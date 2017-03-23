@@ -1,0 +1,18 @@
+config UPM_sx1276
+    bool "sx1276"
+    select MRAA
+    select NEWLIB_LIBC
+    depends on UPM
+    default n
+    help
+        LORA Module
+
+config UPM_sx1276_mac
+    bool "sx1276"
+    select MRAA
+    select NEWLIB_LIBC
+    select UPM_sx1276
+    depends on UPM
+    default n
+    help
+        LORA Module MAC layer

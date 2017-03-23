@@ -1,0 +1,2 @@
+obj-$(CONFIG_UPM_sx1276) += sx1276.o
+obj-$(CONFIG_UPM_sx1276_mac) += loramac.o loramac-crypto.o aes.o cmac.o
