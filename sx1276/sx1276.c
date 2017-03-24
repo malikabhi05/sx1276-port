@@ -57,11 +57,7 @@ upm_result_t sx1276_dio2_qos(sx1276_context dev);
 upm_result_t sx1276_dio3_qos(sx1276_context dev);
 
 sx1276_context sx1276_init(int bus, int cs, int reset_pin, int dio0, int dio1,
-                           int dio2, int dio3, int dio4, int dio5
-#if defined(CONFIG_UPM_sx1276_mac)
-, RadioEvents_Callbacks *events
-#endif
-)
+                           int dio2, int dio3, int dio4, int dio5, RadioEvents_Callbacks *events)
 {
     // make sure MRAA is initialized
     int mraa_rv;
@@ -70,9 +66,7 @@ sx1276_context sx1276_init(int bus, int cs, int reset_pin, int dio0, int dio1,
         return NULL;
     }
 
-#if defined(CONFIG_UPM_sx1276_mac)
     RadioEvents_c = events;
-#endif
     //k_timer_init(&TxTimeoutTimer, );
 #if 1
     // some initial setup
@@ -131,7 +125,7 @@ sx1276_context sx1276_init(int bus, int cs, int reset_pin, int dio0, int dio1,
         free(dev);
         return NULL;
     }
-    if(mraa_spi_frequency(dev->spi, 4000000) != MRAA_SUCCESS) {
+    if(mraa_spi_frequency(dev->spi,3000000) != MRAA_SUCCESS) {
         printf("sx1276: Unable to set higher frequency\n");
         free(dev);
         return NULL;
@@ -164,15 +158,11 @@ sx1276_context sx1276_init(int bus, int cs, int reset_pin, int dio0, int dio1,
         return NULL;
     }
 
-    upm_delay_ms(10);
+    RadioEvents_c->add_ms_delay();
+    //upm_delay_ms(10);
+    //upm_delay_ms(10);
     //k_busy_wait(10000);
     int_flag=0;
-
-#if 0
-    if(mraa_gpio_write(dev->gpio_reset, 1) != MRAA_SUCCESS) { 
-        printf("unable to write the reset pin\n");
-    }
-#endif
 
     if(!(dev->gpio_dio0 = mraa_gpio_init(dio0)) || !(dev->gpio_dio1 = mraa_gpio_init(dio1))
        || !(dev->gpio_dio2 = mraa_gpio_init(dio2)) || !(dev->gpio_dio3 = mraa_gpio_init(dio3))
@@ -222,6 +212,7 @@ sx1276_context sx1276_init(int bus, int cs, int reset_pin, int dio0, int dio1,
         free(dev);
         return NULL;
     }
+
 #if 0
     if(mraa_gpio_isr(dev->gpio_dio5, MRAA_GPIO_EDGE_RISING, sx1276_on_dio5_irq, NULL) != MRAA_SUCCESS) {
         printf("sx1276: Unable to set up the dio5 ISR\n");
@@ -243,6 +234,7 @@ sx1276_context sx1276_init(int bus, int cs, int reset_pin, int dio0, int dio1,
         printf("sx1276: Unable to read the chip ID\n");
         return NULL;
     }
+printf("chip id: %x\n", chip_id);
     if (chip_id != chipRevision) { 
         printf("sx1276: Incorrect chip version, expected: %x, got: %x\n", chipRevision, chip_id);
         return NULL;
@@ -412,7 +404,7 @@ upm_result_t sx1276_rx_chain_calibration(sx1276_context dev){
 
 upm_result_t sx1276_set_channel(sx1276_context dev, uint32_t freq) {
     dev->settings->channel = freq;
-
+printf("before setting channel: freq: %d\n", freq);
     freq = ( uint32_t )( ( double )freq / FXOSC_STEP );
 #if 1
     if(sx1276_write_reg(dev, COM_RegFrfMsb, ( uint8_t )( ( freq >> 16 ) & 0xff ) ) != UPM_SUCCESS) {
@@ -430,7 +422,7 @@ upm_result_t sx1276_set_channel(sx1276_context dev, uint32_t freq) {
 
 upm_result_t sx1276_set_modem(sx1276_context dev, RADIO_MODEM_T modem) {
     if(dev->settings->modem == modem) {
-        printf("modem value is the same, returning\n");
+        //printf("modem value is the same, returning\n");
         return UPM_SUCCESS;
     }
     dev->settings->modem = modem;

@@ -208,7 +208,6 @@ volatile RADIO_EVENT_T r_event;
 #define LORA_MAC_PUBLIC_SYNCWORD                    0x34
 #define RFLR_HOPCHANNEL_CHANNEL_MASK                0x3F
 
-#if defined(CONFIG_UPM_sx1276_mac)
 /*!
  * \brief Radio driver callback functions
  */
@@ -254,8 +253,9 @@ typedef struct
      * \param [IN] channelDetected    Channel Activity detected during the CAD
      */
     void ( *CadDone ) ( bool channelActivityDetected );
+
+    void (*add_ms_delay) (void);
 }RadioEvents_Callbacks;
-#endif
 
 /**
 * SX1276 registers
@@ -1768,11 +1768,7 @@ volatile uint8_t int_flag;
 */
 
 sx1276_context sx1276_init(int bus, int cs, int reset_pin, int dio0, int dio1,
-                           int dio2, int dio3, int dio4, int dio5
-#if defined(CONFIG_UPM_sx1276_mac)
-, RadioEvents_Callbacks *events
-#endif
-);
+                           int dio2, int dio3, int dio4, int dio5, RadioEvents_Callbacks *events);
 
 upm_result_t sx1276_get_chip_version(sx1276_context dev, uint8_t* chip_id);
 

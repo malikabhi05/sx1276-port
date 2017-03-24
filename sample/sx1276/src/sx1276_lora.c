@@ -182,6 +182,14 @@ struct ComplianceTest_s
     uint8_t NbGateways;
 }ComplianceTest;
 
+struct k_timer l_timer;
+
+void timer_delay_local(int time_ms) {
+    k_timer_init(&l_timer, NULL, NULL);
+    k_timer_start(&l_timer, time_ms, 0);
+    while(k_timer_status_get(&l_timer) == 0);
+}
+
 /*!
  * \brief   Prepares the payload of the frame
  */
@@ -290,6 +298,7 @@ static bool SendFrame( void )
 
     if( LoRaMacQueryTxPossible( AppDataSize, &txInfo ) != LORAMAC_STATUS_OK )
     {
+printf("part 1\n");
         // Send empty frame in order to flush MAC commands
         mcpsReq.Type = MCPS_UNCONFIRMED;
         mcpsReq.Req.Unconfirmed.fBuffer = NULL;
@@ -300,6 +309,7 @@ static bool SendFrame( void )
     {
         if( IsTxConfirmed == false )
         {
+printf("part 2\n");
             mcpsReq.Type = MCPS_UNCONFIRMED;
             mcpsReq.Req.Unconfirmed.fPort = AppPort;
             mcpsReq.Req.Unconfirmed.fBuffer = AppData;
@@ -308,6 +318,7 @@ static bool SendFrame( void )
         }
         else
         {
+printf("part 3\n");
             mcpsReq.Type = MCPS_CONFIRMED;
             mcpsReq.Req.Confirmed.fPort = AppPort;
             mcpsReq.Req.Confirmed.fBuffer = AppData;
@@ -316,9 +327,10 @@ static bool SendFrame( void )
             mcpsReq.Req.Confirmed.Datarate = LORAWAN_DEFAULT_DATARATE;
         }
     }
-
+printf("before send frame\n");
     if( LoRaMacMcpsRequest( &mcpsReq ) == LORAMAC_STATUS_OK )
     {
+printf("successful return\n");
         return false;
     }
     return true;
@@ -331,7 +343,7 @@ static void OnTxNextPacketTimerEvent(struct k_timer *timer)
 {
     MibRequestConfirm_t mibReq;
     LoRaMacStatus_t status;
-
+//printf("tx timer expired\n");
     //TimerStop( &TxNextPacketTimer );
     // adding zephyr k_timer
     k_timer_stop(&TxNextPacketTimer);
@@ -635,31 +647,30 @@ static void MlmeConfirm( MlmeConfirm_t *mlmeConfirm )
  */
 int main( void )
 {
+
+upm_delay_ms(1000);
     LoRaMacPrimitives_t LoRaMacPrimitives;
     LoRaMacCallback_t LoRaMacCallbacks;
     MibRequestConfirm_t mibReq;
+MibRequestConfirm_t mibReq1;
+    LoRaMacStatus_t status;
 
     //BoardInitMcu( );
     //BoardInitPeriph( );
 
     DeviceState = DEVICE_STATE_INIT;
 
-    while( 1 )
-    {
-        switch( DeviceState )
-        {
-            case DEVICE_STATE_INIT:
-            {
+//case DEVICE_STATE_INIT:
+ //           {
 printf("entering device state init\n");
                 LoRaMacPrimitives.MacMcpsConfirm = McpsConfirm;
                 LoRaMacPrimitives.MacMcpsIndication = McpsIndication;
                 LoRaMacPrimitives.MacMlmeConfirm = MlmeConfirm;
                 //LoRaMacCallbacks.GetBatteryLevel = BoardGetBatteryLevel;
                 LoRaMacInitialization( &LoRaMacPrimitives, &LoRaMacCallbacks );
-printf("before setting up first timer\n");
+
                 //TimerInit( &TxNextPacketTimer, OnTxNextPacketTimerEvent );
-                k_timer_init(&TxNextPacketTimer, OnTxNextPacketTimerEvent, NULL);
-printf("setup first timer\n");
+                //k_timer_init(&TxNextPacketTimer, OnTxNextPacketTimerEvent, NULL);
 
                 mibReq.Type = MIB_ADR;
                 mibReq.Param.AdrEnable = LORAWAN_ADR_ON;
@@ -692,10 +703,12 @@ printf("setup first timer\n");
 
 #endif
                 DeviceState = DEVICE_STATE_JOIN;
-                break;
-            }
-            case DEVICE_STATE_JOIN:
-            {
+                //break;
+ //           }
+
+
+//case DEVICE_STATE_JOIN:
+  //          {
 #if( OVER_THE_AIR_ACTIVATION != 0 )
                 MlmeReq_t mlmeReq;
 
@@ -713,7 +726,7 @@ printf("setup first timer\n");
                 {
                     LoRaMacMlmeRequest( &mlmeReq );
                 }
-                DeviceState = DEVICE_STATE_SLEEP;
+                //DeviceState = DEVICE_STATE_SLEEP;
 #else
                 // Choose a random device address if not already defined in Commissioning.h
                 if( DevAddr == 0 )
@@ -747,18 +760,29 @@ printf("setup first timer\n");
                 mibReq.Param.IsNetworkJoined = true;
                 LoRaMacMibSetRequestConfirm( &mibReq );
 
-                DeviceState = DEVICE_STATE_SEND;
+                //DeviceState = DEVICE_STATE_SEND;
 #endif
-                break;
-            }
-            case DEVICE_STATE_SEND:
-            {
+        //        break;
+        
+#if 0
+
+    while( 1 )
+    {
+        //switch( DeviceState )
+        //{
+            
+            
+          //  case DEVICE_STATE_SEND:
+           // {
                 if( NextTx == true )
                 {
+//printf("onto the next transaction\n");
                     PrepareTxFrame( AppPort );
-
+//printf("next frame prepared\n");
                     NextTx = SendFrame( );
+//printf("next frame sent\n");
                 }
+/*
                 if( ComplianceTest.Running == true )
                 {
                     // Schedule next packet transmission
@@ -768,34 +792,67 @@ printf("setup first timer\n");
                 {
                     // Schedule next packet transmission
                     TxDutyCycleTime = APP_TX_DUTYCYCLE + upm_rand_range( -APP_TX_DUTYCYCLE_RND, APP_TX_DUTYCYCLE_RND );
+//printf("time before next send: %d\n", TxDutyCycleTime);
                 }
-                DeviceState = DEVICE_STATE_CYCLE;
-                break;
-            }
-            case DEVICE_STATE_CYCLE:
-            {
-                DeviceState = DEVICE_STATE_SLEEP;
+*/
+
+                //DeviceState = DEVICE_STATE_CYCLE;
+//printf("onto the device state cycle\n");
+                //break;
+            //}
+            //case DEVICE_STATE_CYCLE:
+            //{
+//printf("coming into device state cycle\n");
+                //DeviceState = DEVICE_STATE_SLEEP;
 
                 // Schedule next packet transmission
                 //TimerSetValue( &TxNextPacketTimer, TxDutyCycleTime );
                 //TimerStart( &TxNextPacketTimer );
-                k_timer_start(&TxNextPacketTimer, TxDutyCycleTime, 0);
-                break;
-            }
-            case DEVICE_STATE_SLEEP:
-            {
-                // Wake up through events
-                //TimerLowPowerHandler( );
-                // not sure what to do here now
-                break;
-            }
-            default:
-            {
-                DeviceState = DEVICE_STATE_INIT;
-                break;
-            }
+                //k_timer_start(&TxNextPacketTimer, TxDutyCycleTime, 0);
+////////////////////////////////////////////////////////////////////////////////////
+                    
+//printf("tx timer expired\n");
+    //TimerStop( &TxNextPacketTimer );
+    // adding zephyr k_timer
+    //k_timer_stop(&TxNextPacketTimer);
+//k_busy_wait(5000);
+timer_delay_local(500);
+    mibReq1.Type = MIB_NETWORK_JOINED;
+    status = LoRaMacMibGetRequestConfirm( &mibReq1 );
+    if( status == LORAMAC_STATUS_OK )
+    {
+        if( mibReq1.Param.IsNetworkJoined == true )
+        {
+printf("sending\n");
+            //DeviceState = DEVICE_STATE_SEND;
+            NextTx = true;
+        }
+        else
+        {
+printf("trying to join again\n");
+            //DeviceState = DEVICE_STATE_JOIN;
         }
     }
+///////////////////////////////////////////////////////////////////////////////////////
+              //  break;
+            //}
+            
+            
+        //}
+//upm_delay_ms(10);
+printf("remaining time: %d\n", DeviceState);
+    }
+#endif
+
+while(1) {
+    timer_delay_local(1000);
+    PrepareTxFrame( AppPort );
+    NextTx = SendFrame();
+    //timer_delay_local(500);
+    mibReq1.Type = MIB_NETWORK_JOINED;
+    status = LoRaMacMibGetRequestConfirm( &mibReq1 );
+    printf("hellow!! status: %d\n", status);
+}
 }
 
 /*

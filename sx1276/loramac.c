@@ -847,7 +847,14 @@ uint32_t TimerGetCurrentTime(void);
 
 uint32_t TimerGetElapsedTime(uint32_t ref_time);
 
+static void add_ms_delay(void);
+
 //uint32_t randr(int L, int H);
+
+static void add_ms_delay(void) {
+printf("coming into callback\n");
+    upm_delay_ms(500);
+}
 
 static void OnRadioTxDone(void)
 {
@@ -1367,11 +1374,12 @@ static void OnRadioRxTimeout( void )
 
 static void OnMacStateCheckTimerEvent(struct k_timer *onMacStateCheckTimer)
 {
+    printf("***********coming into OnMacStateCheckTimerEvent***********\n");
     // using zephyr based k_timer here
     k_timer_stop(&MacStateCheckTimer);
     //TimerStop( &MacStateCheckTimer );
     bool txTimeout = false;
-
+printf("OnMacStateCheckTimerEvent macdone: %d\n", LoRaMacFlags.Bits.MacDone);
     if( LoRaMacFlags.Bits.MacDone == 1 )
     {
         if( ( LoRaMacState & LORAMAC_RX_ABORT ) == LORAMAC_RX_ABORT )
@@ -1547,6 +1555,7 @@ static void OnMacStateCheckTimerEvent(struct k_timer *onMacStateCheckTimer)
     }
     else
     {
+printf("restarting the mac check timer\n");
         // Operation not finished restart timer
         //TimerSetValue( &MacStateCheckTimer, MAC_STATE_CHECK_TIMEOUT );
         //TimerStart( &MacStateCheckTimer );
@@ -1563,6 +1572,7 @@ static void OnMacStateCheckTimerEvent(struct k_timer *onMacStateCheckTimer)
 
 static void OnTxDelayedTimerEvent(void)
 {
+    printf("***********coming into OnTxDelayedTimerEvent***********\n");
     LoRaMacHeader_t macHdr;
     LoRaMacFrameCtrl_t fCtrl;
 
@@ -1594,6 +1604,7 @@ static void OnTxDelayedTimerEvent(void)
 
 static void OnRxWindow1TimerEvent(struct k_timer *onRxWindow1Timer)
 {
+    printf("************coming into OnRxWindow1TimerEvent************\n");
     uint16_t symbTimeout = 5; // DR_2, DR_1, DR_0
     int8_t datarate = 0;
     uint32_t bandwidth = 0; // LoRa 125 kHz
@@ -1602,7 +1613,7 @@ static void OnRxWindow1TimerEvent(struct k_timer *onRxWindow1Timer)
     //TimerStop( &RxWindowTimer1 );
     k_timer_stop(&RxWindowTimer1);
     RxSlot = 0;
-
+printf("LORAMAC device class: %d\n", LoRaMacDeviceClass);
     if( LoRaMacDeviceClass == CLASS_C )
     {
         // add sx1276 call here
@@ -1690,6 +1701,7 @@ static void OnRxWindow1TimerEvent(struct k_timer *onRxWindow1Timer)
     {// LoRa 500 kHz
         bandwidth  = 2;
     }
+printf("LORAMAC Bandwidth: %d timeout: %d DR: %d\n", bandwidth, symbTimeout, datarate);
     RxWindowSetup( LORAMAC_FIRST_RX1_CHANNEL + ( Channel % 8 ) * LORAMAC_STEPWIDTH_RX1_CHANNEL, datarate, bandwidth, symbTimeout, false );
 #else
     #error "Please define a frequency band in the compiler options."
@@ -1698,6 +1710,7 @@ static void OnRxWindow1TimerEvent(struct k_timer *onRxWindow1Timer)
 
 static void OnRxWindow2TimerEvent( void )
 {
+    printf("************coming into OnRxWindow2TimerEvent************\n");
     uint16_t symbTimeout = 5; // DR_2, DR_1, DR_0
     uint32_t bandwidth = 0; // LoRa 125 kHz
     bool rxContinuousMode = false;
@@ -1782,6 +1795,7 @@ static void OnRxWindow2TimerEvent( void )
 
 static void OnAckTimeoutTimerEvent( void )
 {
+    printf("*************coming into OnAckTimeoutTimerEvent*************\n");
     // zephyr based k_timer
     //TimerStop( &AckTimeoutTimer );
     k_timer_stop(&AckTimeoutTimer);
@@ -1939,6 +1953,7 @@ static bool RxWindowSetup( uint32_t freq, int8_t datarate, uint32_t bandwidth, u
     // check if this is sx1276 specific
     RADIO_MODEM_T modem;
     // add sx1276 call here
+printf("sx1276 get status: %d\n", sx1276_get_status(dev));
     if(sx1276_get_status(dev) == STATE_IDLE) {
     //if( Radio.GetStatus( ) == RF_IDLE )
         // add sx1276 call here
@@ -1964,9 +1979,11 @@ static bool RxWindowSetup( uint32_t freq, int8_t datarate, uint32_t bandwidth, u
             //Radio.SetRxConfig( modem, bandwidth, downlinkDatarate, 1, 0, 8, timeout, false, 0, false, 0, 0, true, rxContinuous );
         }
 #elif defined( USE_BAND_470 ) || defined( USE_BAND_915 ) || defined( USE_BAND_915_HYBRID )
+printf("before setting up the rx config\n");
         modem = MODEM_LORA;
         // add sx1276 call here
         sx1276_set_rx_config(dev, modem, bandwidth, downlinkDatarate, 1, 0, 8, timeout, false, 0, false, 0, 0, true, rxContinuous);
+printf("returning after setting up set rx config\n");
         //Radio.SetRxConfig( modem, bandwidth, downlinkDatarate, 1, 0, 8, timeout, false, 0, false, 0, 0, true, rxContinuous );
 #endif
 
@@ -2843,6 +2860,7 @@ static LoRaMacStatus_t ScheduleTx( )
     {
         // Send later - prepare timer
         LoRaMacState |= LORAMAC_TX_DELAYED;
+printf("LORAMAC state in ScheduleTx: %d", LoRaMacState);
         // using zephyr k_timer
         //TimerSetValue( &TxDelayedTimer, dutyCycleTimeOff );
         //TimerStart( &TxDelayedTimer );
@@ -3218,7 +3236,7 @@ LoRaMacStatus_t SendFrameOnChannel( ChannelParams_t channel )
     { // Normal LoRa channel
         // sx1276 calls here
         sx1276_set_max_payload_length(dev, MODEM_LORA, LoRaMacBufferPktLen);
-        sx1276_set_tx_config(dev, MODEM_LORA, txPower, 0, 0, datarate, 1, 8, false, true, 0, 0, false);
+        sx1276_set_tx_config(dev, MODEM_LORA, txPower, 0, 125000, datarate, 1, 8, false, true, 0, 0, false);
         TxTimeOnAir = sx1276_get_time_on_air(dev, MODEM_LORA, LoRaMacBufferPktLen);
         //Radio.SetMaxPayloadLength( MODEM_LORA, LoRaMacBufferPktLen );
         //Radio.SetTxConfig( MODEM_LORA, txPower, 0, 0, datarate, 1, 8, false, true, 0, 0, false, 3e3 );
@@ -3230,21 +3248,21 @@ LoRaMacStatus_t SendFrameOnChannel( ChannelParams_t channel )
     sx1276_set_max_payload_length(dev, MODEM_LORA, LoRaMacBufferPktLen);
     if( LoRaMacParams.ChannelsDatarate >= DR_4 )
     { // High speed LoRa channel BW500 kHz
-        sx1276_set_tx_config(dev, MODEM_LORA, txPower, 0, 2, datarate, 1, 8, false, true, 0, 0, false);
+        sx1276_set_tx_config(dev, MODEM_LORA, txPower, 0, 500000, datarate, 1, 8, false, true, 0, 0, false);
         TxTimeOnAir = sx1276_get_time_on_air(dev, MODEM_LORA, LoRaMacBufferPktLen);
         //Radio.SetTxConfig( MODEM_LORA, txPower, 0, 2, datarate, 1, 8, false, true, 0, 0, false, 3e3 );
         //TxTimeOnAir = Radio.TimeOnAir( MODEM_LORA, LoRaMacBufferPktLen );
     }
     else
     { // Normal LoRa channel
-        sx1276_set_tx_config(dev, MODEM_LORA, txPower, 0, 0, datarate, 1, 8, false, true, 0, 0, false);
+        sx1276_set_tx_config(dev, MODEM_LORA, txPower, 0, 125000, datarate, 1, 8, false, true, 0, 0, false);
         TxTimeOnAir = sx1276_get_time_on_air(dev, MODEM_LORA, LoRaMacBufferPktLen);
         //Radio.SetTxConfig( MODEM_LORA, txPower, 0, 0, datarate, 1, 8, false, true, 0, 0, false, 3e3 );
         //TxTimeOnAir = Radio.TimeOnAir( MODEM_LORA, LoRaMacBufferPktLen );
     }
 #elif defined( USE_BAND_470 )
     sx1276_set_max_payload_length(dev, MODEM_LORA, LoRaMacBufferPktLen);
-    sx1276_set_tx_config(dev, MODEM_LORA, txPower, 0, 0, datarate, 1, 8, false, true, 0, 0, false);
+    sx1276_set_tx_config(dev, MODEM_LORA, txPower, 0, 125000, datarate, 1, 8, false, true, 0, 0, false);
     TxTimeOnAir = sx1276_get_time_on_air(dev, MODEM_LORA, LoRaMacBufferPktLen);
     //Radio.SetMaxPayloadLength( MODEM_LORA, LoRaMacBufferPktLen );
     //Radio.SetTxConfig( MODEM_LORA, txPower, 0, 0, datarate, 1, 8, false, true, 0, 0, false, 3e3 );
@@ -3272,6 +3290,8 @@ LoRaMacStatus_t SendFrameOnChannel( ChannelParams_t channel )
     // add sx1276 call here
     //Radio.Send( LoRaMacBuffer, LoRaMacBufferPktLen );
     dev->settings->loraSettings->TxTimeout = 3e3;
+printf("before send function\n");
+    //sx1276_send_str(dev, LoRaMacBuffer, dev->settings->loraSettings->TxTimeout);
     sx1276_send(dev, LoRaMacBuffer, LoRaMacBufferPktLen, dev->settings->loraSettings->TxTimeout);
 
     LoRaMacState |= LORAMAC_TX_RUNNING;
@@ -3303,7 +3323,6 @@ LoRaMacStatus_t SetTxContinuousWave( uint16_t timeout )
 
 LoRaMacStatus_t LoRaMacInitialization( LoRaMacPrimitives_t *primitives, LoRaMacCallback_t *callbacks )
 {
-printf("entering loramac init function\n");
     if( primitives == NULL )
     {
         return LORAMAC_STATUS_PARAMETER_INVALID;
@@ -3434,7 +3453,7 @@ printf("entering loramac init function\n");
     k_timer_init(&RxWindowTimer1, OnRxWindow1TimerEvent, NULL);
     k_timer_init(&RxWindowTimer2, OnRxWindow2TimerEvent, NULL);
     k_timer_init(&AckTimeoutTimer, OnAckTimeoutTimerEvent, NULL);
-printf("multiple timer inits done\n");
+
     // Initialize Radio driver
     // sx1276 related??
     RadioEvents.TxDone = OnRadioTxDone;
@@ -3442,8 +3461,10 @@ printf("multiple timer inits done\n");
     RadioEvents.RxError = OnRadioRxError;
     RadioEvents.TxTimeout = OnRadioTxTimeout;
     RadioEvents.RxTimeout = OnRadioRxTimeout;
+    RadioEvents.add_ms_delay = add_ms_delay;
     //Radio.Init(&RadioEvents);
-
+printf("setting up radio events\n");
+upm_delay_ms(500);
     dev = sx1276_init(1, 60, 82, 72, 74, 70, 76, 78, 80, &RadioEvents);
 
     // Random seed initialization
@@ -4311,8 +4332,10 @@ LoRaMacStatus_t LoRaMacMcpsRequest( McpsReq_t *mcpsRequest )
 
     if( mcpsRequest == NULL )
     {
+printf("mcps request empty\n");
         return LORAMAC_STATUS_PARAMETER_INVALID;
     }
+printf("lora mac state: %d, tx_running: %d, tx_delayed: %d\n", LoRaMacState, LORAMAC_TX_RUNNING, LORAMAC_TX_DELAYED);
     if( ( ( LoRaMacState & LORAMAC_TX_RUNNING ) == LORAMAC_TX_RUNNING ) ||
         ( ( LoRaMacState & LORAMAC_TX_DELAYED ) == LORAMAC_TX_DELAYED ) )
     {
@@ -4378,8 +4401,9 @@ LoRaMacStatus_t LoRaMacMcpsRequest( McpsReq_t *mcpsRequest )
                 return LORAMAC_STATUS_PARAMETER_INVALID;
             }
         }
-
+printf("aaa\n");
         status = Send( &macHdr, fPort, fBuffer, fBufferSize );
+printf("bbb: %d\n", status);
         if( status == LORAMAC_STATUS_OK )
         {
             McpsConfirm.McpsRequest = mcpsRequest->Type;
