@@ -1,0 +1,1 @@
+cmd_ext/lib/built-in.o :=  /opt/zephyr-sdk//sysroots/x86_64-pokysdk-linux/usr/bin/i586-zephyr-elfiamcu/i586-zephyr-elfiamcu-ld -nostartfiles -nodefaultlibs -nostdlib -static   -r -o ext/lib/built-in.o ext/lib/crypto/built-in.o 

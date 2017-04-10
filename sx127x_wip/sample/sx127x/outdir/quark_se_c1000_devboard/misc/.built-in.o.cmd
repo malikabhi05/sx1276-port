@@ -1,0 +1,1 @@
+cmd_misc/built-in.o :=  /opt/zephyr-sdk//sysroots/x86_64-pokysdk-linux/usr/bin/i586-zephyr-elfiamcu/i586-zephyr-elfiamcu-ld -nostartfiles -nodefaultlibs -nostdlib -static   -r -o misc/built-in.o misc/printk.o misc/generated/built-in.o 
