@@ -1,0 +1,1 @@
+cmd_drivers/gpio/built-in.o :=  /opt/zephyr-sdk//sysroots/x86_64-pokysdk-linux/usr/bin/i586-zephyr-elfiamcu/i586-zephyr-elfiamcu-ld -nostartfiles -nodefaultlibs -nostdlib -static   -r -o drivers/gpio/built-in.o drivers/gpio/gpio_qmsi.o 

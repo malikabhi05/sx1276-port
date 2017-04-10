@@ -1,0 +1,1 @@
+cmd_ext/lib/mraa/built-in.o :=  /opt/zephyr-sdk//sysroots/x86_64-pokysdk-linux/usr/bin/i586-zephyr-elfiamcu/i586-zephyr-elfiamcu-ld -nostartfiles -nodefaultlibs -nostdlib -static   -r -o ext/lib/mraa/built-in.o ext/lib/mraa/source/mraa.o ext/lib/mraa/source/gpio.o ext/lib/mraa/source/spi.o ext/lib/mraa/source/quark_se_devboard.o 
