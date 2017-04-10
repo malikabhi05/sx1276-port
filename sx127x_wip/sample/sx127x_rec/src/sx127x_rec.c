@@ -13,6 +13,22 @@
 #include "sx127x.h"
 #include "upm_utilities.h"
 
+#define TX_OUTPUT_POWER                             14        // dBm
+
+#define LORA_BANDWIDTH                              0         // [0: 125 kHz,
+                                                              //  1: 250 kHz,
+                                                              //  2: 500 kHz,
+                                                              //  3: Reserved]
+#define LORA_SPREADING_FACTOR                       7         // [SF7..SF12]
+#define LORA_CODINGRATE                             1         // [1: 4/5,
+                                                              //  2: 4/6,
+                                                              //  3: 4/7,
+                                                              //  4: 4/8]
+#define LORA_PREAMBLE_LENGTH                        8         // Same for Tx and Rx
+#define LORA_SYMBOL_TIMEOUT                         5         // Symbols
+#define LORA_FIX_LENGTH_PAYLOAD_ON                  false
+#define LORA_IQ_INVERSION_ON                        false
+
 int counter = 0;
 
 uint8_t buffer[10] = {0};
@@ -34,6 +50,10 @@ void main() {
     // setting frequency
     init(915e6);
     //begin(914984144);
+    SX1276SetRxConfig(MODEM_LORA, LORA_BANDWIDTH, LORA_SPREADING_FACTOR,
+                      LORA_CODINGRATE, 0, LORA_PREAMBLE_LENGTH,
+                      LORA_SYMBOL_TIMEOUT, LORA_FIX_LENGTH_PAYLOAD_ON,
+                      0, true, 0, 0, LORA_IQ_INVERSION_ON, true);
 
     dumpRegisters();
 
@@ -46,11 +66,12 @@ void main() {
         // receive packet actually
         packet_size = parsePacket(0);
         if(packet_size) {
-            printf("Received a packet yayy!! packet size: %d\n", packet_size);
-
+            printf("Received a packet!! Packet Size: %d\n", packet_size);
+            printf("Value: ");
             while(available()) {
-                printf("value: %x\n", SX1276read());
+                printf("%c", (char)SX1276read());
             }
+            printf("\n");
             printf("With RSSI: %d\n", packetRssi(MODEM_LORA));
         }
 
@@ -58,33 +79,3 @@ void main() {
     }
 #endif
 }
-/*
-int counter = 0;
-
-void setup() {
-  Serial.begin(9600);
-  while (!Serial);
-
-  Serial.println("LoRa Sender");
-
-  if (!LoRa.begin(915E6)) {
-    Serial.println("Starting LoRa failed!");
-    while (1);
-  }
-}
-
-void loop() {
-  Serial.print("Sending packet: ");
-  Serial.println(counter);
-
-  // send packet
-  LoRa.beginPacket();
-  LoRa.print("hello ");
-  LoRa.print(counter);
-  LoRa.endPacket();
-
-  counter++;
-
-  delay(5000);
-}
-*/

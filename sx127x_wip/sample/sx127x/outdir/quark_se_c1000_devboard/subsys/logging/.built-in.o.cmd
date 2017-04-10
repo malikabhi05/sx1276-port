@@ -1,1 +1,0 @@
-cmd_subsys/logging/built-in.o :=  /opt/zephyr-sdk//sysroots/x86_64-pokysdk-linux/usr/bin/i586-zephyr-elfiamcu/i586-zephyr-elfiamcu-ld -nostartfiles -nodefaultlibs -nostdlib -static   -r -o subsys/logging/built-in.o subsys/logging/sys_log.o 

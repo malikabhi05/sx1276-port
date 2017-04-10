@@ -17,6 +17,8 @@
 #define PA_OUTPUT_PA_BOOST_PIN 1
 
 #define FREQ_STEP              61.03515625
+#define XTAL_FREQ              32000000
+#define RF_MID_BAND_THRESH     525000000
 
 // init values, use, no idea
 #define RADIO_INIT_REGISTERS_VALUE                \
@@ -45,10 +47,122 @@ typedef enum
     MODEM_LORA
 } RadioModems_t;
 
+/*!
+ * FSK bandwidth definition
+ */
+typedef struct
+{
+    uint32_t bandwidth;
+    uint8_t  RegValue;
+}FskBandwidth_t;
 
+/*!
+ * Radio driver internal state machine states definition
+ */
+typedef enum
+{
+    RF_IDLE = 0,
+    RF_RX_RUNNING,
+    RF_TX_RUNNING,
+    RF_CAD,
+}RadioState_t;
 
-//class LoRaClass : public Stream {
-//public:
+/*!
+ * Radio FSK modem parameters
+ */
+typedef struct
+{
+    int8_t   Power;
+    uint32_t Fdev;
+    uint32_t Bandwidth;
+    uint32_t BandwidthAfc;
+    uint32_t Datarate;
+    uint16_t PreambleLen;
+    bool     FixLen;
+    uint8_t  PayloadLen;
+    bool     CrcOn;
+    bool     IqInverted;
+    bool     RxContinuous;
+    uint32_t TxTimeout;
+}RadioFskSettings_t;
+
+/*!
+ * Radio FSK packet handler state
+ */
+typedef struct
+{
+    uint8_t  PreambleDetected;
+    uint8_t  SyncWordDetected;
+    int8_t   RssiValue;
+    int32_t  AfcValue;
+    uint8_t  RxGain;
+    uint16_t Size;
+    uint16_t NbBytes;
+    uint8_t  FifoThresh;
+    uint8_t  ChunkSize;
+}RadioFskPacketHandler_t;
+
+/*!
+ * Radio LoRa modem parameters
+ */
+typedef struct
+{
+    int8_t   Power;
+    uint32_t Bandwidth;
+    uint32_t Datarate;
+    bool     LowDatarateOptimize;
+    uint8_t  Coderate;
+    uint16_t PreambleLen;
+    bool     FixLen;
+    uint8_t  PayloadLen;
+    bool     CrcOn;
+    bool     FreqHopOn;
+    uint8_t  HopPeriod;
+    bool     IqInverted;
+    bool     RxContinuous;
+    uint32_t TxTimeout;
+}RadioLoRaSettings_t;
+
+/*!
+ * Radio LoRa packet handler state
+ */
+typedef struct
+{
+    int8_t SnrValue;
+    int16_t RssiValue;
+    uint8_t Size;
+}RadioLoRaPacketHandler_t;
+
+/*!
+ * Radio Settings
+ */
+typedef struct
+{
+    RadioState_t             State;
+    RadioModems_t            Modem;
+    uint32_t                 Channel;
+    RadioFskSettings_t       Fsk;
+    RadioFskPacketHandler_t  FskPacketHandler;
+    RadioLoRaSettings_t      LoRa;
+    RadioLoRaPacketHandler_t LoRaPacketHandler;
+}RadioSettings_t;
+
+typedef struct SX1276_s
+{
+    mraa_gpio_context        gpio_ss;
+    mraa_gpio_context        gpio_reset;
+    mraa_gpio_context        gpio_dio0;
+    uint8_t                  _ss;
+    uint8_t                  _reset;
+    uint8_t                  _dio0;
+    mraa_gpio_context        DIO1;
+    mraa_spi_context         spi;
+    int                      _frequency;
+    int                      _packetIndex;
+    int                      _implicitHeaderMode;
+    RadioSettings_t          Settings;
+}SX1276_t;
+
   void LoRaClass();
 
   int init(long frequency);
@@ -115,21 +229,20 @@ typedef enum
   bool SX1276IsChannelFree(RadioModems_t modem, uint32_t freq, int16_t rssiThresh);
   uint32_t SX1276Random( void );
 
-typedef struct SX1276_s
-{
-    mraa_gpio_context        gpio_ss;
-    mraa_gpio_context        gpio_reset;
-    mraa_gpio_context        gpio_dio0;
-    uint8_t                  _ss;
-    uint8_t                  _reset;
-    uint8_t                  _dio0;
-    mraa_gpio_context        DIO1;
-    mraa_spi_context         spi;
-    int                      _frequency;
-    int                      _packetIndex;
-    int                      _implicitHeaderMode;
-}SX1276_t;
-//};
+  //static uint8_t SX1276GetFskBandwidthRegValue( uint32_t bandwidth );
 
-//extern LoRaClass LoRa;
+  void SX1276SetRxConfig( RadioModems_t modem, uint32_t bandwidth,
+                         uint32_t datarate, uint8_t coderate,
+                         uint32_t bandwidthAfc, uint16_t preambleLen,
+                         uint16_t symbTimeout, bool fixLen,
+                         uint8_t payloadLen,
+                         bool crcOn, bool freqHopOn, uint8_t hopPeriod,
+                         bool iqInverted, bool rxContinuous);
 
+  void SX1276SetTxConfig( RadioModems_t modem, int8_t power, uint32_t fdev,
+                        uint32_t bandwidth, uint32_t datarate,
+                        uint8_t coderate, uint16_t preambleLen,
+                        bool fixLen, bool crcOn, bool freqHopOn,
+                        uint8_t hopPeriod, bool iqInverted, uint32_t timeout);
+
+  uint32_t SX1276GetTimeOnAir(RadioModems_t modem, uint8_t pktLen);

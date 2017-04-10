@@ -1,8 +1,11 @@
 #include "sx127x.h"
+#include "sx127x_fsk.h"
 
-// registers
+// registers - mostly lora specific
 #define REG_FIFO                 0x00
 #define REG_OP_MODE              0x01
+#define REG_BITRATE_MSB          0x02
+#define REG_BITRATE_LSB          0x03
 #define REG_FRF_MSB              0x06
 #define REG_FRF_MID              0x07
 #define REG_FRF_LSB              0x08
@@ -19,12 +22,12 @@
 #define REG_PKT_SNR_VALUE        0x1b
 #define REG_MODEM_CONFIG_1       0x1d
 #define REG_MODEM_CONFIG_2       0x1e
-#define REG_PREAMBLE_DETECT      0x1F
+#define REG_LR_SYMBTIMEOUT_LSB   0x1F
 #define REG_PREAMBLE_MSB         0x20
 #define REG_PREAMBLE_LSB         0x21
 #define REG_PAYLOAD_LENGTH       0x22
 #define REG_LR_PAYLOADMAXLENGTH  0x23
-#define REG_OSC                  0x24
+#define REG_LR_HOPPERIOD         0x24
 #define REG_MODEM_CONFIG_3       0x26
 #define REG_SYNC_CONFIG          0x27
 #define REG_SYNCVALUE1           0x28
@@ -39,7 +42,94 @@
 #define REG_DIO_MAPPING_1        0x40
 #define REG_DIO_MAPPING_2        0x41
 #define REG_VERSION              0x42
+#define REG_LR_DETECTOPTIMIZE    0x31
+#define REG_LR_INVERTIQ          0x33
+#define REG_LR_TEST36            0x36
+#define REG_LR_DETECTIONTHRESHOLD                   0x37
+#define REG_LR_SYNCWORD          0x39
+#define REG_LR_TEST3A            0x3A
+#define REG_LR_INVERTIQ2         0x3B
 #define REG_IMAGE_CAL            0x3B
+#define REG_LR_PLLHOP            0x44
+
+/*!
+ * RegDetectionThreshold
+ */
+#define RFLR_DETECTIONTHRESH_SF7_TO_SF12            0x0A // Default
+#define RFLR_DETECTIONTHRESH_SF6                    0x0C
+
+/*!
+ * RegDetectOptimize
+ */
+#define RFLR_DETECTIONOPTIMIZE_MASK                 0xF8
+#define RFLR_DETECTIONOPTIMIZE_SF7_TO_SF12          0x03 // Default
+#define RFLR_DETECTIONOPTIMIZE_SF6                  0x05
+
+/*!
+ * RegPllHop - lora
+ */
+#define RFLR_PLLHOP_FASTHOP_MASK                    0x7F
+#define RFLR_PLLHOP_FASTHOP_ON                      0x80
+#define RFLR_PLLHOP_FASTHOP_OFF                     0x00 // Default
+
+/*!
+ * RegModemConfig1 - lora
+ */
+#define RFLR_MODEMCONFIG1_BW_MASK                   0x0F
+#define RFLR_MODEMCONFIG1_BW_7_81_KHZ               0x00
+#define RFLR_MODEMCONFIG1_BW_10_41_KHZ              0x10
+#define RFLR_MODEMCONFIG1_BW_15_62_KHZ              0x20
+#define RFLR_MODEMCONFIG1_BW_20_83_KHZ              0x30
+#define RFLR_MODEMCONFIG1_BW_31_25_KHZ              0x40
+#define RFLR_MODEMCONFIG1_BW_41_66_KHZ              0x50
+#define RFLR_MODEMCONFIG1_BW_62_50_KHZ              0x60
+#define RFLR_MODEMCONFIG1_BW_125_KHZ                0x70 // Default
+#define RFLR_MODEMCONFIG1_BW_250_KHZ                0x80
+#define RFLR_MODEMCONFIG1_BW_500_KHZ                0x90
+
+#define RFLR_MODEMCONFIG1_CODINGRATE_MASK           0xF1
+#define RFLR_MODEMCONFIG1_CODINGRATE_4_5            0x02
+#define RFLR_MODEMCONFIG1_CODINGRATE_4_6            0x04 // Default
+#define RFLR_MODEMCONFIG1_CODINGRATE_4_7            0x06
+#define RFLR_MODEMCONFIG1_CODINGRATE_4_8            0x08
+
+#define RFLR_MODEMCONFIG1_IMPLICITHEADER_MASK       0xFE
+#define RFLR_MODEMCONFIG1_IMPLICITHEADER_ON         0x01
+#define RFLR_MODEMCONFIG1_IMPLICITHEADER_OFF        0x00 // Default
+
+/*!
+ * RegModemConfig2 - lora
+ */
+#define RFLR_MODEMCONFIG2_SF_MASK                   0x0F
+#define RFLR_MODEMCONFIG2_SF_6                      0x60
+#define RFLR_MODEMCONFIG2_SF_7                      0x70 // Default
+#define RFLR_MODEMCONFIG2_SF_8                      0x80
+#define RFLR_MODEMCONFIG2_SF_9                      0x90
+#define RFLR_MODEMCONFIG2_SF_10                     0xA0
+#define RFLR_MODEMCONFIG2_SF_11                     0xB0
+#define RFLR_MODEMCONFIG2_SF_12                     0xC0
+
+#define RFLR_MODEMCONFIG2_TXCONTINUOUSMODE_MASK     0xF7
+#define RFLR_MODEMCONFIG2_TXCONTINUOUSMODE_ON       0x08
+#define RFLR_MODEMCONFIG2_TXCONTINUOUSMODE_OFF      0x00
+
+#define RFLR_MODEMCONFIG2_RXPAYLOADCRC_MASK         0xFB
+#define RFLR_MODEMCONFIG2_RXPAYLOADCRC_ON           0x04
+#define RFLR_MODEMCONFIG2_RXPAYLOADCRC_OFF          0x00 // Default
+
+#define RFLR_MODEMCONFIG2_SYMBTIMEOUTMSB_MASK       0xFC
+#define RFLR_MODEMCONFIG2_SYMBTIMEOUTMSB            0x00 // Default
+
+/*!
+ * RegModemConfig3 - lora
+ */
+#define RFLR_MODEMCONFIG3_LOWDATARATEOPTIMIZE_MASK  0xF7
+#define RFLR_MODEMCONFIG3_LOWDATARATEOPTIMIZE_ON    0x08
+#define RFLR_MODEMCONFIG3_LOWDATARATEOPTIMIZE_OFF   0x00 // Default
+
+#define RFLR_MODEMCONFIG3_AGCAUTO_MASK              0xFB
+#define RFLR_MODEMCONFIG3_AGCAUTO_ON                0x04 // Default
+#define RFLR_MODEMCONFIG3_AGCAUTO_OFF 0x00
 
 // reg image cal related WOW!!
 /*!
@@ -79,6 +169,22 @@
 #define RFLR_IRQFLAGS_CADDONE                       0x04
 #define RFLR_IRQFLAGS_FHSSCHANGEDCHANNEL            0x02
 #define RFLR_IRQFLAGS_CADDETECTED                   0x01
+
+/*!
+ * RegInvertIQ
+ */
+#define RFLR_INVERTIQ_RX_MASK                       0xBF
+#define RFLR_INVERTIQ_RX_OFF                        0x00
+#define RFLR_INVERTIQ_RX_ON                         0x40
+#define RFLR_INVERTIQ_TX_MASK                       0xFE
+#define RFLR_INVERTIQ_TX_OFF                        0x01
+#define RFLR_INVERTIQ_TX_ON                         0x00
+
+/*!
+ * RegInvertIQ2
+ */
+#define RFLR_INVERTIQ2_ON                           0x19
+#define RFLR_INVERTIQ2_OFF                          0x1D
 
 // register masks
 /*!
@@ -130,6 +236,35 @@ typedef struct
  * \remark RADIO_INIT_REGISTERS_VALUE is defined in sx127x.h file
  */
 const RadioRegisters_t RadioRegsInit[] = RADIO_INIT_REGISTERS_VALUE;
+
+/*!
+ * Precomputed FSK bandwidth registers values
+ */
+const FskBandwidth_t FskBandwidths[] =
+{
+    { 2600  , 0x17 },
+    { 3100  , 0x0F },
+    { 3900  , 0x07 },
+    { 5200  , 0x16 },
+    { 6300  , 0x0E },
+    { 7800  , 0x06 },
+    { 10400 , 0x15 },
+    { 12500 , 0x0D },
+    { 15600 , 0x05 },
+    { 20800 , 0x14 },
+    { 25000 , 0x0C },
+    { 31300 , 0x04 },
+    { 41700 , 0x13 },
+    { 50000 , 0x0B },
+    { 62500 , 0x03 },
+    { 83333 , 0x12 },
+    { 100000, 0x0A },
+    { 125000, 0x02 },
+    { 166700, 0x11 },
+    { 200000, 0x09 },
+    { 250000, 0x01 },
+    { 300000, 0x00 }, // Invalid Bandwidth
+};
 
 SX1276_t SX1276;
 
@@ -243,9 +378,9 @@ int init(long frequency)
     printf("REG_FIFO_RX_BASE_ADDR: %x\n", readRegister(REG_FIFO_RX_BASE_ADDR));
 
     // set LNA boost
-    printf("before REG_LNA: %x\n", readRegister(REG_LNA));
-    writeRegister(REG_LNA, readRegister(REG_LNA) | 0x23);
-    printf("after REG_LNA: %x\n", readRegister(REG_LNA));
+    //printf("before REG_LNA: %x\n", readRegister(REG_LNA));
+    //writeRegister(REG_LNA, readRegister(REG_LNA) | 0x23);
+    //printf("after REG_LNA: %x\n", readRegister(REG_LNA));
 
     // set auto AGC
     writeRegister(REG_MODEM_CONFIG_3, 0x04);
@@ -276,22 +411,24 @@ int beginPacket(int implicitHeader) {
     // as is
     // put in standby mode
     idle();
-    printf("inside begin packet\n");
+    //printf("inside begin packet\n");
 
+/*
     if (implicitHeader) {
         implicitHeaderMode();
     } else {
         explicitHeaderMode();
     }
+*/
 
-    printf("initial value of REG_FIFO_ADDR_PTR: %x\n", readRegister(REG_FIFO_ADDR_PTR));
-    printf("initial value of REG_FIFO_ADDR_PTR: %x\n", readRegister(REG_PAYLOAD_LENGTH));
+    //printf("initial value of REG_FIFO_ADDR_PTR: %x\n", readRegister(REG_FIFO_ADDR_PTR));
+    //printf("initial value of REG_FIFO_ADDR_PTR: %x\n", readRegister(REG_PAYLOAD_LENGTH));
     // reset FIFO address and paload length
     writeRegister(REG_FIFO_ADDR_PTR, 0);
     writeRegister(REG_PAYLOAD_LENGTH, 0);
 
-    printf("later value of REG_FIFO_ADDR_PTR: %x\n", readRegister(REG_FIFO_ADDR_PTR));
-    printf("later value of REG_FIFO_ADDR_PTR: %x\n", readRegister(REG_PAYLOAD_LENGTH));
+    //printf("later value of REG_FIFO_ADDR_PTR: %x\n", readRegister(REG_FIFO_ADDR_PTR));
+    //printf("later value of REG_FIFO_ADDR_PTR: %x\n", readRegister(REG_PAYLOAD_LENGTH));
 
     return 1;
 }
@@ -301,8 +438,8 @@ int endPacket() {
 
     printf("value of REG_IRQ_FLAGS very prior to clearing the interrupt: %x\n", readRegister(REG_IRQ_FLAGS));
 
-    printf("inside end packet\n");
-    printf("final value of REG_PAYLOAD_LENGTH: %x\n", readRegister(REG_PAYLOAD_LENGTH));
+    //printf("inside end packet\n");
+    //printf("final value of REG_PAYLOAD_LENGTH: %x\n", readRegister(REG_PAYLOAD_LENGTH));
 
     // put in TX mode
     // replace this with the set opmode call
@@ -314,11 +451,11 @@ int endPacket() {
 
     printf("interrupt 0 detected\n");
 
-    printf("value of REG_IRQ_FLAGS prior to clearing the interrupt: %x\n", readRegister(REG_IRQ_FLAGS));
+    //printf("value of REG_IRQ_FLAGS prior to clearing the interrupt: %x\n", readRegister(REG_IRQ_FLAGS));
     // clear IRQ's
     //writeRegister(REG_IRQ_FLAGS, RFLR_IRQFLAGS_TXDONE);
     writeRegister(REG_IRQ_FLAGS, 0x80);
-    printf("value of REG_IRQ_FLAGS after clearing the interrupt: %x\n", readRegister(REG_IRQ_FLAGS));
+    //printf("value of REG_IRQ_FLAGS after clearing the interrupt: %x\n", readRegister(REG_IRQ_FLAGS));
 
     return 1;
 }
@@ -329,18 +466,21 @@ int parsePacket(int size) {
 
     int packetLength = 0;
     int irqFlags = readRegister(REG_IRQ_FLAGS);
-    //if(irqFlags != 0)
+    //if(irqFlags == 0)
     //    printf("reception: %x\n", irqFlags);
 
+/*
     if (size > 0) {
         implicitHeaderMode();
         writeRegister(REG_PAYLOAD_LENGTH, size & 0xff);
     } else {
         explicitHeaderMode();
     }
+*/
 
     // clear IRQ's
     writeRegister(REG_IRQ_FLAGS, irqFlags);
+    //upm_delay_us(100000);
 
     if ((irqFlags & RFLR_IRQFLAGS_RXDONE_MASK) && (irqFlags & RFLR_IRQFLAGS_PAYLOADCRCERROR_MASK) == 0) {
         // received a packet
@@ -358,7 +498,8 @@ int parsePacket(int size) {
 
         // put in standby mode
         idle();
-    } else if (readRegister(REG_OP_MODE) != (MODE_LONG_RANGE_MODE | MODE_RX_SINGLE)) {
+    //} else if (readRegister(REG_OP_MODE) != (MODE_LONG_RANGE_MODE | MODE_RX_SINGLE)) {
+    } else if (readRegister(REG_OP_MODE) != (MODE_LONG_RANGE_MODE | MODE_RX_CONTINUOUS)) {
         // not currently in RX mode
 
         // reset FIFO address
@@ -366,7 +507,9 @@ int parsePacket(int size) {
 
         // put in single RX mode
         // again using set opmode function
-        SX1276SetOpMode(MODE_RX_SINGLE);
+        // MODE_RX_CONTINUOUS
+        //SX1276SetOpMode(MODE_RX_SINGLE);
+        SX1276SetOpMode(MODE_RX_CONTINUOUS);
         //writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_RX_SINGLE);
     }
 
@@ -482,6 +625,7 @@ void LoRaClass::onReceive(void(*callback)(int))
 
 // the default size here is 0
 void receive(int size) {
+/*
     if (size > 0) {
         implicitHeaderMode();
 
@@ -489,6 +633,7 @@ void receive(int size) {
     } else {
         explicitHeaderMode();
     }
+*/
 
     //writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_RX_CONTINUOUS);
     SX1276SetOpMode(MODE_RX_CONTINUOUS);
@@ -862,4 +1007,485 @@ uint32_t SX1276Random( void )
     SX1276sleep( );
 
     return rnd;
+}
+
+/*!
+ * Returns the known FSK bandwidth registers value
+ *
+ * \param [IN] bandwidth Bandwidth value in Hz
+ * \retval regValue Bandwidth register value.
+ */
+static uint8_t SX1276GetFskBandwidthRegValue( uint32_t bandwidth )
+{
+    uint8_t i;
+
+    for( i = 0; i < ( sizeof( FskBandwidths ) / sizeof( FskBandwidth_t ) ) - 1; i++ )
+    {
+        if( ( bandwidth >= FskBandwidths[i].bandwidth ) && ( bandwidth < FskBandwidths[i + 1].bandwidth ) )
+        {
+            return FskBandwidths[i].RegValue;
+        }
+    }
+    // ERROR: Value not found
+    //while( 1 );
+    printf("BW value not found\n");
+    return 0;
+}
+
+void SX1276SetRxConfig( RadioModems_t modem, uint32_t bandwidth,
+                         uint32_t datarate, uint8_t coderate,
+                         uint32_t bandwidthAfc, uint16_t preambleLen,
+                         uint16_t symbTimeout, bool fixLen,
+                         uint8_t payloadLen,
+                         bool crcOn, bool freqHopOn, uint8_t hopPeriod,
+                         bool iqInverted, bool rxContinuous ) {
+
+    SX1276SetModem(modem);
+
+    switch(modem){
+        case MODEM_FSK:
+            {
+            SX1276.Settings.Fsk.Bandwidth = bandwidth;
+            SX1276.Settings.Fsk.Datarate = datarate;
+            SX1276.Settings.Fsk.BandwidthAfc = bandwidthAfc;
+            SX1276.Settings.Fsk.FixLen = fixLen;
+            SX1276.Settings.Fsk.PayloadLen = payloadLen;
+            SX1276.Settings.Fsk.CrcOn = crcOn;
+            SX1276.Settings.Fsk.IqInverted = iqInverted;
+            SX1276.Settings.Fsk.RxContinuous = rxContinuous;
+            SX1276.Settings.Fsk.PreambleLen = preambleLen;
+
+            datarate = ( uint16_t )( ( double )XTAL_FREQ / ( double )datarate );
+            writeRegister( REG_BITRATE_MSB, ( uint8_t )( datarate >> 8 ) );
+            writeRegister( REG_BITRATE_LSB, ( uint8_t )( datarate & 0xFF ) );
+
+            writeRegister( REG_RXBW, SX1276GetFskBandwidthRegValue( bandwidth ) );
+            writeRegister( REG_AFCBW, SX1276GetFskBandwidthRegValue( bandwidthAfc ) );
+
+            writeRegister( REG_PREAMBLEMSB, ( uint8_t )( ( preambleLen >> 8 ) & 0xFF ) );
+            writeRegister( REG_PREAMBLELSB, ( uint8_t )( preambleLen & 0xFF ) );
+
+            if( fixLen == 1 )
+            {
+                writeRegister( REG_FSK_PAYLOADLENGTH, payloadLen );
+            }
+            else
+            {
+                writeRegister( REG_FSK_PAYLOADLENGTH, 0xFF ); // Set payload length to the maximum
+            }
+
+            writeRegister( REG_PACKETCONFIG1,
+                         ( readRegister( REG_PACKETCONFIG1 ) &
+                           RF_PACKETCONFIG1_CRC_MASK &
+                           RF_PACKETCONFIG1_PACKETFORMAT_MASK ) |
+                           ( ( fixLen == 1 ) ? RF_PACKETCONFIG1_PACKETFORMAT_FIXED : RF_PACKETCONFIG1_PACKETFORMAT_VARIABLE ) |
+                           ( crcOn << 4 ) );
+            writeRegister( REG_PACKETCONFIG2, ( readRegister( REG_PACKETCONFIG2 ) | RF_PACKETCONFIG2_DATAMODE_PACKET ) );
+        }
+        break;
+
+        case MODEM_LORA:
+        {
+            if( bandwidth > 2 )
+            {
+                // Fatal error: When using LoRa modem only bandwidths 125, 250 and 500 kHz are supported
+                while( 1 );
+            }
+            bandwidth += 7;
+            SX1276.Settings.LoRa.Bandwidth = bandwidth;
+            SX1276.Settings.LoRa.Datarate = datarate;
+            SX1276.Settings.LoRa.Coderate = coderate;
+            SX1276.Settings.LoRa.PreambleLen = preambleLen;
+            SX1276.Settings.LoRa.FixLen = fixLen;
+            SX1276.Settings.LoRa.PayloadLen = payloadLen;
+            SX1276.Settings.LoRa.CrcOn = crcOn;
+            SX1276.Settings.LoRa.FreqHopOn = freqHopOn;
+            SX1276.Settings.LoRa.HopPeriod = hopPeriod;
+            SX1276.Settings.LoRa.IqInverted = iqInverted;
+            SX1276.Settings.LoRa.RxContinuous = rxContinuous;
+
+            if( datarate > 12 )
+            {
+                datarate = 12;
+            }
+            else if( datarate < 6 )
+            {
+                datarate = 6;
+            }
+
+            if( ( ( bandwidth == 7 ) && ( ( datarate == 11 ) || ( datarate == 12 ) ) ) ||
+                ( ( bandwidth == 8 ) && ( datarate == 12 ) ) )
+            {
+                SX1276.Settings.LoRa.LowDatarateOptimize = 0x01;
+            }
+            else
+            {
+                SX1276.Settings.LoRa.LowDatarateOptimize = 0x00;
+            }
+
+            writeRegister( REG_MODEM_CONFIG_1,
+                         ( readRegister( REG_MODEM_CONFIG_1 ) &
+                           RFLR_MODEMCONFIG1_BW_MASK &
+                           RFLR_MODEMCONFIG1_CODINGRATE_MASK &
+                           RFLR_MODEMCONFIG1_IMPLICITHEADER_MASK ) |
+                           ( bandwidth << 4 ) | ( coderate << 1 ) |
+                           fixLen );
+
+            writeRegister( REG_MODEM_CONFIG_2,
+                         ( readRegister( REG_MODEM_CONFIG_2 ) &
+                           RFLR_MODEMCONFIG2_SF_MASK &
+                           RFLR_MODEMCONFIG2_RXPAYLOADCRC_MASK &
+                           RFLR_MODEMCONFIG2_SYMBTIMEOUTMSB_MASK ) |
+                           ( datarate << 4 ) | ( crcOn << 2 ) |
+                           ( ( symbTimeout >> 8 ) & ~RFLR_MODEMCONFIG2_SYMBTIMEOUTMSB_MASK ) );
+
+            writeRegister( REG_MODEM_CONFIG_3,
+                         ( readRegister( REG_MODEM_CONFIG_3 ) &
+                           RFLR_MODEMCONFIG3_LOWDATARATEOPTIMIZE_MASK ) |
+                           ( SX1276.Settings.LoRa.LowDatarateOptimize << 3 ) );
+
+            writeRegister( REG_LR_SYMBTIMEOUT_LSB, ( uint8_t )( symbTimeout & 0xFF ) );
+
+            writeRegister( REG_PREAMBLE_MSB, ( uint8_t )( ( preambleLen >> 8 ) & 0xFF ) );
+            writeRegister( REG_PREAMBLE_LSB, ( uint8_t )( preambleLen & 0xFF ) );
+
+            if( fixLen == 1 )
+            {
+                writeRegister( REG_PAYLOAD_LENGTH, payloadLen );
+            }
+
+            if( SX1276.Settings.LoRa.FreqHopOn == true )
+            {
+                writeRegister( REG_LR_PLLHOP, ( readRegister( REG_LR_PLLHOP ) & RFLR_PLLHOP_FASTHOP_MASK ) | RFLR_PLLHOP_FASTHOP_ON );
+                writeRegister( REG_LR_HOPPERIOD, SX1276.Settings.LoRa.HopPeriod );
+            }
+
+            if( ( bandwidth == 9 ) && ( SX1276.Settings.Channel > RF_MID_BAND_THRESH ) )
+            {
+                // ERRATA 2.1 - Sensitivity Optimization with a 500 kHz Bandwidth
+                writeRegister( REG_LR_TEST36, 0x02 );
+                writeRegister( REG_LR_TEST3A, 0x64 );
+            }
+            else if( bandwidth == 9 )
+            {
+                // ERRATA 2.1 - Sensitivity Optimization with a 500 kHz Bandwidth
+                writeRegister( REG_LR_TEST36, 0x02 );
+                writeRegister( REG_LR_TEST3A, 0x7F );
+            }
+            else
+            {
+                // ERRATA 2.1 - Sensitivity Optimization with a 500 kHz Bandwidth
+                writeRegister( REG_LR_TEST36, 0x03 );
+            }
+
+            if( datarate == 6 )
+            {
+                writeRegister( REG_LR_DETECTOPTIMIZE,
+                             ( readRegister( REG_LR_DETECTOPTIMIZE ) &
+                               RFLR_DETECTIONOPTIMIZE_MASK ) |
+                               RFLR_DETECTIONOPTIMIZE_SF6 );
+                writeRegister( REG_LR_DETECTIONTHRESHOLD,
+                             RFLR_DETECTIONTHRESH_SF6 );
+            }
+            else
+            {
+                writeRegister( REG_LR_DETECTOPTIMIZE,
+                             ( readRegister( REG_LR_DETECTOPTIMIZE ) &
+                             RFLR_DETECTIONOPTIMIZE_MASK ) |
+                             RFLR_DETECTIONOPTIMIZE_SF7_TO_SF12 );
+                writeRegister( REG_LR_DETECTIONTHRESHOLD,
+                             RFLR_DETECTIONTHRESH_SF7_TO_SF12 );
+            }
+        }
+        break;
+    }
+}
+
+
+void SX1276SetTxConfig( RadioModems_t modem, int8_t power, uint32_t fdev,
+                        uint32_t bandwidth, uint32_t datarate,
+                        uint8_t coderate, uint16_t preambleLen,
+                        bool fixLen, bool crcOn, bool freqHopOn,
+                        uint8_t hopPeriod, bool iqInverted, uint32_t timeout ) {
+
+    SX1276SetModem( modem );
+    // not sure why this function is only called to set tx power
+    // might have to set this explicitly for the rx side
+    setTxPower(power, PA_OUTPUT_PA_BOOST_PIN);
+
+    switch( modem )
+    {
+    case MODEM_FSK:
+        {
+            SX1276.Settings.Fsk.Power = power;
+            SX1276.Settings.Fsk.Fdev = fdev;
+            SX1276.Settings.Fsk.Bandwidth = bandwidth;
+            SX1276.Settings.Fsk.Datarate = datarate;
+            SX1276.Settings.Fsk.PreambleLen = preambleLen;
+            SX1276.Settings.Fsk.FixLen = fixLen;
+            SX1276.Settings.Fsk.CrcOn = crcOn;
+            SX1276.Settings.Fsk.IqInverted = iqInverted;
+            SX1276.Settings.Fsk.TxTimeout = timeout;
+
+            fdev = ( uint16_t )( ( double )fdev / ( double )FREQ_STEP );
+            writeRegister( REG_FDEVMSB, ( uint8_t )( fdev >> 8 ) );
+            writeRegister( REG_FDEVLSB, ( uint8_t )( fdev & 0xFF ) );
+
+            datarate = ( uint16_t )( ( double )XTAL_FREQ / ( double )datarate );
+            writeRegister( REG_BITRATE_MSB, ( uint8_t )( datarate >> 8 ) );
+            writeRegister( REG_BITRATE_LSB, ( uint8_t )( datarate & 0xFF ) );
+
+            writeRegister( REG_PREAMBLEMSB, ( preambleLen >> 8 ) & 0x00FF );
+            writeRegister( REG_PREAMBLELSB, preambleLen & 0xFF );
+
+            writeRegister( REG_PACKETCONFIG1,
+                         ( readRegister( REG_PACKETCONFIG1 ) &
+                           RF_PACKETCONFIG1_CRC_MASK &
+                           RF_PACKETCONFIG1_PACKETFORMAT_MASK ) |
+                           ( ( fixLen == 1 ) ? RF_PACKETCONFIG1_PACKETFORMAT_FIXED : RF_PACKETCONFIG1_PACKETFORMAT_VARIABLE ) |
+                           ( crcOn << 4 ) );
+            writeRegister( REG_PACKETCONFIG2, ( readRegister( REG_PACKETCONFIG2 ) | RF_PACKETCONFIG2_DATAMODE_PACKET ) );
+        }
+        break;
+    case MODEM_LORA:
+        {
+            SX1276.Settings.LoRa.Power = power;
+            if( bandwidth > 2 )
+            {
+                // Fatal error: When using LoRa modem only bandwidths 125, 250 and 500 kHz are supported
+                while( 1 );
+            }
+            bandwidth += 7;
+            SX1276.Settings.LoRa.Bandwidth = bandwidth;
+            SX1276.Settings.LoRa.Datarate = datarate;
+            SX1276.Settings.LoRa.Coderate = coderate;
+            SX1276.Settings.LoRa.PreambleLen = preambleLen;
+            SX1276.Settings.LoRa.FixLen = fixLen;
+            SX1276.Settings.LoRa.FreqHopOn = freqHopOn;
+            SX1276.Settings.LoRa.HopPeriod = hopPeriod;
+            SX1276.Settings.LoRa.CrcOn = crcOn;
+            SX1276.Settings.LoRa.IqInverted = iqInverted;
+            SX1276.Settings.LoRa.TxTimeout = timeout;
+
+            if( datarate > 12 )
+            {
+                datarate = 12;
+            }
+            else if( datarate < 6 )
+            {
+                datarate = 6;
+            }
+            if( ( ( bandwidth == 7 ) && ( ( datarate == 11 ) || ( datarate == 12 ) ) ) ||
+                ( ( bandwidth == 8 ) && ( datarate == 12 ) ) )
+            {
+                SX1276.Settings.LoRa.LowDatarateOptimize = 0x01;
+            }
+            else
+            {
+                SX1276.Settings.LoRa.LowDatarateOptimize = 0x00;
+            }
+
+            if( SX1276.Settings.LoRa.FreqHopOn == true )
+            {
+                writeRegister( REG_LR_PLLHOP, ( readRegister( REG_LR_PLLHOP ) & RFLR_PLLHOP_FASTHOP_MASK ) | RFLR_PLLHOP_FASTHOP_ON );
+                writeRegister( REG_LR_HOPPERIOD, SX1276.Settings.LoRa.HopPeriod );
+            }
+
+            writeRegister( REG_MODEM_CONFIG_1,
+                         ( readRegister( REG_MODEM_CONFIG_1 ) &
+                           RFLR_MODEMCONFIG1_BW_MASK &
+                           RFLR_MODEMCONFIG1_CODINGRATE_MASK &
+                           RFLR_MODEMCONFIG1_IMPLICITHEADER_MASK ) |
+                           ( bandwidth << 4 ) | ( coderate << 1 ) |
+                           fixLen );
+
+            writeRegister( REG_MODEM_CONFIG_2,
+                         ( readRegister( REG_MODEM_CONFIG_2 ) &
+                           RFLR_MODEMCONFIG2_SF_MASK &
+                           RFLR_MODEMCONFIG2_RXPAYLOADCRC_MASK ) |
+                           ( datarate << 4 ) | ( crcOn << 2 ) );
+
+            writeRegister( REG_MODEM_CONFIG_3,
+                         ( readRegister( REG_MODEM_CONFIG_3 ) &
+                           RFLR_MODEMCONFIG3_LOWDATARATEOPTIMIZE_MASK ) |
+                           ( SX1276.Settings.LoRa.LowDatarateOptimize << 3 ) );
+
+            writeRegister( REG_PREAMBLE_MSB, ( preambleLen >> 8 ) & 0x00FF );
+            writeRegister( REG_PREAMBLE_LSB, preambleLen & 0xFF );
+//
+            if( datarate == 6 )
+            {
+                writeRegister( REG_LR_DETECTOPTIMIZE,
+                             ( readRegister( REG_LR_DETECTOPTIMIZE ) &
+                               RFLR_DETECTIONOPTIMIZE_MASK ) |
+                               RFLR_DETECTIONOPTIMIZE_SF6 );
+                writeRegister( REG_LR_DETECTIONTHRESHOLD,
+                             RFLR_DETECTIONTHRESH_SF6 );
+            }
+            else
+            {
+                writeRegister( REG_LR_DETECTOPTIMIZE,
+                             ( readRegister( REG_LR_DETECTOPTIMIZE ) &
+                             RFLR_DETECTIONOPTIMIZE_MASK ) |
+                             RFLR_DETECTIONOPTIMIZE_SF7_TO_SF12 );
+                writeRegister( REG_LR_DETECTIONTHRESHOLD,
+                             RFLR_DETECTIONTHRESH_SF7_TO_SF12 );
+            }
+        }
+        break;
+    }
+}
+
+uint32_t SX1276GetTimeOnAir( RadioModems_t modem, uint8_t pktLen )
+{
+    uint32_t airTime = 0;
+
+    switch( modem )
+    {
+    case MODEM_FSK:
+        {
+            airTime = round( ( 8 * ( SX1276.Settings.Fsk.PreambleLen +
+                                     ( ( readRegister( REG_SYNCCONFIG ) & ~RF_SYNCCONFIG_SYNCSIZE_MASK ) + 1 ) +
+                                     ( ( SX1276.Settings.Fsk.FixLen == 0x01 ) ? 0.0 : 1.0 ) +
+                                     ( ( ( readRegister( REG_PACKETCONFIG1 ) & ~RF_PACKETCONFIG1_ADDRSFILTERING_MASK ) != 0x00 ) ? 1.0 : 0 ) +
+                                     pktLen +
+                                     ( ( SX1276.Settings.Fsk.CrcOn == 0x01 ) ? 2.0 : 0 ) ) /
+                                     SX1276.Settings.Fsk.Datarate ) * 1e3 );
+        }
+        break;
+    case MODEM_LORA:
+        {
+            double bw = 0.0;
+            // REMARK: When using LoRa modem only bandwidths 125, 250 and 500 kHz are supported
+            switch( SX1276.Settings.LoRa.Bandwidth )
+            {
+            //case 0: // 7.8 kHz
+            //    bw = 78e2;
+            //    break;
+            //case 1: // 10.4 kHz
+            //    bw = 104e2;
+            //    break;
+            //case 2: // 15.6 kHz
+            //    bw = 156e2;
+            //    break;
+            //case 3: // 20.8 kHz
+            //    bw = 208e2;
+            //    break;
+            //case 4: // 31.2 kHz
+            //    bw = 312e2;
+            //    break;
+            //case 5: // 41.4 kHz
+            //    bw = 414e2;
+            //    break;
+            //case 6: // 62.5 kHz
+            //    bw = 625e2;
+            //    break;
+            case 7: // 125 kHz
+                bw = 125e3;
+                break;
+            case 8: // 250 kHz
+                bw = 250e3;
+                break;
+            case 9: // 500 kHz
+                bw = 500e3;
+                break;
+            }
+
+            // Symbol rate : time for one symbol (secs)
+            double rs = bw / ( 1 << SX1276.Settings.LoRa.Datarate );
+            double ts = 1 / rs;
+            // time of preamble
+            double tPreamble = ( SX1276.Settings.LoRa.PreambleLen + 4.25 ) * ts;
+            // Symbol length of payload and time
+            double tmp = ceil( ( 8 * pktLen - 4 * SX1276.Settings.LoRa.Datarate +
+                                 28 + 16 * SX1276.Settings.LoRa.CrcOn -
+                                 ( SX1276.Settings.LoRa.FixLen ? 20 : 0 ) ) /
+                                 ( double )( 4 * ( SX1276.Settings.LoRa.Datarate -
+                                 ( ( SX1276.Settings.LoRa.LowDatarateOptimize > 0 ) ? 2 : 0 ) ) ) ) *
+                                 ( SX1276.Settings.LoRa.Coderate + 4 );
+            double nPayload = 8 + ( ( tmp > 0 ) ? tmp : 0 );
+            double tPayload = nPayload * ts;
+            // Time on air
+            double tOnAir = tPreamble + tPayload;
+            // return ms secs
+            airTime = floor( tOnAir * 1e3 + 0.999 );
+        }
+        break;
+    }
+    return airTime;
+}
+
+void SX1276Send(uint8_t *buffer, uint8_t size)
+{
+    uint32_t txTimeout = 0;
+
+    switch(SX1276.Settings.Modem)
+    {
+    case MODEM_FSK:
+        {
+            SX1276.Settings.FskPacketHandler.NbBytes = 0;
+            SX1276.Settings.FskPacketHandler.Size = size;
+
+            if( SX1276.Settings.Fsk.FixLen == false )
+            {
+                //SX1276WriteFifo( ( uint8_t* )&size, 1 );
+                write_buf(( uint8_t* )&size, 1);
+            }
+            else
+            {
+                writeRegister( REG_PAYLOADLENGTH, size );
+            }
+
+            if( ( size > 0 ) && ( size <= 64 ) )
+            {
+                SX1276.Settings.FskPacketHandler.ChunkSize = size;
+            }
+            else
+            {
+                memcpy( RxTxBuffer, buffer, size );
+                SX1276.Settings.FskPacketHandler.ChunkSize = 32;
+            }
+
+            // Write payload buffer
+            write_buf( buffer, SX1276.Settings.FskPacketHandler.ChunkSize );
+            SX1276.Settings.FskPacketHandler.NbBytes += SX1276.Settings.FskPacketHandler.ChunkSize;
+            txTimeout = SX1276.Settings.Fsk.TxTimeout;
+        }
+        break;
+    case MODEM_LORA:
+        {
+            if( SX1276.Settings.LoRa.IqInverted == true )
+            {
+                writeRegister(REG_LR_INVERTIQ, ((readRegister(REG_LR_INVERTIQ) & RFLR_INVERTIQ_TX_MASK & RFLR_INVERTIQ_RX_MASK) | RFLR_INVERTIQ_RX_OFF | RFLR_INVERTIQ_TX_ON));
+                writeRegister( REG_LR_INVERTIQ2, RFLR_INVERTIQ2_ON );
+            }
+            else
+            {
+                writeRegister( REG_LR_INVERTIQ, ( ( readRegister( REG_LR_INVERTIQ ) & RFLR_INVERTIQ_TX_MASK & RFLR_INVERTIQ_RX_MASK ) | RFLR_INVERTIQ_RX_OFF | RFLR_INVERTIQ_TX_OFF ) );
+                writeRegister( REG_LR_INVERTIQ2, RFLR_INVERTIQ2_OFF );
+            }
+
+            SX1276.Settings.LoRaPacketHandler.Size = size;
+
+            // Initializes the payload size
+            writeRegister( REG_LR_PAYLOADLENGTH, size );
+
+            // Full buffer used for Tx
+            writeRegister( REG_LR_FIFOTXBASEADDR, 0 );
+            writeRegister( REG_LR_FIFOADDRPTR, 0 );
+
+            // FIFO operations can not take place in Sleep mode
+            if( ( readRegister( REG_OPMODE ) & ~RF_OPMODE_MASK ) == RF_OPMODE_SLEEP )
+            {
+                SX1276SetStby( );
+                upm_delay_us(1000);
+            }
+            // Write payload buffer
+            writeRegister( buffer, size );
+            txTimeout = SX1276.Settings.LoRa.TxTimeout;
+        }
+        break;
+    }
+
+    SX1276SetTx( txTimeout );
 }
