@@ -1,0 +1,1 @@
+obj-$(CONFIG_UPM_sx127x) += sx127x.o
