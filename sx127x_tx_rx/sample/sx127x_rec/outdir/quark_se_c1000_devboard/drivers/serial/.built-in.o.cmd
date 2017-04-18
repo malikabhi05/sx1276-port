@@ -1,1 +1,0 @@
-cmd_drivers/serial/built-in.o :=  /opt/zephyr-sdk//sysroots/x86_64-pokysdk-linux/usr/bin/i586-zephyr-elfiamcu/i586-zephyr-elfiamcu-ld -nostartfiles -nodefaultlibs -nostdlib -static   -r -o drivers/serial/built-in.o drivers/serial/uart_qmsi.o 

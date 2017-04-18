@@ -1,1 +1,0 @@
-cmd_drivers/pinmux/built-in.o :=  /opt/zephyr-sdk//sysroots/x86_64-pokysdk-linux/usr/bin/i586-zephyr-elfiamcu/i586-zephyr-elfiamcu-ld -nostartfiles -nodefaultlibs -nostdlib -static   -r -o drivers/pinmux/built-in.o drivers/pinmux/pinmux_qmsi.o 
