@@ -1,0 +1,697 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>96Boards Nitrogen &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../../../index.html"/>
+        <link rel="up" title="Supported Boards" href="../../../boards.html"/>
+        <link rel="next" title="Arduino/Genuino 101 (BLE)" href="../../arduino_101_ble/doc/board.html"/>
+        <link rel="prev" title="96Boards Carbon" href="../../96b_carbon/doc/96b_carbon.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../boards.html">Supported Boards</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#x86-boards">X86 Boards</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../boards.html#arm-boards">ARM Boards</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../96b_carbon/doc/96b_carbon.html">96Boards Carbon</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">96Boards Nitrogen</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware">Hardware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flashing-zephyr-onto-96boards-nitrogen">Flashing Zephyr onto 96Boards Nitrogen</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_101_ble/doc/board.html">Arduino/Genuino 101 (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_due/doc/board.html">Arduino Due</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cc3200_launchxl/doc/cc3200_launchxl.html">CC3200 LaunchXL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../curie_ble/doc/board.html">Curie (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_k64f/doc/frdm_k64f.html">NXP FRDM-K64F</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_kw41z/doc/frdm_kw41z.html">NXP FRDM-KW41Z</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hexiwear_k64/doc/hexiwear_k64.html">Hexiwear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mps2_an385/doc/mps2_an385.html">ARM V2M MPS2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf51_pca10028/doc/nrf51_pca10028.html">nRF51-PCA10028</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52840_pca10056/doc/nrf52840_pca10056.html">nRF52840-PCA10056</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52_pca10040/doc/nordic_segger.html">Nordic nRF5x Segger J-Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52_pca10040/doc/nrf52_pca10040.html">nRF52-PCA10040</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f401re/doc/nucleof401re.html">ST Nucleo F401RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f411re/doc/nucleof411re.html">ST Nucleo F411RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_l476rg/doc/nucleol476rg.html">ST Nucleo L476RG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../qemu_cortex_m3/doc/board.html">ARM Cortex-M3 Emulation (QEMU)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sam_e70_xplained/doc/sam_e70_xplained.html">SAM E70 Xplained</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../v2m_beetle/doc/v2m_beetle.html">ARM V2M Beetle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#arc-boards">ARC Boards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#nios-ii-boards">NIOS II Boards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../boards.html">Supported Boards</a> &raquo;</li>
+        
+      <li>96Boards Nitrogen</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/boards/arm/96b_nitrogen/doc/96b_nitrogen.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="boards-nitrogen">
+<span id="b-nitrogen-board"></span><h1>96Boards Nitrogen<a class="headerlink" href="#boards-nitrogen" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Zephyr applications use the 96b_nitrogen board configuration to run on the
+96Boards Nitrogen hardware. It provides support for the Nordic Semiconductor
+nRF52832 ARM Cortex-M4F CPU.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="../../../../_images/96b-nitrogen-front.png"><img alt="96Boards Nitrogen" src="../../../../_images/96b-nitrogen-front.png" style="width: 487px;" /></a>
+<p class="caption"><span class="caption-text">96Boards Nitrogen</span></p>
+</div>
+<p>More information about the board can be found at the <a class="reference external" href="http://wiki.seeed.cc/BLE_Nitrogen/">seeed BLE Nitrogen</a>
+website. The <a class="reference external" href="http://infocenter.nordicsemi.com/">Nordic Semiconductor Infocenter</a> contains the processor&#8217;s
+information and the datasheet.</p>
+</div>
+<div class="section" id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
+<p>96Boards Nitrogen provides the following hardware components:</p>
+<ul class="simple">
+<li>nRF52832 microcontroller with 512kB Flash, 64kB RAM</li>
+<li>ARM®32-bit Cortex®-M4 CPU with FPU</li>
+<li>Bluetooth LE</li>
+<li>NFC</li>
+<li>LPC11U35 on board SWD debugger<ul>
+<li>SWD debugger firmware</li>
+<li>USB to UART</li>
+<li>Drag and Drop firmware upgrade</li>
+</ul>
+</li>
+<li>7 LEDs<ul>
+<li>USR1, BT, PWR, CDC, DAP, MSD, Battery charge</li>
+</ul>
+</li>
+<li>SWD debug connectors<ul>
+<li>nRF52832 SWD connector</li>
+<li>nRF52832 Uart connector</li>
+</ul>
+</li>
+<li>On board chip antenna</li>
+<li>1.8V work voltage</li>
+<li>2x20pin 2.0mm pitch Low speed connector</li>
+</ul>
+<div class="section" id="supported-features">
+<h3>Supported Features<a class="headerlink" href="#supported-features" title="Permalink to this headline">¶</a></h3>
+<p>The Zephyr 96b_nitrogen board configuration supports the following hardware
+features:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="20%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Interface</th>
+<th class="head">Controller</th>
+<th class="head">Driver/Component</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>NVIC</td>
+<td>on-chip</td>
+<td>nested vectored interrupt controller</td>
+</tr>
+<tr class="row-odd"><td>RTC</td>
+<td>on-chip</td>
+<td>system clock</td>
+</tr>
+<tr class="row-even"><td>UART</td>
+<td>on-chip</td>
+<td>serial port</td>
+</tr>
+<tr class="row-odd"><td>GPIO</td>
+<td>on-chip</td>
+<td>gpio</td>
+</tr>
+<tr class="row-even"><td>FLASH</td>
+<td>on-chip</td>
+<td>flash</td>
+</tr>
+<tr class="row-odd"><td>RADIO</td>
+<td>on-chip</td>
+<td>bluetooth</td>
+</tr>
+<tr class="row-even"><td>RTT</td>
+<td>on-chip</td>
+<td>console</td>
+</tr>
+</tbody>
+</table>
+<p>Other hardware features are not supported by the Zephyr kernel.
+See <a class="reference external" href="http://infocenter.nordicsemi.com/">Nordic Semiconductor Infocenter</a> for a complete list of nRF52-based
+board hardware features.</p>
+<p>The default configuration can be found in the defconfig file:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">boards/arm/96b_nitrogen/96b_nitrogen_defconfig</span></code></div></blockquote>
+</div>
+<div class="section" id="pin-mapping">
+<h3>Pin Mapping<a class="headerlink" href="#pin-mapping" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="led">
+<h4>LED<a class="headerlink" href="#led" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>LED1 / User LED (green) = P0.29</li>
+<li>LED2 / BT LED (blue) = P0.28</li>
+</ul>
+</div>
+<div class="section" id="push-buttons">
+<h4>Push buttons<a class="headerlink" href="#push-buttons" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>BUTTON = SW1 = P0.27</li>
+</ul>
+</div>
+<div class="section" id="external-connectors">
+<h4>External Connectors<a class="headerlink" href="#external-connectors" title="Permalink to this headline">¶</a></h4>
+<p>Low Speed Header</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="30%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">PIN #</th>
+<th class="head">Signal Name</th>
+<th class="head">nRF52832 Functions</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>UART CTS</td>
+<td>P.014 / TRACEDATA[3]</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>UART TX</td>
+<td>P0.13</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>UART RX</td>
+<td>P0.15 / TRACEDATA[2]</td>
+</tr>
+<tr class="row-even"><td>9</td>
+<td>UART RTS</td>
+<td>P0.12</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>UART TX</td>
+<td>P0.13</td>
+</tr>
+<tr class="row-even"><td>13</td>
+<td>UART RX</td>
+<td>P0.15 / TRACEDATA[2]</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>P0.22</td>
+<td>P0.22</td>
+</tr>
+<tr class="row-even"><td>17</td>
+<td>P0.20</td>
+<td>P0.20</td>
+</tr>
+<tr class="row-odd"><td>19</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr class="row-even"><td>21</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr class="row-odd"><td>23</td>
+<td>P0.02</td>
+<td>P0.02</td>
+</tr>
+<tr class="row-even"><td>25</td>
+<td>P0.04</td>
+<td>P0.04</td>
+</tr>
+<tr class="row-odd"><td>27</td>
+<td>P0.06</td>
+<td>P0.06</td>
+</tr>
+<tr class="row-even"><td>29</td>
+<td>P0.08</td>
+<td>P0.08</td>
+</tr>
+<tr class="row-odd"><td>31</td>
+<td>P0.16</td>
+<td>P0.16</td>
+</tr>
+<tr class="row-even"><td>33</td>
+<td>P0.18</td>
+<td>P0.18</td>
+</tr>
+<tr class="row-odd"><td>35</td>
+<td>VCC</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>37</td>
+<td>USB5V</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>39</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="30%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">PIN #</th>
+<th class="head">Signal Name</th>
+<th class="head">nRF52832 Functions</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>PWR BTN</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>RST BTN</td>
+<td>P0.21 / RESET</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>P0.26</td>
+<td>P0.26</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>P0.25</td>
+<td>P0.25</td>
+</tr>
+<tr class="row-odd"><td>12</td>
+<td>P0.24</td>
+<td>P0.24</td>
+</tr>
+<tr class="row-even"><td>14</td>
+<td>P0.23</td>
+<td>P0.23</td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr class="row-even"><td>18</td>
+<td>N/A</td>
+<td>PC7</td>
+</tr>
+<tr class="row-odd"><td>20</td>
+<td>N/A</td>
+<td>PC9</td>
+</tr>
+<tr class="row-even"><td>22</td>
+<td>N/A</td>
+<td>PB8</td>
+</tr>
+<tr class="row-odd"><td>24</td>
+<td>P0.03</td>
+<td>P0.03</td>
+</tr>
+<tr class="row-even"><td>26</td>
+<td>P0.05</td>
+<td>P0.05</td>
+</tr>
+<tr class="row-odd"><td>28</td>
+<td>P0.07</td>
+<td>P0.07</td>
+</tr>
+<tr class="row-even"><td>30</td>
+<td>P0.11</td>
+<td>P0.11</td>
+</tr>
+<tr class="row-odd"><td>32</td>
+<td>P0.17</td>
+<td>P0.17</td>
+</tr>
+<tr class="row-even"><td>34</td>
+<td>P0.19</td>
+<td>P0.19</td>
+</tr>
+<tr class="row-odd"><td>36</td>
+<td>NC</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>38</td>
+<td>NC</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>40</td>
+<td>GND</td>
+<td>GND</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="system-clock">
+<h3>System Clock<a class="headerlink" href="#system-clock" title="Permalink to this headline">¶</a></h3>
+<p>nRF52 has two external oscillators. The frequency of the slow clock is
+32.768 kHz. The frequency of the main clock is 32 MHz.</p>
+</div>
+</div>
+<div class="section" id="flashing-zephyr-onto-96boards-nitrogen">
+<h2>Flashing Zephyr onto 96Boards Nitrogen<a class="headerlink" href="#flashing-zephyr-onto-96boards-nitrogen" title="Permalink to this headline">¶</a></h2>
+<p>The 96Boards Nitrogen board can be flashed via the <a class="reference external" href="https://developer.mbed.org/handbook/CMSIS-DAP">CMSIS DAP</a> interface,
+which is provided by the micro USB interface to the LPC11U35 chip.</p>
+<p>Using the CMSIS-DAP interface, the board can be flashed via the USB storage
+interface (drag-and-drop) and also via <a class="reference external" href="https://github.com/mbedmicro/pyOCD">pyOCD</a>.</p>
+<div class="section" id="installing-pyocd">
+<h3>Installing pyOCD<a class="headerlink" href="#installing-pyocd" title="Permalink to this headline">¶</a></h3>
+<p>The latest stable version of <a class="reference external" href="https://github.com/mbedmicro/pyOCD">pyOCD</a> can be installed via pip as follows:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --pre -U pyocd
+</pre></div>
+</div>
+<p>To install the latest development version (master branch), do the following:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --pre -U git+https://github.com/mbedmicro/pyOCD.git#egg<span class="o">=</span>pyOCD
+</pre></div>
+</div>
+<p>You can then verify that your board is detected by pyOCD by running:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> pyocd-flashtool -l
+</pre></div>
+</div>
+<div class="section" id="common-errors">
+<h4>Common Errors<a class="headerlink" href="#common-errors" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="no-connected-boards">
+<h4>No connected boards<a class="headerlink" href="#no-connected-boards" title="Permalink to this headline">¶</a></h4>
+<p>If you don&#8217;t use sudo when invoking pyocd-flashtool, you might get any of the
+following errors:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">No available boards are connected</span>
+</pre></div>
+</div>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">No connected boards</span>
+</pre></div>
+</div>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Error: There is no board connected.</span>
+</pre></div>
+</div>
+<p>To fix the permission issue, simply add the following udev rule for the
+NXP LPC1768 interface:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s1">&#39;ATTR{idProduct}==&quot;0204&quot;, ATTR{idVendor}==&quot;0d28&quot;, MODE=&quot;0666&quot;, GROUP=&quot;plugdev&quot;&#39;</span> &gt; /etc/udev/rules.d/50-cmsis-dap.rules
+</pre></div>
+</div>
+<p>Finally, unplug and plug the board again.</p>
+</div>
+<div class="section" id="valueerror-the-device-has-no-langid">
+<h4>ValueError: The device has no langid<a class="headerlink" href="#valueerror-the-device-has-no-langid" title="Permalink to this headline">¶</a></h4>
+<p>As described by <a class="reference external" href="https://github.com/mbedmicro/pyOCD/issues/259">pyOCD issue 259</a>, you might get the
+<code class="code docutils literal"><span class="pre">ValueError:</span> <span class="pre">The</span> <span class="pre">device</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">langid</span></code> error when not running
+pyOCD as root (e.g. sudo).</p>
+<p>To fix the above error, add the udev rule shown in the previous section
+and install a more recent version of pyOCD.</p>
+</div>
+</div>
+<div class="section" id="flashing-an-application-to-96boards-nitrogen">
+<h3>Flashing an Application to 96Boards Nitrogen<a class="headerlink" href="#flashing-an-application-to-96boards-nitrogen" title="Permalink to this headline">¶</a></h3>
+<p>The sample application <a class="reference internal" href="../../../../samples/hello_world/README.html#hello-world"><span class="std std-ref">Hello World</span></a> is being used in this tutorial:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span>&lt;zephyr_root_path&gt;/samples/hello_world
+</pre></div>
+</div>
+<p>To build the Zephyr kernel and application, enter:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> &lt;zephyr_root_path&gt;
+<span class="gp">$</span> <span class="nb">source</span> zephyr-env.sh
+<span class="gp">$</span> <span class="nb">cd</span> <span class="nv">$ZEPHYR_BASE</span>/samples/hello_world/
+<span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>96b_nitrogen
+</pre></div>
+</div>
+<p>Connect the micro-USB cable to the 96Boards Nitrogen and to your computer.</p>
+<p>Erase the flash memory in the nRF52832:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> pyocd-flashtool -d debug -t nrf52 -ce
+</pre></div>
+</div>
+<p>Flash the application using the pyocd-flashtool tool:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> pyocd-flashtool -d debug -t nrf52 outdir/96b_nitrogen/zephyr.hex
+</pre></div>
+</div>
+<p>Run your favorite terminal program to listen for output.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> minicom -D &lt;tty_device&gt; -b <span class="m">115200</span>
+</pre></div>
+</div>
+<p>Replace <code class="code docutils literal"><span class="pre">&lt;tty_device&gt;</span></code> with the port where the board 96Boards Nitrogen
+can be found. For example, under Linux, <code class="code docutils literal"><span class="pre">/dev/ttyACM0</span></code>.
+The <code class="docutils literal"><span class="pre">-b</span></code> option sets baud rate ignoring the value from config.</p>
+<p>Press the Reset button and you should see the the following message in your
+terminal:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Hello World! arm</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging-with-gdb">
+<h3>Debugging with GDB<a class="headerlink" href="#debugging-with-gdb" title="Permalink to this headline">¶</a></h3>
+<p>To debug Zephyr with GDB launch the GDB server on a terminal:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> pyocd-gdbserver
+</pre></div>
+</div>
+<p>and then launch GDB against the .elf file you built:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> arm-none-eabi-gdb outdir/96b_nitrogen/zephyr.elf
+</pre></div>
+</div>
+<p>And finally connect GDB to the GDB Server:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">(gdb) target remote localhost:3333</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../arduino_101_ble/doc/board.html" class="btn btn-neutral float-right" title="Arduino/Genuino 101 (BLE)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../96b_carbon/doc/96b_carbon.html" class="btn btn-neutral" title="96Boards Carbon" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

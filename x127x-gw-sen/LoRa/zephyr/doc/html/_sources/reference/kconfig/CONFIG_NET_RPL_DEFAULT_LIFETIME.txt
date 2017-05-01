@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: NET_RPL_DEFAULT_LIFETIME
+
+.. option:: CONFIG_NET_RPL_DEFAULT_LIFETIME:
+.. _CONFIG_NET_RPL_DEFAULT_LIFETIME:
+
+Default route lifetime as a multiple of the lifetime unit.
+
+
+
+:Symbol:           NET_RPL_DEFAULT_LIFETIME
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Default route lifetime." if NET_RPL (value: "n")
+:Default values:
+
+ *  255 (value: "n")
+ *   Condition: NET_RPL (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_RPL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.rpl:147

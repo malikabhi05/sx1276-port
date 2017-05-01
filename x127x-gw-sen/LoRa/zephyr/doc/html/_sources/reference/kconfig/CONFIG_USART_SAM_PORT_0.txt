@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: USART_SAM_PORT_0
+
+.. option:: CONFIG_USART_SAM_PORT_0:
+.. _CONFIG_USART_SAM_PORT_0:
+
+Configure USART0 at boot depending on the additional options below.
+
+
+
+:Symbol:           USART_SAM_PORT_0
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable USART0" if USART_SAM (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: USART_SAM (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SERIAL (value: "n")
+:Locations:
+ * ../drivers/serial/Kconfig.usart_sam:17

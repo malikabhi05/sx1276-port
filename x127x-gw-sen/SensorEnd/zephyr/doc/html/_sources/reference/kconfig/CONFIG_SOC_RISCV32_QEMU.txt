@@ -1,0 +1,32 @@
+:orphan:
+
+.. title:: SOC_RISCV32_QEMU
+
+.. option:: CONFIG_SOC_RISCV32_QEMU:
+.. _CONFIG_SOC_RISCV32_QEMU:
+
+The configuration item CONFIG_SOC_RISCV32_QEMU:
+
+:Symbol:           SOC_RISCV32_QEMU
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "riscv32_qemu SOC implementation"
+:Default values:
+ (no default values)
+:Selects:
+
+ *  :option:`CONFIG_ATOMIC_OPERATIONS_C`
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../arch/riscv32/soc/riscv32-qemu/Kconfig.soc:1

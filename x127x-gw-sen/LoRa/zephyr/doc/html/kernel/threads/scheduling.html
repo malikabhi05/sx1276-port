@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Scheduling &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Threads" href="threads.html"/>
+        <link rel="next" title="Custom Data" href="custom_data.html"/>
+        <link rel="prev" title="Lifecycle" href="lifecycle.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../kernel.html">Zephyr Kernel Primer (version 2)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="threads.html">Threads</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="lifecycle.html">Lifecycle</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Scheduling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suggested-uses">Suggested Uses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="custom_data.html">Custom Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system_threads.html">System Threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workqueues.html">Workqueue Threads</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../timing/timing.html">Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/memory.html">Memory Allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synchronization/synchronization.html">Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_passing/data_passing.html">Data Passing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../other/other.html">Other Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../kernel.html">Zephyr Kernel Primer (version 2)</a> &raquo;</li>
+        
+          <li><a href="threads.html">Threads</a> &raquo;</li>
+        
+      <li>Scheduling</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/kernel/threads/scheduling.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="scheduling">
+<span id="scheduling-v2"></span><h1>Scheduling<a class="headerlink" href="#scheduling" title="Permalink to this headline">¶</a></h1>
+<p>The kernel&#8217;s priority-based scheduler allows an application&#8217;s threads
+to share the CPU.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#concepts" id="id3">Concepts</a><ul>
+<li><a class="reference internal" href="#thread-states" id="id4">Thread States</a></li>
+<li><a class="reference internal" href="#thread-priorities" id="id5">Thread Priorities</a></li>
+<li><a class="reference internal" href="#scheduling-algorithm" id="id6">Scheduling Algorithm</a></li>
+<li><a class="reference internal" href="#cooperative-time-slicing" id="id7">Cooperative Time Slicing</a></li>
+<li><a class="reference internal" href="#preemptive-time-slicing" id="id8">Preemptive Time Slicing</a></li>
+<li><a class="reference internal" href="#scheduler-locking" id="id9">Scheduler Locking</a></li>
+<li><a class="reference internal" href="#thread-sleeping" id="id10">Thread Sleeping</a></li>
+<li><a class="reference internal" href="#busy-waiting" id="id11">Busy Waiting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#suggested-uses" id="id12">Suggested Uses</a></li>
+<li><a class="reference internal" href="#configuration-options" id="id13">Configuration Options</a></li>
+<li><a class="reference internal" href="#apis" id="id14">APIs</a></li>
+</ul>
+</div>
+<div class="section" id="concepts">
+<h2><a class="toc-backref" href="#id3">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>The scheduler determines which thread is allowed to execute
+at any point in time; this thread is known as the <strong>current thread</strong>.</p>
+<p>Whenever the scheduler changes the identity of the current thread,
+or when execution of the current thread is supplanted by an ISR,
+the kernel first saves the current thread&#8217;s CPU register values.
+These register values get restored when the thread later resumes execution.</p>
+<div class="section" id="thread-states">
+<h3><a class="toc-backref" href="#id4">Thread States</a><a class="headerlink" href="#thread-states" title="Permalink to this headline">¶</a></h3>
+<p>A thread that has no factors that prevent its execution is deemed
+to be <strong>ready</strong>, and is eligible to be selected as the current thread.</p>
+<p>A thread that has one or more factors that prevent its execution
+is deemed to be <strong>unready</strong>, and cannot be selected as the current thread.</p>
+<p>The following factors make a thread unready:</p>
+<ul class="simple">
+<li>The thread has not been started.</li>
+<li>The thread is waiting on for a kernel object to complete an operation.
+(For example, the thread is taking a semaphore that is unavailable.)</li>
+<li>The thread is waiting for a timeout to occur.</li>
+<li>The thread has been suspended.</li>
+<li>The thread has terminated or aborted.</li>
+</ul>
+</div>
+<div class="section" id="thread-priorities">
+<h3><a class="toc-backref" href="#id5">Thread Priorities</a><a class="headerlink" href="#thread-priorities" title="Permalink to this headline">¶</a></h3>
+<p>A thread&#8217;s priority is an integer value, and can be either negative or
+non-negative.
+Numerically lower priorities takes precedence over numerically higher values.
+For example, the scheduler gives thread A of priority 4 <em>higher</em> priority
+over thread B of priority 7; likewise thread C of priority -2 has higher
+priority than both thread A and thread B.</p>
+<p>The scheduler distinguishes between two classes of threads,
+based on each thread&#8217;s priority.</p>
+<ul class="simple">
+<li>A <em class="dfn">cooperative thread</em> has a negative priority value.
+Once it becomes the current thread, a cooperative thread remains
+the current thread until it performs an action that makes it unready.</li>
+<li>A <em class="dfn">preemptible thread</em> has a non-negative priority value.
+Once it becomes the current thread, a preemptible thread may be supplanted
+at any time if a cooperative thread, or a preemptible thread of higher
+or equal priority, becomes ready.</li>
+</ul>
+<p>A thread&#8217;s initial priority value can be altered up or down after the thread
+has been started. Thus it possible for a preemptible thread to become
+a cooperative thread, and vice versa, by changing its priority.</p>
+<p>The kernel supports a virtually unlimited number of thread priority levels.
+The configuration options <a class="reference internal" href="../../reference/kconfig/CONFIG_NUM_COOP_PRIORITIES.html#cmdoption-arg-CONFIG_NUM_COOP_PRIORITIES"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_NUM_COOP_PRIORITIES</span></code></a> and
+<a class="reference internal" href="../../reference/kconfig/CONFIG_NUM_PREEMPT_PRIORITIES.html#cmdoption-arg-CONFIG_NUM_PREEMPT_PRIORITIES"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_NUM_PREEMPT_PRIORITIES</span></code></a> specify the number of priority
+levels for each class of thread, resulting the following usable priority
+ranges:</p>
+<ul class="simple">
+<li>cooperative threads: (-<a class="reference internal" href="../../reference/kconfig/CONFIG_NUM_COOP_PRIORITIES.html#cmdoption-arg-CONFIG_NUM_COOP_PRIORITIES"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_NUM_COOP_PRIORITIES</span></code></a>) to -1</li>
+<li>preemptive threads: 0 to (<a class="reference internal" href="../../reference/kconfig/CONFIG_NUM_PREEMPT_PRIORITIES.html#cmdoption-arg-CONFIG_NUM_PREEMPT_PRIORITIES"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_NUM_PREEMPT_PRIORITIES</span></code></a> - 1)</li>
+</ul>
+<p>For example, configuring 5 cooperative priorities and 10 preemptive priorities
+results in the ranges -5 to -1 and 0 to 9, respectively.</p>
+</div>
+<div class="section" id="scheduling-algorithm">
+<h3><a class="toc-backref" href="#id6">Scheduling Algorithm</a><a class="headerlink" href="#scheduling-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>The kernel&#8217;s scheduler selects the highest priority ready thread
+to be the current thread. When multiple ready threads of the same priority
+exist, the scheduler chooses the one that has been waiting longest.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Execution of ISRs takes precedence over thread execution,
+so the execution of the current thread may be supplanted by an ISR
+at any time unless interrupts have been masked. This applies to both
+cooperative threads and preemptive threads.</p>
+</div>
+</div>
+<div class="section" id="cooperative-time-slicing">
+<h3><a class="toc-backref" href="#id7">Cooperative Time Slicing</a><a class="headerlink" href="#cooperative-time-slicing" title="Permalink to this headline">¶</a></h3>
+<p>Once a cooperative thread becomes the current thread, it remains
+the current thread until it performs an action that makes it unready.
+Consequently, if a cooperative thread performs lengthy computations,
+it may cause an unacceptable delay in the scheduling of other threads,
+including those of higher priority and equal priority.</p>
+<p>To overcome such problems, a cooperative thread can voluntarily relinquish
+the CPU from time to time to permit other threads to execute.
+A thread can relinquish the CPU in two ways:</p>
+<ul class="simple">
+<li>Calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv27k_yieldv" title="k_yield"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_yield()</span></code></a> puts the thread at the back of the scheduler&#8217;s
+prioritized list of ready threads, and then invokes the scheduler.
+All ready threads whose priority is higher or equal to that of the
+yielding thread are then allowed to execute before the yielding thread is
+rescheduled. If no such ready threads exist, the scheduler immediately
+reschedules the yielding thread without context switching.</li>
+<li>Calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv27k_sleep7int32_t" title="k_sleep"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sleep()</span></code></a> makes the thread unready for a specified
+time period. Ready threads of <em>all</em> priorities are then allowed to execute;
+however, there is no guarantee that threads whose priority is lower
+than that of the sleeping thread will actually be scheduled before
+the sleeping thread becomes ready once again.</li>
+</ul>
+</div>
+<div class="section" id="preemptive-time-slicing">
+<h3><a class="toc-backref" href="#id8">Preemptive Time Slicing</a><a class="headerlink" href="#preemptive-time-slicing" title="Permalink to this headline">¶</a></h3>
+<p>Once a preemptive thread becomes the current thread, it remains
+the current thread until a higher priority thread becomes ready,
+or until the thread performs an action that makes it unready.
+Consequently, if a preemptive thread performs lengthy computations,
+it may cause an unacceptable delay in the scheduling of other threads,
+including those of equal priority.</p>
+<p>To overcome such problems, a preemptive thread can perform cooperative
+time slicing (as described above), or the scheduler&#8217;s time slicing capability
+can be used to allow other threads of the same priority to execute.</p>
+<p>The scheduler divides time into a series of <strong>time slices</strong>, where slices
+are measured in system clock ticks. The time slice size is configurable,
+but this size can be changed while the application is running.</p>
+<p>At the end of every time slice, the scheduler checks to see if the current
+thread is preemptible and, if so, implicitly invokes <a class="reference internal" href="../../api/kernel_api.html#_CPPv27k_yieldv" title="k_yield"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_yield()</span></code></a>
+on behalf of the thread. This gives other ready threads of the same priority
+the opportunity to execute before the current thread is scheduled again.
+If no threads of equal priority are ready, the current thread remains
+the current thread.</p>
+<p>Threads with a priority higher than specified limit are exempt from preemptive
+time slicing, and are never preempted by a thread of equal priority.
+This allows an application to use preemptive time slicing
+only when dealing with lower priority threads that are less time-sensitive.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The kernel&#8217;s time slicing algorithm does <em>not</em> ensure that a set
+of equal-priority threads receive an equitable amount of CPU time,
+since it does not measure the amount of time a thread actually gets to
+execute. For example, a thread may become the current thread just before
+the end of a time slice and then immediately have to yield the CPU.
+However, the algorithm <em>does</em> ensure that a thread never executes
+for longer than a single time slice without being required to yield.</p>
+</div>
+</div>
+<div class="section" id="scheduler-locking">
+<h3><a class="toc-backref" href="#id9">Scheduler Locking</a><a class="headerlink" href="#scheduler-locking" title="Permalink to this headline">¶</a></h3>
+<p>A preemptible thread that does not wish to be preempted while performing
+a critical operation can instruct the scheduler to temporarily treat it
+as a cooperative thread by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_sched_lockv" title="k_sched_lock"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sched_lock()</span></code></a>. This prevents
+other threads from interfering while the critical operation is being performed.</p>
+<p>Once the critical operation is complete the preemptible thread must call
+<a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_sched_unlockv" title="k_sched_unlock"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sched_unlock()</span></code></a> to restore its normal, preemptible status.</p>
+<p>If a thread calls <a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_sched_lockv" title="k_sched_lock"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sched_lock()</span></code></a> and subsequently performs an
+action that makes it unready, the scheduler will switch the locking thread out
+and allow other threads to execute. When the locking thread again
+becomes the current thread, its non-preemptible status is maintained.</p>
+</div>
+<div class="section" id="thread-sleeping">
+<span id="id1"></span><h3><a class="toc-backref" href="#id10">Thread Sleeping</a><a class="headerlink" href="#thread-sleeping" title="Permalink to this headline">¶</a></h3>
+<p>A thread can call <a class="reference internal" href="../../api/kernel_api.html#_CPPv27k_sleep7int32_t" title="k_sleep"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sleep()</span></code></a> to delay its processing
+for a specified time period. During the time the thread is sleeping
+the CPU is relinquished to allow other ready threads to execute.
+Once the specified delay has elapsed the thread becomes ready
+and is eligible to be scheduled once again.</p>
+<p>A sleeping thread can be woken up prematurely by another thread using
+<a class="reference internal" href="../../api/kernel_api.html#_CPPv28k_wakeup7k_tid_t" title="k_wakeup"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_wakeup()</span></code></a>. This technique can sometimes be used
+to permit the secondary thread to signal the sleeping thread
+that something has occurred <em>without</em> requiring the threads
+to define a kernel synchronization object, such as a semaphore.
+Waking up a thread that is not sleeping is allowed, but has no effect.</p>
+</div>
+<div class="section" id="busy-waiting">
+<span id="id2"></span><h3><a class="toc-backref" href="#id11">Busy Waiting</a><a class="headerlink" href="#busy-waiting" title="Permalink to this headline">¶</a></h3>
+<p>A thread can call <a class="reference internal" href="../../api/kernel_api.html#_CPPv211k_busy_wait8uint32_t" title="k_busy_wait"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_busy_wait()</span></code></a> to perform a <code class="docutils literal"><span class="pre">busy</span> <span class="pre">wait</span></code>
+that delays its processing for a specified time period
+<em>without</em> relinquishing the CPU to another ready thread.</p>
+<p>A busy wait is typically used instead of thread sleeping
+when the required delay is too short to warrant having the scheduler
+context switch from the current thread to another thread and then back again.</p>
+</div>
+</div>
+<div class="section" id="suggested-uses">
+<h2><a class="toc-backref" href="#id12">Suggested Uses</a><a class="headerlink" href="#suggested-uses" title="Permalink to this headline">¶</a></h2>
+<p>Use cooperative threads for device drivers and other performance-critical work.</p>
+<p>Use cooperative threads to implement mutually exclusion without the need
+for a kernel object, such as a mutex.</p>
+<p>Use preemptive threads to give priority to time-sensitive processing
+over less time-sensitive processing.</p>
+</div>
+<div class="section" id="configuration-options">
+<h2><a class="toc-backref" href="#id13">Configuration Options</a><a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>Related configuration options:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../reference/kconfig/CONFIG_NUM_COOP_PRIORITIES.html#cmdoption-arg-CONFIG_NUM_COOP_PRIORITIES"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_NUM_COOP_PRIORITIES</span></code></a></li>
+<li><a class="reference internal" href="../../reference/kconfig/CONFIG_NUM_PREEMPT_PRIORITIES.html#cmdoption-arg-CONFIG_NUM_PREEMPT_PRIORITIES"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_NUM_PREEMPT_PRIORITIES</span></code></a></li>
+<li><a class="reference internal" href="../../reference/kconfig/CONFIG_TIMESLICING.html#cmdoption-arg-CONFIG_TIMESLICING"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_TIMESLICING</span></code></a></li>
+<li><a class="reference internal" href="../../reference/kconfig/CONFIG_TIMESLICE_SIZE.html#cmdoption-arg-CONFIG_TIMESLICE_SIZE"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_TIMESLICE_SIZE</span></code></a></li>
+<li><a class="reference internal" href="../../reference/kconfig/CONFIG_TIMESLICE_PRIORITY.html#cmdoption-arg-CONFIG_TIMESLICE_PRIORITY"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_TIMESLICE_PRIORITY</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="apis">
+<h2><a class="toc-backref" href="#id14">APIs</a><a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>The following thread scheduling-related APIs are provided by <code class="file docutils literal"><span class="pre">kernel.h</span></code>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv213k_current_getv" title="k_current_get"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_current_get()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_sched_lockv" title="k_sched_lock"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sched_lock()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_sched_unlockv" title="k_sched_unlock"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sched_unlock()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv27k_yieldv" title="k_yield"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_yield()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv27k_sleep7int32_t" title="k_sleep"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sleep()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv28k_wakeup7k_tid_t" title="k_wakeup"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_wakeup()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv211k_busy_wait8uint32_t" title="k_busy_wait"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_busy_wait()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv222k_sched_time_slice_set7int32_ti" title="k_sched_time_slice_set"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sched_time_slice_set()</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="custom_data.html" class="btn btn-neutral float-right" title="Custom Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lifecycle.html" class="btn btn-neutral" title="Lifecycle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

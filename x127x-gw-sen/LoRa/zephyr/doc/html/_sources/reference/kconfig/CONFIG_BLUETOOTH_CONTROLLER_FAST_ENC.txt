@@ -1,0 +1,41 @@
+:orphan:
+
+.. title:: BLUETOOTH_CONTROLLER_FAST_ENC
+
+.. option:: CONFIG_BLUETOOTH_CONTROLLER_FAST_ENC:
+.. _CONFIG_BLUETOOTH_CONTROLLER_FAST_ENC:
+
+Enable connection encryption setup in 3 connection intervals.
+Peripheral will respond to Encryption Request with Encryption Response
+in the same connection interval, and also, will respond with Start
+Encryption Response PDU in the 3rd connection interval, hence
+completing encryption setup in 3 connection intervals. Encrypted data
+would be transmitted as fast as in 3rd connection interval from the
+connection establishment.
+Maximum CPU time in Radio ISR will increase if this feature is
+selected.
+
+
+
+:Symbol:           BLUETOOTH_CONTROLLER_FAST_ENC
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Fast Encryption Setup"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BLUETOOTH_HCI && BLUETOOTH && BLUETOOTH_CONTROLLER && BLUETOOTH_CONTROLLER (value: "n")
+:Locations:
+ * ../subsys/bluetooth/controller/Kconfig:65

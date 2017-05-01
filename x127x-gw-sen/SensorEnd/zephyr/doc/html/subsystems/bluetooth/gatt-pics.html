@@ -1,0 +1,1225 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GATT PICS &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Qualification Testing" href="qualification.html"/>
+        <link rel="next" title="L2CAP PICS" href="l2cap-pics.html"/>
+        <link rel="prev" title="GAP PICS" href="gap-pics.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../subsystems.html">Subsystems</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="bluetooth.html">Bluetooth</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bluetooth.html#source-tree-layout">Source tree layout</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="bluetooth.html#further-reading">Further reading</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../api/bluetooth.html">Bluetooth API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devel.html">Developing Bluetooth Applications</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qualification.html">Qualification Testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c_library.html">Standard C Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/networking.html">Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../power_management.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sensor.html">Sensor Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell.html">Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../test/ztest.html">Test Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usb/usb.html">USB device stack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../subsystems.html">Subsystems</a> &raquo;</li>
+        
+          <li><a href="bluetooth.html">Bluetooth</a> &raquo;</li>
+        
+          <li><a href="qualification.html">Qualification Testing</a> &raquo;</li>
+        
+      <li>GATT PICS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/subsystems/bluetooth/gatt-pics.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gatt-pics">
+<h1>GATT PICS<a class="headerlink" href="#gatt-pics" title="Permalink to this headline">¶</a></h1>
+<p>PTS version: 6.4</p>
+<p>* - different than PTS defaults</p>
+<p>^ - field not available on PTS</p>
+<p>M - mandatory</p>
+<p>O - optional</p>
+<div class="section" id="generic-attribute-profile-role">
+<h2>Generic Attribute Profile Role<a class="headerlink" href="#generic-attribute-profile-role" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_GATT_1_1</td>
+<td>True</td>
+<td>Generic Attribute Profile Client (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_1_2</td>
+<td>True</td>
+<td>Generic Attribute Profile Server (C.2)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_1A_1</td>
+<td>False (*)</td>
+<td>Complete GATT client (C.3)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_1A_2</td>
+<td>False (*)</td>
+<td>Complete GATT server (C.4)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="att-bearer-transport">
+<h2>ATT Bearer Transport<a class="headerlink" href="#att-bearer-transport" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_GATT_2_1</td>
+<td>False (*)</td>
+<td>Attribute Protocol Supported over BR/EDR
+(L2CAP fixed channel support) (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_2_2</td>
+<td>True</td>
+<td>Attribute Protocol Supported over LE (C.2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="generic-attribute-profile-support">
+<h2>Generic Attribute Profile Support<a class="headerlink" href="#generic-attribute-profile-support" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_GATT_3_1</td>
+<td>True</td>
+<td>Client: Exchange MTU (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_2</td>
+<td>False (*)</td>
+<td>Client: Discover All Primary Services (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_3</td>
+<td>True</td>
+<td>Client: Discover Primary Services Service
+UUID (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_4</td>
+<td>True</td>
+<td>Client: Find Included Services (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_5</td>
+<td>True</td>
+<td>Client: Discover All characteristics of a
+Service (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_6</td>
+<td>True</td>
+<td>Client: Discover Characteristics by UUID (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_7</td>
+<td>True</td>
+<td>Client: Discover All Characteristic Descriptors
+(C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_8</td>
+<td>True</td>
+<td>Client: Read Characteristic Value (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_9</td>
+<td>False (*)</td>
+<td>Client: Read using Characteristic UUID (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_10</td>
+<td>True</td>
+<td>Client: Read Long Characteristic Values (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_11</td>
+<td>True</td>
+<td>Client: Read Multiple Characteristic
+Values (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_12</td>
+<td>True</td>
+<td>Client: Write without Response (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_13</td>
+<td>True</td>
+<td>Client: Signed Write Without Response (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_14</td>
+<td>True</td>
+<td>Client: Write Characteristic Value (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_15</td>
+<td>True</td>
+<td>Client: Write Long Characteristic Values (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_16</td>
+<td>False (*)</td>
+<td>Client: Characteristic Value Reliable
+Writes (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_17</td>
+<td>True</td>
+<td>Client: Notifications (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_18</td>
+<td>True</td>
+<td>Client: Indications (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_19</td>
+<td>True</td>
+<td>Client: Read Characteristic Descriptors (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_20</td>
+<td>True</td>
+<td>Client: Read long Characteristic Descriptors
+(C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_21</td>
+<td>True</td>
+<td>Client: Write Characteristic Descriptors (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3_22</td>
+<td>True</td>
+<td>Client: Write Long Characteristic Descriptors
+(C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3_23</td>
+<td>True</td>
+<td>Client: Service Changed Characteristic (M)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="profile-attribute-types-and-formats-by-client">
+<h2>Profile Attribute Types and Formats, by client<a class="headerlink" href="#profile-attribute-types-and-formats-by-client" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="15%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_GATT_3B_1</td>
+<td>False (*)</td>
+<td>Client: Primary Service Declaration (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_2</td>
+<td>False (*)</td>
+<td>Client: Secondary Service Declaration (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_3</td>
+<td>False (*)</td>
+<td>Client: Include Declaration (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_4</td>
+<td>False (*)</td>
+<td>Client: Characteristic Declaration (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_5</td>
+<td>False (*)</td>
+<td>Client: Characteristic Value Declaration (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_6</td>
+<td>False (*)</td>
+<td>Client: Characteristic Extended Properties (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_7</td>
+<td>False (*)</td>
+<td>Client: Characteristic User Description
+Descriptor (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_8</td>
+<td>False (*)</td>
+<td>Client: Client Characteristic Configuration
+Descriptor (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_9</td>
+<td>False (*)</td>
+<td>Client: Server Characteristic Configuration
+Descriptor (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_10</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format Descriptor (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_11</td>
+<td>False (*)</td>
+<td>Client: Characteristic Aggregate Format
+Descriptor (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_12</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Boolean (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_13</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: 2Bit (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_14</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: nibble (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_15</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Uint8 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_16</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Uint12 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_17</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Uint16 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_18</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Uint24 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_19</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Uint32 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_20</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Uint48 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_21</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Uint64 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_22</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Uint128 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_23</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Sint8 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_24</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Sint12 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_25</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Sint16 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_26</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Sint24 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_27</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Sint32 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_28</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Sint48 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_29</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Sint64 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_30</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Sint128 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_31</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Float32 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_32</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Float64 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_33</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: SFLOAT (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_34</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: FLOAT (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_35</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: Duint16 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_36</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: utf8s (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_3B_37</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: utf16s (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_3B_38</td>
+<td>False (*)</td>
+<td>Client: Characteristic Format: struct (M)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="attribute-profile-support-by-server">
+<h2>Attribute Profile Support, by Server<a class="headerlink" href="#attribute-profile-support-by-server" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="15%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_GATT_4_1</td>
+<td>True</td>
+<td>Server: Exchange MTU (C.4)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_2</td>
+<td>True</td>
+<td>Server: Discover All Primary Services (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_3</td>
+<td>True</td>
+<td>Server: Discover Primary Services Service
+UUID (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_4</td>
+<td>True</td>
+<td>Server: Find Included Services (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_5</td>
+<td>True</td>
+<td>Server: Discover All characteristics of
+a Service (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_6</td>
+<td>True</td>
+<td>Server: Discover Characteristics by UUID (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_7</td>
+<td>True</td>
+<td>Server: Discover All Characteristic
+Descriptors (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_8</td>
+<td>True</td>
+<td>Server: Read Characteristic Value (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_9</td>
+<td>True</td>
+<td>Server: Read using Characteristic UUID (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_10</td>
+<td>True</td>
+<td>Server: Read Long Characteristic Values (C.4)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_11</td>
+<td>True</td>
+<td>Server: Read Multiple Characteristic
+Values (C.4)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_12</td>
+<td>True</td>
+<td>Server: Write without Response (C.2)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_13</td>
+<td>True</td>
+<td>Server: Signed Write Without Response (C.4)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_14</td>
+<td>True</td>
+<td>Server: Write Characteristic Value (C.3)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_15</td>
+<td>True</td>
+<td>Server: Write Long Characteristic Values (C.4)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_16</td>
+<td>True</td>
+<td>Server: Characteristic Value Reliable
+Writes (C.4)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_17</td>
+<td>True</td>
+<td>Server: Notifications (C.4)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_18</td>
+<td>False (*)</td>
+<td>Server: Indications (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_19</td>
+<td>True</td>
+<td>Server: Read Characteristic Descriptors (C.4)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_20</td>
+<td>True</td>
+<td>Server: Read long Characteristic
+Descriptors (C.4)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_21</td>
+<td>True</td>
+<td>Server: Write Characteristic Descriptors (C.4)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4_22</td>
+<td>True</td>
+<td>Server: Write Long Characteristic
+Descriptors (C.4)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4_23</td>
+<td>False (*)</td>
+<td>Server: Service Changed Characteristic (C.1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="profile-attribute-types-and-characteristic-formats">
+<h2>Profile Attribute Types and Characteristic Formats<a class="headerlink" href="#profile-attribute-types-and-characteristic-formats" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="15%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_GATT_4B_1</td>
+<td>True</td>
+<td>Server: Primary Service Declaration (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_2</td>
+<td>True</td>
+<td>Server: Secondary Service Declaration (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_3</td>
+<td>True</td>
+<td>Server: Include Declaration (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_4</td>
+<td>True</td>
+<td>Server: Characteristic Declaration (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_5</td>
+<td>True</td>
+<td>Server: Characteristic Value Declaration (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_6</td>
+<td>True</td>
+<td>Server: Characteristic Extended Properties (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_7</td>
+<td>True</td>
+<td>Server: Characteristic User Description
+Descriptor (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_8</td>
+<td>True</td>
+<td>Server: Client Characteristic Configuration
+Descriptor (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_9</td>
+<td>True</td>
+<td>Server: Server Characteristic Configuration
+Descriptor (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_10</td>
+<td>True</td>
+<td>Server: Characteristic Format Descriptor (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_11</td>
+<td>True</td>
+<td>Server: Characteristic Aggregate Format
+Descriptor (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_12</td>
+<td>True</td>
+<td>Server: Characteristic Format: Boolean (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_13</td>
+<td>True</td>
+<td>Server: Characteristic Format: 2Bit (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_14</td>
+<td>True</td>
+<td>Server: Characteristic Format: nibble (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_15</td>
+<td>True</td>
+<td>Server: Characteristic Format: Uint8 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_16</td>
+<td>True</td>
+<td>Server: Characteristic Format: Uint12 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_17</td>
+<td>True</td>
+<td>Server: Characteristic Format: Uint16 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_18</td>
+<td>True</td>
+<td>Server: Characteristic Format: Uint24 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_19</td>
+<td>True</td>
+<td>Server: Characteristic Format: Uint32 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_20</td>
+<td>True</td>
+<td>Server: Characteristic Format: Uint48 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_21</td>
+<td>True</td>
+<td>Server: Characteristic Format: Uint64 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_22</td>
+<td>True</td>
+<td>Server: Characteristic Format: Uint128 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_23</td>
+<td>True</td>
+<td>Server: Characteristic Format: Sint8 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_24</td>
+<td>True</td>
+<td>Server: Characteristic Format: Sint12 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_25</td>
+<td>True</td>
+<td>Server: Characteristic Format: Sint16 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_26</td>
+<td>True</td>
+<td>Server: Characteristic Format: Sint24 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_27</td>
+<td>True</td>
+<td>Server: Characteristic Format: Sint32 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_28</td>
+<td>True</td>
+<td>Server: Characteristic Format: Sint48 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_29</td>
+<td>True</td>
+<td>Server: Characteristic Format: Sint64 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_30</td>
+<td>True</td>
+<td>Server: Characteristic Format: Sint128 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_31</td>
+<td>True</td>
+<td>Server: Characteristic Format: Float32 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_32</td>
+<td>True</td>
+<td>Server: Characteristic Format: Float64 (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_33</td>
+<td>True</td>
+<td>Server: Characteristic Format: SFLOAT (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_34</td>
+<td>True</td>
+<td>Server: Characteristic Format: FLOAT (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_35</td>
+<td>True</td>
+<td>Server: Characteristic Format: Duint16 (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_36</td>
+<td>True</td>
+<td>Server: Characteristic Format: utf8s (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_4B_37</td>
+<td>True</td>
+<td>Server: Characteristic Format: utf16s (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_4B_38</td>
+<td>True</td>
+<td>Server: Characteristic Format: struct (M)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="generic-attribute-profile-service-sdp-interoperability">
+<h2>Generic Attribute Profile Service - SDP Interoperability<a class="headerlink" href="#generic-attribute-profile-service-sdp-interoperability" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="15%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_GATT_6_2</td>
+<td>False (*)</td>
+<td>Discover GATT Services using Service Discovery
+Profile (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_6_3</td>
+<td>False (*)</td>
+<td>Publish SDP record for GATT services support
+via BR/EDR (C.2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="attribute-protocol-transport-security">
+<h2>Attribute Protocol Transport Security<a class="headerlink" href="#attribute-protocol-transport-security" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_GATT_7_1</td>
+<td>False (*)</td>
+<td>Security Mode 4 (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_7_2</td>
+<td>True</td>
+<td>LE Security Mode 1 (C.2)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_7_3</td>
+<td>True</td>
+<td>LE Security Mode 2 (C.2)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_7_4</td>
+<td>True</td>
+<td>LE Authentication Procedure (C.2)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_7_5</td>
+<td>False (*)</td>
+<td>LE connection data signing procedure (C.2)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_GATT_7_6</td>
+<td>False (*)</td>
+<td>LE Authenticate signed data procedure (C.2)</td>
+</tr>
+<tr class="row-even"><td>TSPC_GATT_7_7</td>
+<td>True</td>
+<td>LE Authorization Procedure (C.2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="attribute-protocol-client-messages">
+<h2>Attribute Protocol Client Messages<a class="headerlink" href="#attribute-protocol-client-messages" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_ATT_3_1</td>
+<td>False (*)</td>
+<td>Attribute Error Response (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_3_2</td>
+<td>False (*)</td>
+<td>Exchange MTU Request (O)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_3_4</td>
+<td>False (*)</td>
+<td>Find Information Request (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_3_6</td>
+<td>False (*)</td>
+<td>Find by Type Value Request (O)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_3_8</td>
+<td>False (*)</td>
+<td>Read by Type Request (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_3_10</td>
+<td>False (*)</td>
+<td>Read Request (O)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_3_12</td>
+<td>False (*)</td>
+<td>Read Blob Request (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_3_14</td>
+<td>False (*)</td>
+<td>Read Multiple Request (O)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_3_16</td>
+<td>False (*)</td>
+<td>Read by Group Type Request (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_3_17</td>
+<td>False (*)</td>
+<td>Read by Group Type Response (C.6)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_3_18</td>
+<td>False (*)</td>
+<td>Write Request (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_3_20</td>
+<td>False (*)</td>
+<td>Write Command (O)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_3_21</td>
+<td>False (*)</td>
+<td>Signed Write Command (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_3_22</td>
+<td>False (*)</td>
+<td>Prepare Write Request (O)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_3_24</td>
+<td>False (*)</td>
+<td>Execute Write Request (C.8)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_3_26</td>
+<td>False (*)</td>
+<td>Handle Value Notification (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_3_28</td>
+<td>False (*)</td>
+<td>Handle Value Confirmation (M)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="attribute-protocol-server-messages">
+<h2>Attribute Protocol Server Messages<a class="headerlink" href="#attribute-protocol-server-messages" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_ATT_4_1</td>
+<td>True</td>
+<td>Attribute Error Response (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_4_2</td>
+<td>True</td>
+<td>Exchange MTU Request (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_4_3</td>
+<td>True</td>
+<td>Exchange MTU Response (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_4_5</td>
+<td>True</td>
+<td>Find Information Response (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_4_7</td>
+<td>True</td>
+<td>Find by Type Value Response (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_4_8</td>
+<td>True</td>
+<td>Read by Type Request (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_4_9</td>
+<td>False (*)</td>
+<td>Read by Type Response (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_4_11</td>
+<td>True</td>
+<td>Read Response (M)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_4_13</td>
+<td>False (*)</td>
+<td>Read Blob Response (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_4_15</td>
+<td>False (*)</td>
+<td>Read Multiple Response (C.2)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_4_17</td>
+<td>True</td>
+<td>Read by Group Type Response (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_4_19</td>
+<td>False (*)</td>
+<td>Write Response (C.3)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_4_20</td>
+<td>False (*)</td>
+<td>Write Command (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_4_21</td>
+<td>False (*)</td>
+<td>Signed Write Command (O)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_4_23</td>
+<td>False (*)</td>
+<td>Prepare Write Response (C.4)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_4_25</td>
+<td>False (*)</td>
+<td>Execute Write Response (C.4)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_4_26</td>
+<td>False (*)</td>
+<td>Handle Value Notification (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_4_27</td>
+<td>False (*)</td>
+<td>Handle Value Indication (O)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="attribute-protocol-transport">
+<h2>Attribute Protocol Transport<a class="headerlink" href="#attribute-protocol-transport" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_ATT_5_2</td>
+<td>True</td>
+<td>LE Security Mode 1 (C.2)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_ATT_5_4</td>
+<td>True</td>
+<td>LE Authentication Procedure (C.2)</td>
+</tr>
+<tr class="row-even"><td>TSPC_ATT_5_7</td>
+<td>True</td>
+<td>LE Authorization Procedure (C.2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="device-configuration">
+<h2>Device Configuration<a class="headerlink" href="#device-configuration" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_GAP_0_2</td>
+<td>True</td>
+<td>LE (C.2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="l2cap-pics.html" class="btn btn-neutral float-right" title="L2CAP PICS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gap-pics.html" class="btn btn-neutral" title="GAP PICS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

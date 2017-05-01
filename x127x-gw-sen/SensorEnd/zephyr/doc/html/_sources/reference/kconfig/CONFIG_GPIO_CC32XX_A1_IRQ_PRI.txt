@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: GPIO_CC32XX_A1_IRQ_PRI
+
+.. option:: CONFIG_GPIO_CC32XX_A1_IRQ_PRI:
+.. _CONFIG_GPIO_CC32XX_A1_IRQ_PRI:
+
+CC32XX GPIO A1 IRQ priority.
+
+
+
+:Symbol:           GPIO_CC32XX_A1_IRQ_PRI
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [0, 5]
+:Prompts:
+
+ *  "GPIO A1 interrupt priority" if GPIO_CC32XX_A1 (value: "n")
+:Default values:
+
+ *  1 (value: "n")
+ *   Condition: GPIO_CC32XX_A1 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ GPIO_CC32XX && GPIO (value: "n")
+:Locations:
+ * ../drivers/gpio/Kconfig.cc32xx:45

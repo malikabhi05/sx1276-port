@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: NET_STATISTICS_IPV6
+
+.. option:: CONFIG_NET_STATISTICS_IPV6:
+.. _CONFIG_NET_STATISTICS_IPV6:
+
+Keep track of IPv6 related statistics
+
+
+
+:Symbol:           NET_STATISTICS_IPV6
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "IPv6 statistics" if NET_IPV6 (value: "n")
+:Default values:
+
+ *  y (value: "y")
+ *   Condition: NET_IPV6 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_STATISTICS (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.stats:40

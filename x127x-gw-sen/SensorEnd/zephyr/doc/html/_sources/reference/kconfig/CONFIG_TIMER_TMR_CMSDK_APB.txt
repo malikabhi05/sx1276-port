@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: TIMER_TMR_CMSDK_APB
+
+.. option:: CONFIG_TIMER_TMR_CMSDK_APB:
+.. _CONFIG_TIMER_TMR_CMSDK_APB:
+
+The timers (TMR) present in the platform are used as timers.
+This option enables the support for the timers.
+
+
+
+:Symbol:           TIMER_TMR_CMSDK_APB
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "ARM CMSDK (Cortex-M System Design Kit) Timer driver"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_FAMILY_ARM && COUNTER (value: "n")
+:Locations:
+ * ../drivers/counter/Kconfig.tmr_cmsdk_apb:11

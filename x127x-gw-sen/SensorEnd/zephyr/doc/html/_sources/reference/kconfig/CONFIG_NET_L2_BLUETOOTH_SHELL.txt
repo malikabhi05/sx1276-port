@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: NET_L2_BLUETOOTH_SHELL
+
+.. option:: CONFIG_NET_L2_BLUETOOTH_SHELL:
+.. _CONFIG_NET_L2_BLUETOOTH_SHELL:
+
+This can be used for testing Bluetooth management commands through the
+console via a shell module named "net_bt".
+
+
+
+:Symbol:           NET_L2_BLUETOOTH_SHELL
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable Bluetooth shell module"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_CONSOLE_SHELL`
+ *  :option:`CONFIG_NET_L2_BLUETOOTH_MGMT`
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/ip/l2/Kconfig:98

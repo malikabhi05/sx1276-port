@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: BOARD_STM32373C_EVAL
+
+.. option:: CONFIG_BOARD_STM32373C_EVAL:
+.. _CONFIG_BOARD_STM32373C_EVAL:
+
+The configuration item CONFIG_BOARD_STM32373C_EVAL:
+
+:Symbol:           BOARD_STM32373C_EVAL
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "STM32373C_EVAL Evaluation Board" if SOC_STM32F373XC (value: "n")
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../boards/arm/stm32373c_eval/Kconfig.board:8

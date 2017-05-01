@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File System APIs &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../index.html"/>
+        <link rel="up" title="API Documentation" href="api.html"/>
+        <link rel="next" title="Samples and Demos" href="../samples/samples.html"/>
+        <link rel="prev" title="Power Management APIs" href="power_management_api.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="kernel_api.html">Kernel APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">Device Driver Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bluetooth.html">Bluetooth API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html">Networking API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io_interfaces.html">Input / Output Driver APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power_management_api.html">Power Management APIs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">File System APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#file-system-functions">File System Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-system-data-structures">File System Data Structures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api.html">API Documentation</a> &raquo;</li>
+        
+      <li>File System APIs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/file_system.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-system-apis">
+<span id="file-system"></span><h1>File System APIs<a class="headerlink" href="#file-system-apis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="file-system-functions">
+<h2>File System Functions<a class="headerlink" href="#file-system-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="_CPPv27fs_openP9fs_file_tPKc">
+<span id="fs_open__fs_file_tP.cCP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1gaaeef41aecd19caff84af861b1cfec366"></span>int <code class="descclassname"></code><code class="descname">fs_open</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fs_file_t" title="fs_file_t">fs_file_t</a> *<em>zfp</em>, <em class="property">const</em> char *<em>file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv27fs_openP9fs_file_tPKc" title="Permalink to this definition">¶</a></dt>
+<dd><p>File open. </p>
+<p>Opens an existing file or create a new one and associates a stream with it.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zfp</span></code>: Pointer to file object </li>
+<li><code class="docutils literal"><span class="pre">file_name</span></code>: The name of file to open</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv28fs_closeP9fs_file_t">
+<span id="fs_close__fs_file_tP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1gab27274679034fb1b263ad4430b961499"></span>int <code class="descclassname"></code><code class="descname">fs_close</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fs_file_t" title="fs_file_t">fs_file_t</a> *<em>zfp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv28fs_closeP9fs_file_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>File close. </p>
+<p>Flushes the associated stream and closes the file.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zfp</span></code>: Pointer to the file object</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29fs_unlinkPKc">
+<span id="fs_unlink__cCP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1gab979f963a8372f98080f66e0f32c8df6"></span>int <code class="descclassname"></code><code class="descname">fs_unlink</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv29fs_unlinkPKc" title="Permalink to this definition">¶</a></dt>
+<dd><p>File unlink. </p>
+<p>Deletes the specified file or directory</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">path</span></code>: Path to the file or directory to delete</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv27fs_readP9fs_file_tPv6size_t">
+<span id="fs_read__fs_file_tP.voidP.s"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1ga187833148335da595b7b16d2eda49e83"></span>ssize_t <code class="descclassname"></code><code class="descname">fs_read</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fs_file_t" title="fs_file_t">fs_file_t</a> *<em>zfp</em>, void *<em>ptr</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv27fs_readP9fs_file_tPv6size_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>File read. </p>
+<p>Reads items of data of size bytes long.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Number of bytes read. On success, it will be equal to number of items requested to be read. Returns less than number of bytes requested if there are not enough bytes available in file. Will return -ERRNO code on error. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zfp</span></code>: Pointer to the file object </li>
+<li><code class="docutils literal"><span class="pre">ptr</span></code>: Pointer to the data buffer </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Number of bytes to be read</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv28fs_writeP9fs_file_tPKv6size_t">
+<span id="fs_write__fs_file_tP.voidCP.s"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1gadaedb46071aa25f9d763a2145fe30386"></span>ssize_t <code class="descclassname"></code><code class="descname">fs_write</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fs_file_t" title="fs_file_t">fs_file_t</a> *<em>zfp</em>, <em class="property">const</em> void *<em>ptr</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv28fs_writeP9fs_file_tPKv6size_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>File write. </p>
+<p>Writes items of data of size bytes long.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Number of bytes written. On success, it will be equal to the number of bytes requested to be written. Any other value, indicates an error. Will return -ERRNO code on error. In the case where -ERRNO is returned, the file pointer will not be advanced because it couldn&#8217;t start the operation. In the case where it is able to write, but is not able to complete writing all of the requested number of bytes, then it is because the disk got full. In that case, it returns less number of bytes written than requested, but not a negative -ERRNO value as in regular error case. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zfp</span></code>: Pointer to the file object </li>
+<li><code class="docutils literal"><span class="pre">ptr</span></code>: Pointer to the data buffer </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Number of bytes to be write</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv27fs_seekP9fs_file_t5off_ti">
+<span id="fs_seek__fs_file_tP.off_t.i"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1gaec551b6099145e0102fd427e84d9a5a9"></span>int <code class="descclassname"></code><code class="descname">fs_seek</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fs_file_t" title="fs_file_t">fs_file_t</a> *<em>zfp</em>, off_t <em>offset</em>, int <em>whence</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv27fs_seekP9fs_file_t5off_ti" title="Permalink to this definition">¶</a></dt>
+<dd><p>File seek. </p>
+<p>Moves the file position to a new location in the file. The offset is added to file position based on the &#8216;whence&#8217; parameter.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zfp</span></code>: Pointer to the file object </li>
+<li><code class="docutils literal"><span class="pre">offset</span></code>: Relative location to move the file pointer to </li>
+<li><code class="docutils literal"><span class="pre">whence</span></code>: Relative location from where offset is to be calculated.<ul>
+<li>FS_SEEK_SET = from beginning of file</li>
+<li>FS_SEEK_CUR = from current position,</li>
+<li>FS_SEEK_END = from end of file.</li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv27fs_tellP9fs_file_t">
+<span id="fs_tell__fs_file_tP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1ga0f7c9eebb82e2d7345b33afbf43de516"></span>off_t <code class="descclassname"></code><code class="descname">fs_tell</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fs_file_t" title="fs_file_t">fs_file_t</a> *<em>zfp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv27fs_tellP9fs_file_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current file position. </p>
+<p>Retrieves the current position in the file.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zfp</span></code>: Pointer to the file object</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">position</span></code>: Current position in file Current revision does not validate the file object. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211fs_truncateP9fs_file_t5off_t">
+<span id="fs_truncate__fs_file_tP.off_t"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1ga91ef19439beca4c6356ecc497e419c40"></span>int <code class="descclassname"></code><code class="descname">fs_truncate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fs_file_t" title="fs_file_t">fs_file_t</a> *<em>zfp</em>, off_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv211fs_truncateP9fs_file_t5off_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the size of an open file. </p>
+<p>Truncates the file to the new length if it is shorter than the current size of the file. Expands the file if the new length is greater than the current size of the file. The expanded region would be filled with zeroes.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>In the case of expansion, if the volume got full during the expansion process, the function will expand to the maximum possible length and returns success. Caller should check if the expanded size matches the requested length.</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zfp</span></code>: Pointer to the file object </li>
+<li><code class="docutils literal"><span class="pre">length</span></code>: New size of the file in bytes</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv27fs_syncP9fs_file_t">
+<span id="fs_sync__fs_file_tP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1ga96c557af4e35f164a0d8d211442f7952"></span>int <code class="descclassname"></code><code class="descname">fs_sync</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv29fs_file_t" title="fs_file_t">fs_file_t</a> *<em>zfp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv27fs_syncP9fs_file_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flushes any cached write of an open file. </p>
+<p>This function can be used to flush the cache of an open file. This can be called to ensure data gets written to the storage media immediately. This may be done to avoid data loss if power is removed unexpectedly. Note that closing a file will cause caches to be flushed correctly so it need not be called if the file is being closed.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zfp</span></code>: Pointer to the file object</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv28fs_mkdirPKc">
+<span id="fs_mkdir__cCP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1ga235cef7d5c4df385a40a0f0293574b0c"></span>int <code class="descclassname"></code><code class="descname">fs_mkdir</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv28fs_mkdirPKc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory create. </p>
+<p>Creates a new directory using specified path.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">path</span></code>: Path to the directory to create</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210fs_opendirP8fs_dir_tPKc">
+<span id="fs_opendir__fs_dir_tP.cCP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1gaa550013f8ece5d24008a56d7dd7ff57b"></span>int <code class="descclassname"></code><code class="descname">fs_opendir</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv28fs_dir_t" title="fs_dir_t">fs_dir_t</a> *<em>zdp</em>, <em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv210fs_opendirP8fs_dir_tPKc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory open. </p>
+<p>Opens an existing directory specified by the path.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zdp</span></code>: Pointer to the directory object </li>
+<li><code class="docutils literal"><span class="pre">path</span></code>: Path to the directory to open</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210fs_readdirP8fs_dir_tP9fs_dirent">
+<span id="fs_readdir__fs_dir_tP.fs_direntP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1gafc26df9c5da1672accbbfca6e1c9baac"></span>int <code class="descclassname"></code><code class="descname">fs_readdir</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv28fs_dir_t" title="fs_dir_t">fs_dir_t</a> *<em>zdp</em>, <em class="property">struct</em> <a class="reference internal" href="#_CPPv29fs_dirent" title="fs_dirent">fs_dirent</a> *<em>entry</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv210fs_readdirP8fs_dir_tP9fs_dirent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory read entry. </p>
+<p>Reads directory entries of a open directory</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>In end-of-dir condition, this will return 0 and set entry-&gt;name[0] = 0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zdp</span></code>: Pointer to the directory object </li>
+<li><code class="docutils literal"><span class="pre">entry</span></code>: Pointer to zfs_dirent structure to read the entry into</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211fs_closedirP8fs_dir_t">
+<span id="fs_closedir__fs_dir_tP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1ga74ac31e722d68d2af6caa918a4647731"></span>int <code class="descclassname"></code><code class="descname">fs_closedir</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv28fs_dir_t" title="fs_dir_t">fs_dir_t</a> *<em>zdp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv211fs_closedirP8fs_dir_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory close. </p>
+<p>Closes an open directory.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">zdp</span></code>: Pointer to the directory object</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv27fs_statPKcP9fs_dirent">
+<span id="fs_stat__cCP.fs_direntP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1ga890681c0d324b2d184da7b1577ed571e"></span>int <code class="descclassname"></code><code class="descname">fs_stat</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>path</em>, <em class="property">struct</em> <a class="reference internal" href="#_CPPv29fs_dirent" title="fs_dirent">fs_dirent</a> *<em>entry</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv27fs_statPKcP9fs_dirent" title="Permalink to this definition">¶</a></dt>
+<dd><p>File or directory status. </p>
+<p>Checks the status of a file or directory specified by the path</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">path</span></code>: Path to the file or directory </li>
+<li><code class="docutils literal"><span class="pre">entry</span></code>: Pointer to zfs_dirent structure to fill if file or directory exists.</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210fs_statvfsP10fs_statvfs">
+<span id="fs_statvfs__fs_statvfsP"></span><span class="target" id="Zephyrd9/d2d/group__file__system__api_1gaf41658e9aedccd8427f3342e2ce7f956"></span>int <code class="descclassname"></code><code class="descname">fs_statvfs</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv210fs_statvfsP10fs_statvfs" title="fs_statvfs">fs_statvfs</a> *<em>stat</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv210fs_statvfsP10fs_statvfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves statistics of the file system volume. </p>
+<p>Returns the total and available space in the file system volume.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">stat</span></code>: Pointer to zfs_statvfs structure to receive the fs statistics</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Success </li>
+<li><code class="docutils literal"><span class="pre">-ERRNO</span></code>: errno code if error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="file-system-data-structures">
+<h2>File System Data Structures<a class="headerlink" href="#file-system-data-structures" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="_CPPv29fs_file_t">
+<span id="fs_file_t"></span><span class="target" id="Zephyrdf/db3/group__data__structures_1ga1cd02f4929c16a812725535b21d789d2"></span><em class="property">typedef </em><code class="descclassname"></code><code class="descname">fs_file_t</code><a class="headerlink" href="#_CPPv29fs_file_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>File object representing an open file. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv28fs_dir_t">
+<span id="fs_dir_t"></span><span class="target" id="Zephyrdf/db3/group__data__structures_1ga1d0b88e7bc080f70fc88a6e71a48d9ff"></span><em class="property">typedef </em><code class="descclassname"></code><code class="descname">fs_dir_t</code><a class="headerlink" href="#_CPPv28fs_dir_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory object representing an open directory. </p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv29fs_dirent">
+<span id="fs_dirent"></span><span class="target" id="Zephyrd1/da5/structfs__dirent"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">fs_dirent</code><a class="headerlink" href="#_CPPv29fs_dirent" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;fs.h&gt;</em><p>Structure to receive file or directory information. </p>
+<p>Used in functions that reads the directory entries to get file or directory information.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">dir_entry_type</span></code>: Whether file or directory<ul>
+<li>FS_DIR_ENTRY_FILE</li>
+<li>FS_DIR_ENTRY_DIR </li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">name</span></code>: Name of directory or file </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of file. 0 if directory </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv210fs_statvfs">
+<span id="fs_statvfs"></span><span class="target" id="Zephyrd0/df9/structfs__statvfs"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">fs_statvfs</code><a class="headerlink" href="#_CPPv210fs_statvfs" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;fs.h&gt;</em><p>Structure to receive volume statistics. </p>
+<p>Used to retrieve information about total and available space in the volume.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">f_bsize</span></code>: Optimal transfer block size </li>
+<li><code class="docutils literal"><span class="pre">f_frsize</span></code>: Allocation unit size </li>
+<li><code class="docutils literal"><span class="pre">f_blocks</span></code>: Size of FS in f_frsize units </li>
+<li><code class="docutils literal"><span class="pre">f_bfree</span></code>: Number of free blocks </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../samples/samples.html" class="btn btn-neutral float-right" title="Samples and Demos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="power_management_api.html" class="btn btn-neutral" title="Power Management APIs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

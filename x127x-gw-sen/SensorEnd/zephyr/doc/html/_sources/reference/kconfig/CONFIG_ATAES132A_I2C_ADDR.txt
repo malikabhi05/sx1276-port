@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: ATAES132A_I2C_ADDR
+
+.. option:: CONFIG_ATAES132A_I2C_ADDR:
+.. _CONFIG_ATAES132A_I2C_ADDR:
+
+ATAES132A chip's I2C address.
+
+
+
+:Symbol:           ATAES132A_I2C_ADDR
+:Type:             hex
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "ATAES132A I2C addess" if ATAES132A (value: "n")
+:Default values:
+
+ *  0x50 (value: "n")
+ *   Condition: ATAES132A (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ CRYPTO (value: "n")
+:Locations:
+ * ../drivers/crypto/Kconfig.ataes132a:23

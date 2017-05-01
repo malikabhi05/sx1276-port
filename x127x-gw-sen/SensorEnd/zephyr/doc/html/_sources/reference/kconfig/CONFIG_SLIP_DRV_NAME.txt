@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: SLIP_DRV_NAME
+
+.. option:: CONFIG_SLIP_DRV_NAME:
+.. _CONFIG_SLIP_DRV_NAME:
+
+This option sets the driver name
+
+
+
+:Symbol:           SLIP_DRV_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "SLIP Driver name"
+:Default values:
+
+ *  "slip"
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SLIP (value: "n")
+:Locations:
+ * ../drivers/slip/Kconfig:44

@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: GPIO_MCUX_PORTB_NAME
+
+.. option:: CONFIG_GPIO_MCUX_PORTB_NAME:
+.. _CONFIG_GPIO_MCUX_PORTB_NAME:
+
+The configuration item CONFIG_GPIO_MCUX_PORTB_NAME:
+
+:Symbol:           GPIO_MCUX_PORTB_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Port B driver name" if GPIO_MCUX_PORTB (value: "n")
+:Default values:
+
+ *  "GPIO_1"
+ *   Condition: GPIO_MCUX_PORTB (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ GPIO_MCUX && GPIO (value: "n")
+:Locations:
+ * ../drivers/gpio/Kconfig.mcux:42

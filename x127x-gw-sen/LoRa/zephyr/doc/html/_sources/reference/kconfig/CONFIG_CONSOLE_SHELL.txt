@@ -1,0 +1,37 @@
+:orphan:
+
+.. title:: CONSOLE_SHELL
+
+.. option:: CONFIG_CONSOLE_SHELL:
+.. _CONFIG_CONSOLE_SHELL:
+
+Shell implementation based on CONSOLE_HANDLER.
+
+
+
+
+:Symbol:           CONSOLE_SHELL
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "y"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable console input handler [ Experimental ]"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_CONSOLE_HANDLER`
+:Reverse (select-related) dependencies:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL && NET_SHELL || NETWORKING && NETWORKING && NET_L2_BLUETOOTH_SHELL || NETWORKING && NETWORKING && NET_L2_IEEE802154 && NET_L2_IEEE802154_RFD && NET_L2_IEEE802154_SHELL (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../subsys/shell/Kconfig:11

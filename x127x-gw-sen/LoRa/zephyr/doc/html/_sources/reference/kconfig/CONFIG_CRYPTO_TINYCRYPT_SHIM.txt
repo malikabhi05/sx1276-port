@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: CRYPTO_TINYCRYPT_SHIM
+
+.. option:: CONFIG_CRYPTO_TINYCRYPT_SHIM:
+.. _CONFIG_CRYPTO_TINYCRYPT_SHIM:
+
+Enable TinyCrypt shim layer compliant with crypto APIs.
+
+
+
+:Symbol:           CRYPTO_TINYCRYPT_SHIM
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable TinyCrypt shim driver [EXPERIMENTAL] " if CRYPTO (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: CRYPTO (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ CRYPTO (value: "n")
+:Locations:
+ * ../drivers/crypto/Kconfig:37

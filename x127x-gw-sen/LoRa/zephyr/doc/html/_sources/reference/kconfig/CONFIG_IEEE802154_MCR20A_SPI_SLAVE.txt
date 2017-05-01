@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: IEEE802154_MCR20A_SPI_SLAVE
+
+.. option:: CONFIG_IEEE802154_MCR20A_SPI_SLAVE:
+.. _CONFIG_IEEE802154_MCR20A_SPI_SLAVE:
+
+This option sets the SPI slave number SPI controller has to switch
+to when dealing with MCR20A chip.
+
+
+
+:Symbol:           IEEE802154_MCR20A_SPI_SLAVE
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "SPI slave linked to MCR20A"
+:Default values:
+
+ *  0 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ IEEE802154_MCR20A || IEEE802154_MCR20A_RAW (value: "n")
+:Locations:
+ * ../drivers/ieee802154/Kconfig.mcr20a:44

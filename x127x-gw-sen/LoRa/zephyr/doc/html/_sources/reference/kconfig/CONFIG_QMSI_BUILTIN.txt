@@ -1,0 +1,45 @@
+:orphan:
+
+.. title:: QMSI_BUILTIN
+
+.. option:: CONFIG_QMSI_BUILTIN:
+.. _CONFIG_QMSI_BUILTIN:
+
+Link with local QMSI sources instead of external library.
+
+
+
+:Symbol:           QMSI_BUILTIN
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable QMSI drivers through integrated sources"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_QMSI`
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_SERIES_QUARK_SE (value: "n")
+:Locations:
+ * ../ext/hal/qmsi/Kconfig:22
+ * ../arch/arc/soc/quark_se_c1000_ss/Kconfig.defconfig:60
+ * ../arch/x86/soc/intel_quark/quark_d2000/Kconfig.defconfig.series:52
+ * ../arch/x86/soc/intel_quark/quark_se/Kconfig.defconfig.series:43

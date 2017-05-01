@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Zephyr Kernel &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Welcome to Zephyr Kernel</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/README.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-zephyr-kernel">
+<h1>Welcome to Zephyr Kernel<a class="headerlink" href="#welcome-to-zephyr-kernel" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the Zephyr Project.</p>
+<p>Thank you for your interest in the Zephyr Project. These instructions are
+designed to walk you through generating the Zephyr Project&#8217;s documentation.</p>
+<div class="section" id="documentation-notes">
+<h2>Documentation Notes<a class="headerlink" href="#documentation-notes" title="Permalink to this headline">¶</a></h2>
+<p>Zephyr Project content is written using the reStructuredText markup language
+(.rst file extension) with Sphinx extensions, and processed using sphinx to
+create a formatted stand-alone website. Developers can view this content either
+in its raw form as .rst markup files, or you can generate the HTML content and view it
+with a web browser directly on your workstations drive. This same .rst
+content is also fed into the Zephyr Project&#8217;s public website documentation area
+(with a different theme applied).</p>
+<p>You can read details about reStructuredText and about Sphinx extensions from
+their respective websites.</p>
+<p>The project&#8217;s documentation currently comprises the following items:</p>
+<ul class="simple">
+<li>ReStructuredText source files used to generate documentation found at
+<a class="reference external" href="https://zephyrproject.org/doc">https://zephyrproject.org/doc</a> website. Most of the reStructuredText sources
+are found in the <code class="docutils literal"><span class="pre">/doc</span></code> directory, but there are others stored within the
+code source tree near their specific component (such as <code class="docutils literal"><span class="pre">/samples</span></code> and
+<code class="docutils literal"><span class="pre">/boards</span></code>)</li>
+<li>Doxygen-generated material used to create all API-specific documents
+also found at <a class="reference external" href="https://zephyrproject.org/doc">https://zephyrproject.org/doc</a></li>
+<li>Script-generated material for kernel configuration options based on kconfig
+files found in the source code tree</li>
+<li>Additional material on <a class="reference external" href="https://wiki.zephyrproject.org">https://wiki.zephyrproject.org</a></li>
+</ul>
+<p>The reStructuredText files are processed by the Sphinx documentation system,
+and make use of the breathe extension for including the doxygen-generated API
+material.  Additional tools are required to generate the
+documentation locally, as described in the following sections.</p>
+</div>
+<div class="section" id="installing-the-documentation-processors">
+<h2>Installing the documentation processors<a class="headerlink" href="#installing-the-documentation-processors" title="Permalink to this headline">¶</a></h2>
+<p>Our documentation processing has been tested to run with:</p>
+<ul class="simple">
+<li>Doxygen version 1.8.10 (and 1.8.11)</li>
+<li>Sphinx version 1.4.4 (but not with 1.5.1)</li>
+<li>Breathe version 4.4.0</li>
+<li>docutils version 0.12 (0.13 has issues with Sphinx 1.4.4)</li>
+</ul>
+<p>Begin by cloning a copy of the git repository for the zephyr project and
+setting up your development environment as described in <a class="reference internal" href="getting_started/getting_started.html#getting-started"><span class="std std-ref">Getting Started Guide</span></a>
+or specifically for Ubuntu in <a class="reference internal" href="getting_started/installation_linux.html#installation-linux"><span class="std std-ref">Development Environment Setup on Linux</span></a>.  (Be sure to
+export the environment variables <code class="docutils literal"><span class="pre">ZEPHYR_GCC_VARIANT</span></code> and
+<code class="docutils literal"><span class="pre">ZEPHYR_SDK_INSTALL_DIR</span></code> as documented there.)</p>
+<p>Here are a set of commands to install the documentation generations tools on
+Ubuntu:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install python-pip
+$ pip install --upgrade pip
+$ sudo apt-get install doxygen
+$ pip install <span class="nv">sphinx</span><span class="o">==</span><span class="m">1</span>.4.4
+$ sudo -H pip install breathe
+$ sudo -H pip install sphinx-rtd-theme
+</pre></div>
+</div>
+<p>There is a known issue that causes docutils version 0.13 to fail with sphinx
+1.4.4.  Verify the version of docutils using:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip show docutils
+</pre></div>
+</div>
+<p>If this shows you&#8217;ve got version 0.13 of docutils installed, you can install
+the working version of docutils with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo -H pip install <span class="nv">docutils</span><span class="o">==</span><span class="m">0</span>.12
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-documentation-generators">
+<h2>Running the Documentation Generators<a class="headerlink" href="#running-the-documentation-generators" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">/doc</span></code> directory in your cloned copy of zephyr project git repo has all the
+.rst source files, extra tools, and Makefile for generating a local copy of
+the Zephyr project&#8217;s technical documentation.  Assuming the local Zephyr
+project copy is <code class="docutils literal"><span class="pre">~/zephyr</span></code>, here are the commands to generate the html
+content locally:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/zephyr
+$ <span class="nb">source</span> zephyr-env.sh
+$ make htmldocs
+</pre></div>
+</div>
+<p>The html output will be in <code class="docutils literal"><span class="pre">~/zephyr/doc/_build/html/index.html</span></code></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: CLOCK_STM32_PLL_Q_DIVISOR
+
+.. option:: CONFIG_CLOCK_STM32_PLL_Q_DIVISOR:
+.. _CONFIG_CLOCK_STM32_PLL_Q_DIVISOR:
+
+PLL Q Output divisor, allowed values: 0, 2, 4, 6, 8.
+
+
+
+:Symbol:           CLOCK_STM32_PLL_Q_DIVISOR
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [0, 8]
+:Prompts:
+
+ *  "PLL Q Divisor" if CLOCK_CONTROL_STM32_CUBE && CLOCK_STM32_SYSCLK_SRC_PLL (value: "n")
+:Default values:
+
+ *  2 (value: "n")
+ *   Condition: CLOCK_CONTROL_STM32_CUBE && CLOCK_STM32_SYSCLK_SRC_PLL (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_FAMILY_STM32 && CLOCK_CONTROL && SOC_SERIES_STM32L4X (value: "n")
+:Locations:
+ * ../drivers/clock_control/Kconfig.stm32:141

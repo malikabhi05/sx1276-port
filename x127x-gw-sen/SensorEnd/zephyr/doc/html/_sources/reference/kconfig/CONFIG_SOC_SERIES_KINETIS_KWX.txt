@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: SOC_SERIES_KINETIS_KWX
+
+.. option:: CONFIG_SOC_SERIES_KINETIS_KWX:
+.. _CONFIG_SOC_SERIES_KINETIS_KWX:
+
+Enable support for Kinetis KWx MCU series
+
+
+:Symbol:           SOC_SERIES_KINETIS_KWX
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Kinetis KWx Series MCU"
+:Default values:
+ (no default values)
+:Selects:
+
+ *  :option:`CONFIG_CPU_CORTEX_M`
+ *  :option:`CONFIG_SOC_FAMILY_KINETIS`
+ *  :option:`CONFIG_SYS_POWER_LOW_POWER_STATE_SUPPORTED`
+ *  :option:`CONFIG_CPU_HAS_SYSTICK`
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../arch/arm/soc/nxp_kinetis/kwx/Kconfig.series:8

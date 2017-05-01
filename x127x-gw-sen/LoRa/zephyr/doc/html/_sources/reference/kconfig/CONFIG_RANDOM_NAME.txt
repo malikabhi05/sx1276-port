@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: RANDOM_NAME
+
+.. option:: CONFIG_RANDOM_NAME:
+.. _CONFIG_RANDOM_NAME:
+
+Specify the device name to be used for the RANDOM driver.
+
+
+
+:Symbol:           RANDOM_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Random Device Name" if RANDOM_GENERATOR (value: "n")
+:Default values:
+
+ *  "RANDOM_0"
+ *   Condition: RANDOM_GENERATOR (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ RANDOM_GENERATOR (value: "n")
+:Locations:
+ * ../drivers/random/Kconfig:27

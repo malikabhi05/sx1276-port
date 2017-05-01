@@ -1,0 +1,39 @@
+:orphan:
+
+.. title:: NET_L2_IEEE802154_RADIO_CSMA_CA_MAX_BO
+
+.. option:: CONFIG_NET_L2_IEEE802154_RADIO_CSMA_CA_MAX_BO:
+.. _CONFIG_NET_L2_IEEE802154_RADIO_CSMA_CA_MAX_BO:
+
+The maximum number of backoffs the CSMA-CA algorithm will attempt
+before declaring a channel access failure.
+
+
+
+:Symbol:           NET_L2_IEEE802154_RADIO_CSMA_CA_MAX_BO
+:Type:             int
+:Value:            "1"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [1, 5]
+:Prompts:
+
+ *  "CSMA maximum backoffs"
+:Default values:
+
+ *  4 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_L2_IEEE802154 && NET_L2_IEEE802154_RADIO_CSMA_CA (value: "n")
+:Locations:
+ * ../subsys/net/ip/l2/ieee802154/Kconfig.radio:40

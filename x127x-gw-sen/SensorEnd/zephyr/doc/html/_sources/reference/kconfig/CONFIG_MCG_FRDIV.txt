@@ -1,0 +1,43 @@
+:orphan:
+
+.. title:: MCG_FRDIV
+
+.. option:: CONFIG_MCG_FRDIV:
+.. _CONFIG_MCG_FRDIV:
+
+Selects the amount to divide down the external reference clock for the
+FLL. The resulting frequency must be in the range 31.25 kHz to 39.0625
+kHz.
+
+
+
+:Symbol:           MCG_FRDIV
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [0, 7]
+:Prompts:
+
+ *  "FLL external reference divider"
+:Default values:
+
+ *  0 (value: "n")
+ *   Condition: (none)
+ *  5 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BOARD_FRDM_KW41Z (value: "n")
+:Locations:
+ * ../arch/arm/soc/nxp_kinetis/Kconfig:112
+ * ../boards/arm/frdm_kw41z/Kconfig.defconfig:25

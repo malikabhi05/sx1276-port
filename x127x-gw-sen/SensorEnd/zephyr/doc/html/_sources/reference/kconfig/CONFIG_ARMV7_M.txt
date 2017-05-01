@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: ARMV7_M
+
+.. option:: CONFIG_ARMV7_M:
+.. _CONFIG_ARMV7_M:
+
+This option signifies the use of an ARMv7-M processor implementation.
+
+
+
+:Symbol:           ARMV7_M
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_ATOMIC_OPERATIONS_BUILTIN`
+ *  :option:`CONFIG_ISA_THUMB2`
+ *  :option:`CONFIG_CPU_CORTEX_M_HAS_BASEPRI`
+ *  :option:`CONFIG_CPU_CORTEX_M_HAS_PROGRAMMABLE_FAULT_PRIOS`
+:Reverse (select-related) dependencies:
+ CPU_CORTEX_M && ARM && CPU_CORTEX_M3 || CPU_CORTEX_M && ARM && CPU_CORTEX_M4 || CPU_CORTEX_M && ARM && CPU_CORTEX_M7 (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ CPU_CORTEX_M && ARM (value: "n")
+:Locations:
+ * ../arch/arm/core/cortex_m/Kconfig:62

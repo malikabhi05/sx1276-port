@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: SPI_2_DEFAULT_CFG
+
+.. option:: CONFIG_SPI_2_DEFAULT_CFG:
+.. _CONFIG_SPI_2_DEFAULT_CFG:
+
+The configuration item CONFIG_SPI_2_DEFAULT_CFG:
+
+:Symbol:           SPI_2_DEFAULT_CFG
+:Type:             hex
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Port 2 default configuration" if SPI_2 (value: "n")
+:Default values:
+
+ *  0x80 (value: "n")
+ *   Condition: SPI_2 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SPI (value: "n")
+:Locations:
+ * ../drivers/spi/Kconfig:170

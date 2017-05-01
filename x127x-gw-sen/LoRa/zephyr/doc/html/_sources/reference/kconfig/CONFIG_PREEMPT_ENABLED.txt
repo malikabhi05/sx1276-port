@@ -1,0 +1,34 @@
+:orphan:
+
+.. title:: PREEMPT_ENABLED
+
+.. option:: CONFIG_PREEMPT_ENABLED:
+.. _CONFIG_PREEMPT_ENABLED:
+
+The configuration item CONFIG_PREEMPT_ENABLED:
+
+:Symbol:           PREEMPT_ENABLED
+:Type:             bool
+:Value:            "y"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  y (value: "y")
+ *   Condition: (none)
+ *  n (value: "n")
+ *   Condition: NUM_PREEMPT_PRIORITIES = 0 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../kernel/Kconfig:99

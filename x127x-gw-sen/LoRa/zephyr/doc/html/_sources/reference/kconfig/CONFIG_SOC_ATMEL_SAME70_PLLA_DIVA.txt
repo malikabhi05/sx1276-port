@@ -1,0 +1,48 @@
+:orphan:
+
+.. title:: SOC_ATMEL_SAME70_PLLA_DIVA
+
+.. option:: CONFIG_SOC_ATMEL_SAME70_PLLA_DIVA:
+.. _CONFIG_SOC_ATMEL_SAME70_PLLA_DIVA:
+
+This is the divider DIVA used by the PLL.
+The processor clock is (MAINCK * (MULA + 1) / DIVA).
+
+Board config file can override this settings
+for a particular board.
+
+Setting DIVA=0 would disable PLL at boot, this is currently
+not supported.
+
+With default of MULA == 24, and DIVA == 1,
+PLL is running at 25 times the main clock frequency.
+
+
+
+:Symbol:           SOC_ATMEL_SAME70_PLLA_DIVA
+:Type:             int
+:Value:            "1"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [1, 255]
+:Prompts:
+
+ *  "PLL DIVA"
+:Default values:
+
+ *  1 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_SERIES_SAME70 && ARM (value: "n")
+:Locations:
+ * ../arch/arm/soc/atmel_sam/same70/Kconfig.soc:97

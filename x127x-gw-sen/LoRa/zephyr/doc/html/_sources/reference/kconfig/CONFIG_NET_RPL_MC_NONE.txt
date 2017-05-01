@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: NET_RPL_MC_NONE
+
+.. option:: CONFIG_NET_RPL_MC_NONE:
+.. _CONFIG_NET_RPL_MC_NONE:
+
+The configuration item CONFIG_NET_RPL_MC_NONE:
+
+:Symbol:           NET_RPL_MC_NONE
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "No routing metric"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_RPL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.rpl:49

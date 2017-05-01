@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: BOARD_MPS2_AN385
+
+.. option:: CONFIG_BOARD_MPS2_AN385:
+.. _CONFIG_BOARD_MPS2_AN385:
+
+The configuration item CONFIG_BOARD_MPS2_AN385:
+
+:Symbol:           BOARD_MPS2_AN385
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "ARM Cortex-M3 SMM on V2M-MPS2 (Application Note AN385)" if SOC_MPS2_AN385 (value: "n")
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../boards/arm/mps2_an385/Kconfig.board:7

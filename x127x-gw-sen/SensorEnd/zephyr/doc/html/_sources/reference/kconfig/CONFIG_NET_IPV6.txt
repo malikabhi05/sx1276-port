@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: NET_IPV6
+
+.. option:: CONFIG_NET_IPV6:
+.. _CONFIG_NET_IPV6:
+
+Enable IPv6 support. This should be selected by default as there
+is limited set of network bearers provided that support IPv4.
+
+
+
+:Symbol:           NET_IPV6
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "IPv6"
+:Default values:
+
+ *  y (value: "y")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.ipv6:9

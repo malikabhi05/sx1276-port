@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: UART_RISCV_QEMU
+
+.. option:: CONFIG_UART_RISCV_QEMU:
+.. _CONFIG_UART_RISCV_QEMU:
+
+Enable the riscv-qemu UART driver.
+
+
+:Symbol:           UART_RISCV_QEMU
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "riscv-qemu UART driver" if SOC_RISCV32_QEMU (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: SOC_RISCV32_QEMU (value: "n")
+:Selects:
+
+ *  :option:`CONFIG_SERIAL_HAS_DRIVER` if SOC_RISCV32_QEMU (value: "n")
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SERIAL (value: "n")
+:Locations:
+ * ../drivers/serial/Kconfig.riscv_qemu:8

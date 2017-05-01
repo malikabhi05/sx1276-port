@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Custom Data &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Threads" href="threads.html"/>
+        <link rel="next" title="System Threads" href="system_threads.html"/>
+        <link rel="prev" title="Scheduling" href="scheduling.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../kernel.html">Zephyr Kernel Primer (version 2)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="threads.html">Threads</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="lifecycle.html">Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Custom Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suggested-uses">Suggested Uses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="system_threads.html">System Threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workqueues.html">Workqueue Threads</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../timing/timing.html">Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/memory.html">Memory Allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synchronization/synchronization.html">Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_passing/data_passing.html">Data Passing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../other/other.html">Other Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../kernel.html">Zephyr Kernel Primer (version 2)</a> &raquo;</li>
+        
+          <li><a href="threads.html">Threads</a> &raquo;</li>
+        
+      <li>Custom Data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/kernel/threads/custom_data.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="custom-data">
+<span id="custom-data-v2"></span><h1>Custom Data<a class="headerlink" href="#custom-data" title="Permalink to this headline">¶</a></h1>
+<p>A thread&#8217;s <em class="dfn">custom data</em> is a 32-bit, thread-specific value that may be
+used by an application for any purpose.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#concepts" id="id1">Concepts</a></li>
+<li><a class="reference internal" href="#implementation" id="id2">Implementation</a><ul>
+<li><a class="reference internal" href="#using-custom-data" id="id3">Using Custom Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#suggested-uses" id="id4">Suggested Uses</a></li>
+<li><a class="reference internal" href="#configuration-options" id="id5">Configuration Options</a></li>
+<li><a class="reference internal" href="#apis" id="id6">APIs</a></li>
+</ul>
+</div>
+<div class="section" id="concepts">
+<h2><a class="toc-backref" href="#id1">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>Every thread has a 32-bit custom data area.
+The custom data is accessible only by the thread itself, and may be used by the
+application for any purpose it chooses.
+The default custom data for a thread is zero.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Custom data support is not available to ISRs because they operate
+within a single shared kernel interrupt handling context.</p>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2><a class="toc-backref" href="#id2">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-custom-data">
+<h3><a class="toc-backref" href="#id3">Using Custom Data</a><a class="headerlink" href="#using-custom-data" title="Permalink to this headline">¶</a></h3>
+<p>By default, thread custom data support is disabled. The configuration option
+<a class="reference internal" href="../../reference/kconfig/CONFIG_THREAD_CUSTOM_DATA.html#cmdoption-arg-CONFIG_THREAD_CUSTOM_DATA"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_THREAD_CUSTOM_DATA</span></code></a> can be used to enable support.</p>
+<p>The <a class="reference internal" href="../../api/kernel_api.html#_CPPv224k_thread_custom_data_setPv" title="k_thread_custom_data_set"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_custom_data_set()</span></code></a> and
+<a class="reference internal" href="../../api/kernel_api.html#_CPPv224k_thread_custom_data_getv" title="k_thread_custom_data_get"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_custom_data_get()</span></code></a> functions are used to write and read
+a thread&#8217;s custom data, respectively. A thread can only access its own
+custom data, and not that of another thread.</p>
+<p>The following code uses the custom data feature to record the number of times
+each thread calls a specific routine.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Obviously, only a single routine can use this technique,
+since it monopolizes the use of the custom data feature.</p>
+</div>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">call_tracking_routine</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">uint32_t</span> <span class="n">call_count</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">k_is_in_isr</span><span class="p">())</span> <span class="p">{</span>
+        <span class="cm">/* ignore any call made by an ISR */</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">call_count</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">k_thread_custom_data_get</span><span class="p">();</span>
+        <span class="n">call_count</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">k_thread_custom_data_set</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">call_count</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* do rest of routine&#39;s processing */</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="suggested-uses">
+<h2><a class="toc-backref" href="#id4">Suggested Uses</a><a class="headerlink" href="#suggested-uses" title="Permalink to this headline">¶</a></h2>
+<p>Use thread custom data to allow a routine to access thread-specific information,
+by using the custom data as a pointer to a data structure owned by the thread.</p>
+</div>
+<div class="section" id="configuration-options">
+<h2><a class="toc-backref" href="#id5">Configuration Options</a><a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>Related configuration options:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../reference/kconfig/CONFIG_THREAD_CUSTOM_DATA.html#cmdoption-arg-CONFIG_THREAD_CUSTOM_DATA"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_THREAD_CUSTOM_DATA</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="apis">
+<h2><a class="toc-backref" href="#id6">APIs</a><a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>The following thread custom data APIs are provided by <code class="file docutils literal"><span class="pre">kernel.h</span></code>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv224k_thread_custom_data_setPv" title="k_thread_custom_data_set"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_custom_data_set()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv224k_thread_custom_data_getv" title="k_thread_custom_data_get"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_custom_data_get()</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="system_threads.html" class="btn btn-neutral float-right" title="System Threads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scheduling.html" class="btn btn-neutral" title="Scheduling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

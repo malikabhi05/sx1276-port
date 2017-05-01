@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: NET_NBUF_TX_COUNT
+
+.. option:: CONFIG_NET_NBUF_TX_COUNT:
+.. _CONFIG_NET_NBUF_TX_COUNT:
+
+Each TX buffer will occupy smallish amount of memory.
+See include/net/nbuf.h and the sizeof(struct nbuf)
+
+
+
+:Symbol:           NET_NBUF_TX_COUNT
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "How many network sends can be pending at the same time"
+:Default values:
+
+ *  2 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:228

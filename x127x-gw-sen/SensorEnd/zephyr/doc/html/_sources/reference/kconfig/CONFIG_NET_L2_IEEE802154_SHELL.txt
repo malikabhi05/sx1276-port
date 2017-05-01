@@ -1,0 +1,37 @@
+:orphan:
+
+.. title:: NET_L2_IEEE802154_SHELL
+
+.. option:: CONFIG_NET_L2_IEEE802154_SHELL:
+.. _CONFIG_NET_L2_IEEE802154_SHELL:
+
+This can be used for testing 15.4 through the console via exposing
+a shell module named "ieee15_4".
+
+
+
+:Symbol:           NET_L2_IEEE802154_SHELL
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable IEEE 802.15.4 shell module" if NET_L2_IEEE802154_RFD (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: NET_L2_IEEE802154_RFD (value: "n")
+:Selects:
+
+ *  :option:`CONFIG_CONSOLE_SHELL` if NET_L2_IEEE802154_RFD (value: "n")
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_L2_IEEE802154 (value: "n")
+:Locations:
+ * ../subsys/net/ip/l2/ieee802154/Kconfig:62

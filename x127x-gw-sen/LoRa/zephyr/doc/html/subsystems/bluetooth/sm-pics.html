@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SM PICS &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Qualification Testing" href="qualification.html"/>
+        <link rel="next" title="RFCOMM PICS" href="rfcomm-pics.html"/>
+        <link rel="prev" title="L2CAP PICS" href="l2cap-pics.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../subsystems.html">Subsystems</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="bluetooth.html">Bluetooth</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bluetooth.html#source-tree-layout">Source tree layout</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="bluetooth.html#further-reading">Further reading</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../api/bluetooth.html">Bluetooth API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devel.html">Developing Bluetooth Applications</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="qualification.html">Qualification Testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c_library.html">Standard C Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/networking.html">Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../power_management.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sensor.html">Sensor Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell.html">Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../test/ztest.html">Test Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usb/usb.html">USB device stack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../subsystems.html">Subsystems</a> &raquo;</li>
+        
+          <li><a href="bluetooth.html">Bluetooth</a> &raquo;</li>
+        
+          <li><a href="qualification.html">Qualification Testing</a> &raquo;</li>
+        
+      <li>SM PICS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/subsystems/bluetooth/sm-pics.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sm-pics">
+<h1>SM PICS<a class="headerlink" href="#sm-pics" title="Permalink to this headline">¶</a></h1>
+<p>PTS version: 6.4</p>
+<p>* - different than PTS defaults</p>
+<p>^ - field not available on PTS</p>
+<p>M - mandatory</p>
+<p>O - optional</p>
+<div class="section" id="connection-roles">
+<h2>Connection Roles<a class="headerlink" href="#connection-roles" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="17%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_SM_1_1</td>
+<td>True</td>
+<td>Master Role (Initiator) (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_SM_1_2</td>
+<td>True</td>
+<td>Slave Role (Responder) (C.2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="security-properties">
+<h2>Security Properties<a class="headerlink" href="#security-properties" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="17%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_SM_2_1</td>
+<td>True</td>
+<td>Authenticated MITM protection (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_SM_2_2</td>
+<td>True</td>
+<td>Unauthenticated no MITM protection (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_SM_2_3</td>
+<td>True</td>
+<td>No security requirements (M)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_SM_2_4</td>
+<td>False</td>
+<td>OOB supported (O)</td>
+</tr>
+<tr class="row-even"><td>TSPC_SM_2_5</td>
+<td>(^)</td>
+<td>LE Secure Connections (C.2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="encryption-key-size">
+<h2>Encryption Key Size<a class="headerlink" href="#encryption-key-size" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="17%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_SM_3_1</td>
+<td>True</td>
+<td>Encryption Key Size Negotiation (M)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pairing-method">
+<h2>Pairing Method<a class="headerlink" href="#pairing-method" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="17%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_SM_4_1</td>
+<td>True</td>
+<td>Just Works (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_SM_4_2</td>
+<td>True</td>
+<td>Passkey Entry (C.1)</td>
+</tr>
+<tr class="row-even"><td>TSPC_SM_4_3</td>
+<td>False (*)</td>
+<td>Out of Band (C.1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="security-initiation">
+<h2>Security Initiation<a class="headerlink" href="#security-initiation" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="15%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_SM_5_1</td>
+<td>True</td>
+<td>Encryption Setup using STK (C.3)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_SM_5_2</td>
+<td>True</td>
+<td>Encryption Setup using LTK (O)</td>
+</tr>
+<tr class="row-even"><td>TSPC_SM_5_3</td>
+<td>True</td>
+<td>Slave Initiated Security (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_SM_5_4</td>
+<td>True</td>
+<td>Slave Initiated Security – Master response(C.2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="signing-algorithm">
+<h2>Signing Algorithm<a class="headerlink" href="#signing-algorithm" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="17%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_SM_6_1</td>
+<td>True</td>
+<td>Signing Algorithm - Generation (O)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_SM_6_2</td>
+<td>True</td>
+<td>Signing Algorithm - Resolving (O)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="key-distribution">
+<h2>Key Distribution<a class="headerlink" href="#key-distribution" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="17%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter Name</th>
+<th class="head">Selected</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TSPC_SM_7_1</td>
+<td>True</td>
+<td>Encryption Key (C.1)</td>
+</tr>
+<tr class="row-odd"><td>TSPC_SM_7_2</td>
+<td>False (*)</td>
+<td>Identity Key (C.2)</td>
+</tr>
+<tr class="row-even"><td>TSPC_SM_7_3</td>
+<td>True</td>
+<td>Signing Key (C.3)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfcomm-pics.html" class="btn btn-neutral float-right" title="RFCOMM PICS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="l2cap-pics.html" class="btn btn-neutral" title="L2CAP PICS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

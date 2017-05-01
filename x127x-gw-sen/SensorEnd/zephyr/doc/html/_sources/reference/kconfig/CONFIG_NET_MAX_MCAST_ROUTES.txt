@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: NET_MAX_MCAST_ROUTES
+
+.. option:: CONFIG_NET_MAX_MCAST_ROUTES:
+.. _CONFIG_NET_MAX_MCAST_ROUTES:
+
+This determines how many entries can be stored in multicast
+routing table.
+
+
+
+:Symbol:           NET_MAX_MCAST_ROUTES
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Max number of multicast routing entries stored." if NET_ROUTE_MCAST (value: "n")
+:Default values:
+
+ *  1 (value: "n")
+ *   Condition: NET_ROUTE_MCAST (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:81

@@ -1,0 +1,40 @@
+:orphan:
+
+.. title:: I2C_NRF5
+
+.. option:: CONFIG_I2C_NRF5:
+.. _CONFIG_I2C_NRF5:
+
+This option enables the I2C driver for Nordic Semiconductor nRF5
+family porcessors.
+
+
+
+:Symbol:           I2C_NRF5
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "NRF5 I2C driver" if I2C && SOC_FAMILY_NRF5 (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: I2C && SOC_FAMILY_NRF5 (value: "n")
+ *  y (value: "y")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_GPIO` if I2C && SOC_FAMILY_NRF5 (value: "n")
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ I2C && BOARD_BBC_MICROBIT (value: "n")
+:Locations:
+ * ../drivers/i2c/Kconfig:63
+ * ../boards/arm/bbc_microbit/Kconfig.defconfig:31

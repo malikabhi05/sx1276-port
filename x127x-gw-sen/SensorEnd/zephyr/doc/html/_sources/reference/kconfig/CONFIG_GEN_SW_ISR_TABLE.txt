@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: GEN_SW_ISR_TABLE
+
+.. option:: CONFIG_GEN_SW_ISR_TABLE:
+.. _CONFIG_GEN_SW_ISR_TABLE:
+
+This option controls whether a platform using gen_isr_tables
+needs a software ISR table table created. This is an array of struct
+_isr_table_entry containing the interrupt service routine and supplied
+parameter.
+
+
+
+:Symbol:           GEN_SW_ISR_TABLE
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Generate a software ISR table" if GEN_ISR_TABLES (value: "n")
+:Default values:
+
+ *  y (value: "y")
+ *   Condition: GEN_ISR_TABLES (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../arch/Kconfig:143

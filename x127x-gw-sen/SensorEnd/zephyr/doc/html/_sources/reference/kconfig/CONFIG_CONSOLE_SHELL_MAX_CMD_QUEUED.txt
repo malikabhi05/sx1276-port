@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: CONSOLE_SHELL_MAX_CMD_QUEUED
+
+.. option:: CONFIG_CONSOLE_SHELL_MAX_CMD_QUEUED:
+.. _CONFIG_CONSOLE_SHELL_MAX_CMD_QUEUED:
+
+Maximum size of the queue for input commands.
+
+
+
+:Symbol:           CONSOLE_SHELL_MAX_CMD_QUEUED
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Shell's command queue size"
+:Default values:
+
+ *  3 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ CONSOLE_SHELL (value: "n")
+:Locations:
+ * ../subsys/shell/Kconfig:29

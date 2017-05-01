@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Environmental Sensing Sample &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Advanced Samples" href="../advanced.html"/>
+        <link rel="next" title="Power Management Samples" href="../power/power.html"/>
+        <link rel="prev" title="Advanced Samples" href="../advanced.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../samples.html">Samples and Demos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../kernel.html">Kernel Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic/basic.html">Basic Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../net/net.html">Networking Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/bluetooth.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sensor/sensor.html">Sensor Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grove/grove.html">Grove Kit Samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../advanced.html">Advanced Samples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Environmental Sensing Sample</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wiring">Wiring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and Running</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../power/power.html">Power Management Samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../samples.html">Samples and Demos</a> &raquo;</li>
+        
+          <li><a href="../advanced.html">Advanced Samples</a> &raquo;</li>
+        
+      <li>Environmental Sensing Sample</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/samples/environmental_sensing/README.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="environmental-sensing-sample">
+<span id="env-sensing-sample"></span><h1>Environmental Sensing Sample<a class="headerlink" href="#environmental-sensing-sample" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This sample implementes a simple environmental sensing service using the Arduino
+101 board.</p>
+<p>The sensor subsystem application collects temperature, humidity and pressure
+data from a set of sensors connected to the Arduino 101 and sends it to the SoC
+through IPM. The collected sensor data is also displayed by the sensor subsystem
+on a Grove LCD.</p>
+<p>The application processor exposes the received sensor data as a simple Bluetooth
+Environmental Sensing Service.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>To use this sample, the following hardware is required:</p>
+<ul class="simple">
+<li>Arduino 101</li>
+<li><a class="reference external" href="http://wiki.seeed.cc/Grove-LCD_RGB_Backlight/">Grove LCD module</a></li>
+<li><a class="reference external" href="http://wiki.seeedstudio.com/wiki/Grove_-_Base_Shield">Grove Base Shield</a> [Optional]</li>
+<li><a class="reference external" href="https://www.adafruit.com/product/2635">HDC1008 Sensor</a></li>
+<li><a class="reference external" href="https://www.adafruit.com/products/2652">BME280 Sensor</a></li>
+</ul>
+</div>
+<div class="section" id="wiring">
+<h2>Wiring<a class="headerlink" href="#wiring" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="external-wiring">
+<h3>External Wiring<a class="headerlink" href="#external-wiring" title="Permalink to this headline">¶</a></h3>
+<p>The sample uses the HDC1008 sensor for temperature and humidity measurement, and
+the BMP280 sensor for pressure measurement. This section describes how to wire
+these sensors to the Arduino 101 board.</p>
+<p>Both sensors operate at 3.3V and use I2C to communicate with the Arduino. On the
+Arduino 101, the I2C data pin (SDA) is exposed as pin A4 (on the ANALOG IN
+header) and the I2C clock pin (SCL) as pin A5 (also on the ANALOG IN header).
+Since the Arduino 101 doesn&#8217;t have internal pull-up resistors, these need to be
+added externally when connecting SCL and SDA to the sensors.</p>
+<p>In addition to connecting the ground (GND), 3.3V power (VDD and VDDIO) and I2C
+pins, both HDC1008 and BMP280 require some extra wiring.</p>
+<p>For HDC1008, connect the address pins (A0 and A1) to GND (this sets the device
+address to the default used by the app). Also connect the RDY pin of the sensor
+to the A1 pin (on ANALOG IN header) of the Arduino board. This is needed as the
+application configures data-ready interrupt on that pin (GPIO pin 3).</p>
+<p>For BMP280, connect the SDO pin to GND and the CSB pin to VDDIO, since the
+sensor needs to be setup to use I2C, and not SPI.</p>
+<a class="reference internal image-reference" href="../../_images/wiring.png"><img alt="Wiring with Arduino 101" class="align-center" src="../../_images/wiring.png" style="width: 600px;" /></a>
+</div>
+<div class="section" id="using-board-sensors">
+<h3>Using board sensors<a class="headerlink" href="#using-board-sensors" title="Permalink to this headline">¶</a></h3>
+<p>If you do not want to use any external sensors, you can use the Arduino 101&#8217;s
+internal BMI160 sensor to do just temperature readings. To do this, you need to
+modify the channel_info array from the sensor subsystem application to contain
+only BMI160&#8217;s temperature channel, and also remove the humidity and pressure
+characteristic from the control application (running on the application
+processor).</p>
+<p>If you choose this approach and you also want to use the Grove LCD, then you
+also need to modify the sensor subsystem application to only display temperature
+on the LCD, as humidity and pressure values will not be available.</p>
+</div>
+<div class="section" id="grove-lcd">
+<h3>Grove LCD<a class="headerlink" href="#grove-lcd" title="Permalink to this headline">¶</a></h3>
+<p>Using the Grove LCD is optional and it can be disabled by removing the Grove
+configuration options from the arc/proj.conf file.</p>
+<p>The Grove LCD communicates with the sensor subsystem through the I2C bus. When
+connecting the Grove LCD to the Arduino 101, either directly (similar to sensor
+wiring) or through a Grove Base Shield, you need to make sure that the I2C SDA
+and SCL lines have pull-up resistors connected between GND and the 3.3V power
+source.</p>
+<p>Take note that even though SDA and SCL are connected to a 3.3V power source, the
+Grove LCD VDD line needs to be connected to the 5V power line, otherwise
+characters will not be displayed on the LCD (3.3V is enough to power just the
+backlight).</p>
+</div>
+</div>
+<div class="section" id="building-and-running">
+<h2>Building and Running<a class="headerlink" href="#building-and-running" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="building">
+<h3>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h3>
+<p>This sample builds two applications for both the sensor subsystem (arc) and the
+application processor (x86). The resulting images need to be flashed to the
+device either using JTAG (openocd) or DFU util (USB).</p>
+<p>Before using the environmental sensing sample, the Arduino 101 board needs to be
+flashed with the firmware for its nRF51 Bluetooth LE controller. To do this,
+follow the steps in <a class="reference internal" href="../../boards/x86/arduino_101/doc/board.html#bluetooth-firmware-arduino-101"><span class="std std-ref">Flashing the Bluetooth Core</span></a>.</p>
+<p>The sample provide a single <code class="file docutils literal"><span class="pre">Makefile</span></code> that builds both images, simple run
+make in the top level directory of the application and flash either using JTAG
+or using DFU. (DFU is preferred).</p>
+<p>The sample can be found here: <code class="file docutils literal"><span class="pre">samples/environmental_sensing</span></code> in the
+Zephyr project tree.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make
+<span class="gp">$</span> make flash <span class="c1"># for flashing with JTAG</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running">
+<h3>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h3>
+<p>The ARC (Sensor Subsystem) program collects temperature, humidity and pressure
+data using the sensors API and sends it to the x86 core through an outbound
+IPM. The collected data is also displayed on a Grove LCD.</p>
+<p>The x86 program reads the sensor data from an inbound IPM and exposes it as
+GATT characteristics (temperature, humidity and pressure) through a simple
+Bluetooth Environmental Sensing Service. The values of these characteristics
+are updated every time a new message containing sensor data is received.</p>
+<p>An example of sensor data values that can be seen on the Grove LCD is
+illustrated in the image below.</p>
+<a class="reference internal image-reference" href="../../_images/temp_sensing_4.png"><img alt="LCD Display" class="align-center" src="../../_images/temp_sensing_4.png" style="width: 400px;" /></a>
+<p>The data exposed over Bluetooth using an Environmental Sensing Service can be
+tested with a BLE Scanner app. The image below is a screenshot of such an application.</p>
+<a class="reference internal image-reference" href="../../_images/temp_sensing_5.png"><img alt="BLE Scanner Application" class="align-center" src="../../_images/temp_sensing_5.png" style="width: 400px;" /></a>
+<p>The temperature value is 0xBA09 (little-endian) which is equal to 2490 in
+decimal. Since the Bluetooth specification states that temperature values are
+expressed with a resolution of 0.01 degrees Celsius, the value exposed over
+Bluetooth is the same as the one displayed on the Grove LCD (24.9 degrees
+Celsius).</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../power/power.html" class="btn btn-neutral float-right" title="Power Management Samples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../advanced.html" class="btn btn-neutral" title="Advanced Samples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

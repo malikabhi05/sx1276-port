@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: MCR20A_GPIO_RESET_PIN
+
+.. option:: CONFIG_MCR20A_GPIO_RESET_PIN:
+.. _CONFIG_MCR20A_GPIO_RESET_PIN:
+
+The configuration item CONFIG_MCR20A_GPIO_RESET_PIN:
+
+:Symbol:           MCR20A_GPIO_RESET_PIN
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "GPIO pin connected to RESET input of MCR20A"
+:Default values:
+
+ *  2 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ IEEE802154_MCR20A || IEEE802154_MCR20A_RAW (value: "n")
+:Locations:
+ * ../drivers/ieee802154/Kconfig.mcr20a:63

@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: GPIO_PULPINO
+
+.. option:: CONFIG_GPIO_PULPINO:
+.. _CONFIG_GPIO_PULPINO:
+
+Enable driver for the Pulpino GPIO controller.
+
+Says n if not sure.
+
+
+:Symbol:           GPIO_PULPINO
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Pulpino GPIO controller driver" if GPIO && SOC_RISCV32_PULPINO (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: GPIO && SOC_RISCV32_PULPINO (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ GPIO (value: "n")
+:Locations:
+ * ../drivers/gpio/Kconfig.pulpino:8

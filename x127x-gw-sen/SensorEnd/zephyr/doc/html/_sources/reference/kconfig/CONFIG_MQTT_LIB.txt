@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: MQTT_LIB
+
+.. option:: CONFIG_MQTT_LIB:
+.. _CONFIG_MQTT_LIB:
+
+Enable the Zephyr MQTT Library
+
+
+
+:Symbol:           MQTT_LIB
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "MQTT Library Support"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/lib/mqtt/Kconfig:9

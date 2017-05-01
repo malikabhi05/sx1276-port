@@ -1,0 +1,46 @@
+:orphan:
+
+.. title:: BLUETOOTH_RX_BUF_LEN
+
+.. option:: CONFIG_BLUETOOTH_RX_BUF_LEN:
+.. _CONFIG_BLUETOOTH_RX_BUF_LEN:
+
+Maximum data size for each HCI RX buffer. This size includes
+everything starting with the ACL or HCI event headers. Note that
+buffer sizes are always rounded up to the nearest multiple of 4,
+so if this Kconfig value is something else then there will be some
+wasted space. The minimum of 73 has been taken for LE SC which has
+an L2CAP MTU of 65 bytes. On top of this there's the L2CAP header
+(4 bytes) and the ACL header (also 4 bytes) which yields 73 bytes.
+
+
+
+:Symbol:           BLUETOOTH_RX_BUF_LEN
+:Type:             int
+:Value:            "73"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [73, 2000]
+:Prompts:
+
+ *  "Maximum supported HCI RX buffer length"
+:Default values:
+
+ *  76 (value: "n")
+ *   Condition: (none)
+ *  264 (value: "n")
+ *   Condition: BLUETOOTH_BREDR (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BLUETOOTH_HCI && BLUETOOTH (value: "n")
+:Locations:
+ * ../subsys/bluetooth/host/Kconfig:63

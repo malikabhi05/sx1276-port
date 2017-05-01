@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: ARM_CLOCK_CONTROL_DEV_NAME
+
+.. option:: CONFIG_ARM_CLOCK_CONTROL_DEV_NAME:
+.. _CONFIG_ARM_CLOCK_CONTROL_DEV_NAME:
+
+Configure Clock Config Device name
+
+
+
+:Symbol:           ARM_CLOCK_CONTROL_DEV_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Clock Config Device name" if CLOCK_CONTROL_BEETLE (value: "n")
+:Default values:
+
+ *  "CLOCK_CONTROL_0"
+ *   Condition: CLOCK_CONTROL_BEETLE (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_FAMILY_ARM && CLOCK_CONTROL (value: "n")
+:Locations:
+ * ../drivers/clock_control/Kconfig.beetle:30

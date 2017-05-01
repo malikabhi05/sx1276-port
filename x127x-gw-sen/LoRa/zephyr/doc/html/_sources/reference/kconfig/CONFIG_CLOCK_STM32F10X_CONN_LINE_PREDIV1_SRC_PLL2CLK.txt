@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: CLOCK_STM32F10X_CONN_LINE_PREDIV1_SRC_PLL2CLK
+
+.. option:: CONFIG_CLOCK_STM32F10X_CONN_LINE_PREDIV1_SRC_PLL2CLK:
+.. _CONFIG_CLOCK_STM32F10X_CONN_LINE_PREDIV1_SRC_PLL2CLK:
+
+Use clock from PLL2CLK as source of PLL
+
+
+
+:Symbol:           CLOCK_STM32F10X_CONN_LINE_PREDIV1_SRC_PLL2CLK
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "PLL2CLK"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_STM32F10X_CONNECTIVITY_LINE_DEVICE && CLOCK_CONTROL (value: "n")
+:Locations:
+ * ../drivers/clock_control/Kconfig.stm32f107xx:74

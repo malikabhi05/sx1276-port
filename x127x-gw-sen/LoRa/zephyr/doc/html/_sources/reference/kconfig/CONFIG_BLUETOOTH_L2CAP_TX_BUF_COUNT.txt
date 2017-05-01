@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: BLUETOOTH_L2CAP_TX_BUF_COUNT
+
+.. option:: CONFIG_BLUETOOTH_L2CAP_TX_BUF_COUNT:
+.. _CONFIG_BLUETOOTH_L2CAP_TX_BUF_COUNT:
+
+Number of buffers available for outgoing L2CAP packets.
+
+
+
+:Symbol:           BLUETOOTH_L2CAP_TX_BUF_COUNT
+:Type:             int
+:Value:            "2"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [2, 255]
+:Prompts:
+
+ *  "Number of L2CAP TX buffers"
+:Default values:
+
+ *  3 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BLUETOOTH_HCI && BLUETOOTH && BLUETOOTH_HCI_HOST && BLUETOOTH_CONN (value: "n")
+:Locations:
+ * ../subsys/bluetooth/host/Kconfig:127

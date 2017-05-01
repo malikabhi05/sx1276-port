@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kernel Clocks &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Timing" href="timing.html"/>
+        <link rel="next" title="Timers" href="timers.html"/>
+        <link rel="prev" title="Timing" href="timing.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../kernel.html">Zephyr Kernel Primer (version 2)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../threads/threads.html">Threads</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="timing.html">Timing</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Kernel Clocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suggested-uses">Suggested Uses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="timers.html">Timers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/memory.html">Memory Allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synchronization/synchronization.html">Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_passing/data_passing.html">Data Passing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../other/other.html">Other Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../kernel.html">Zephyr Kernel Primer (version 2)</a> &raquo;</li>
+        
+          <li><a href="timing.html">Timing</a> &raquo;</li>
+        
+      <li>Kernel Clocks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/kernel/timing/clocks.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kernel-clocks">
+<span id="clocks-v2"></span><h1>Kernel Clocks<a class="headerlink" href="#kernel-clocks" title="Permalink to this headline">¶</a></h1>
+<p>The kernel&#8217;s clocks are the foundation for all of its time-based services.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#concepts" id="id2">Concepts</a><ul>
+<li><a class="reference internal" href="#clock-limitations" id="id3">Clock Limitations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation" id="id4">Implementation</a><ul>
+<li><a class="reference internal" href="#measuring-time-with-normal-precision" id="id5">Measuring Time with Normal Precision</a></li>
+<li><a class="reference internal" href="#measuring-time-with-high-precision" id="id6">Measuring Time with High Precision</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#suggested-uses" id="id7">Suggested Uses</a></li>
+<li><a class="reference internal" href="#configuration" id="id8">Configuration</a></li>
+<li><a class="reference internal" href="#apis" id="id9">APIs</a></li>
+</ul>
+</div>
+<div class="section" id="concepts">
+<h2><a class="toc-backref" href="#id2">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>The kernel supports two distinct clocks.</p>
+<ul class="simple">
+<li>The 32-bit <strong>hardware clock</strong> is a high precision counter that tracks time
+in unspecified units called <strong>cycles</strong>. The duration of a cycle is determined
+by the board hardware used by the kernel, and is typically measured
+in nanoseconds.</li>
+<li>The 64-bit <strong>system clock</strong> is a counter that tracks the number of
+<strong>ticks</strong> that have elapsed since the kernel was initialized. The duration
+of a tick is is configurable, and typically ranges from 1 millisecond to
+100 milliseconds.</li>
+</ul>
+<p>The kernel also provides a number of variables that can be used
+to convert the time units used by the clocks into standard time units
+(e.g. seconds, milliseconds, nanoseconds, etc), and to convert between
+the two types of clock time units.</p>
+<p>The system clock is used by most of the kernel&#8217;s time-based services, including
+kernel timer objects and the timeouts supported by other kernel object types.
+For convenience, the kernel&#8217;s APIs allow time durations to be specified
+in milliseconds, and automatically converts them to the corresponding
+number of ticks.</p>
+<p>The hardware clock can be used to measure time with higher precision than
+that provided by kernel services based on the system clock.</p>
+<div class="section" id="clock-limitations">
+<span id="id1"></span><h3><a class="toc-backref" href="#id3">Clock Limitations</a><a class="headerlink" href="#clock-limitations" title="Permalink to this headline">¶</a></h3>
+<p>The system clock&#8217;s tick count is derived from the hardware clock&#8217;s cycle
+count. The kernel determines how many clock cycles correspond to the desired
+tick frequency, then programs the hardware clock to generate an interrupt
+after that many cycles; each interrupt corresponds to a single tick.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Configuring a smaller tick duration permits finer-grained timing,
+but also increases the amount of work the kernel has to do to process
+tick interrupts since they occur more frequently. Setting the tick
+duration to zero disables <em>both</em> kernel clocks, as well as their
+associated services.</p>
+</div>
+<p>Any millisecond-based time interval specified using a kernel API
+represents the <strong>minimum</strong> delay that will occur,
+and may actually take longer than the amount of time requested.</p>
+<p>For example, specifying a timeout delay of 100 ms when attempting to take
+a semaphore means that the kernel will never terminate the operation
+and report failure before at least 100 ms have elapsed. However,
+it is possible that the operation may take longer than 100 ms to complete,
+and may either complete successfully during the additional time
+or fail at the end of the added time.</p>
+<p>The amount of added time that occurs during a kernel object operation
+depends on the following factors.</p>
+<ul class="simple">
+<li>The added time introduced by rounding up the specified time interval
+when converting from milliseconds to ticks. For example, if a tick duration
+of 10 ms is being used, a specified delay of 25 ms will be rounded up
+to 30 ms.</li>
+<li>The added time introduced by having to wait for the next tick interrupt
+before a delay can be properly tracked. For example, if a tick duration
+of 10 ms is being used, a specified delay of 20 ms requires the kernel
+to wait for 3 ticks to occur (rather than only 2), since the first tick
+can occur at any time from the next fraction of a millisecond to just
+slightly less than 10 ms; only after the first tick has occurred does
+the kernel know the next 2 ticks will take 20 ms.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2><a class="toc-backref" href="#id4">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="measuring-time-with-normal-precision">
+<h3><a class="toc-backref" href="#id5">Measuring Time with Normal Precision</a><a class="headerlink" href="#measuring-time-with-normal-precision" title="Permalink to this headline">¶</a></h3>
+<p>This code uses the system clock to determine how much time has elapsed
+between two points in time.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int64_t</span> <span class="n">time_stamp</span><span class="p">;</span>
+<span class="kt">int64_t</span> <span class="n">milliseconds_spent</span><span class="p">;</span>
+
+<span class="cm">/* capture initial time stamp */</span>
+<span class="n">time_stamp</span> <span class="o">=</span> <span class="n">k_uptime_get</span><span class="p">();</span>
+
+<span class="cm">/* do work for some (extended) period of time */</span>
+<span class="p">...</span>
+
+<span class="cm">/* compute how long the work took (also updates the time stamp) */</span>
+<span class="n">milliseconds_spent</span> <span class="o">=</span> <span class="n">k_uptime_delta</span><span class="p">(</span><span class="o">&amp;</span><span class="n">time_stamp</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="measuring-time-with-high-precision">
+<h3><a class="toc-backref" href="#id6">Measuring Time with High Precision</a><a class="headerlink" href="#measuring-time-with-high-precision" title="Permalink to this headline">¶</a></h3>
+<p>This code uses the hardware clock to determine how much time has elapsed
+between two points in time.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span> <span class="n">start_time</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">stop_time</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">cycles_spent</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">nanoseconds_spent</span><span class="p">;</span>
+
+<span class="cm">/* capture initial time stamp */</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">k_cycle_get_32</span><span class="p">();</span>
+
+<span class="cm">/* do work for some (short) period of time */</span>
+<span class="p">...</span>
+
+<span class="cm">/* capture final time stamp */</span>
+<span class="n">stop_time</span> <span class="o">=</span> <span class="n">k_cycle_get_32</span><span class="p">();</span>
+
+<span class="cm">/* compute how long the work took (assumes no counter rollover) */</span>
+<span class="n">cycles_spent</span> <span class="o">=</span> <span class="n">stop_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">;</span>
+<span class="n">nanoseconds_spent</span> <span class="o">=</span> <span class="n">SYS_CLOCK_HW_CYCLES_TO_NS</span><span class="p">(</span><span class="n">cycles_spent</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="suggested-uses">
+<h2><a class="toc-backref" href="#id7">Suggested Uses</a><a class="headerlink" href="#suggested-uses" title="Permalink to this headline">¶</a></h2>
+<p>Use services based on the system clock for time-based processing
+that does not require high precision,
+such as <a class="reference internal" href="timers.html#timers-v2"><span class="std std-ref">timer objects</span></a> or <a class="reference internal" href="../threads/scheduling.html#thread-sleeping"><span class="std std-ref">Thread Sleeping</span></a>.</p>
+<p>Use services based on the hardware clock for time-based processing
+that requires higher precision than the system clock can provide,
+such as <a class="reference internal" href="../threads/scheduling.html#busy-waiting"><span class="std std-ref">Busy Waiting</span></a> or fine-grained time measurements.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The high frequency of the hardware clock, combined with its 32-bit size,
+means that counter rollover must be taken into account when taking
+high-precision measurements over an extended period of time.</p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2><a class="toc-backref" href="#id8">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Related configuration options:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../reference/kconfig/CONFIG_SYS_CLOCK_TICKS_PER_SEC.html#cmdoption-arg-CONFIG_SYS_CLOCK_TICKS_PER_SEC"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_SYS_CLOCK_TICKS_PER_SEC</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="apis">
+<h2><a class="toc-backref" href="#id9">APIs</a><a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>The following kernel clock APIs are provided by <code class="file docutils literal"><span class="pre">kernel.h</span></code>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_uptime_getv" title="k_uptime_get"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_uptime_get()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv215k_uptime_get_32v" title="k_uptime_get_32"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_uptime_get_32()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_uptime_deltaP7int64_t" title="k_uptime_delta"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_uptime_delta()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv217k_uptime_delta_32P7int64_t" title="k_uptime_delta_32"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_uptime_delta_32()</span></code></a></li>
+<li><code class="xref cpp cpp-func docutils literal"><span class="pre">k_cycle_get_32()</span></code></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#c.SYS_CLOCK_HW_CYCLES_TO_NS" title="SYS_CLOCK_HW_CYCLES_TO_NS"><code class="xref c c-macro docutils literal"><span class="pre">SYS_CLOCK_HW_CYCLES_TO_NS</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#c.K_NO_WAIT" title="K_NO_WAIT"><code class="xref c c-macro docutils literal"><span class="pre">K_NO_WAIT</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#c.K_MSEC" title="K_MSEC"><code class="xref c c-macro docutils literal"><span class="pre">K_MSEC</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#c.K_SECONDS" title="K_SECONDS"><code class="xref c c-macro docutils literal"><span class="pre">K_SECONDS</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#c.K_MINUTES" title="K_MINUTES"><code class="xref c c-macro docutils literal"><span class="pre">K_MINUTES</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#c.K_HOURS" title="K_HOURS"><code class="xref c c-macro docutils literal"><span class="pre">K_HOURS</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#c.K_FOREVER" title="K_FOREVER"><code class="xref c c-macro docutils literal"><span class="pre">K_FOREVER</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="timers.html" class="btn btn-neutral float-right" title="Timers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="timing.html" class="btn btn-neutral" title="Timing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

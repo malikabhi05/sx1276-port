@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Power Management APIs &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../index.html"/>
+        <link rel="up" title="API Documentation" href="api.html"/>
+        <link rel="next" title="File System APIs" href="file_system.html"/>
+        <link rel="prev" title="Input / Output Driver APIs" href="io_interfaces.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="kernel_api.html">Kernel APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">Device Driver Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bluetooth.html">Bluetooth API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html">Networking API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io_interfaces.html">Input / Output Driver APIs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Power Management APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#power-management-hook-interface">Power Management Hook Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device-power-management-apis">Device Power Management APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_system.html">File System APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api.html">API Documentation</a> &raquo;</li>
+        
+      <li>Power Management APIs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/power_management_api.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="power-management-apis">
+<span id="power-management-api"></span><h1>Power Management APIs<a class="headerlink" href="#power-management-apis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="power-management-hook-interface">
+<h2>Power Management Hook Interface<a class="headerlink" href="#power-management-hook-interface" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="_CPPv242_sys_soc_pm_idle_exit_notification_disablev">
+<span id="_sys_soc_pm_idle_exit_notification_disable__void"></span><span class="target" id="Zephyrd1/d48/group__power__management__hook__interface_1ga65bdeb9f67700f3832d43ae94ba6094d"></span><em class="property">static</em> void <code class="descclassname"></code><code class="descname">_sys_soc_pm_idle_exit_notification_disable</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv242_sys_soc_pm_idle_exit_notification_disablev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to disable power management idle exit notification. </p>
+<p>_sys_soc_resume() would be called from the ISR of the event that caused exit from kernel idling after PM operations. For some power operations, this notification may not be necessary. This function can be called in _sys_soc_suspend to disable the corresponding _sys_soc_resume notification. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv231_sys_soc_resume_from_deep_sleepv">
+<span id="_sys_soc_resume_from_deep_sleep__void"></span><span class="target" id="Zephyrd1/d48/group__power__management__hook__interface_1gaf1ea0c4670d90da0f1054a209c6e971c"></span>void <code class="descclassname"></code><code class="descname">_sys_soc_resume_from_deep_sleep</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv231_sys_soc_resume_from_deep_sleepv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook function to notify exit from deep sleep. </p>
+<p>The purpose of this function is to notify exit from deep sleep. The implementation of this function can vary depending on the soc specific boot flow.</p>
+<p>This function would switch cpu context to the execution point at the time system entered deep sleep power state. Some implementations may not require use of this function e.g. the BSP or boot loader may do the context switch.</p>
+<p>In boot flows where this function gets called even at cold boot, the function should return immediately. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215_sys_soc_resumev">
+<span id="_sys_soc_resume__void"></span><span class="target" id="Zephyrd1/d48/group__power__management__hook__interface_1ga36a75e605804c7b5046a939746f82121"></span>void <code class="descclassname"></code><code class="descname">_sys_soc_resume</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv215_sys_soc_resumev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook function to notify exit from kernel idling after PM operations. </p>
+<p>This function would notify exit from kernel idling if a corresponding _sys_soc_suspend() notification was handled and did not return SYS_PM_NOT_HANDLED.</p>
+<p>This function would be called from the ISR context of the event that caused the exit from kernel idling. This will be called immediately after interrupts are enabled. This is called to give a chance to do any operations before the kernel would switch tasks or processes nested interrupts. This is required for cpu low power states that would require interrupts to be enabled while entering low power states. e.g. C1 in x86. In those cases, the ISR would be invoked immediately after the event wakes up the CPU, before code following the CPU wait, gets a chance to execute. This can be ignored if no operation needs to be done at the wake event notification. Alternatively _sys_soc_pm_idle_exit_notification_disable() can be called in _sys_soc_suspend to disable this notification. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216_sys_soc_suspend7int32_t">
+<span id="_sys_soc_suspend__int32_t"></span><span class="target" id="Zephyrd1/d48/group__power__management__hook__interface_1ga7565d6dc6b0acc5824964c014585f0dc"></span>int <code class="descclassname"></code><code class="descname">_sys_soc_suspend</code><span class="sig-paren">(</span>int32_t <em>ticks</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv216_sys_soc_suspend7int32_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook function to allow entry to low power state. </p>
+<p>This function is called by the kernel when it is about to idle. It is passed the number of clock ticks that the kernel calculated as available time to idle.</p>
+<p>The implementation of this function is dependent on the soc specific components and the various schemes they support. Some implementations may choose to do device PM operations in this function, while others would not need to, because they would have done it at other places.</p>
+<p>Typically a wake event is set and the soc or cpu is put to any of the supported low power states. The wake event should be set to wake up the soc or cpu before the available idle time expires to avoid disrupting the kernel&#8217;s scheduling.</p>
+<p>This function is entered with interrupts disabled. It should re-enable interrupts if it had entered a low power state.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ticks</span></code>: the upcoming kernel idle time</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">SYS_PM_NOT_HANDLED</span></code>: If low power state was not entered. </li>
+<li><code class="docutils literal"><span class="pre">SYS_PM_LOW_POWER_STATE</span></code>: If CPU low power state was entered. </li>
+<li><code class="docutils literal"><span class="pre">SYS_PM_DEEP_SLEEP</span></code>: If SOC low power state was entered. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="device-power-management-apis">
+<h2>Device Power Management APIs<a class="headerlink" href="#device-power-management-apis" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="_CPPv215device_busy_setP6device">
+<span id="device_busy_set__deviceP"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1ga6f4c5fdb7b15d446324502910764f59e"></span>void <code class="descclassname"></code><code class="descname">device_busy_set</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> *<em>busy_dev</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv215device_busy_setP6device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicate that the device is in the middle of a transaction. </p>
+<p>Called by a device driver to indicate that it is in the middle of a transaction.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">busy_dev</span></code>: Pointer to device structure of the driver instance. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217device_busy_clearP6device">
+<span id="device_busy_clear__deviceP"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1gacc21276365fe69c765c8191c4e5cdc37"></span>void <code class="descclassname"></code><code class="descname">device_busy_clear</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> *<em>busy_dev</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217device_busy_clearP6device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicate that the device has completed its transaction. </p>
+<p>Called by a device driver to indicate the end of a transaction.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">busy_dev</span></code>: Pointer to device structure of the driver instance. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213device_pm_nopP6devicei">
+<span id="device_pm_nop__deviceP.i"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1ga5e83848c5c683441cd59bc840aed0470"></span>int <code class="descclassname"></code><code class="descname">device_pm_nop</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> *<em>unused_device</em>, int <em>unused_policy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv213device_pm_nopP6devicei" title="Permalink to this definition">¶</a></dt>
+<dd><p>No-op function to initialize unimplemented pm hooks. </p>
+<p>This function should be used to initialize device pm hooks for which a device has no operation.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unused_device</span></code>: Unused </li>
+<li><code class="docutils literal"><span class="pre">unused_policy</span></code>: Unused</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Always returns 0 </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214device_suspendP6devicei">
+<span id="device_suspend__deviceP.i"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1gaacf19135e0d3e46e8c213751cf5b2d2f"></span><em class="property">static</em> <em class="property">inline</em> int <code class="descclassname"></code><code class="descname">device_suspend</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> *<em>device</em>, int <em>pm_policy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214device_suspendP6devicei" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the suspend function of a device. </p>
+<p>
+Called by the Power Manager application to let the device do any policy based PM suspend operations.<dl class="docutils">
+<dt><strong>Warning</strong></dt>
+<dd>This function is deprecated and will be removed in a future version, use device_set_power_state instead.</dd>
+</dl>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">device</span></code>: Pointer to device structure of the driver instance. </li>
+<li><code class="docutils literal"><span class="pre">pm_policy</span></code>: PM policy for which this call is made.</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: If successful. </li>
+<li><code class="docutils literal"><span class="pre">Errno</span></code>: Negative errno code if failure. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213device_resumeP6devicei">
+<span id="device_resume__deviceP.i"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1ga43ac7494ac92e8c0eac407c8d01147a5"></span><em class="property">static</em> <em class="property">inline</em> int <code class="descclassname"></code><code class="descname">device_resume</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> *<em>device</em>, int <em>pm_policy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv213device_resumeP6devicei" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the resume function of a device. </p>
+<p>
+Called by the Power Manager application to let the device do any policy based PM resume operations.<dl class="docutils">
+<dt><strong>Warning</strong></dt>
+<dd>This function is deprecated and will be removed in a future version, use device_set_power_state instead.</dd>
+</dl>
+</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">device</span></code>: Pointer to device structure of the driver instance. </li>
+<li><code class="docutils literal"><span class="pre">pm_policy</span></code>: PM policy for which this call is made.</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: If successful. </li>
+<li><code class="docutils literal"><span class="pre">Errno</span></code>: Negative errno code if failure. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221device_pm_control_nopP6device8uint32_tPv">
+<span id="device_pm_control_nop__deviceP.uint32_t.voidP"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1ga896006923a6bc553fce49d78dc9b2efa"></span>int <code class="descclassname"></code><code class="descname">device_pm_control_nop</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> *<em>unused_device</em>, uint32_t <em>unused_ctrl_command</em>, void *<em>unused_context</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221device_pm_control_nopP6device8uint32_tPv" title="Permalink to this definition">¶</a></dt>
+<dd><p>No-op function to initialize unimplemented hook. </p>
+<p>This function should be used to initialize device hook for which a device has no PM operations.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unused_device</span></code>: Unused </li>
+<li><code class="docutils literal"><span class="pre">unused_ctrl_command</span></code>: Unused </li>
+<li><code class="docutils literal"><span class="pre">unused_context</span></code>: Unused</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: Always returns 0 </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222device_set_power_stateP6device8uint32_t">
+<span id="device_set_power_state__deviceP.uint32_t"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1ga11abe2abd36cef5f6780c67eca65cc9c"></span><em class="property">static</em> int <code class="descclassname"></code><code class="descname">device_set_power_state</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> *<em>device</em>, uint32_t <em>device_power_state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222device_set_power_stateP6device8uint32_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the set power state function of a device. </p>
+<p>Called by the application or power management service to let the device do required operations when moving to the required power state Note that devices may support just some of the device power states <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">device</span></code>: Pointer to device structure of the driver instance. </li>
+<li><code class="docutils literal"><span class="pre">device_power_state</span></code>: Device power state to be set</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: If successful. </li>
+<li><code class="docutils literal"><span class="pre">Errno</span></code>: Negative errno code if failure. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222device_get_power_stateP6deviceP8uint32_t">
+<span id="device_get_power_state__deviceP.uint32_tP"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1gad6b1ce8cec8fed3d00d40e0136f16bb7"></span><em class="property">static</em> int <code class="descclassname"></code><code class="descname">device_get_power_state</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> *<em>device</em>, uint32_t *<em>device_power_state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv222device_get_power_stateP6deviceP8uint32_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the get power state function of a device. </p>
+<p>This function lets the caller know the current device power state at any time. This state will be one of the defined power states allowed for the devices in that system</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">device</span></code>: pointer to device structure of the driver instance. </li>
+<li><code class="docutils literal"><span class="pre">device_power_state</span></code>: Device power state to be filled by the device</li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: If successful. </li>
+<li><code class="docutils literal"><span class="pre">Errno</span></code>: Negative errno code if failure. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215device_list_getPP6devicePi">
+<span id="device_list_get__devicePP.iP"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1ga42ee756b94eb5db2d5cd4d4c4bd73cee"></span>void <code class="descclassname"></code><code class="descname">device_list_get</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> **<em>device_list</em>, int *<em>device_count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv215device_list_getPP6devicePi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the device structure list array and device count. </p>
+<p>Called by the Power Manager application to get the list of device structures associated with the devices in the system. The PM app would use this list to create its own sorted list based on the order it wishes to suspend or resume the devices.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">device_list</span></code>: Pointer to receive the device list array </li>
+<li><code class="docutils literal"><span class="pre">device_count</span></code>: Pointer to receive the device count </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221device_any_busy_checkv">
+<span id="device_any_busy_check__void"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1ga32e631c3d8880d470b88001af8958134"></span>int <code class="descclassname"></code><code class="descname">device_any_busy_check</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv221device_any_busy_checkv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if any device is in the middle of a transaction. </p>
+<p>Called by an application to see if any device is in the middle of a critical transaction that cannot be interrupted.</p>
+<p><dl class="docutils">
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: if no device is busy </li>
+<li><code class="docutils literal"><span class="pre">-EBUSY</span></code>: if any device is busy </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217device_busy_checkP6device">
+<span id="device_busy_check__deviceP"></span><span class="target" id="Zephyrd2/def/group__device__power__management__api_1ga132bd7172447a21a64a90e2e4fe0eacf"></span>int <code class="descclassname"></code><code class="descname">device_busy_check</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="device.html#_CPPv26device" title="device">device</a> *<em>chk_dev</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217device_busy_checkP6device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a specific device is in the middle of a transaction. </p>
+<p>Called by an application to see if a particular device is in the middle of a critical transaction that cannot be interrupted.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">chk_dev</span></code>: Pointer to device structure of the specific device driver the caller is interested in. </li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">0</span></code>: if the device is not busy </li>
+<li><code class="docutils literal"><span class="pre">-EBUSY</span></code>: if the device is busy </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.DEFINE_DEVICE_PM_OPS">
+<span class="target" id="Zephyrd2/def/group__device__power__management__api_1ga7c97f678af3f0772900bb01aba78d325"></span><code class="descname">DEFINE_DEVICE_PM_OPS</code><span class="sig-paren">(</span>_name, _suspend, _resume<span class="sig-paren">)</span> static struct <a class="reference internal" href="#Zephyrd2/d6e/structdevice__pm__ops"><span class="std std-ref">device_pm_ops</span></a> _CONCAT(_name, _dev_pm_ops) = { \
+		.suspend = _suspend,			\
+		.resume = _resume,			\
+	}<a class="headerlink" href="#c.DEFINE_DEVICE_PM_OPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper macro to define the <a class="reference internal" href="#Zephyrd2/d6e/structdevice__pm__ops"><span class="std std-ref">device_pm_ops</span></a> structure. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">_name</span></code>: name of the device </li>
+<li><code class="docutils literal"><span class="pre">_suspend</span></code>: name of the suspend function </li>
+<li><code class="docutils literal"><span class="pre">_resume</span></code>: name of the resume function </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.DEVICE_PM_OPS_GET">
+<span class="target" id="Zephyrd2/def/group__device__power__management__api_1gaaa1b58c1eb1f75d9909616f9fb095f4c"></span><code class="descname">DEVICE_PM_OPS_GET</code><span class="sig-paren">(</span>_name<span class="sig-paren">)</span> &amp;_CONCAT(_name, _dev_pm_ops)<a class="headerlink" href="#c.DEVICE_PM_OPS_GET" title="Permalink to this definition">¶</a></dt>
+<dd><p>Macro to get a pointer to the device_ops_structure. </p>
+<p>Will return the name of the structure that was created using DEFINE_PM_OPS macro if CONFIG_DEVICE_POWER_MANAGEMENT is defined. Otherwise, will return NULL.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">_name</span></code>: name of the device </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv213device_pm_ops">
+<span id="device_pm_ops"></span><span class="target" id="Zephyrd2/d6e/structdevice__pm__ops"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">device_pm_ops</code><a class="headerlink" href="#_CPPv213device_pm_ops" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;device.h&gt;</em><p>Structure holding handlers for device PM operations. </p>
+<p><dl class="docutils">
+<dt><strong>Warning</strong></dt>
+<dd>This struct is deprecated and will be removed in a future version.</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">suspend</span></code>: Pointer to the handler for suspend operations </li>
+<li><code class="docutils literal"><span class="pre">resume</span></code>: Pointer to the handler for resume operations </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_system.html" class="btn btn-neutral float-right" title="File System APIs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="io_interfaces.html" class="btn btn-neutral" title="Input / Output Driver APIs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

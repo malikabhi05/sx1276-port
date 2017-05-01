@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: TELNET_CONSOLE_SEND_TIMEOUT
+
+.. option:: CONFIG_TELNET_CONSOLE_SEND_TIMEOUT:
+.. _CONFIG_TELNET_CONSOLE_SEND_TIMEOUT:
+
+This option can be used to modify the duration of the timer that kick
+in when a line buffer is not empty but did not yet meet the line feed.
+
+
+
+:Symbol:           TELNET_CONSOLE_SEND_TIMEOUT
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Telnet console line send timeout"
+:Default values:
+
+ *  100 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ TELNET_CONSOLE && CONSOLE (value: "n")
+:Locations:
+ * ../drivers/console/Kconfig.telnet:53

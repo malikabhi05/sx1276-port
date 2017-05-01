@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: DISK_ACCESS
+
+.. option:: CONFIG_DISK_ACCESS:
+.. _CONFIG_DISK_ACCESS:
+
+Enable disk access over a supported media backend like FLASH or RAM
+
+
+
+:Symbol:           DISK_ACCESS
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "y"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable Disk Interface"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ FILE_SYSTEM || USB_DEVICE_STACK && USB_DEVICE_STACK && USB_MASS_STORAGE (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../subsys/disk/Kconfig:9

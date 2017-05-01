@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quark D2000 Development Board &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../../../index.html"/>
+        <link rel="up" title="Supported Boards" href="../../../boards.html"/>
+        <link rel="next" title="tinyTILE" href="../../tinytile/doc/board.html"/>
+        <link rel="prev" title="X86 Emulation (QEMU)" href="../../qemu_x86/doc/board.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../boards.html">Supported Boards</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../boards.html#x86-boards">X86 Boards</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_101/doc/board.html">Arduino/Genuino 101</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../qemu_x86/doc/board.html">X86 Emulation (QEMU)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Quark D2000 Development Board</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware">Hardware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#programming-and-debugging">Programming and Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../tinytile/doc/board.html">tinyTILE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#arm-boards">ARM Boards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#arc-boards">ARC Boards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#nios-ii-boards">NIOS II Boards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../boards.html">Supported Boards</a> &raquo;</li>
+        
+      <li>Quark D2000 Development Board</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/boards/x86/quark_d2000_crb/doc/quark_d2000_crb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quark-d2000-development-board">
+<span id="quark-d2000-devboard"></span><h1>Quark D2000 Development Board<a class="headerlink" href="#quark-d2000-development-board" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Intel® Quark ™ microcontroller D2000 package is shipped as a 40-pin QFN
+component.</p>
+<a class="reference internal image-reference" href="../../../../_images/quark-d2000-developers-kit.png"><img alt="Quark D2000 Development Board" class="align-center" src="../../../../_images/quark-d2000-developers-kit.png" style="width: 442px;" /></a>
+<p>Intel™ Quark® microcontroller D2000 contains the following items:</p>
+<ul class="simple">
+<li>On-board components:<ul>
+<li>Accelerometer/Magnetometer sensor</li>
+<li>UART/JTAG to USB convert for USB debug port</li>
+</ul>
+</li>
+<li>Expansion options:<ul>
+<li>“Arduino Uno” compatible SIL sockets ( 3.3V IO Only )</li>
+</ul>
+</li>
+<li>Other connectors:<ul>
+<li>1x USB 2.0 Device Port – micro Type B</li>
+<li>On-board coin cell battery holder</li>
+<li>5V input a screw terminal/header (external power or Li-ion)</li>
+<li>EEMBC power input header</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
+<p>General information for the board can be found at the <a class="reference external" href="http://www.intel.com/content/www/us/en/embedded/products/quark/mcu/d2000/quark-d2000-crb-user-guide.html">Intel Website</a>,
+which includes both <a class="reference external" href="http://www.intel.com/content/www/us/en/embedded/products/quark/mcu/d2000/quark-d2000-crb-schematics.html">schematics</a> and BRD files.</p>
+<p>The Intel® Quark™ Microcontroller D2000 Development Platform supports the
+familiar open standard Arduino Uno Rev 3.0 physical interface and is
+mechanically compatible with Uno Rev 3.0. It does not support the 6 pin ICSP
+Header.</p>
+<div class="section" id="supported-features">
+<h3>Supported Features<a class="headerlink" href="#supported-features" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="26%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Interface</th>
+<th class="head">Controller</th>
+<th class="head">Driver/Component</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>MVIC</td>
+<td>on-chip</td>
+<td>interrupt_controller</td>
+</tr>
+<tr class="row-odd"><td>UART</td>
+<td>on-chip</td>
+<td>serial port-polling;
+serial port-interrupt</td>
+</tr>
+<tr class="row-even"><td>SPI</td>
+<td>on-chip</td>
+<td>spi</td>
+</tr>
+<tr class="row-odd"><td>I2C</td>
+<td>on-chip</td>
+<td>i2c</td>
+</tr>
+<tr class="row-even"><td>GPIO</td>
+<td>on-chip</td>
+<td>gpio</td>
+</tr>
+<tr class="row-odd"><td>PWM</td>
+<td>on-chip</td>
+<td>pwm</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="programming-and-debugging">
+<h2>Programming and Debugging<a class="headerlink" href="#programming-and-debugging" title="Permalink to this headline">¶</a></h2>
+<p>The D2000 board configuration details are found in the project&#8217;s tree at
+<code class="file docutils literal"><span class="pre">boards/x86/quark_d2000_crb</span></code>.</p>
+<p>To build an application for this board, the following call is needed:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>quark_d2000_crb &lt;make target&gt;
+</pre></div>
+</div>
+<div class="section" id="flashing">
+<h3>Flashing<a class="headerlink" href="#flashing" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Since the board has a built-in JTAG; it is possible to flash the device
+through the USB only.  Set the following jumpers to enable the built-in JTAG:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="18%" />
+<col width="24%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Jumper</th>
+<th class="head">UART</th>
+<th class="head">Common</th>
+<th class="head">JTAG</th>
+<th class="head">Name</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>J9</td>
+<td>Open</td>
+<td>X</td>
+<td>X</td>
+<td>TDO</td>
+</tr>
+<tr class="row-odd"><td>J10</td>
+<td>Open</td>
+<td>X</td>
+<td>X</td>
+<td>TDI</td>
+</tr>
+<tr class="row-even"><td>J11</td>
+<td>Open</td>
+<td>X</td>
+<td>X</td>
+<td>TRST</td>
+</tr>
+<tr class="row-odd"><td>J12</td>
+<td>X</td>
+<td>N/A</td>
+<td>X</td>
+<td>TMS</td>
+</tr>
+<tr class="row-even"><td>J17</td>
+<td>X</td>
+<td>N/A</td>
+<td>X</td>
+<td>TCK</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">Connect the D2000 via USB to the host computer.</p>
+</li>
+<li><p class="first">Once the binary is built, it can be flashed to the device by:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>quark_d2000_crb flash
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="debugging">
+<h3>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h3>
+<p>To debug an application on the Quark D2000 board, follow these steps.  As an
+example, we are using the <a class="reference internal" href="../../../../samples/hello_world/README.html#hello-world"><span class="std std-ref">Hello World</span></a> application.</p>
+<ol class="arabic">
+<li><p class="first">Go to the application&#8217;s folder:.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> <span class="nv">$ZEPHYR_BASE</span>/samples/hello_world
+</pre></div>
+</div>
+</li>
+<li><p class="first">Verify the final binary is in <code class="file docutils literal"><span class="pre">outdir/quark_d2000_crb/zephyr.elf</span></code>.</p>
+</li>
+<li><p class="first">To enable the debug process, enter:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>quark_d2000_crb debug
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../tinytile/doc/board.html" class="btn btn-neutral float-right" title="tinyTILE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../qemu_x86/doc/board.html" class="btn btn-neutral" title="X86 Emulation (QEMU)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

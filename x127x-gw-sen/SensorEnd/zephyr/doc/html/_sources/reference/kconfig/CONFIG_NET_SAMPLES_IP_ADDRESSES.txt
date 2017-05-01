@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: NET_SAMPLES_IP_ADDRESSES
+
+.. option:: CONFIG_NET_SAMPLES_IP_ADDRESSES:
+.. _CONFIG_NET_SAMPLES_IP_ADDRESSES:
+
+Allow IP addresses to be set in config file for
+networking client/server sample applications.
+
+
+
+:Symbol:           NET_SAMPLES_IP_ADDRESSES
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Set IP addresses for sample applications"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.samples:9

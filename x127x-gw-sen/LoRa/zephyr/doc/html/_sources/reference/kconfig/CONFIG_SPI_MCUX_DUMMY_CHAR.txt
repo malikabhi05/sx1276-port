@@ -1,0 +1,39 @@
+:orphan:
+
+.. title:: SPI_MCUX_DUMMY_CHAR
+
+.. option:: CONFIG_SPI_MCUX_DUMMY_CHAR:
+.. _CONFIG_SPI_MCUX_DUMMY_CHAR:
+
+This option configures what value to send when the tx buffer length is
+less than the rx buffer length.
+
+
+
+:Symbol:           SPI_MCUX_DUMMY_CHAR
+:Type:             hex
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [0x00, 0xff]
+:Prompts:
+
+ *  "Dummy character"
+:Default values:
+
+ *  0x00 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SPI_MCUX && SPI (value: "n")
+:Locations:
+ * ../drivers/spi/Kconfig.mcux:28

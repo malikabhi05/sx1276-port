@@ -1,0 +1,41 @@
+:orphan:
+
+.. title:: NET_MGMT_EVENT_QUEUE_SIZE
+
+.. option:: CONFIG_NET_MGMT_EVENT_QUEUE_SIZE:
+.. _CONFIG_NET_MGMT_EVENT_QUEUE_SIZE:
+
+Numbers of events which can be queued at same time. Note that if a
+3rd event comes in, the first will be removed without generating any
+notification. Thus the size of this queue has to be tweaked depending
+on the load of the system, planned for the usage.
+
+
+
+:Symbol:           NET_MGMT_EVENT_QUEUE_SIZE
+:Type:             int
+:Value:            "1"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [1, 8]
+:Prompts:
+
+ *  "Size of event queue" if NET_MGMT_EVENT (value: "n")
+:Default values:
+
+ *  2 (value: "n")
+ *   Condition: NET_MGMT_EVENT (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_MGMT (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.mgmt:42

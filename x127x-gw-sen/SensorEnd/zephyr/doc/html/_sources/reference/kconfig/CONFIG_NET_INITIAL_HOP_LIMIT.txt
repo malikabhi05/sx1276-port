@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: NET_INITIAL_HOP_LIMIT
+
+.. option:: CONFIG_NET_INITIAL_HOP_LIMIT:
+.. _CONFIG_NET_INITIAL_HOP_LIMIT:
+
+The value should be > 0
+
+
+
+:Symbol:           NET_INITIAL_HOP_LIMIT
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Initial hop limit for a connection"
+:Default values:
+
+ *  64 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL && NET_IPV6 (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.ipv6:30

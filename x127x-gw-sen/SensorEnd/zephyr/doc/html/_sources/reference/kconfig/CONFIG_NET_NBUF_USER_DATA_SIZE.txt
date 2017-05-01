@@ -1,0 +1,40 @@
+:orphan:
+
+.. title:: NET_NBUF_USER_DATA_SIZE
+
+.. option:: CONFIG_NET_NBUF_USER_DATA_SIZE:
+.. _CONFIG_NET_NBUF_USER_DATA_SIZE:
+
+This is for drivers to set how much user_data shall be included in
+each network data fragment.
+Example: For Bluetooth, the user_data shall be at least 4 bytes as
+that is used for identifying the type of data they are carrying.
+
+
+
+:Symbol:           NET_NBUF_USER_DATA_SIZE
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Size of user_data reserved"
+:Default values:
+
+ *  0 (value: "n")
+ *   Condition: (none)
+ *  4 (value: "n")
+ *   Condition: NET_L2_BLUETOOTH (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:254

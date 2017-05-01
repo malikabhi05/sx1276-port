@@ -1,0 +1,44 @@
+:orphan:
+
+.. title:: FP_SHARING
+
+.. option:: CONFIG_FP_SHARING:
+.. _CONFIG_FP_SHARING:
+
+This option allows multiple preemptible threads to use the floating
+point registers. Any preemptible thread that uses the registers must
+provide stack space where the kernel can save FPU context info during
+a preemptive context switch. A thread that uses only the x87 FPU/MMX
+registers must provide 108 bytes of added stack space, while a thread
+the uses the SSE registers must provide 464 bytes of added stack space.
+
+
+
+:Symbol:           FP_SHARING
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Floating point register sharing" if FLOAT (value: "n")
+ *  "Floating point register sharing" if FLOAT (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: FLOAT (value: "n")
+ *  n (value: "n")
+ *   Condition: FLOAT (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ CPU_HAS_FPU && X86 (value: "n")
+:Locations:
+ * ../arch/arm/core/Kconfig:55
+ * ../arch/x86/Kconfig:91

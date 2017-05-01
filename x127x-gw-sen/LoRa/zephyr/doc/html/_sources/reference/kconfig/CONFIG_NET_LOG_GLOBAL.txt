@@ -1,0 +1,59 @@
+:orphan:
+
+.. title:: NET_LOG_GLOBAL
+
+.. option:: CONFIG_NET_LOG_GLOBAL:
+.. _CONFIG_NET_LOG_GLOBAL:
+
+By default, logging will apply only on enabled CONFIG_NET_DEBUG_*
+options, on which CONFIG_SYS_LOG_NET_LEVEL would be applied.
+However, if you want all the network stack logging enabled at once,
+use this option. Beware logging takes a lot of ROM/RAM and kills
+execution timing so it can affect your use case.
+
+
+
+:Symbol:           NET_LOG_GLOBAL
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable global network stack logging"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_NET_DEBUG_CORE`
+ *  :option:`CONFIG_NET_DEBUG_IF`
+ *  :option:`CONFIG_NET_DEBUG_UTILS`
+ *  :option:`CONFIG_NET_DEBUG_CONTEXT`
+ *  :option:`CONFIG_NET_DEBUG_NET_BUF`
+ *  :option:`CONFIG_NET_DEBUG_CONN`
+ *  :option:`CONFIG_NET_DEBUG_ROUTE` if NET_ROUTE (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_IPV6` if NET_IPV6 (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_ICMPV6` if NET_IPV6 (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_IPV6_NBR_CACHE` if NET_IPV6 (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_6LO` if NET_6LO (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_IPV4` if NET_IPV4 (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_ICMPV4` if NET_IPV4 (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_DHCPV4` if NET_DHCPV4 (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_UDP` if NET_UDP (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_TCP` if NET_TCP (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_RPL` if NET_RPL (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_TRICKLE` if NET_TRICKLE (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_MGMT_EVENT` if NET_MGMT (value: "n")
+ *  :option:`CONFIG_NET_DEBUG_MGMT_EVENT_STACK` if NET_MGMT_EVENT (value: "n")
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL && NET_LOG (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.debug:34

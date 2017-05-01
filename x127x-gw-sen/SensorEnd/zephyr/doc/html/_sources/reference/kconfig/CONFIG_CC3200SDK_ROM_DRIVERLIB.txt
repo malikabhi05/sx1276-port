@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: CC3200SDK_ROM_DRIVERLIB
+
+.. option:: CONFIG_CC3200SDK_ROM_DRIVERLIB:
+.. _CONFIG_CC3200SDK_ROM_DRIVERLIB:
+
+Vector to CC3200 SDK driverlib APIs in ROM.
+
+
+
+:Symbol:           CC3200SDK_ROM_DRIVERLIB
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Use the Peripheral Driver library functions in ROM"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_CC3200SDK`
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ HAS_CC3200SDK (value: "n")
+:Locations:
+ * ../ext/hal/ti/cc3200sdk/Kconfig:22

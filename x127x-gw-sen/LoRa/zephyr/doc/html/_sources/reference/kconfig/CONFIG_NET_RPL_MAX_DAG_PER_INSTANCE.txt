@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: NET_RPL_MAX_DAG_PER_INSTANCE
+
+.. option:: CONFIG_NET_RPL_MAX_DAG_PER_INSTANCE:
+.. _CONFIG_NET_RPL_MAX_DAG_PER_INSTANCE:
+
+This determines how many DAG to allocate within one RPL instance.
+
+
+
+:Symbol:           NET_RPL_MAX_DAG_PER_INSTANCE
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Maximum number of DAGs within an instance" if NET_RPL (value: "n")
+:Default values:
+
+ *  2 (value: "n")
+ *   Condition: NET_RPL (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_RPL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.rpl:95

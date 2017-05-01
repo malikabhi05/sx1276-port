@@ -1,0 +1,34 @@
+:orphan:
+
+.. title:: CPU_CORTEX_M_HAS_BASEPRI
+
+.. option:: CONFIG_CPU_CORTEX_M_HAS_BASEPRI:
+.. _CONFIG_CPU_CORTEX_M_HAS_BASEPRI:
+
+This option signifies the CPU has the BASEPRI register.
+
+
+
+:Symbol:           CPU_CORTEX_M_HAS_BASEPRI
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ CPU_CORTEX_M && ARM && ARMV7_M (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ CPU_CORTEX_M && ARM (value: "n")
+:Locations:
+ * ../arch/arm/core/cortex_m/Kconfig:38

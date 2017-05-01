@@ -1,0 +1,75 @@
+:orphan:
+
+.. title:: IRQ_OFFLOAD_INTNUM
+
+.. option:: CONFIG_IRQ_OFFLOAD_INTNUM:
+.. _CONFIG_IRQ_OFFLOAD_INTNUM:
+
+The index of the software interrupt to be used for IRQ offload.
+
+Please note that in order for IRQ offload to work correctly the selected
+interrupt shall have its priority shall not exceed XCHAL_EXCM_LEVEL.
+
+
+
+:Symbol:           IRQ_OFFLOAD_INTNUM
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "IRQ offload SW interrupt index"
+:Default values:
+
+ *  13 (value: "n")
+ *   Condition: (none)
+ *  1 (value: "n")
+ *   Condition: (none)
+ *  13 (value: "n")
+ *   Condition: (none)
+ *  7 (value: "n")
+ *   Condition: (none)
+ *  13 (value: "n")
+ *   Condition: (none)
+ *  4 (value: "n")
+ *   Condition: (none)
+ *  7 (value: "n")
+ *   Condition: (none)
+ *  7 (value: "n")
+ *   Condition: (none)
+ *  13 (value: "n")
+ *   Condition: (none)
+ *  7 (value: "n")
+ *   Condition: (none)
+ *  7 (value: "n")
+ *   Condition: (none)
+ *  11 (value: "n")
+ *   Condition: (none)
+ *  22 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ XRC_D2PM_5swIrq && XTENSA (value: "n")
+:Locations:
+ * ../arch/xtensa/Kconfig:68
+ * ../arch/xtensa/soc/XRC_FUSION_AON_ALL_LM/Kconfig:9
+ * ../arch/xtensa/soc/hifi_mini_4swIrq/Kconfig:9
+ * ../arch/xtensa/soc/hifi_mini/Kconfig:9
+ * ../arch/xtensa/soc/hifi2_std/Kconfig:9
+ * ../arch/xtensa/soc/hifi3_bd5_call0/Kconfig:9
+ * ../arch/xtensa/soc/hifi4_bd7/Kconfig:9
+ * ../arch/xtensa/soc/D_108mini/Kconfig:9
+ * ../arch/xtensa/soc/sample_controller/Kconfig:9
+ * ../arch/xtensa/soc/hifi3_bd5/Kconfig:9
+ * ../arch/xtensa/soc/D_212GP/Kconfig:9
+ * ../arch/xtensa/soc/D_233L/Kconfig:9
+ * ../arch/xtensa/soc/XRC_D2PM/Kconfig:9
+ * ../arch/xtensa/soc/XRC_D2PM_5swIrq/Kconfig:9

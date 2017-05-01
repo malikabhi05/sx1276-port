@@ -1,0 +1,41 @@
+:orphan:
+
+.. title:: GPIO_MCUX_PORTD
+
+.. option:: CONFIG_GPIO_MCUX_PORTD:
+.. _CONFIG_GPIO_MCUX_PORTD:
+
+Enable Port D.
+
+
+
+:Symbol:           GPIO_MCUX_PORTD
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Port D" if PINMUX_MCUX_PORTD (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: PINMUX_MCUX_PORTD (value: "n")
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ GPIO_MCUX && BOARD_HEXIWEAR_K64 (value: "n")
+:Locations:
+ * ../drivers/gpio/Kconfig.mcux:69
+ * ../boards/arm/frdm_k64f/Kconfig.defconfig:81
+ * ../boards/arm/hexiwear_k64/Kconfig.defconfig:81

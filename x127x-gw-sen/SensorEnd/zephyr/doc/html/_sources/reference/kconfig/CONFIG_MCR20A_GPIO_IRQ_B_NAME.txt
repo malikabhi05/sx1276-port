@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: MCR20A_GPIO_IRQ_B_NAME
+
+.. option:: CONFIG_MCR20A_GPIO_IRQ_B_NAME:
+.. _CONFIG_MCR20A_GPIO_IRQ_B_NAME:
+
+The configuration item CONFIG_MCR20A_GPIO_IRQ_B_NAME:
+
+:Symbol:           MCR20A_GPIO_IRQ_B_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "GPIO device used for IRQ_B output of MCR20A"
+:Default values:
+
+ *  GPIO_MCUX_PORTB_NAME (value: "")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ IEEE802154_MCR20A || IEEE802154_MCR20A_RAW (value: "n")
+:Locations:
+ * ../drivers/ieee802154/Kconfig.mcr20a:51

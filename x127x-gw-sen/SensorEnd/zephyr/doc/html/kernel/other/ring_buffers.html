@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Ring Buffers &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Other Services" href="other.html"/>
+        <link rel="next" title="Floating Point Services" href="float.html"/>
+        <link rel="prev" title="Polling API" href="polling.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../kernel.html">Zephyr Kernel Primer (version 2)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../threads/threads.html">Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../timing/timing.html">Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/memory.html">Memory Allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synchronization/synchronization.html">Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_passing/data_passing.html">Data Passing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="other.html">Other Services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="interrupts.html">Interrupts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic.html">Atomic Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polling.html">Polling API</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Ring Buffers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="float.html">Floating Point Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cxx_support.html">C++ Support for Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu_idle.html">CPU Idling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../kernel.html">Zephyr Kernel Primer (version 2)</a> &raquo;</li>
+        
+          <li><a href="other.html">Other Services</a> &raquo;</li>
+        
+      <li>Ring Buffers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/kernel/other/ring_buffers.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ring-buffers">
+<span id="ring-buffers-v2"></span><h1>Ring Buffers<a class="headerlink" href="#ring-buffers" title="Permalink to this headline">¶</a></h1>
+<p>A <em class="dfn">ring buffer</em> is a circular buffer of 32-bit words, whose contents
+are stored in first-in-first-out order. Data items can be enqueued and dequeued
+from a ring buffer in chunks of up to 1020 bytes. Each data item also has
+two associated metadata values: a type identifier and a 16-bit integer value,
+both of which are application-specific.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#concepts" id="id1">Concepts</a><ul>
+<li><a class="reference internal" href="#concurrency" id="id2">Concurrency</a></li>
+<li><a class="reference internal" href="#internal-operation" id="id3">Internal Operation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation" id="id4">Implementation</a><ul>
+<li><a class="reference internal" href="#defining-a-ring-buffer" id="id5">Defining a Ring Buffer</a></li>
+<li><a class="reference internal" href="#enqueuing-data" id="id6">Enqueuing Data</a></li>
+<li><a class="reference internal" href="#retrieving-data" id="id7">Retrieving Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#apis" id="id8">APIs</a></li>
+</ul>
+</div>
+<div class="section" id="concepts">
+<h2><a class="toc-backref" href="#id1">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>Any number of ring buffers can be defined. Each ring buffer is referenced
+by its memory address.</p>
+<p>A ring buffer has the following key properties:</p>
+<ul class="simple">
+<li>A <strong>data buffer</strong> of 32-bit words. The data buffer contains the data items
+that have been added to the ring buffer but not yet removed.</li>
+<li>A <strong>data buffer size</strong>, measured in 32-bit words. This governs the maximum
+amount of data (including metadata values) the ring buffer can hold.</li>
+</ul>
+<p>A ring buffer must be initialized before it can be used. This sets its
+data buffer to empty.</p>
+<p>A ring buffer <strong>data item</strong> is an array of 32-bit words from 0 to 1020 bytes
+in length. When a data item is <strong>enqueued</strong> its contents are copied
+to the data buffer, along with its associated metadata values (which occupy
+one additional 32-bit word).
+If the ring buffer has insufficient space to hold the new data item
+the enqueue operation fails.</p>
+<p>A data items is <strong>dequeued</strong> from a ring buffer by removing the oldest
+enqueued item. The contents of the dequeued data item, as well as its
+two metadata values, are copied to areas supplied by the retriever.
+If the ring buffer is empty, or if the data array supplied by the retriever
+is not large enough to hold the data item&#8217;s data, the dequeue operation fails.</p>
+<div class="section" id="concurrency">
+<h3><a class="toc-backref" href="#id2">Concurrency</a><a class="headerlink" href="#concurrency" title="Permalink to this headline">¶</a></h3>
+<p>The ring buffer APIs do not provide any concurrency control.
+Depending on usage (particularly with respect to number of concurrent
+readers/writers) applications may need to protect the ring buffer with
+mutexes and/or use semaphores to notify consumers that there is data to
+read.</p>
+<p>For the trivial case of one producer and one consumer, concurrency
+shouldn&#8217;t be needed.</p>
+</div>
+<div class="section" id="internal-operation">
+<h3><a class="toc-backref" href="#id3">Internal Operation</a><a class="headerlink" href="#internal-operation" title="Permalink to this headline">¶</a></h3>
+<p>The ring buffer always maintains an empty 32-bit word in its data buffer
+to allow it to distinguish between empty and full states.</p>
+<p>If the size of the data buffer is a power of two, the ring buffer
+uses efficient masking operations instead of expensive modulo operations
+when enqueuing and dequeuing data items.</p>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2><a class="toc-backref" href="#id4">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="defining-a-ring-buffer">
+<h3><a class="toc-backref" href="#id5">Defining a Ring Buffer</a><a class="headerlink" href="#defining-a-ring-buffer" title="Permalink to this headline">¶</a></h3>
+<p>A ring buffer is defined using a variable of type <code class="xref c c-type docutils literal"><span class="pre">struct</span> <span class="pre">ring_buf</span></code>.
+It must then be initialized by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv217sys_ring_buf_initP8ring_buf8uint32_tP8uint32_t" title="sys_ring_buf_init"><code class="xref cpp cpp-func docutils literal"><span class="pre">sys_ring_buf_init()</span></code></a>.</p>
+<p>The following code defines and initializes an empty ring buffer
+(which is part of a larger data structure). The ring buffer&#8217;s data buffer
+is capable of holding 64 words of data and metadata information.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#define MY_RING_BUF_SIZE 64</span>
+
+<span class="k">struct</span> <span class="n">my_struct</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">ring_buf</span> <span class="n">rb</span><span class="p">;</span>
+    <span class="kt">uint32_t</span> <span class="n">buffer</span><span class="p">[</span><span class="n">MY_RING_BUF_SIZE</span><span class="p">];</span>
+    <span class="p">...</span>
+<span class="p">};</span>
+<span class="k">struct</span> <span class="n">my_struct</span> <span class="n">ms</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">init_my_struct</span> <span class="p">{</span>
+    <span class="n">sys_ring_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ms</span><span class="p">.</span><span class="n">rb</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ms</span><span class="p">.</span><span class="n">buffer</span><span class="p">),</span> <span class="n">ms</span><span class="p">.</span><span class="n">buffer</span><span class="p">);</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Alternatively, a ring buffer can be defined and initialized at compile time
+using one of two macros at file scope. Each macro defines both the ring
+buffer itself and its data buffer.</p>
+<p>The following code defines a ring buffer with a power-of-two sized data buffer,
+which can be accessed using efficient masking operations.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cm">/* Buffer with 2^8 (or 256) words */</span>
+<span class="n">SYS_RING_BUF_DECLARE_POW2</span><span class="p">(</span><span class="n">my_ring_buf</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The following code defines a ring buffer with an arbitrary-sized data buffer,
+which can be accessed using less efficient modulo operations.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#define MY_RING_BUF_WORDS 93</span>
+<span class="n">SYS_RING_BUF_DECLARE_SIZE</span><span class="p">(</span><span class="n">my_ring_buf</span><span class="p">,</span> <span class="n">MY_RING_BUF_WORDS</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="enqueuing-data">
+<h3><a class="toc-backref" href="#id6">Enqueuing Data</a><a class="headerlink" href="#enqueuing-data" title="Permalink to this headline">¶</a></h3>
+<p>A data item is added to a ring buffer by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv216sys_ring_buf_putP8ring_buf8uint16_t7uint8_tP8uint32_t7uint8_t" title="sys_ring_buf_put"><code class="xref cpp cpp-func docutils literal"><span class="pre">sys_ring_buf_put()</span></code></a>.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span> <span class="n">my_data</span><span class="p">[</span><span class="n">MY_DATA_WORDS</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+
+<span class="n">ret</span> <span class="o">=</span> <span class="n">sys_ring_buf_put</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ring_buf</span><span class="p">,</span> <span class="n">TYPE_FOO</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">my_data</span><span class="p">,</span> <span class="n">SIZE32_OF</span><span class="p">(</span><span class="n">my_data</span><span class="p">));</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="n">EMSGSIZE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* not enough room for the data item */</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the data item requires only the type or application-specific integer value
+(i.e. it has no data array), a size of 0 and data pointer of <code class="xref c c-macro docutils literal"><span class="pre">NULL</span></code>
+can be specified.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+
+<span class="n">ret</span> <span class="o">=</span> <span class="n">sys_ring_buf_put</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ring_buf</span><span class="p">,</span> <span class="n">TYPE_BAR</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="n">EMSGSIZE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* not enough room for the data item */</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="retrieving-data">
+<h3><a class="toc-backref" href="#id7">Retrieving Data</a><a class="headerlink" href="#retrieving-data" title="Permalink to this headline">¶</a></h3>
+<p>A data item is removed from a ring buffer by calling
+<a class="reference internal" href="../../api/kernel_api.html#_CPPv216sys_ring_buf_getP8ring_bufP8uint16_tP7uint8_tP8uint32_tP7uint8_t" title="sys_ring_buf_get"><code class="xref cpp cpp-func docutils literal"><span class="pre">sys_ring_buf_get()</span></code></a>.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span> <span class="n">my_data</span><span class="p">[</span><span class="n">MY_DATA_WORDS</span><span class="p">];</span>
+<span class="kt">uint16_t</span> <span class="n">my_type</span><span class="p">;</span>
+<span class="kt">uint8_t</span>  <span class="n">my_value</span><span class="p">;</span>
+<span class="kt">uint8_t</span>  <span class="n">my_size</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+
+<span class="n">my_size</span> <span class="o">=</span> <span class="n">SIZE32_OF</span><span class="p">(</span><span class="n">my_data</span><span class="p">);</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">sys_ring_buf_get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ring_buf</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_type</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_value</span><span class="p">,</span> <span class="n">my_data</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_size</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="n">EMSGSIZE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">&quot;Buffer is too small, need %d uint32_t</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">my_size</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="n">EAGAIN</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">&quot;Ring buffer is empty</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">&quot;Got item of type %u value &amp;u of size %u dwords</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+           <span class="n">my_type</span><span class="p">,</span> <span class="n">my_value</span><span class="p">,</span> <span class="n">my_size</span><span class="p">);</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="apis">
+<h2><a class="toc-backref" href="#id8">APIs</a><a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>The following ring buffer APIs are provided by <code class="file docutils literal"><span class="pre">misc/ring_buffer.h</span></code>:</p>
+<ul class="simple">
+<li><code class="xref cpp cpp-func docutils literal"><span class="pre">SYS_RING_BUF_DECLARE_POW2()</span></code></li>
+<li><code class="xref cpp cpp-func docutils literal"><span class="pre">SYS_RING_BUF_DECLARE_SIZE()</span></code></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv217sys_ring_buf_initP8ring_buf8uint32_tP8uint32_t" title="sys_ring_buf_init"><code class="xref cpp cpp-func docutils literal"><span class="pre">sys_ring_buf_init()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv221sys_ring_buf_is_emptyP8ring_buf" title="sys_ring_buf_is_empty"><code class="xref cpp cpp-func docutils literal"><span class="pre">sys_ring_buf_is_empty()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv222sys_ring_buf_space_getP8ring_buf" title="sys_ring_buf_space_get"><code class="xref cpp cpp-func docutils literal"><span class="pre">sys_ring_buf_space_get()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv216sys_ring_buf_putP8ring_buf8uint16_t7uint8_tP8uint32_t7uint8_t" title="sys_ring_buf_put"><code class="xref cpp cpp-func docutils literal"><span class="pre">sys_ring_buf_put()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv216sys_ring_buf_getP8ring_bufP8uint16_tP7uint8_tP8uint32_tP7uint8_t" title="sys_ring_buf_get"><code class="xref cpp cpp-func docutils literal"><span class="pre">sys_ring_buf_get()</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="float.html" class="btn btn-neutral float-right" title="Floating Point Services" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="polling.html" class="btn btn-neutral" title="Polling API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

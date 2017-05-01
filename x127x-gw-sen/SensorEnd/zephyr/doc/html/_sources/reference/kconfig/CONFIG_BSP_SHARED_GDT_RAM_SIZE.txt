@@ -1,0 +1,40 @@
+:orphan:
+
+.. title:: BSP_SHARED_GDT_RAM_SIZE
+
+.. option:: CONFIG_BSP_SHARED_GDT_RAM_SIZE:
+.. _CONFIG_BSP_SHARED_GDT_RAM_SIZE:
+
+Size of the memory shared between the BSP and the Bootloader in order
+to store the GDT.
+
+
+
+:Symbol:           BSP_SHARED_GDT_RAM_SIZE
+:Type:             hex
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Size of the shared RAM with the QMSI Bootloader" if !SET_GDT (value: "n")
+ *  "Size of the GDT in RAM shared with the QMSI Bootloader"
+:Default values:
+
+ *  0x20 (value: "n")
+ *   Condition: !SET_GDT (value: "n")
+ *  0x20 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ X86 && SOC_QUARK_SE_C1000 && X86 (value: "n")
+:Locations:
+ * ../arch/x86/soc/intel_quark/quark_d2000/Kconfig:28
+ * ../arch/x86/soc/intel_quark/quark_se/Kconfig:99

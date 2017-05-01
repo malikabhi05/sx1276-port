@@ -1,0 +1,40 @@
+:orphan:
+
+.. title:: NET_L2_IEEE802154_ACK_SET
+
+.. option:: CONFIG_NET_L2_IEEE802154_ACK_SET:
+.. _CONFIG_NET_L2_IEEE802154_ACK_SET:
+
+Enable a network management request to let upper layers to force
+requesting a ACK on any DATA frames. Such setting can be found
+useful if one needs to send a buffer "reliably". Note however, this
+becomes utterly useless if application protocol already handles
+reliability like TCP.
+
+
+
+:Symbol:           NET_L2_IEEE802154_ACK_SET
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Expose ACK request setting" if NET_L2_IEEE802154_ORFD (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: NET_L2_IEEE802154_ORFD (value: "n")
+:Selects:
+
+ *  :option:`CONFIG_NET_L2_IEEE802154_MGMT` if NET_L2_IEEE802154_ORFD (value: "n")
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_L2_IEEE802154 (value: "n")
+:Locations:
+ * ../subsys/net/ip/l2/ieee802154/Kconfig:71

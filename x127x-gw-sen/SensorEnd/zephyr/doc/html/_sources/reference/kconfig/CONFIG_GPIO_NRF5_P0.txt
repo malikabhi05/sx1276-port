@@ -1,0 +1,62 @@
+:orphan:
+
+.. title:: GPIO_NRF5_P0
+
+.. option:: CONFIG_GPIO_NRF5_P0:
+.. _CONFIG_GPIO_NRF5_P0:
+
+Enable nRF5 GPIO port P0 config options.
+
+
+
+:Symbol:           GPIO_NRF5_P0
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "nRF5x GPIO Port P0 options"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ GPIO_NRF5 && BOARD_NRF52_PCA10040 (value: "n")
+:Locations:
+ * ../drivers/gpio/Kconfig.nrf5:17
+ * ../boards/arm/bbc_microbit/Kconfig.defconfig:14
+ * ../boards/arm/quark_se_c1000_ble/Kconfig.defconfig:20
+ * ../boards/arm/nrf51_blenano/Kconfig.defconfig:14
+ * ../boards/arm/96b_nitrogen/Kconfig.defconfig:14
+ * ../boards/arm/nrf51_pca10028/Kconfig.defconfig:14
+ * ../boards/arm/curie_ble/Kconfig.defconfig:20
+ * ../boards/arm/arduino_101_ble/Kconfig.defconfig:20
+ * ../boards/arm/nrf52840_pca10056/Kconfig.defconfig:14
+ * ../boards/arm/nrf52_pca10040/Kconfig.defconfig:14

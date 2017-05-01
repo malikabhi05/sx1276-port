@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: BLUETOOTH_CONTROLLER_CONN_RSSI
+
+.. option:: CONFIG_BLUETOOTH_CONTROLLER_CONN_RSSI:
+.. _CONFIG_BLUETOOTH_CONTROLLER_CONN_RSSI:
+
+Enable connection RSSI measurement.
+
+
+
+:Symbol:           BLUETOOTH_CONTROLLER_CONN_RSSI
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Connection RSSI"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BLUETOOTH_HCI && BLUETOOTH && BLUETOOTH_CONTROLLER && BLUETOOTH_CONTROLLER (value: "n")
+:Locations:
+ * ../subsys/bluetooth/controller/Kconfig:78

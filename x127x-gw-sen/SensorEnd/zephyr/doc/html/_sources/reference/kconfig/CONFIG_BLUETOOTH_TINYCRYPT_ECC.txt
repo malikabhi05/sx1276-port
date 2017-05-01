@@ -1,0 +1,42 @@
+:orphan:
+
+.. title:: BLUETOOTH_TINYCRYPT_ECC
+
+.. option:: CONFIG_BLUETOOTH_TINYCRYPT_ECC:
+.. _CONFIG_BLUETOOTH_TINYCRYPT_ECC:
+
+If this option is set TinyCrypt library is used for emulating the
+ECDH HCI commands and events needed by e.g. LE Secure Connections.
+In builds including the BLE Host, if not set the controller crypto is
+used for ECDH and if the controller doesn't support the required HCI
+commands the LE Secure Connections support will be disabled.
+In builds including the HCI Raw interface and the BLE Controller, this
+option injects support for the 2 HCI commands required for LE Secure
+Connections so that Hosts can make use of those.
+
+
+
+:Symbol:           BLUETOOTH_TINYCRYPT_ECC
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Use TinyCrypt library for ECDH" if BLUETOOTH_HCI_RAW || BLUETOOTH_HCI_HOST (value: "n")
+:Default values:
+ (no default values)
+:Selects:
+
+ *  :option:`CONFIG_TINYCRYPT` if BLUETOOTH_HCI_RAW || BLUETOOTH_HCI_HOST (value: "n")
+ *  :option:`CONFIG_TINYCRYPT_ECC_DH` if BLUETOOTH_HCI_RAW || BLUETOOTH_HCI_HOST (value: "n")
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BLUETOOTH_HCI && BLUETOOTH (value: "n")
+:Locations:
+ * ../subsys/bluetooth/host/Kconfig:248

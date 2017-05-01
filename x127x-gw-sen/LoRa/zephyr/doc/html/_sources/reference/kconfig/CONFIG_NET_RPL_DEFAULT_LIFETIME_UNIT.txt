@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: NET_RPL_DEFAULT_LIFETIME_UNIT
+
+.. option:: CONFIG_NET_RPL_DEFAULT_LIFETIME_UNIT:
+.. _CONFIG_NET_RPL_DEFAULT_LIFETIME_UNIT:
+
+This is the granularity of time used in RPL lifetime values,
+in seconds.
+
+
+
+:Symbol:           NET_RPL_DEFAULT_LIFETIME_UNIT
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Default route lifetime unit." if NET_RPL (value: "n")
+:Default values:
+
+ *  65535 (value: "n")
+ *   Condition: NET_RPL (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_RPL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.rpl:139

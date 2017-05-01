@@ -1,0 +1,39 @@
+:orphan:
+
+.. title:: NET_L2_IEEE802154_RADIO_TX_RETRIES
+
+.. option:: CONFIG_NET_L2_IEEE802154_RADIO_TX_RETRIES:
+.. _CONFIG_NET_L2_IEEE802154_RADIO_TX_RETRIES:
+
+Number of transmission attempts radio driver should do, before
+replying it could not send the packet.
+
+
+
+:Symbol:           NET_L2_IEEE802154_RADIO_TX_RETRIES
+:Type:             int
+:Value:            "1"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [1, 7]
+:Prompts:
+
+ *  "Radio Transmission attempts"
+:Default values:
+
+ *  3 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_L2_IEEE802154 (value: "n")
+:Locations:
+ * ../subsys/net/ip/l2/ieee802154/Kconfig.radio:9

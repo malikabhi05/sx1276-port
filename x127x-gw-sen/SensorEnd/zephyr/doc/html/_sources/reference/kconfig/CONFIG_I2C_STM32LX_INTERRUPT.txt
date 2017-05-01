@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: I2C_STM32LX_INTERRUPT
+
+.. option:: CONFIG_I2C_STM32LX_INTERRUPT:
+.. _CONFIG_I2C_STM32LX_INTERRUPT:
+
+Enable Interrupt support for the I2C Driver of STM32Lxx family.
+
+
+
+:Symbol:           I2C_STM32LX_INTERRUPT
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "STM32Lx MCU I2C Interrupt Support" if I2C_STM32LX (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: I2C_STM32LX (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../drivers/i2c/Kconfig:93

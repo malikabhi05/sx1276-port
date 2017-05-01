@@ -1,0 +1,41 @@
+:orphan:
+
+.. title:: NET_TCP_TIME_WAIT
+
+.. option:: CONFIG_NET_TCP_TIME_WAIT:
+.. _CONFIG_NET_TCP_TIME_WAIT:
+
+Officially, the TCP standard requires a 4 minute timeout on
+connection close before that particular port pair can be used
+again.  This requires that the net_context and net_tcp structs
+persist for the full duration, so has non-trivial memory costs
+and is optional.  Modern systems with well-randomized sequence
+numbers don't need this, but it is present for specification
+compliance where needed.
+
+
+
+:Symbol:           NET_TCP_TIME_WAIT
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable TCP TIME_WAIT timeouts"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:102

@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ARM Cortex-M3 Emulation (QEMU) &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../../../index.html"/>
+        <link rel="up" title="Supported Boards" href="../../../boards.html"/>
+        <link rel="next" title="SAM E70 Xplained" href="../../sam_e70_xplained/doc/sam_e70_xplained.html"/>
+        <link rel="prev" title="ST Nucleo L476RG" href="../../nucleo_l476rg/doc/nucleol476rg.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../boards.html">Supported Boards</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#x86-boards">X86 Boards</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../boards.html#arm-boards">ARM Boards</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../96b_carbon/doc/96b_carbon.html">96Boards Carbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../96b_nitrogen/doc/96b_nitrogen.html">96Boards Nitrogen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_101_ble/doc/board.html">Arduino/Genuino 101 (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_due/doc/board.html">Arduino Due</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cc3200_launchxl/doc/cc3200_launchxl.html">CC3200 LaunchXL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../curie_ble/doc/board.html">Curie (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_k64f/doc/frdm_k64f.html">NXP FRDM-K64F</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_kw41z/doc/frdm_kw41z.html">NXP FRDM-KW41Z</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hexiwear_k64/doc/hexiwear_k64.html">Hexiwear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mps2_an385/doc/mps2_an385.html">ARM V2M MPS2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf51_pca10028/doc/nrf51_pca10028.html">nRF51-PCA10028</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52840_pca10056/doc/nrf52840_pca10056.html">nRF52840-PCA10056</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52_pca10040/doc/nordic_segger.html">Nordic nRF5x Segger J-Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52_pca10040/doc/nrf52_pca10040.html">nRF52-PCA10040</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f401re/doc/nucleof401re.html">ST Nucleo F401RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f411re/doc/nucleof411re.html">ST Nucleo F411RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_l476rg/doc/nucleol476rg.html">ST Nucleo L476RG</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ARM Cortex-M3 Emulation (QEMU)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware">Hardware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../sam_e70_xplained/doc/sam_e70_xplained.html">SAM E70 Xplained</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../v2m_beetle/doc/v2m_beetle.html">ARM V2M Beetle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#arc-boards">ARC Boards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#nios-ii-boards">NIOS II Boards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../boards.html">Supported Boards</a> &raquo;</li>
+        
+      <li>ARM Cortex-M3 Emulation (QEMU)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/boards/arm/qemu_cortex_m3/doc/board.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="arm-cortex-m3-emulation-qemu">
+<span id="qemu-cortex-m3"></span><h1>ARM Cortex-M3 Emulation (QEMU)<a class="headerlink" href="#arm-cortex-m3-emulation-qemu" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Zephyr kernel uses the qemu_cortex_m3 board configuration to emulate the TI
+LM3S6965 platform running on QEMU. It provides support for an ARM Cortex-M3 CPU
+and the following devices:</p>
+<ul class="simple">
+<li>Nested Vectored Interrupt Controller</li>
+<li>System Tick System Clock</li>
+<li>Stellaris UART</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This board configuration makes no claims about its suitability for use
+with an actual ti_lm3s6965 hardware system, or any other hardware system.</p>
+</div>
+</div>
+<div class="section" id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="supported-features">
+<h3>Supported Features<a class="headerlink" href="#supported-features" title="Permalink to this headline">¶</a></h3>
+<p>The qemu_cortex_m3 board configuration supports the following hardware features:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="25%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Interface</th>
+<th class="head">Controller</th>
+<th class="head">Driver/Component</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>NVIC</td>
+<td>on-chip</td>
+<td>nested vectored
+interrupt controller</td>
+</tr>
+<tr class="row-odd"><td>Stellaris
+UART</td>
+<td>on-chip</td>
+<td>serial port</td>
+</tr>
+<tr class="row-even"><td>SYSTICK</td>
+<td>on-chip</td>
+<td>system clock</td>
+</tr>
+</tbody>
+</table>
+<p>The kernel currently does not support other hardware features on this platform.</p>
+</div>
+<div class="section" id="devices">
+<h3>Devices<a class="headerlink" href="#devices" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="system-clock">
+<h4>System Clock<a class="headerlink" href="#system-clock" title="Permalink to this headline">¶</a></h4>
+<p>The qemu_cortex_m3 board configuration uses a system clock frequency of 12 MHz.</p>
+</div>
+<div class="section" id="serial-port">
+<h4>Serial Port<a class="headerlink" href="#serial-port" title="Permalink to this headline">¶</a></h4>
+<p>The qemu_cortex_m3 board configuration uses a single serial communication
+channel with the CPU&#8217;s UART0.</p>
+</div>
+</div>
+<div class="section" id="known-problems-or-limitations">
+<h3>Known Problems or Limitations<a class="headerlink" href="#known-problems-or-limitations" title="Permalink to this headline">¶</a></h3>
+<p>The following platform features are unsupported:</p>
+<ul class="simple">
+<li>Memory protection through optional MPU.  However, using a XIP kernel
+effectively provides TEXT/RODATA write protection in ROM.</li>
+<li>SRAM at addresses 0x1FFF0000-0x1FFFFFFF</li>
+<li>Writing to the hardware&#8217;s flash memory</li>
+</ul>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>The Definitive Guide to the ARM Cortex-M3, Second Edition by Joseph Yiu (ISBN
+978-0-12-382090-7)</li>
+<li>ARMv7-M Architecture Technical Reference Manual (ARM DDI 0403D ID021310)</li>
+<li>Procedure Call Standard for the ARM Architecture (ARM IHI 0042E, current
+through ABI release 2.09, 2012/11/30)</li>
+<li>Cortex-M3 Revision r2p1 Technical Reference Manual (ARM DDI 0337I ID072410)</li>
+<li>Cortex-M3 Devices Generic User Guide (ARM DUI 0052A ID121610)</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../sam_e70_xplained/doc/sam_e70_xplained.html" class="btn btn-neutral float-right" title="SAM E70 Xplained" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../nucleo_l476rg/doc/nucleol476rg.html" class="btn btn-neutral" title="ST Nucleo L476RG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+:orphan:
+
+.. title:: NET_L2_RAW_CHANNEL
+
+.. option:: CONFIG_NET_L2_RAW_CHANNEL:
+.. _CONFIG_NET_L2_RAW_CHANNEL:
+
+The configuration item CONFIG_NET_L2_RAW_CHANNEL:
+
+:Symbol:           NET_L2_RAW_CHANNEL
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ IEEE802154_CC2520_RAW || IEEE802154_MCR20A_RAW && SPI (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:13

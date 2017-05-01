@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: TEST_EXTRA_STACKSIZE
+
+.. option:: CONFIG_TEST_EXTRA_STACKSIZE:
+.. _CONFIG_TEST_EXTRA_STACKSIZE:
+
+The configuration item CONFIG_TEST_EXTRA_STACKSIZE:
+
+:Symbol:           TEST_EXTRA_STACKSIZE
+:Type:             int
+:Value:            "0"
+:User value:       (no user value)
+:Visibility:       "y"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Test function thread stack size"
+:Default values:
+
+ *  0 (value: "n")
+ *   Condition: (none)
+ *  768 (value: "n")
+ *   Condition: XTENSA (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../tests/Kconfig:11

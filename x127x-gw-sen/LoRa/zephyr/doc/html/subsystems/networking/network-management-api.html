@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Network Management API &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Networking" href="networking.html"/>
+        <link rel="next" title="Network Buffers" href="buffers.html"/>
+        <link rel="prev" title="L2 Stack and Drivers" href="l2-and-drivers.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../subsystems.html">Subsystems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/bluetooth.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../c_library.html">Standard C Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="networking.html">Networking</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip-stack-migrate.html">Migrating from Zephyr v1.6 IP Stack to v1.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip-stack-architecture.html">IP Stack Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="networking-api-usage.html">Network Connectivity API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2-and-drivers.html">L2 Stack and Drivers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Network Management API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requesting-a-defined-procedure">Requesting a defined procedure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#listening-to-network-event">Listening to network event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-a-network-management-procedure">Defining a network management procedure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#signaling-a-network-event">Signaling a network event</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="buffers.html">Network Buffers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qemu_setup.html">Networking with Qemu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../power_management.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sensor.html">Sensor Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell.html">Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../test/ztest.html">Test Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usb/usb.html">USB device stack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../subsystems.html">Subsystems</a> &raquo;</li>
+        
+          <li><a href="networking.html">Networking</a> &raquo;</li>
+        
+      <li>Network Management API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/subsystems/networking/network-management-api.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="network-management-api">
+<span id="id1"></span><h1>Network Management API<a class="headerlink" href="#network-management-api" title="Permalink to this headline">¶</a></h1>
+<p>The Network Management APIs allow applications, as well as network
+layer code itself, to call defined network routines at any level in
+the IP stack, or receive notifications on relevant network events. For
+example, by using these APIs, code can request a scan be done on a
+WiFi- or Bluetooth-based network interface, or request notification if
+a network interface IP address changes.</p>
+<p>The Network Management API implementation is designed to save memory
+by eliminating code at build time for management routines that are not
+used. Distinct and statically defined APIs for network management
+procedures are not used.  Instead, defined procedure handlers are
+registered by using a <cite>NET_MGMT_REGISTER_REQUEST_HANDLER</cite>
+macro. Procedure requests are done through a single <cite>net_mgmt()</cite> API
+that invokes the registered handler for the corresponding request.</p>
+<p>The current implementation is experimental and may change and improve
+in future releases.</p>
+<div class="section" id="requesting-a-defined-procedure">
+<h2>Requesting a defined procedure<a class="headerlink" href="#requesting-a-defined-procedure" title="Permalink to this headline">¶</a></h2>
+<p>All network management requests are of the form
+<cite>net_mgmt(mgmt_request, ...)</cite>. The <cite>mgmt_request</cite> parameter is a bit
+mask that tells which stack layer is targeted, if a <cite>net_if</cite> object is
+implied, and the specific management procedure being requested. The
+available procedure requests depend on what has been implemented in
+the stack.</p>
+<p>To avoid extra cost, all <cite>net_mgmt()</cite> calls are direct. Though this
+may change in a future release, it will not affect the users of this
+function.</p>
+</div>
+<div class="section" id="listening-to-network-event">
+<h2>Listening to network event<a class="headerlink" href="#listening-to-network-event" title="Permalink to this headline">¶</a></h2>
+<p>You can receive notifications on network events by registering a
+callback function and specifying an event mask used to match one or
+more events that are relevant.</p>
+<p>Two functions are available, <cite>net_mgmt_add_event_callback()</cite> for
+registering the callback function, and <cite>net_mgmt_del_event_callback()</cite>
+for un-registering. A helper function, <cite>net_mgmt_init_event_cb()</cite>, can
+be used to ease the initialization of the callback structure.</p>
+<p>When an event is raised that matches a registered event mask, the
+associated callback function is invoked with the actual event
+code. This makes it possible for different events to be handled by the
+same callback function, if desired.</p>
+<p>See an example of registering callback functions and using the network
+management API in <cite>test/net/mgmt/src/mgmt.c</cite>.</p>
+</div>
+<div class="section" id="defining-a-network-management-procedure">
+<h2>Defining a network management procedure<a class="headerlink" href="#defining-a-network-management-procedure" title="Permalink to this headline">¶</a></h2>
+<p>You can provide additional management procedures specific to your
+stack implementation by defining a handler and registering it with an
+associated mgmt_request code.</p>
+<p>Management request code are defined in relevant places depending on
+the targeted layer or eventually, if l2 is the layer, on the
+technology as well. For instance, all IP layer management request code
+will be found in the <cite>include/net/net_mgmt.h</cite> header file. But in case
+of an L2 technology, let&#8217;s say Ethernet, these would be found in
+<cite>include/net/ethernet.h</cite></p>
+<p>You define your handler modelled with this signature:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">int</span> <span class="nf">your_handler</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">mgmt_event</span><span class="p">,</span> <span class="k">struct</span> <span class="n">net_if</span> <span class="o">*</span><span class="n">iface</span><span class="p">,</span>
+                        <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>and then register it with an associated mgmt_request code:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">NET_MGMT_REGISTER_REQUEST_HANDLER</span><span class="p">(</span><span class="o">&lt;</span><span class="n">mgmt_request</span> <span class="n">code</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">your_handler</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This new management procedure could then be called by using:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">net_mgmt</span><span class="p">(</span><span class="o">&lt;</span><span class="n">mgmt_request</span> <span class="n">code</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="signaling-a-network-event">
+<h2>Signaling a network event<a class="headerlink" href="#signaling-a-network-event" title="Permalink to this headline">¶</a></h2>
+<p>You can signal a specific network event using the <cite>net_mgmt_notify()</cite>
+function and provide the network event code. See
+<cite>include/net/net_mgmt.h</cite> for details. As for the management request
+code, event code can be also found on specific L2 technology headers,
+for example <cite>include/net/ieee802154.h</cite> would be the right place if
+802.15.4 L2 is the technology one wants to listen to events.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="buffers.html" class="btn btn-neutral float-right" title="Network Buffers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="l2-and-drivers.html" class="btn btn-neutral" title="L2 Stack and Drivers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

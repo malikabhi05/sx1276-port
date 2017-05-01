@@ -1,0 +1,34 @@
+:orphan:
+
+.. title:: NET_L2_IEEE802154_MGMT
+
+.. option:: CONFIG_NET_L2_IEEE802154_MGMT:
+.. _CONFIG_NET_L2_IEEE802154_MGMT:
+
+The configuration item CONFIG_NET_L2_IEEE802154_MGMT:
+
+:Symbol:           NET_L2_IEEE802154_MGMT
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_NET_MGMT`
+ *  :option:`CONFIG_NET_MGMT_EVENT`
+:Reverse (select-related) dependencies:
+ NETWORKING && NETWORKING && NET_L2_IEEE802154 && NET_L2_IEEE802154_RFD || NETWORKING && NETWORKING && NET_L2_IEEE802154 && NET_L2_IEEE802154_ORFD && NET_L2_IEEE802154_ACK_SET (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_L2_IEEE802154 (value: "n")
+:Locations:
+ * ../subsys/net/ip/l2/ieee802154/Kconfig:15

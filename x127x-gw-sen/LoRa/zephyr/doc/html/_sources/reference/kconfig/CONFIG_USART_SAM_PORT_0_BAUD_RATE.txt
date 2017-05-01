@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: USART_SAM_PORT_0_BAUD_RATE
+
+.. option:: CONFIG_USART_SAM_PORT_0_BAUD_RATE:
+.. _CONFIG_USART_SAM_PORT_0_BAUD_RATE:
+
+USART0 baud rate to be set at boot.
+
+
+
+:Symbol:           USART_SAM_PORT_0_BAUD_RATE
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "USART0 Baud Rate" if USART_SAM_PORT_0 (value: "n")
+:Default values:
+
+ *  115200 (value: "n")
+ *   Condition: USART_SAM_PORT_0 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SERIAL (value: "n")
+:Locations:
+ * ../drivers/serial/Kconfig.usart_sam:32

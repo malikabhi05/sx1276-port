@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: SOC_PART_NUMBER_KINETIS_KWX
+
+.. option:: CONFIG_SOC_PART_NUMBER_KINETIS_KWX:
+.. _CONFIG_SOC_PART_NUMBER_KINETIS_KWX:
+
+This string holds the full part number of the SoC. It is a hidden option
+that you should not set directly. The part number selection choice defines
+the default value for this string.
+
+
+
+:Symbol:           SOC_PART_NUMBER_KINETIS_KWX
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  "MKW41Z256VHT4"
+ *   Condition: SOC_PART_NUMBER_MKW41Z256VHT4 (value: "n")
+ *  "MKW41Z512VHT4"
+ *   Condition: SOC_PART_NUMBER_MKW41Z512VHT4 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_SERIES_KINETIS_KWX && ARM (value: "n")
+:Locations:
+ * ../arch/arm/soc/nxp_kinetis/kwx/Kconfig.soc:30

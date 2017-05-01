@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: STDOUT_CONSOLE
+
+.. option:: CONFIG_STDOUT_CONSOLE:
+.. _CONFIG_STDOUT_CONSOLE:
+
+This option directs standard output (e.g. printf) to the console
+device, rather than suppressing it entirely.
+
+
+
+:Symbol:           STDOUT_CONSOLE
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Send stdout to console" if CONSOLE_HAS_DRIVER (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: CONSOLE_HAS_DRIVER (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ NET_BUF_LOG && NET_BUF || NET_BUF_SIMPLE_LOG && NET_BUF_LOG (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../misc/Kconfig:151

@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: SOC_ATMEL_SAME70_DISABLE_ERASE_PIN
+
+.. option:: CONFIG_SOC_ATMEL_SAME70_DISABLE_ERASE_PIN:
+.. _CONFIG_SOC_ATMEL_SAME70_DISABLE_ERASE_PIN:
+
+At reset ERASE pin is configured in System IO mode. Asserting the ERASE
+pin at '1' will completely erase Flash memory. Setting this option will
+switch the pin to general IO mode giving control of the pin to the GPIO
+module.
+
+
+
+:Symbol:           SOC_ATMEL_SAME70_DISABLE_ERASE_PIN
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Disable ERASE pin"
+:Default values:
+
+ *  0 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_SERIES_SAME70 && ARM (value: "n")
+:Locations:
+ * ../arch/arm/soc/atmel_sam/same70/Kconfig.soc:123

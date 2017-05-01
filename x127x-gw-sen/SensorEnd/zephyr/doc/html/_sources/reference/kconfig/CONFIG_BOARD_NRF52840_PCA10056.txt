@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: BOARD_NRF52840_PCA10056
+
+.. option:: CONFIG_BOARD_NRF52840_PCA10056:
+.. _CONFIG_BOARD_NRF52840_PCA10056:
+
+The configuration item CONFIG_BOARD_NRF52840_PCA10056:
+
+:Symbol:           BOARD_NRF52840_PCA10056
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "NRF52840 PCA10056" if SOC_NRF52840 (value: "n")
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../boards/arm/nrf52840_pca10056/Kconfig.board:7

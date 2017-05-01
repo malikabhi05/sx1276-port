@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CC3200 LaunchXL &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../../../index.html"/>
+        <link rel="up" title="Supported Boards" href="../../../boards.html"/>
+        <link rel="next" title="Curie (BLE)" href="../../curie_ble/doc/board.html"/>
+        <link rel="prev" title="Arduino Due" href="../../arduino_due/doc/board.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../boards.html">Supported Boards</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#x86-boards">X86 Boards</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../boards.html#arm-boards">ARM Boards</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../96b_carbon/doc/96b_carbon.html">96Boards Carbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../96b_nitrogen/doc/96b_nitrogen.html">96Boards Nitrogen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_101_ble/doc/board.html">Arduino/Genuino 101 (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_due/doc/board.html">Arduino Due</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CC3200 LaunchXL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware">Hardware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#programming-and-debugging">Programming and Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../curie_ble/doc/board.html">Curie (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_k64f/doc/frdm_k64f.html">NXP FRDM-K64F</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_kw41z/doc/frdm_kw41z.html">NXP FRDM-KW41Z</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hexiwear_k64/doc/hexiwear_k64.html">Hexiwear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mps2_an385/doc/mps2_an385.html">ARM V2M MPS2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf51_pca10028/doc/nrf51_pca10028.html">nRF51-PCA10028</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52840_pca10056/doc/nrf52840_pca10056.html">nRF52840-PCA10056</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52_pca10040/doc/nordic_segger.html">Nordic nRF5x Segger J-Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52_pca10040/doc/nrf52_pca10040.html">nRF52-PCA10040</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f401re/doc/nucleof401re.html">ST Nucleo F401RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f411re/doc/nucleof411re.html">ST Nucleo F411RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_l476rg/doc/nucleol476rg.html">ST Nucleo L476RG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../qemu_cortex_m3/doc/board.html">ARM Cortex-M3 Emulation (QEMU)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sam_e70_xplained/doc/sam_e70_xplained.html">SAM E70 Xplained</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../v2m_beetle/doc/v2m_beetle.html">ARM V2M Beetle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#arc-boards">ARC Boards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#nios-ii-boards">NIOS II Boards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../boards.html">Supported Boards</a> &raquo;</li>
+        
+      <li>CC3200 LaunchXL</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/boards/arm/cc3200_launchxl/doc/cc3200_launchxl.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cc3200-launchxl">
+<span id="id1"></span><h1>CC3200 LaunchXL<a class="headerlink" href="#cc3200-launchxl" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The SimpleLink CC3200 LaunchXL is a development board for the CC3200
+wireless microcontroller (MCU), the industry’s first single-chip
+programmable MCU with built-in Wi-Fi connectivity.</p>
+<div class="section" id="features">
+<h3>Features:<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>SimpleLink Wi-Fi, internet-on-a-chip solution with integrated MCU</li>
+<li>40-pin LaunchPad standard that leverages the BoosterPack ecosystem</li>
+<li>FTDI based JTAG emulation with serial port for Flash programming</li>
+<li>On-board accelerometer and temperature sensor</li>
+<li>Two buttons and three LEDs for user interaction</li>
+<li>UART through USB to PC</li>
+<li>Power from USB for the LaunchPad and optional external BoosterPack</li>
+<li>GNU Debugger (GDB) support over Open On chip debugger (OpenOCD)</li>
+</ul>
+<p>Details on the CC3200 LaunchXL development board can be found in the
+<a class="reference external" href="http://www.ti.com/lit/pdf/swru372">CC3200 LaunchXL User&#8217;s Guide</a>.</p>
+</div>
+</div>
+<div class="section" id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
+<p>The CC3200 SoC has two MCUs:</p>
+<ol class="arabic simple">
+<li>Applications MCU - an ARM® Cortex®-M4 Core at 80 MHz, with 256Kb RAM,
+and access to external serial 1Mb flash with bootloader and peripheral
+drivers in ROM.</li>
+<li>Network Coprocessor (NWP) - a dedicated ARM MCU, which completely
+offloads Wi-Fi and internet protocols from the application MCU.</li>
+</ol>
+<p>Complete details of the CC3200 SoC can be found in the <a class="reference external" href="http://www.ti.com/lit/pdf/swru367">CC3200 TRM</a>.</p>
+<div class="section" id="supported-features">
+<h3>Supported Features<a class="headerlink" href="#supported-features" title="Permalink to this headline">¶</a></h3>
+<p>Zephyr has been ported to the Applications MCU, with basic peripheral
+driver support.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="26%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Interface</th>
+<th class="head">Controller</th>
+<th class="head">Driver/Component</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>UART</td>
+<td>on-chip</td>
+<td>serial port-interrupt</td>
+</tr>
+<tr class="row-odd"><td>GPIO</td>
+<td>on-chip</td>
+<td>gpio</td>
+</tr>
+</tbody>
+</table>
+<p>The accelerometer, temperature sensors, WiFi, or other perhipherals
+accessible through the BoosterPack, are not currently supported by
+this Zephyr port.</p>
+</div>
+<div class="section" id="connections-and-ios">
+<h3>Connections and IOs<a class="headerlink" href="#connections-and-ios" title="Permalink to this headline">¶</a></h3>
+<p>Peripherals on the CC3200 LaunchXL are mapped to the following pins in
+the file <code class="file docutils literal"><span class="pre">boards/arm/cc3200_launchxl/pinmux.c</span></code>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="27%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Function</th>
+<th class="head">PIN</th>
+<th class="head">GPIO</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>UART0_TX</td>
+<td>55</td>
+<td>N/A</td>
+</tr>
+<tr class="row-odd"><td>UART0_RX</td>
+<td>57</td>
+<td>N/A</td>
+</tr>
+<tr class="row-even"><td>LED D7 (R)</td>
+<td>64</td>
+<td>9</td>
+</tr>
+<tr class="row-odd"><td>LED D6 (O)</td>
+<td>01</td>
+<td>10</td>
+</tr>
+<tr class="row-even"><td>LED D5 (G)</td>
+<td>02</td>
+<td>11</td>
+</tr>
+<tr class="row-odd"><td>Switch SW2</td>
+<td>15</td>
+<td>22</td>
+</tr>
+<tr class="row-even"><td>Switch SW3</td>
+<td>04</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+<p>The default configuration can be found in the Kconfig file at
+<code class="file docutils literal"><span class="pre">boards/arm/cc3200_launchxl/cc3200_launchxl_defconfig</span></code>.</p>
+</div>
+</div>
+<div class="section" id="programming-and-debugging">
+<h2>Programming and Debugging<a class="headerlink" href="#programming-and-debugging" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build">
+<h3>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
+<p>Follow the <a class="reference internal" href="../../../../getting_started/getting_started.html#getting-started"><span class="std std-ref">Getting Started Guide</span></a> instructions for Zephyr application
+development.</p>
+<p>To build for the CC3200 LaunchXL:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> make <span class="nv">BOARD</span><span class="o">=</span>cc3200_launchxl
+</pre></div>
+</div>
+<p>This will produce both a zephyr.elf  (for GDB debugging) and a
+zephyr.bin file (for flashing) in the outdir/cc3200_launchxl/
+subdirectory.</p>
+</div>
+<div class="section" id="ftdi-usb-setup">
+<h3>FTDI USB Setup<a class="headerlink" href="#ftdi-usb-setup" title="Permalink to this headline">¶</a></h3>
+<p>The CC3200 LaunchXL has onboard FTDI based JTAG emulation with serial
+port for Flash programming.</p>
+<p>Under Linux, plugging the CC3200 USB cable into the PC should result in
+a new USB device showing up at /dev/ttyUSB1.  If not, it may be
+necessary to create a udev rule to load the FTDI Linux driver for the
+TI vendor and product ID.  For example:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> cat /etc/udev/rules.d/98-usbftdi.rules
+<span class="go">SUBSYSTEM==&quot;usb&quot;, ATTRS{idVendor}==&quot;0451&quot;, ATTRS{idProduct}==&quot;c32a&quot;, MODE=&quot;0660&quot;, GROUP=&quot;dialout&quot;, RUN+=&quot;/sbin/modprobe ftdi-sio&quot; RUN+=&quot;/bin/sh -c &#39;/bin/echo 0451 c32a &gt; /sys/bus/usb-serial/drivers/ftdi_sio/new_id&#39;&quot;</span>
+</pre></div>
+</div>
+<p>To ensure access to the usb ftdi device without having to be root, add
+yourself to the dialout group:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> sudo usermod -a -G dialout &lt;username&gt;
+</pre></div>
+</div>
+<p>Once the USB cable is connected to your host PC running Linux, one
+should see something like:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> dmesg -t
+<span class="go">usb 1-2: new full-speed USB device number 32 using ohci-pci</span>
+<span class="go">usb 1-2: New USB device found, idVendor=0451, idProduct=c32a</span>
+<span class="go">usb 1-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3</span>
+<span class="go">usb 1-2: Product: USB &lt;-&gt; JTAG/SWD</span>
+<span class="go">usb 1-2: Manufacturer: FTDI</span>
+<span class="go">usb 1-2: SerialNumber: cc3101</span>
+<span class="go">ftdi_sio 1-2:1.0: FTDI USB Serial Device converter detected</span>
+<span class="go">usb 1-2: Detected FT2232C</span>
+<span class="go">usb 1-2: Number of endpoints 2</span>
+<span class="go">usb 1-2: Endpoint 1 MaxPacketSize 64</span>
+<span class="go">usb 1-2: Endpoint 2 MaxPacketSize 64</span>
+<span class="go">usb 1-2: Setting MaxPacketSize 64</span>
+<span class="go">usb 1-2: FTDI USB Serial Device converter now attached to ttyUSB0</span>
+<span class="go">ftdi_sio 1-2:1.1: FTDI USB Serial Device converter detected</span>
+<span class="go">usb 1-2: Detected FT2232C</span>
+<span class="go">usb 1-2: Number of endpoints 2</span>
+<span class="go">usb 1-2: Endpoint 1 MaxPacketSize 64</span>
+<span class="go">usb 1-2: Endpoint 2 MaxPacketSize 64</span>
+<span class="go">usb 1-2: Setting MaxPacketSize 64</span>
+<span class="go">usb 1-2: FTDI USB Serial Device converter now attached to ttyUSB1</span>
+<span class="go">ftdi_sio ttyUSB0: failed to get modem status: -110</span>
+
+<span class="gp">%</span> ls -l /dev/ttyUSB1
+<span class="go">crw-rw---- 1 root dialout  /dev/ttyUSB1</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The ttyUSB1 device is used for UART0 output.  ttyUSB0 is not used.</p>
+</div>
+</div>
+<div class="section" id="flashing">
+<h3>Flashing<a class="headerlink" href="#flashing" title="Permalink to this headline">¶</a></h3>
+<p>The CC3200 has no integrated internal flash, but has 1Mb external serial
+flash for storing program images and other files.  Upon reset, the TI
+bootloader copies the program from serial flash into RAM, and then
+transfers control to the program.</p>
+<p>The <a class="reference external" href="http://www.ti.com/lit/pdf/swru369">CC3200 Programmer&#8217;s Guide</a> provides instructions for development
+using the <a class="reference external" href="http://www.ti.com/tool/cc3200sdk">CC3200 SDK</a> with Windows platforms, including how to flash
+the zephyr.bin binary onto the board.</p>
+<div class="section" id="for-windows">
+<h4>For Windows:<a class="headerlink" href="#for-windows" title="Permalink to this headline">¶</a></h4>
+<p>See Section 5.4 of the <a class="reference external" href="http://www.ti.com/lit/pdf/swru369">CC3200 Programmer&#8217;s Guide</a>; or, follow the
+directions per the <a class="reference external" href="http://processors.wiki.ti.com/index.php/CC31xx_%26_CC32xx_UniFlash_Quick_Start_Guide">UniFlash Quick Start Guide</a>. Please be sure to use
+UniFlash version 3.4.1.</p>
+</div>
+<div class="section" id="for-linux">
+<h4>For Linux:<a class="headerlink" href="#for-linux" title="Permalink to this headline">¶</a></h4>
+<p>An option for flashing the CC3200 LaunchXL on Linux is the
+<a class="reference external" href="https://github.com/ALLTERCO/cc3200tool">cc3200tool</a>.  See the README there for build/install/usage.</p>
+<p>The following command has been known to work:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> cc3200tool -p /dev/ttyUSB1 --reset prompt write_file zephyr.bin
+<span class="go">/sys/mcuimg.bin</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need to manually insert a jumper on SOP2 (J15) for
+flashing and remove the jumper for execution.</p>
+</div>
+</div>
+</div>
+<div class="section" id="debugging">
+<h3>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="http://www.ti.com/tool/cc3200sdk">CC3200 SDK</a> supports debugging using GDB (for ARM) over OpenOCD,
+and includes the necessary OpenOCD CFG and sample gdbinit scripts.</p>
+<p>See Section 5.3.3.5 of the <a class="reference external" href="http://www.ti.com/lit/pdf/swru369">CC3200 Programmer&#8217;s Guide</a>.</p>
+<p>To see program output from UART0, one can execute in a separate terminal
+window:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> screen /dev/ttyUSB1 <span class="m">115200</span> 8N1
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The bootloader takes the first 16Kb of the 256Kb RAM, so the
+Zephyr application starts at 0x20004000.  The Zephyr CC3200
+configuration thus sets the max SRAM size to 240Kb.</p>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>CC32xx Wiki:</dt>
+<dd><a class="reference external" href="http://processors.wiki.ti.com/index.php/CC31xx_%26_CC32xx">http://processors.wiki.ti.com/index.php/CC31xx_%26_CC32xx</a></dd>
+<dt>TI CC3200 Product Page:</dt>
+<dd><a class="reference external" href="http://www.ti.com/product/cc3200">http://www.ti.com/product/cc3200</a></dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../curie_ble/doc/board.html" class="btn btn-neutral float-right" title="Curie (BLE)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../arduino_due/doc/board.html" class="btn btn-neutral" title="Arduino Due" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

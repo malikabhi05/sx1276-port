@@ -1,0 +1,34 @@
+:orphan:
+
+.. title:: DISK_FLASH_DEV_NAME
+
+.. option:: CONFIG_DISK_FLASH_DEV_NAME:
+.. _CONFIG_DISK_FLASH_DEV_NAME:
+
+The configuration item CONFIG_DISK_FLASH_DEV_NAME:
+
+:Symbol:           DISK_FLASH_DEV_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Flash device name to be used as storage backend"
+:Default values:
+
+ *  SPI_FLASH_W25QXXDV_DRV_NAME (value: "")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ FLASH && SPI && BOARD_ARDUINO_101 && SPI_FLASH_W25QXXDV && DISK_ACCESS_FLASH (value: "n")
+:Locations:
+ * ../subsys/disk/Kconfig:37
+ * ../boards/x86/arduino_101/Kconfig.defconfig:72

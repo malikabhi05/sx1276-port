@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: ATAES132A_DRV_NAME
+
+.. option:: CONFIG_ATAES132A_DRV_NAME:
+.. _CONFIG_ATAES132A_DRV_NAME:
+
+Name for the ATAES132A driver wich will be used for binding.
+
+
+
+:Symbol:           ATAES132A_DRV_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Driver's name" if ATAES132A (value: "n")
+:Default values:
+
+ *  "ataes132a"
+ *   Condition: ATAES132A (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ CRYPTO (value: "n")
+:Locations:
+ * ../drivers/crypto/Kconfig.ataes132a:9

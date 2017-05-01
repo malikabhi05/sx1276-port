@@ -1,0 +1,47 @@
+:orphan:
+
+.. title:: FLOAT
+
+.. option:: CONFIG_FLOAT:
+.. _CONFIG_FLOAT:
+
+This option allows threads to use the x87 FPU/MMX registers. The
+registers may be used by any number of cooperative threads or by
+a single preemptible thread, but not both, since the kernel does not
+preserve FPU context information when switching between threads.
+Additional options must be enabled to permit the use of SSE registers or
+to permit floating point register use by multiple preemptible threads.
+
+Disabling this option means that any thread that uses the floating
+point registers will get a fatal exception.
+
+
+
+:Symbol:           FLOAT
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Floating point registers"
+ *  "Floating point registers"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ CPU_HAS_FPU && X86 (value: "n")
+:Locations:
+ * ../arch/arm/core/Kconfig:44
+ * ../arch/x86/Kconfig:76

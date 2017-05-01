@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: NET_DEBUG_L2_IEEE802154_FRAGMENT
+
+.. option:: CONFIG_NET_DEBUG_L2_IEEE802154_FRAGMENT:
+.. _CONFIG_NET_DEBUG_L2_IEEE802154_FRAGMENT:
+
+The configuration item CONFIG_NET_DEBUG_L2_IEEE802154_FRAGMENT:
+
+:Symbol:           NET_DEBUG_L2_IEEE802154_FRAGMENT
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable debug support for IEEE 802.15.4 fragmentation" if NET_L2_IEEE802154_FRAGMENT && NET_LOG (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: NET_L2_IEEE802154_FRAGMENT && NET_LOG (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_L2_IEEE802154 (value: "n")
+:Locations:
+ * ../subsys/net/ip/l2/ieee802154/Kconfig:123

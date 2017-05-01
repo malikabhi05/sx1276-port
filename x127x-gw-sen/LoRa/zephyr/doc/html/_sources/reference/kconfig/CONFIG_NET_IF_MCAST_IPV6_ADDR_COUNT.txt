@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: NET_IF_MCAST_IPV6_ADDR_COUNT
+
+.. option:: CONFIG_NET_IF_MCAST_IPV6_ADDR_COUNT:
+.. _CONFIG_NET_IF_MCAST_IPV6_ADDR_COUNT:
+
+The configuration item CONFIG_NET_IF_MCAST_IPV6_ADDR_COUNT:
+
+:Symbol:           NET_IF_MCAST_IPV6_ADDR_COUNT
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Max number of multicast IPv6 addresses per network interface"
+:Default values:
+
+ *  1 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL && NET_IPV6 (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.ipv6:22

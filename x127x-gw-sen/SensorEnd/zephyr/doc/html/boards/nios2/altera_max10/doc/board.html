@@ -1,0 +1,534 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Altera MAX10 &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../../../index.html"/>
+        <link rel="up" title="Supported Boards" href="../../../boards.html"/>
+        <link rel="next" title="Zephyr Kernel Primer (version 2)" href="../../../../kernel/kernel.html"/>
+        <link rel="prev" title="DesignWare(R) ARC(R) EM Starter Kit" href="../../../arc/em_starterkit/doc/board.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../boards.html">Supported Boards</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#x86-boards">X86 Boards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#arm-boards">ARM Boards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#arc-boards">ARC Boards</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../boards.html#nios-ii-boards">NIOS II Boards</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Altera MAX10</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware">Hardware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#programming-and-debugging">Programming and Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../boards.html">Supported Boards</a> &raquo;</li>
+        
+      <li>Altera MAX10</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/boards/nios2/altera_max10/doc/board.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="altera-max10">
+<span id="id1"></span><h1>Altera MAX10<a class="headerlink" href="#altera-max10" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Zephyr kernel is supported on the Altera MAX10 Rev C development kit, using
+the Nios II Gen 2 soft CPU.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../../../../_images/max_10_dev_kit_top_photo.jpg"><img alt="Altera’s MAX* 10" src="../../../../_images/max_10_dev_kit_top_photo.jpg" style="width: 442px;" /></a>
+<p class="caption"><span class="caption-text">Altera’s MAX* 10  (Credit: Altera)</span></p>
+</div>
+</div>
+<div class="section" id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dip-switch-settings">
+<h3>DIP Switch settings<a class="headerlink" href="#dip-switch-settings" title="Permalink to this headline">¶</a></h3>
+<p>There are two sets of switches on the back of the board. Of particular
+importance is SW2:</p>
+<ul class="simple">
+<li>Switch 2 (CONFIG_SEL) should be in the OFF (up) position so that the first
+boot image is CFM0</li>
+<li>Switch 3 (VTAP_BYPASS) needs to be in the ON (down) position or the flashing
+scripts won&#8217;t work</li>
+<li>Switch 4 (HSMC_BYPASSN) should be OFF (up)</li>
+</ul>
+<a class="reference internal image-reference" href="../../../../_images/Altera_MAX10_switches.jpg"><img alt="Altera’s MAX* 10 Switches" class="align-center" src="../../../../_images/Altera_MAX10_switches.jpg" style="width: 442px;" /></a>
+<p>Other switches are user switches, their position is application-specific.</p>
+</div>
+<div class="section" id="necessary-software">
+<h3>Necessary Software<a class="headerlink" href="#necessary-software" title="Permalink to this headline">¶</a></h3>
+<p>You will need the Altera Quartus SDK in order to work with this device. The
+<a class="reference external" href="http://dl.altera.com/?edition=lite">Altera Lite Distribution</a> of Quartus may be obtained without
+charge.</p>
+<p>For convenience, once installed you should put the binaries provided by the SDK
+in your path. Below is an example, adjust ALTERA_BASE to where you installed the
+SDK:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">export ALTERA_BASE=/opt/altera_lite/16.0</span>
+<span class="go">export PATH=$PATH:$ALTERA_BASE/quartus/bin:$ALTERA_BASE/nios2eds/bin</span>
+</pre></div>
+</div>
+<p>You may need to adjust your udev rules so that you can talk to the USB Blaster
+II peripheral, which is the built-in JTAG interface for this device.</p>
+<p>The following works for Fedora 23:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> For Altera USB-Blaster permissions.
+<span class="go">SUBSYSTEM==&quot;usb&quot;,\</span>
+<span class="go">ENV{DEVTYPE}==&quot;usb_device&quot;,\</span>
+<span class="go">ATTR{idVendor}==&quot;09fb&quot;,\</span>
+<span class="go">ATTR{idProduct}==&quot;6010&quot;,\</span>
+<span class="go">MODE=&quot;0666&quot;,\</span>
+<span class="go">NAME=&quot;bus/usb/$env{BUSNUM}/$env{DEVNUM}&quot;,\</span>
+<span class="go">RUN+=&quot;/bin/chmod 0666 %c&quot;</span>
+<span class="go">SUBSYSTEM==&quot;usb&quot;,\</span>
+<span class="go">ENV{DEVTYPE}==&quot;usb_device&quot;,\</span>
+<span class="go">ATTR{idVendor}==&quot;09fb&quot;,\</span>
+<span class="go">ATTR{idProduct}==&quot;6810&quot;,\</span>
+<span class="go">MODE=&quot;0666&quot;,\</span>
+<span class="go">NAME=&quot;bus/usb/$env{BUSNUM}/$env{DEVNUM}&quot;,\</span>
+<span class="go">RUN+=&quot;/bin/chmod 0666 %c&quot;</span>
+</pre></div>
+</div>
+<p>You can test connectivity with the SDK jtagconfig tool, you should see something
+like:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> jtagconfig
+<span class="go">1) USB-BlasterII [1-1.2]</span>
+<span class="go">  031050DD   10M50DA(.|ES)/10M50DC</span>
+<span class="go">  020D10DD   VTAP10</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reference-cpu">
+<h3>Reference CPU<a class="headerlink" href="#reference-cpu" title="Permalink to this headline">¶</a></h3>
+<p>A reference CPU design of a Nios II/f core is included in the Zephyr tree. The
+CPU may be found in the <code class="file docutils literal"><span class="pre">arch/nios2/soc/nios2f-zephyr/cpu</span></code> directory.</p>
+<p>To flash this CPU, use the <code class="file docutils literal"><span class="pre">arch/nios2/soc/nios2f-zephyr/cpu/nios2-configure-sof</span></code>
+tool:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> nios2-configure-sof ghrd_10m50da.sof
+</pre></div>
+</div>
+<p>This CPU is a Nios II/F core with a 16550 UART, JTAG UART, and the Avalon Timer.
+For any Nios II SOC definition, you can find out more details about the CPU
+configuration by inspecting system.h in the SOC&#8217;s include directory.</p>
+</div>
+<div class="section" id="console-output">
+<h3>Console Output<a class="headerlink" href="#console-output" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="uart">
+<h4>16550 UART<a class="headerlink" href="#uart" title="Permalink to this headline">¶</a></h4>
+<p>By default, the kernel is configured to send console output to the 16550 UART.
+You can monitor this on your workstation by connecting to the top right mini USB
+port on the board (it will show up in /dev as a ttyUSB node), and then running
+minicom with flow control disabled, 115200-8N1 settings.</p>
+</div>
+<div class="section" id="jtag-uart">
+<h4>JTAG UART<a class="headerlink" href="#jtag-uart" title="Permalink to this headline">¶</a></h4>
+<p>You can also have it send its console output to the JTAG UART. Set these in your
+project configuration:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">CONFIG_UART_ALTERA_JTAG=y</span>
+<span class="go">CONFIG_UART_CONSOLE_ON_DEV_NAME=&quot;jtag_uart0&quot;</span>
+</pre></div>
+</div>
+<p>To view these messages on your local workstation, run the terminal application
+in the SDK:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> nios2-terminal
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="programming-and-debugging">
+<h2>Programming and Debugging<a class="headerlink" href="#programming-and-debugging" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="flashing">
+<h3>Flashing<a class="headerlink" href="#flashing" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="flashing-kernel-into-ufm">
+<h4>Flashing Kernel into UFM<a class="headerlink" href="#flashing-kernel-into-ufm" title="Permalink to this headline">¶</a></h4>
+<p>This is as simple as:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make flash
+</pre></div>
+</div>
+<p>This provisions the Zephyr kernel and the CPU configuration onto the board,
+using the scripts/support/quartus-flash.py script. After it completes the kernel
+will immediately boot.</p>
+</div>
+<div class="section" id="flashing-kernel-directly-into-ram-over-jtag">
+<h4>Flashing Kernel directly into RAM over JTAG<a class="headerlink" href="#flashing-kernel-directly-into-ram-over-jtag" title="Permalink to this headline">¶</a></h4>
+<p>The SDK included the nios2-download tool which will let you flash a kernel
+directly into RAM and then boot it from the __start symbol.</p>
+<p>In order for this to work, your entire kernel must be located in RAM. Make sure
+the following config options are disabled:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">CONFIG_XIP=n</span>
+<span class="go">CONFIG_INCLUDE_RESET_VECTOR=n</span>
+</pre></div>
+</div>
+<p>Then, after building your kernel, push it into device&#8217;s RAM:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> nios2-download --go outdir/zephyr.elf
+</pre></div>
+</div>
+<p>If you have a console session running (either minicom or nios2-terminal) you
+should see the application&#8217;s output. There are additional arguments you can pass
+to nios2-download so that it spawns a GDB server that you can connect to,
+although it&#8217;s typically simpler to just use nios2-gdb-server as described below.</p>
+</div>
+</div>
+<div class="section" id="debugging">
+<h3>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h3>
+<p>The Altera SDK includes a GDB server which can be used to debug a MAX10 board.
+You can either debug a running image that was flashed onto the device in User
+Flash Memory (UFM), or load an image over the JTAG using GDB.</p>
+<div class="section" id="debugging-with-ufm-flashed-image">
+<h4>Debugging With UFM Flashed Image<a class="headerlink" href="#debugging-with-ufm-flashed-image" title="Permalink to this headline">¶</a></h4>
+<p>This can be accomplished with the &#8220;make debug&#8221; build target:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make debug
+<span class="go">make[1]: Entering directory &#39;/projects/zephyr2&#39;</span>
+<span class="go">make[2]: Entering directory &#39;/projects/zephyr2/tests/crypto/test_sha256/outdir&#39;</span>
+<span class="go">  Using /projects/zephyr2 as source for kernel</span>
+<span class="go">  GEN     ./Makefile</span>
+<span class="go">  CHK     include/generated/version.h</span>
+<span class="go">  CHK     misc/generated/configs.c</span>
+<span class="go">  CHK     include/generated/offsets.h</span>
+<span class="go">  CHK     misc/generated/sysgen/prj.mdef</span>
+<span class="go">Nios II GDB server running on port 14777</span>
+<span class="go">Ignoring --stop option because --tcpport also specified</span>
+<span class="go">Python Exception &lt;type &#39;exceptions.ImportError&#39;&gt; No module named gdb:</span>
+<span class="go">/opt/zephyr-sdk/sysroots/i686-pokysdk-linux/usr/bin/nios2-poky-elf/nios2-poky-elf-gdb: warning:</span>
+<span class="go">Could not load the Python gdb module from `/opt/zephyr-sdk/2.0.1/sysroots/i686-pokysdk-linux/usr/share/gdb/python&#39;.</span>
+<span class="go">Limited Python support is available from the _gdb module.</span>
+<span class="go">Suggest passing --data-directory=/path/to/gdb/data-directory.</span>
+
+<span class="go">GNU gdb (GDB) 7.9.1</span>
+<span class="go">Copyright (C) 2015 Free Software Foundation, Inc.</span>
+<span class="go">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span>
+<span class="go">This is free software: you are free to change and redistribute it.</span>
+<span class="go">There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;</span>
+<span class="go">and &quot;show warranty&quot; for details.</span>
+<span class="go">This GDB was configured as &quot;--host=i686-pokysdk-linux --target=nios2-poky-elf&quot;.</span>
+<span class="go">Type &quot;show configuration&quot; for configuration details.</span>
+<span class="go">For bug reporting instructions, please see:</span>
+<span class="go">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</span>
+<span class="go">Find the GDB manual and other documentation resources online at:</span>
+<span class="go">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span>
+<span class="go">For help, type &quot;help&quot;.</span>
+<span class="go">Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...</span>
+<span class="go">Reading symbols from /projects/zephyr2/tests/crypto/test_sha256/outdir/zephyr.elf...done.</span>
+<span class="go">Remote debugging using :14777</span>
+<span class="go">Using cable &quot;USB-BlasterII [1-1.6.1]&quot;, device 1, instance 0x00</span>
+<span class="go">Resetting and pausing target processor: OK</span>
+<span class="go">Listening on port 14777 for connection from GDB: accepted</span>
+<span class="go">vprintf (format=&lt;optimized out&gt;, vargs=&lt;optimized out&gt;)</span>
+<span class="go">    at /projects/zephyr2/lib/libc/minimal/source/stdout/fprintf.c:61</span>
+<span class="go">61 {</span>
+<span class="go">(gdb) b nano_init</span>
+<span class="go">Breakpoint 1 at 0x1de8: file /projects/zephyr2/kernel/nanokernel/nano_init.c, line 207.</span>
+<span class="go">(gdb) c</span>
+<span class="go">Continuing.</span>
+
+<span class="go">Breakpoint 1, _Cstart () at /projects/zephyr2/kernel/nanokernel/nano_init.c:323</span>
+<span class="go">323      nano_init((struct tcs *)&amp;dummyTCS);</span>
+<span class="go">(gdb) bt</span>
+<span class="go">Python Exception &lt;type &#39;exceptions.ImportError&#39;&gt; No module named gdb.frames:</span>
+<span class="gp">#</span><span class="m">0</span>  _Cstart <span class="o">()</span> at /projects/zephyr2/kernel/nanokernel/nano_init.c:323
+<span class="gp">#</span><span class="m">1</span>  0x00003ca4 in _PrepC <span class="o">()</span> at /projects/zephyr2/arch/nios2/core/prep_c.c:61
+<span class="gp">#</span><span class="m">2</span>  0x00003ccc in __start <span class="o">()</span> at /projects/zephyr2/arch/nios2/core/crt0.S:155
+<span class="go">(gdb)</span>
+</pre></div>
+</div>
+<p>To start debugging manually:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">nios2-gdb-server --tcpport 1234 --stop --reset-target</span>
+</pre></div>
+</div>
+<p>And then connect with GDB:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">nios2-poky-elf-gdb  outdir/zephyr.elf -ex &quot;target remote :1234&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging-with-jtag-flashed-image">
+<h4>Debugging With JTAG Flashed Image<a class="headerlink" href="#debugging-with-jtag-flashed-image" title="Permalink to this headline">¶</a></h4>
+<p>In order for this to work, execute-in-place must be disabled, since the GDB
+&#8216;load&#8217; command can only put text and data in RAM. Ensure this is in your
+configuration:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">CONFIG_XIP=n</span>
+</pre></div>
+</div>
+<p>It is OK for this procedure to leave the reset vector enabled, unlike
+nios2-download (which errors out if it finds sections outside of SRAM) it will
+be ignored.</p>
+<p>In a terminal, launch the nios2 GDB server. It doesn&#8217;t matter what kernel (if
+any) is on the device, but you should have at least flashed a CPU using
+nios2-configure-sof. You can leave this process running.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> nios2-gdb-server --tcpport <span class="m">1234</span> --tcppersist --init-cache --reset-target
+</pre></div>
+</div>
+<p>Build your zephyr kernel, and load it into a GDB built for Nios II (included in
+the Zephyr SDK):</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> nios2-poky-elf-gdb outdir/zephyr.elf
+</pre></div>
+</div>
+<p>Then connect to the GDB server:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">(gdb) target remote :1234</span>
+</pre></div>
+</div>
+<p>And then load the kernel image over the wire. The CPU will not start from the
+reset vector, instead it will boot from the __start symbol:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">(gdb) load</span>
+<span class="go">Loading section reset, size 0xc lma 0x0</span>
+<span class="go">Loading section exceptions, size 0x1b0 lma 0x400020</span>
+<span class="go">Loading section text, size 0x8df0 lma 0x4001d0</span>
+<span class="go">Loading section devconfig, size 0x30 lma 0x408fc0</span>
+<span class="go">Loading section rodata, size 0x3f4 lma 0x408ff0</span>
+<span class="go">Loading section datas, size 0x888 lma 0x4093e4</span>
+<span class="go">Loading section initlevel, size 0x30 lma 0x409c6c</span>
+<span class="go">Loading section _k_task_list, size 0x58 lma 0x409c9c</span>
+<span class="go">Loading section _k_task_ptr, size 0x8 lma 0x409cf4</span>
+<span class="go">Loading section _k_event_list, size 0x10 lma 0x409cfc</span>
+<span class="go">Start address 0x408f54, load size 40184</span>
+<span class="go">Transfer rate: 417 KB/sec, 368 bytes/write.</span>
+<span class="go">After this is done you may set breakpoints and continue execution. If you ever want to reset the CPU, issue the &#39;load&#39; command again.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.altera.com/en_US/pdfs/literature/hb/nios2/n2cpu-nii5v1gen2.pdf">CPU Documentation</a></li>
+<li><a class="reference external" href="https://www.altera.com/en_US/pdfs/literature/an/an730.pdf">Nios II Processor Booting Methods in MAX 10 FPGA Devices</a></li>
+<li><a class="reference external" href="https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/ug/ug_embedded_ip.pdf">Embedded Peripherals IP User Guide</a></li>
+<li><a class="reference external" href="https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/hb/max-10/ug_m10_config.pdf">MAX 10 FPGA Configuration User Guide</a></li>
+<li><a class="reference external" href="https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/ug/ug-max10m50-fpga-dev-kit.pdf">MAX 10 FPGA Development Kit User Guide</a></li>
+<li><a class="reference external" href="https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/hb/nios2/edh_ed51004.pdf">Nios II Command-Line Tools</a></li>
+<li><a class="reference external" href="https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/manual/tclscriptrefmnl.pdf">Quartus II Scripting Reference Manual</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../../kernel/kernel.html" class="btn btn-neutral float-right" title="Zephyr Kernel Primer (version 2)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../../arc/em_starterkit/doc/board.html" class="btn btn-neutral" title="DesignWare(R) ARC(R) EM Starter Kit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

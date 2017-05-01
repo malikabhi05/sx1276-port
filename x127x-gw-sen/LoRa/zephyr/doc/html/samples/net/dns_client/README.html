@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DNS Client Application &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../../index.html"/>
+        <link rel="up" title="Networking Samples" href="../net.html"/>
+        <link rel="next" title="Echo Client" href="../echo_client/README.html"/>
+        <link rel="prev" title="Sample DHCPv4 client application" href="../dhcpv4_client/README.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../samples.html">Samples and Demos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../kernel.html">Kernel Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basic/basic.html">Basic Samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../net.html">Networking Samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../coaps_client/README.html">CoAP over DTLS sample client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../coaps_server/README.html">CoAP over DTLS sample server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dhcpv4_client/README.html">Sample DHCPv4 client application</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DNS Client Application</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wiring">Wiring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and Running</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../echo_client/README.html">Echo Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../echo_server/README.html">Echo Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_client/README.html">HTTP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_server/README.html">HTTP Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mbedtls_dtlsclient/README.html">mbedTLS DTLS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mbedtls_dtlsserver/README.html">mbedTLS DTLS sample server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mqtt_publisher/README.html">MQTT Publisher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nats/README.html">NATS Client Implementation Sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../telnet/README.html">Sample TELNET console application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zoap_client/README.html">CoAP client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zoap_server/README.html">CoAP Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zperf/README.html">zperf: Network Traffic Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bluetooth/bluetooth.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sensor/sensor.html">Sensor Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../grove/grove.html">Grove Kit Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced.html">Advanced Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../power/power.html">Power Management Samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../samples.html">Samples and Demos</a> &raquo;</li>
+        
+          <li><a href="../net.html">Networking Samples</a> &raquo;</li>
+        
+      <li>DNS Client Application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/samples/net/dns_client/README.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dns-client-application">
+<h1>DNS Client Application<a class="headerlink" href="#dns-client-application" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The DNS resolver or DNS client sample application implements a basic
+DNS resolver according to RFC 1035. Supported DNS answers are:
+IPv4/IPv6 addresses and CNAME.</p>
+<p>If a CNAME is received, the DNS resolver will create another DNS query.
+The number of additional queries is controlled by the
+DNS_RESOLVER_ADDITIONAL_QUERIES Kconfig variable.</p>
+<p>For more information about DNS configuration variables, see:
+<code class="file docutils literal"><span class="pre">subsys/net/lib/dns/Kconfig</span></code>. The DNS resolver API can be found at
+<code class="file docutils literal"><span class="pre">include/net/dns_client.h</span></code>. The sample code can be found at:
+<code class="file docutils literal"><span class="pre">samples/net/dns_client</span></code>.</p>
+<p>The return codes used by this sample application are described by the following table.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="8%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Macro</td>
+<td>Value</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>-EINVAL</td>
+<td>-22</td>
+<td>if an invalid parameter was detected</td>
+</tr>
+<tr class="row-odd"><td>-EIO</td>
+<td>-5</td>
+<td>network error</td>
+</tr>
+<tr class="row-even"><td>-ENOMEM</td>
+<td>-12</td>
+<td>memory error, perhaps related to network buffers</td>
+</tr>
+</tbody>
+</table>
+<p>A return code of 0 must be interpreted as success.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="../../../subsystems/networking/qemu_setup.html#networking-with-qemu"><span class="std std-ref">networking with Qemu</span></a></li>
+<li>screen terminal emulator or equivalent.</li>
+<li>For the Arduino 101 board, the ENC28J60 Ethernet module is required.</li>
+<li>dnsmasq application. The dnsmasq version used in this sample is:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">dnsmasq -v</span>
+<span class="go">Dnsmasq version 2.76  Copyright (c) 2000-2016 Simon Kelley</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wiring">
+<h2>Wiring<a class="headerlink" href="#wiring" title="Permalink to this headline">¶</a></h2>
+<p>The ENC28J60 module is an Ethernet device with SPI interface.
+The following pins must be connected from the ENC28J60 device to the
+Arduino 101 board:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Arduino 101</td>
+<td>ENC28J60 (pin numbers on the board)</td>
+</tr>
+<tr class="row-even"><td>D13</td>
+<td>SCK  (1)</td>
+</tr>
+<tr class="row-odd"><td>D12</td>
+<td>SO   (3)</td>
+</tr>
+<tr class="row-even"><td>D11</td>
+<td>SI   (2)</td>
+</tr>
+<tr class="row-odd"><td>D10</td>
+<td>CS   (7)</td>
+</tr>
+<tr class="row-even"><td>D04</td>
+<td>INT  (5)</td>
+</tr>
+<tr class="row-odd"><td>3.3V</td>
+<td>VCC  (10)</td>
+</tr>
+<tr class="row-even"><td>GDN</td>
+<td>GND  (9)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="building-and-running">
+<h2>Building and Running<a class="headerlink" href="#building-and-running" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="network-configuration">
+<h3>Network Configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Open the project configuration file for your platform, for example:
+<code class="file docutils literal"><span class="pre">prj_frdm_k64f.conf</span></code> is the configuration file for the
+<a class="reference internal" href="../../../boards/arm/frdm_k64f/doc/frdm_k64f.html#frdm-k64f"><span class="std std-ref">NXP FRDM-K64F</span></a> board. For IPv4 networks, set the following variables:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">CONFIG_NET_IPV4=y</span>
+<span class="go">CONFIG_NET_IPV6=n</span>
+</pre></div>
+</div>
+<p>IPv6 is the preferred routing technology for this sample application,
+if CONFIG_NET_IPV6=y is set, the value of CONFIG_NET_IPV4 is ignored.</p>
+<p>In this sample application, only static IP addresses are supported,
+those addresses are specified in the project configuration file,
+for example:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">CONFIG_NET_SAMPLES_MY_IPV6_ADDR=&quot;2001:db8::1&quot;</span>
+<span class="go">CONFIG_NET_SAMPLES_PEER_IPV6_ADDR=&quot;2001:db8::2&quot;</span>
+</pre></div>
+</div>
+<p>are the IPv6 addresses for the DNS client running Zephyr and the
+DNS server, respectively.</p>
+<p>Alternatively, the IP addresses may be specified in the
+<code class="file docutils literal"><span class="pre">samples/net/dns_client/src/config.h</span></code> file.</p>
+<p>Open the <code class="file docutils literal"><span class="pre">samples/net/dns_client/src/config.h</span></code> file and set the
+server port to match the DNS server setup, for example:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#define REMOTE_PORT          5353</span>
+</pre></div>
+</div>
+<p>assumes that the DNS server is listening at UDP port 5353.</p>
+</div>
+<div class="section" id="dns-server">
+<h3>DNS server<a class="headerlink" href="#dns-server" title="Permalink to this headline">¶</a></h3>
+<p>The dnsmasq tool may be used for testing purposes. Open a terminal
+window and type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> dnsmasq -p <span class="m">5353</span> -d
+</pre></div>
+</div>
+<p>NOTE: some systems may require root privileges to run dnsmaq, use sudo or su.</p>
+<p>If dnsmasq fails to start with an error like this:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">dnsmasq: failed to create listening socket for port 5353: Address already in use</span>
+</pre></div>
+</div>
+<p>Open a terminal window and type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> killall -s KILL dnsmasq
+</pre></div>
+</div>
+<p>Try to launch the dnsmasq application again.</p>
+</div>
+<div class="section" id="qemu-x86">
+<h3>QEMU x86<a class="headerlink" href="#qemu-x86" title="Permalink to this headline">¶</a></h3>
+<p>Open a terminal window and type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make
+</pre></div>
+</div>
+<p>Run &#8216;loop_socat.sh&#8217; and &#8216;loop-slip-tap.sh&#8217; as indicated at:</p>
+<blockquote>
+<div><a class="reference external" href="https://gerrit.zephyrproject.org/r/gitweb?p=net-tools.git;a=blob;f=README">https://gerrit.zephyrproject.org/r/gitweb?p=net-tools.git;a=blob;f=README</a></div></blockquote>
+<p>Set the IPv4 ip address:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ip addr add <span class="m">192</span>.0.2.2/24 dev tap0
+</pre></div>
+</div>
+<p>Open a terminal where the project was build (i.e. <code class="file docutils literal"><span class="pre">samples/net/dns_client</span></code>) and type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make run
+</pre></div>
+</div>
+</div>
+<div class="section" id="frdm-k64f">
+<h3>FRDM K64F<a class="headerlink" href="#frdm-k64f" title="Permalink to this headline">¶</a></h3>
+<p>Open a terminal window and type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>frdm_k64f
+</pre></div>
+</div>
+<p>The FRDM K64F board is detected as a USB storage device. The board
+must be mounted (i.e. to /mnt) to &#8216;flash&#8217; the binary:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> cp outdir/frdm_k64f/zephyr.bin /mnt
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../../boards/arm/frdm_k64f/doc/frdm_k64f.html#frdm-k64f"><span class="std std-ref">Freedom-K64F board documentation</span></a> for more information
+about this board.</p>
+<p>Open a terminal window and type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> screen /dev/ttyACM0 <span class="m">115200</span>
+</pre></div>
+</div>
+<p>Use &#8216;dmesg&#8217; to find the right USB device.</p>
+<p>Once the binary is loaded into the FRDM board, press the RESET button.</p>
+</div>
+<div class="section" id="arduino-101">
+<h3>Arduino 101<a class="headerlink" href="#arduino-101" title="Permalink to this headline">¶</a></h3>
+<p>Open a terminal window and type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>arduino_101
+</pre></div>
+</div>
+<p>To load the binary in the development board follow the steps
+in <a class="reference internal" href="../../../boards/x86/arduino_101/doc/board.html#arduino-101"><span class="std std-ref">Arduino/Genuino 101</span></a>.</p>
+<p>Open a terminal window and type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> screen /dev/ttyUSB0 <span class="m">115200</span>
+</pre></div>
+</div>
+<p>Use &#8216;dmesg&#8217; to find the right USB device.</p>
+<p>Once the binary is loaded into the Arduino 101 board, press the RESET button.</p>
+</div>
+<div class="section" id="sample-output">
+<h3>Sample Output<a class="headerlink" href="#sample-output" title="Permalink to this headline">¶</a></h3>
+<p>IPv4 (CONFIG_NET_IPV6=n, CONFIG_NET_IPV4=y)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">To</span> <span class="n">exit</span> <span class="kn">from</span> <span class="nn">QEMU</span> <span class="n">enter</span><span class="p">:</span> <span class="s1">&#39;CTRL+a, x&#39;</span>
+
+<span class="p">[</span><span class="n">QEMU</span><span class="p">]</span> <span class="n">CPU</span><span class="p">:</span> <span class="n">qemu32</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">not_a_real_domain_name</span>
+<span class="n">rc</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">zephyrproject</span><span class="o">.</span><span class="n">org</span>
+<span class="n">rc</span><span class="p">:</span> <span class="o">-</span><span class="mi">22</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">linux</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">192.243</span><span class="o">.</span><span class="mf">104.10</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">zephyrproject</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">140.211</span><span class="o">.</span><span class="mf">169.8</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">kernel</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">149.20</span><span class="o">.</span><span class="mf">4.69</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">199.204</span><span class="o">.</span><span class="mf">44.194</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">198.145</span><span class="o">.</span><span class="mf">20.140</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">gerrit</span><span class="o">.</span><span class="n">zephyrproject</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">199.19</span><span class="o">.</span><span class="mf">213.246</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">linuxfoundation</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">140.211</span><span class="o">.</span><span class="mf">169.4</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">jira</span><span class="o">.</span><span class="n">zephyrproject</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">199.19</span><span class="o">.</span><span class="mf">213.246</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">wikipedia</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">208.80</span><span class="o">.</span><span class="mf">153.224</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">collabprojects</span><span class="o">.</span><span class="n">linuxfoundation</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="mf">140.211</span><span class="o">.</span><span class="mf">169.4</span>
+
+</pre></div>
+</div>
+<p>IPv6 (CONFIG_NET_IPV6=y, CONFIG_NET_IPV4=n)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">To</span> <span class="n">exit</span> <span class="kn">from</span> <span class="nn">QEMU</span> <span class="n">enter</span><span class="p">:</span> <span class="s1">&#39;CTRL+a, x&#39;</span>
+<span class="p">[</span><span class="n">QEMU</span><span class="p">]</span> <span class="n">CPU</span><span class="p">:</span> <span class="n">qemu32</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">not_a_real_domain_name</span>
+<span class="n">rc</span><span class="p">:</span> <span class="o">-</span><span class="mi">22</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">zephyrproject</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="n">ff02</span><span class="p">::</span><span class="mi">3</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">zephyrproject</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="n">ff02</span><span class="p">::</span><span class="mi">4</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">gerrit</span><span class="o">.</span><span class="n">zephyrproject</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="n">ff02</span><span class="p">::</span><span class="mi">5</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">jira</span><span class="o">.</span><span class="n">zephyrproject</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="n">ff02</span><span class="p">::</span><span class="mi">6</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">jenkins</span><span class="o">.</span><span class="n">zephyrproject</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="n">ff02</span><span class="p">::</span><span class="mi">7</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">linuxfoundation</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="n">ff02</span><span class="p">::</span><span class="mi">8</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">linuxfoundation</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="n">ff02</span><span class="p">::</span><span class="mi">9</span>
+
+<span class="o">-------------------------------------------</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">142</span><span class="p">]</span> <span class="n">name</span><span class="p">:</span> <span class="n">collabprojects</span><span class="o">.</span><span class="n">linuxfoundation</span><span class="o">.</span><span class="n">org</span>
+<span class="p">[</span><span class="n">run_dns</span><span class="p">:</span><span class="mi">159</span><span class="p">]</span> <span class="n">ff02</span><span class="p">::</span><span class="n">a</span>
+
+</pre></div>
+</div>
+<p>Note: IPv6 addresses obtained via dnsmasq and <code class="file docutils literal"><span class="pre">/etc/hosts</span></code>.</p>
+</div>
+<div class="section" id="known-issues">
+<h3>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The above sample contains a rc: -22 (-EINVAL). This is the expected behavior
+for that domain name.</li>
+<li>If a lot of rc: -5 (-EIO) errors are flooding the screen, increment
+APP_SLEEP_MSECS to 500 or even 1000. See <code class="file docutils literal"><span class="pre">samples/net/dns_client/src/config.h</span></code>.</li>
+<li>IPv4: there is still an issue not yet isolated that causes the application
+to fail during the first two queries. The issue lies between L2 (ARP) and
+UDP and it only appears during application startup.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../echo_client/README.html" class="btn btn-neutral float-right" title="Echo Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../dhcpv4_client/README.html" class="btn btn-neutral" title="Sample DHCPv4 client application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

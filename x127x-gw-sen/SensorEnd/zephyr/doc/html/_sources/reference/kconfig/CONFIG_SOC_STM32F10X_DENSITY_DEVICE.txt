@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: SOC_STM32F10X_DENSITY_DEVICE
+
+.. option:: CONFIG_SOC_STM32F10X_DENSITY_DEVICE:
+.. _CONFIG_SOC_STM32F10X_DENSITY_DEVICE:
+
+* Low density Value line devices
+* Medium density Value line devices
+* High density Value line devices
+* XL-density devices Value line devices
+
+
+
+:Symbol:           SOC_STM32F10X_DENSITY_DEVICE
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ SOC_STM32F103XE && ARM || SOC_STM32F103XB && ARM (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ ARM (value: "n")
+:Locations:
+ * ../arch/arm/soc/st_stm32/stm32f1/Kconfig.soc:27

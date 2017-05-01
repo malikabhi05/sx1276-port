@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: SPI_SS_1_NAME
+
+.. option:: CONFIG_SPI_SS_1_NAME:
+.. _CONFIG_SPI_SS_1_NAME:
+
+The configuration item CONFIG_SPI_SS_1_NAME:
+
+:Symbol:           SPI_SS_1_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "SPI port 1 device name" if SPI_SS_1 (value: "n")
+:Default values:
+
+ *  "SPI_SS_1"
+ *   Condition: SPI_SS_1 (value: "n")
+ *  "SPI_1"
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SPI && SOC_QUARK_SE_C1000_SS && SPI_QMSI_SS (value: "n")
+:Locations:
+ * ../drivers/spi/Kconfig:242
+ * ../arch/arc/soc/quark_se_c1000_ss/Kconfig.defconfig:318

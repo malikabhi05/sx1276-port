@@ -1,0 +1,37 @@
+:orphan:
+
+.. title:: NET_MGMT
+
+.. option:: CONFIG_NET_MGMT:
+.. _CONFIG_NET_MGMT:
+
+Add support for NM API that enables managing different aspects
+of the network stack as well as receiving notification on network
+events (ip address change, iface up and running ...).
+
+
+
+:Symbol:           NET_MGMT
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Network Management API"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ NETWORKING && NETWORKING && NET_L2_BLUETOOTH && NET_L2_BLUETOOTH_MGMT || NETWORKING && NETWORKING && NET_L2_IEEE802154 && NET_L2_IEEE802154_MGMT || NETWORKING && NETWORKING && NET_STATISTICS && NET_STATISTICS_USER_API (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.mgmt:7

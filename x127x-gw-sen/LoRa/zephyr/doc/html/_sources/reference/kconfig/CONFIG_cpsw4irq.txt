@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: cpsw4irq
+
+.. option:: CONFIG_cpsw4irq:
+.. _CONFIG_cpsw4irq:
+
+The configuration item CONFIG_cpsw4irq:
+
+:Symbol:           cpsw4irq
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "cpsw4irq core"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../arch/xtensa/soc/Kconfig.cores:6

@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Alerts &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Synchronization" href="synchronization.html"/>
+        <link rel="next" title="Data Passing" href="../data_passing/data_passing.html"/>
+        <link rel="prev" title="Mutexes" href="mutexes.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../kernel.html">Zephyr Kernel Primer (version 2)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../threads/threads.html">Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../timing/timing.html">Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/memory.html">Memory Allocation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="synchronization.html">Synchronization</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="semaphores.html">Semaphores</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutexes.html">Mutexes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Alerts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suggested-uses">Suggested Uses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../data_passing/data_passing.html">Data Passing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../other/other.html">Other Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../kernel.html">Zephyr Kernel Primer (version 2)</a> &raquo;</li>
+        
+          <li><a href="synchronization.html">Synchronization</a> &raquo;</li>
+        
+      <li>Alerts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/kernel/synchronization/alerts.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="alerts">
+<span id="alerts-v2"></span><h1>Alerts<a class="headerlink" href="#alerts" title="Permalink to this headline">¶</a></h1>
+<p>An <em class="dfn">alert</em> is a kernel object that allows an application to perform
+asynchronous signalling when a condition of interest occurs.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#concepts" id="id1">Concepts</a><ul>
+<li><a class="reference internal" href="#alert-lifecycle" id="id2">Alert Lifecycle</a></li>
+<li><a class="reference internal" href="#comparison-to-unix-style-signals" id="id3">Comparison to Unix-style Signals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation" id="id4">Implementation</a><ul>
+<li><a class="reference internal" href="#defining-an-alert" id="id5">Defining an Alert</a></li>
+<li><a class="reference internal" href="#signaling-an-alert" id="id6">Signaling an Alert</a></li>
+<li><a class="reference internal" href="#handling-an-alert" id="id7">Handling an Alert</a></li>
+<li><a class="reference internal" href="#accepting-an-alert" id="id8">Accepting an Alert</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#suggested-uses" id="id9">Suggested Uses</a></li>
+<li><a class="reference internal" href="#configuration-options" id="id10">Configuration Options</a></li>
+<li><a class="reference internal" href="#apis" id="id11">APIs</a></li>
+</ul>
+</div>
+<div class="section" id="concepts">
+<h2><a class="toc-backref" href="#id1">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>Any number of alerts can be defined. Each alert is referenced by
+its memory address.</p>
+<p>An alert has the following key properties:</p>
+<ul class="simple">
+<li>An <strong>alert handler</strong>, which specifies the action to be taken
+when the alert is signalled. The action may instruct the system workqueue
+to execute a function to process the alert, mark the alert as pending
+so it can be processed later by a thread, or ignore the alert.</li>
+<li>An <strong>pending count</strong>, which records the number of pending alerts
+that have yet to be received.</li>
+<li>An <strong>count limit</strong>, which specifies the maximum number of pending alerts
+that will be recorded.</li>
+</ul>
+<p>An alert must be initialized before it can be used. This establishes
+its alert handler and sets the pending count to zero.</p>
+<div class="section" id="alert-lifecycle">
+<h3><a class="toc-backref" href="#id2">Alert Lifecycle</a><a class="headerlink" href="#alert-lifecycle" title="Permalink to this headline">¶</a></h3>
+<p>An ISR or a thread signals an alert by <strong>sending</strong> the alert
+when a condition of interest occurs that cannot be handled by the detector.</p>
+<p>Each time an alert is sent, the kernel examines its alert handler
+to determine what action to take.</p>
+<ul>
+<li><p class="first"><code class="xref c c-macro docutils literal"><span class="pre">K_ALERT_IGNORE</span></code> causes the alert to be ignored.</p>
+</li>
+<li><p class="first"><code class="xref c c-macro docutils literal"><span class="pre">K_ALERT_DEFAULT</span></code> causes the pending count to be incremented,
+unless this would exceed the count limit.</p>
+</li>
+<li><p class="first">Any other value is assumed to be the address of an alert handler function,
+and is invoked by the system workqueue thread. If the function returns
+zero, the signal is deemed to have been consumed; otherwise the pending
+count is incremented, unless this would exceed the count limit.</p>
+<p>The kernel ensures that the alert handler function is executed once
+for each time an alert is sent, even if the alert is sent multiple times
+in rapid succession.</p>
+</li>
+</ul>
+<p>A thread accepts a pending alert by <strong>receiving</strong> the alert.
+This decrements the pending count. If the pending count is currently zero,
+the thread may choose to wait for the alert to become pending.
+Any number of threads may wait for a pending alert simultaneously;
+when the alert is pended it is accepted by the highest priority thread
+that has waited longest.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A thread must processes pending alerts one at a time. The thread
+cannot receive multiple pending alerts in a single operation.</p>
+</div>
+</div>
+<div class="section" id="comparison-to-unix-style-signals">
+<h3><a class="toc-backref" href="#id3">Comparison to Unix-style Signals</a><a class="headerlink" href="#comparison-to-unix-style-signals" title="Permalink to this headline">¶</a></h3>
+<p>Zephyr alerts are somewhat akin to Unix-style signals, but have a number of
+significant differences. The most notable of these are:</p>
+<ul class="simple">
+<li>A Zephyr alert cannot be blocked; it is always delivered to its alert
+handler immediately.</li>
+<li>A Zephyr alert pends <em>after</em> it has been delivered to its alert handler,
+and only if an alert handler function does not consume the alert.</li>
+<li>Zephyr has no pre-defined alerts or actions. All alerts are application
+defined, and all have a default action that pends the alert.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2><a class="toc-backref" href="#id4">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="defining-an-alert">
+<h3><a class="toc-backref" href="#id5">Defining an Alert</a><a class="headerlink" href="#defining-an-alert" title="Permalink to this headline">¶</a></h3>
+<p>An alert is defined using a variable of type <code class="xref c c-type docutils literal"><span class="pre">struct</span> <span class="pre">k_alert</span></code>.
+It must then be initialized by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_alert_initP7k_alert17k_alert_handler_tj" title="k_alert_init"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_alert_init()</span></code></a>.</p>
+<p>The following code defines and initializes an alert. The alert allows
+up to 10 unreceived alert signals to pend before it begins to ignore
+new pending alerts.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">extern</span> <span class="kt">int</span> <span class="nf">my_alert_handler</span><span class="p">(</span><span class="k">struct</span> <span class="n">k_alert</span> <span class="o">*</span><span class="n">alert</span><span class="p">);</span>
+
+<span class="k">struct</span> <span class="n">k_alert</span> <span class="n">my_alert</span><span class="p">;</span>
+
+<span class="n">k_alert_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_alert</span><span class="p">,</span> <span class="n">my_alert_handler</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Alternatively, an alert can be defined and initialized at compile time
+by calling <a class="reference internal" href="../../api/kernel_api.html#c.K_ALERT_DEFINE" title="K_ALERT_DEFINE"><code class="xref c c-macro docutils literal"><span class="pre">K_ALERT_DEFINE</span></code></a>.</p>
+<p>The following code has the same effect as the code segment above.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">extern</span> <span class="kt">int</span> <span class="nf">my_alert_handler</span><span class="p">(</span><span class="k">struct</span> <span class="n">k_alert</span> <span class="o">*</span><span class="n">alert</span><span class="p">);</span>
+
+<span class="n">K_ALERT_DEFINE</span><span class="p">(</span><span class="n">my_alert</span><span class="p">,</span> <span class="n">my_alert_handler</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="signaling-an-alert">
+<h3><a class="toc-backref" href="#id6">Signaling an Alert</a><a class="headerlink" href="#signaling-an-alert" title="Permalink to this headline">¶</a></h3>
+<p>An alert is signalled by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_alert_sendP7k_alert" title="k_alert_send"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_alert_send()</span></code></a>.</p>
+<p>The following code illustrates how an ISR can signal an alert
+to indicate that a key press has occurred.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">extern</span> <span class="kt">int</span> <span class="nf">my_alert_handler</span><span class="p">(</span><span class="k">struct</span> <span class="n">k_alert</span> <span class="o">*</span><span class="n">alert</span><span class="p">);</span>
+
+<span class="n">K_ALERT_DEFINE</span><span class="p">(</span><span class="n">my_alert</span><span class="p">,</span> <span class="n">my_alert_handler</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">keypress_interrupt_handler</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+    <span class="n">k_alert_send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_alert</span><span class="p">);</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="handling-an-alert">
+<h3><a class="toc-backref" href="#id7">Handling an Alert</a><a class="headerlink" href="#handling-an-alert" title="Permalink to this headline">¶</a></h3>
+<p>An alert handler function is used when a signalled alert should not be ignored
+or immediately pended. It has the following form:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="o">&lt;</span><span class="n">function_name</span><span class="o">&gt;</span><span class="p">(</span><span class="k">struct</span> <span class="n">k_alert</span> <span class="o">*</span><span class="n">alert</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* catch the alert signal; return zero if the signal is consumed, */</span>
+    <span class="cm">/* or non-zero to let the alert pend                              */</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following code illustrates an alert handler function that processes
+key presses detected by an ISR (as shown in the previous section).</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">my_alert_handler</span><span class="p">(</span><span class="k">struct</span> <span class="n">k_alert</span> <span class="o">*</span><span class="n">alert_id_is_unused</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* determine what key was pressed */</span>
+    <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">get_keypress</span><span class="p">();</span>
+
+    <span class="cm">/* do complex processing of the keystroke */</span>
+    <span class="p">...</span>
+
+    <span class="cm">/* signalled alert has been consumed */</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accepting-an-alert">
+<h3><a class="toc-backref" href="#id8">Accepting an Alert</a><a class="headerlink" href="#accepting-an-alert" title="Permalink to this headline">¶</a></h3>
+<p>A pending alert is accepted by a thread by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_alert_recvP7k_alert7int32_t" title="k_alert_recv"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_alert_recv()</span></code></a>.</p>
+<p>The following code is an alternative to the code in the previous section.
+It uses a dedicated thread to do very complex processing
+of key presses that would otherwise monopolize the system workqueue.
+The alert handler function is now used only to filter out unwanted key press
+alerts, allowing the dedicated thread to wake up and process key press alerts
+only when a numeric key is pressed.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">my_alert_handler</span><span class="p">(</span><span class="k">struct</span> <span class="n">k_alert</span> <span class="o">*</span><span class="n">alert_id_is_unused</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* determine what key was pressed */</span>
+    <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">get_keypress</span><span class="p">();</span>
+
+    <span class="cm">/* signal thread only if key pressed was a digit */</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">c</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">c</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="cm">/* save key press information */</span>
+        <span class="p">...</span>
+        <span class="cm">/* signalled alert should be pended */</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="cm">/* signalled alert has been consumed */</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">keypress_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">unused1</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">unused2</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">unused3</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* consume numeric key presses */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="cm">/* wait for a key press alert to pend */</span>
+        <span class="n">k_alert_recv</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_alert</span><span class="p">,</span> <span class="n">K_FOREVER</span><span class="p">);</span>
+
+        <span class="cm">/* process saved key press, which must be a digit */</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="suggested-uses">
+<h2><a class="toc-backref" href="#id9">Suggested Uses</a><a class="headerlink" href="#suggested-uses" title="Permalink to this headline">¶</a></h2>
+<p>Use an alert to minimize ISR processing by deferring interrupt-related
+work to a thread to reduce the amount of time interrupts are locked.</p>
+<p>Use an alert to allow the kernel&#8217;s system workqueue to handle an alert,
+rather than defining an application thread to handle it.</p>
+<p>Use an alert to allow the kernel&#8217;s system workqueue to pre-process an alert,
+prior to letting an application thread handle it.</p>
+</div>
+<div class="section" id="configuration-options">
+<h2><a class="toc-backref" href="#id10">Configuration Options</a><a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>Related configuration options:</p>
+<ul class="simple">
+<li>None.</li>
+</ul>
+</div>
+<div class="section" id="apis">
+<h2><a class="toc-backref" href="#id11">APIs</a><a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>The following alert APIs are provided by <code class="file docutils literal"><span class="pre">kernel.h</span></code>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../api/kernel_api.html#c.K_ALERT_DEFINE" title="K_ALERT_DEFINE"><code class="xref c c-macro docutils literal"><span class="pre">K_ALERT_DEFINE</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_alert_initP7k_alert17k_alert_handler_tj" title="k_alert_init"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_alert_init()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_alert_sendP7k_alert" title="k_alert_send"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_alert_send()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_alert_recvP7k_alert7int32_t" title="k_alert_recv"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_alert_recv()</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../data_passing/data_passing.html" class="btn btn-neutral float-right" title="Data Passing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mutexes.html" class="btn btn-neutral" title="Mutexes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

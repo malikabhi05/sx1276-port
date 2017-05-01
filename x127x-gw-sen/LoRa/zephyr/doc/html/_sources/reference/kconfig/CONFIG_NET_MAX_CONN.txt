@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: NET_MAX_CONN
+
+.. option:: CONFIG_NET_MAX_CONN:
+.. _CONFIG_NET_MAX_CONN:
+
+The value depends on your network needs. The value
+should include both UDP and TCP connections.
+
+
+
+:Symbol:           NET_MAX_CONN
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "How many network connections are supported" if NET_UDP || NET_TCP (value: "n")
+:Default values:
+
+ *  4 (value: "n")
+ *   Condition: NET_UDP || NET_TCP (value: "n")
+ *  8 (value: "n")
+ *   Condition: NET_IPV6 && NET_IPV4 && (NET_UDP || NET_TCP) (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:127

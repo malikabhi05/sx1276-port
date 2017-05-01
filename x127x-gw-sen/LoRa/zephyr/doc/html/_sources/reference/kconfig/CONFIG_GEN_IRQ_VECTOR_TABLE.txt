@@ -1,0 +1,46 @@
+:orphan:
+
+.. title:: GEN_IRQ_VECTOR_TABLE
+
+.. option:: CONFIG_GEN_IRQ_VECTOR_TABLE:
+.. _CONFIG_GEN_IRQ_VECTOR_TABLE:
+
+This option controls whether a platform using gen_isr_tables
+needs an interrupt vector table created. Only disable this if the
+platform does not use a vector table at all, or requires the vector
+table to be in a format that is not an array of function pointers
+indexed by IRQ line. In the latter case, the vector table must be
+supplied by the application or architecture code.
+
+
+
+:Symbol:           GEN_IRQ_VECTOR_TABLE
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Generate an interrupt vector table" if GEN_ISR_TABLES (value: "n")
+:Default values:
+
+ *  y (value: "y")
+ *   Condition: GEN_ISR_TABLES (value: "n")
+ *  n (value: "n")
+ *   Condition: (none)
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NIOS2 (value: "n")
+:Locations:
+ * ../arch/Kconfig:130
+ * ../arch/riscv32/Kconfig:70
+ * ../arch/nios2/Kconfig:43

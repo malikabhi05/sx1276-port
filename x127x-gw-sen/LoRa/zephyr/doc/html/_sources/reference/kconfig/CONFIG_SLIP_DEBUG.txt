@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: SLIP_DEBUG
+
+.. option:: CONFIG_SLIP_DEBUG:
+.. _CONFIG_SLIP_DEBUG:
+
+This option enables debug support for SLIP driver.
+
+
+
+:Symbol:           SLIP_DEBUG
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "SLIP driver debug"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SLIP (value: "n")
+:Locations:
+ * ../drivers/slip/Kconfig:60

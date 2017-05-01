@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: BOARD_NUCLEO_L476RG
+
+.. option:: CONFIG_BOARD_NUCLEO_L476RG:
+.. _CONFIG_BOARD_NUCLEO_L476RG:
+
+The configuration item CONFIG_BOARD_NUCLEO_L476RG:
+
+:Symbol:           BOARD_NUCLEO_L476RG
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Nucleo L476RG Development Board" if SOC_STM32L476XX (value: "n")
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../boards/arm/nucleo_l476rg/Kconfig.board:9

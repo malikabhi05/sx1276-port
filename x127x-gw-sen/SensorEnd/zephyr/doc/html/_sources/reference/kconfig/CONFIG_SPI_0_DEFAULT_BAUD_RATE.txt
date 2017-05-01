@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: SPI_0_DEFAULT_BAUD_RATE
+
+.. option:: CONFIG_SPI_0_DEFAULT_BAUD_RATE:
+.. _CONFIG_SPI_0_DEFAULT_BAUD_RATE:
+
+The configuration item CONFIG_SPI_0_DEFAULT_BAUD_RATE:
+
+:Symbol:           SPI_0_DEFAULT_BAUD_RATE
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Port 0 default baud rate" if SPI_0 (value: "n")
+:Default values:
+
+ *  500000 (value: "n")
+ *   Condition: SPI_0 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SPI (value: "n")
+:Locations:
+ * ../drivers/spi/Kconfig:97

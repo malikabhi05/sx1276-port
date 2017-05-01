@@ -1,0 +1,43 @@
+:orphan:
+
+.. title:: OMIT_FRAME_POINTER
+
+.. option:: CONFIG_OMIT_FRAME_POINTER:
+.. _CONFIG_OMIT_FRAME_POINTER:
+
+Choose Y for best performance. On some architectures (including x86)
+this will favour code size and performance over debugability.
+
+Choose N in you wish to retain the frame pointer. This option may
+be useful if your application uses runtime backtracing and does not
+support parsing unwind tables.
+
+If unsure, disable OVERRIDE_FRAME_POINTER_DEFAULT to allow the compiler
+to adopt sensible defaults for your architecture.
+
+
+
+:Symbol:           OMIT_FRAME_POINTER
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Omit frame pointer" if OVERRIDE_FRAME_POINTER_DEFAULT (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: OVERRIDE_FRAME_POINTER_DEFAULT (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../misc/Kconfig:227

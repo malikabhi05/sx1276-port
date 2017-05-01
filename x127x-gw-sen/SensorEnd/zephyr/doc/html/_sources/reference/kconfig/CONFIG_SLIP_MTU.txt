@@ -1,0 +1,41 @@
+:orphan:
+
+.. title:: SLIP_MTU
+
+.. option:: CONFIG_SLIP_MTU:
+.. _CONFIG_SLIP_MTU:
+
+This option sets the MTU for the SLIP connection.
+The value is only used when fragmenting the network
+data into net_buf's. The actual SLIP connection
+does not use this value.
+
+
+
+:Symbol:           SLIP_MTU
+:Type:             int
+:Value:            "80"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [80, 1500]
+:Prompts:
+
+ *  "SLIP MTU"
+:Default values:
+
+ *  1500 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SLIP (value: "n")
+:Locations:
+ * ../drivers/slip/Kconfig:50

@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: TIMER_TMR_CMSDK_APB_1_IRQ_PRI
+
+.. option:: CONFIG_TIMER_TMR_CMSDK_APB_1_IRQ_PRI:
+.. _CONFIG_TIMER_TMR_CMSDK_APB_1_IRQ_PRI:
+
+Interrupt priority for Timer 1.
+
+
+
+:Symbol:           TIMER_TMR_CMSDK_APB_1_IRQ_PRI
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Interrupt Priority for Timer 1" if TIMER_TMR_CMSDK_APB_1 (value: "n")
+:Default values:
+
+ *  3 (value: "n")
+ *   Condition: TIMER_TMR_CMSDK_APB_1 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_FAMILY_ARM && COUNTER && TIMER_TMR_CMSDK_APB (value: "n")
+:Locations:
+ * ../drivers/counter/Kconfig.tmr_cmsdk_apb:60

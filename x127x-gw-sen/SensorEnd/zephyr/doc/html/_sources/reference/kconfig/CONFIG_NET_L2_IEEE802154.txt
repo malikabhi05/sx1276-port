@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: NET_L2_IEEE802154
+
+.. option:: CONFIG_NET_L2_IEEE802154:
+.. _CONFIG_NET_L2_IEEE802154:
+
+Add support for low rate WPAN IEEE 802.15.4 technology.
+
+
+
+:Symbol:           NET_L2_IEEE802154
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable IEEE 802.15.4 Radio"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ IEEE802154_CC2520 && NETWORKING || NETWORKING && SPI && IEEE802154_MCR20A || NETWORKING && SOC_NRF52840 && IEEE802154_NRF5 (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/ip/l2/ieee802154/Kconfig:7

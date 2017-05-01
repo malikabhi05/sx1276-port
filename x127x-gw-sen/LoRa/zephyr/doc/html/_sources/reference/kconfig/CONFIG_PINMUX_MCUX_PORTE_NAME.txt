@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: PINMUX_MCUX_PORTE_NAME
+
+.. option:: CONFIG_PINMUX_MCUX_PORTE_NAME:
+.. _CONFIG_PINMUX_MCUX_PORTE_NAME:
+
+The configuration item CONFIG_PINMUX_MCUX_PORTE_NAME:
+
+:Symbol:           PINMUX_MCUX_PORTE_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Pinmux Port E driver name" if PINMUX_MCUX_PORTE (value: "n")
+:Default values:
+
+ *  "porte"
+ *   Condition: PINMUX_MCUX_PORTE (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ PINMUX_MCUX && PINMUX (value: "n")
+:Locations:
+ * ../drivers/pinmux/Kconfig.mcux:67

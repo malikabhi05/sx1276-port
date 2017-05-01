@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: NET_SAMPLES_MY_IPV6_ADDR
+
+.. option:: CONFIG_NET_SAMPLES_MY_IPV6_ADDR:
+.. _CONFIG_NET_SAMPLES_MY_IPV6_ADDR:
+
+Use 2001:db8::1 here if uncertain.
+
+
+
+:Symbol:           NET_SAMPLES_MY_IPV6_ADDR
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "My IPv6 address"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_SAMPLES_IP_ADDRESSES && NET_IPV6 (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.samples:20

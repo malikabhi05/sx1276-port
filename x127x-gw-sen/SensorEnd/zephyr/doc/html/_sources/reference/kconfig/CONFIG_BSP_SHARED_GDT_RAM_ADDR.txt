@@ -1,0 +1,40 @@
+:orphan:
+
+.. title:: BSP_SHARED_GDT_RAM_ADDR
+
+.. option:: CONFIG_BSP_SHARED_GDT_RAM_ADDR:
+.. _CONFIG_BSP_SHARED_GDT_RAM_ADDR:
+
+Address of the memory shared between the BSP and the Bootloader in order
+to store the GDT.
+
+
+
+:Symbol:           BSP_SHARED_GDT_RAM_ADDR
+:Type:             hex
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Address of the shared RAM with the QMSI Bootloader"
+ *  "Address of the GDT in RAM shared with the QMSI Bootloader"
+:Default values:
+
+ *  0x00281FE0 (value: "n")
+ *   Condition: (none)
+ *  0xA8013FE0 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ X86 && SOC_QUARK_SE_C1000 && X86 (value: "n")
+:Locations:
+ * ../arch/x86/soc/intel_quark/quark_d2000/Kconfig:21
+ * ../arch/x86/soc/intel_quark/quark_se/Kconfig:92

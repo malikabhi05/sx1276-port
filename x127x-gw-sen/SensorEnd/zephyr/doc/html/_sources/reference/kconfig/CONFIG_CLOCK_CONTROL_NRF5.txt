@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: CLOCK_CONTROL_NRF5
+
+.. option:: CONFIG_CLOCK_CONTROL_NRF5:
+.. _CONFIG_CLOCK_CONTROL_NRF5:
+
+Enable support for the Nordic Semiconductor nRF5x series SoC clock
+driver.
+
+
+
+:Symbol:           CLOCK_CONTROL_NRF5
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "NRF5 Clock controller support" if SOC_FAMILY_NRF5 (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: SOC_FAMILY_NRF5 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ SOC_SERIES_NRF51X || SOC_SERIES_NRF52X (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ CLOCK_CONTROL (value: "n")
+:Locations:
+ * ../drivers/clock_control/Kconfig.nrf5:7

@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: NET_6LO_CONTEXT
+
+.. option:: CONFIG_NET_6LO_CONTEXT:
+.. _CONFIG_NET_6LO_CONTEXT:
+
+Enables 6lowpan context based compression based on information
+received in RA(Router Advertisement) message.
+
+
+
+:Symbol:           NET_6LO_CONTEXT
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable 6lowpan context based compression" if NET_6LO (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: NET_6LO (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL && NET_IPV6 (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.ipv6:71

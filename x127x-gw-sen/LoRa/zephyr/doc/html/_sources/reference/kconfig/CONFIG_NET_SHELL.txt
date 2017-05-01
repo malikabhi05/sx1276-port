@@ -1,0 +1,37 @@
+:orphan:
+
+.. title:: NET_SHELL
+
+.. option:: CONFIG_NET_SHELL:
+.. _CONFIG_NET_SHELL:
+
+Activate shell module that provides network commands like
+ping to the console.
+
+
+
+:Symbol:           NET_SHELL
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Enable network shell utilities"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_CONSOLE_SHELL`
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:32

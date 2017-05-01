@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Device Drivers and Device Model &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../index.html"/>
+        <link rel="next" title="Subsystems" href="../subsystems/subsystems.html"/>
+        <link rel="prev" title="Legacy Applications Porting Guide" href="../porting/application.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Device Drivers and Device Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standard-drivers">Standard Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synchronous-calls">Synchronous Calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver-apis">Driver APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver-data-structures">Driver Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#subsystems-and-api-structures">Subsystems and API Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#single-driver-multiple-instances">Single Driver, Multiple Instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initialization-levels">Initialization Levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-drivers">System Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Device Drivers and Device Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/drivers/drivers.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="device-drivers-and-device-model">
+<span id="device-drivers"></span><h1>Device Drivers and Device Model<a class="headerlink" href="#device-drivers-and-device-model" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The Zephyr kernel supports a variety of device drivers. The specific set of
+device drivers available for an application&#8217;s board configuration varies
+according to the associated hardware components and device driver software.</p>
+<p>The Zephyr device model provides a consistent device model for configuring the
+drivers that are part of a system. The device model is responsible
+for initializing all the drivers configured into the system.</p>
+<p>Each type of driver (UART, SPI, I2C) is supported by a generic type API.</p>
+<p>In this model the driver fills in the pointer to the structure containing the
+function pointers to its API functions during driver initialization. These
+structures are placed into the RAM section in initialization level order.</p>
+</div>
+<div class="section" id="standard-drivers">
+<h2>Standard Drivers<a class="headerlink" href="#standard-drivers" title="Permalink to this headline">¶</a></h2>
+<p>Device drivers which are present on all supported board configurations
+are listed below.</p>
+<ul>
+<li><p class="first"><strong>Interrupt controller</strong>: This device driver is used by the kernel&#8217;s
+interrupt management subsystem.</p>
+</li>
+<li><p class="first"><strong>Timer</strong>: This device driver is used by the kernel&#8217;s system clock and
+hardware clock subsystem.</p>
+</li>
+<li><p class="first"><strong>Serial communication</strong>: This device driver is used by the kernel&#8217;s
+system console subsystem.</p>
+</li>
+<li><p class="first"><strong>Random number generator</strong>: This device driver provides a source of random
+numbers.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Certain implementations of this device driver do not generate sequences of
+values that are truly random.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="synchronous-calls">
+<h2>Synchronous Calls<a class="headerlink" href="#synchronous-calls" title="Permalink to this headline">¶</a></h2>
+<p>Zephyr provides a set of device drivers for multiple boards. Each driver
+should support an interrupt-based implementation, rather than polling, unless
+the specific hardware does not provide any interrupt.</p>
+<p>High-level calls accessed through device-specific APIs, such as i2c.h
+or spi.h, are usually intended as synchronous. Thus, these calls should be
+blocking.</p>
+</div>
+<div class="section" id="driver-apis">
+<h2>Driver APIs<a class="headerlink" href="#driver-apis" title="Permalink to this headline">¶</a></h2>
+<p>The following APIs for device drivers are provided by <code class="file docutils literal"><span class="pre">device.h</span></code>. The APIs
+are intended for use in device drivers only and should not be used in
+applications.</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="../api/device.html#c.DEVICE_INIT" title="DEVICE_INIT"><code class="xref c c-func docutils literal"><span class="pre">DEVICE_INIT()</span></code></a></dt>
+<dd>create device object and set it up for boot time initialization.</dd>
+<dt><a class="reference internal" href="../api/device.html#c.DEVICE_AND_API_INIT" title="DEVICE_AND_API_INIT"><code class="xref c c-func docutils literal"><span class="pre">DEVICE_AND_API_INIT()</span></code></a></dt>
+<dd>Create device object and set it up for boot time initialization.
+This also takes a pointer to driver API struct for link time
+pointer assignment.</dd>
+<dt><a class="reference internal" href="../api/device.html#c.DEVICE_NAME_GET" title="DEVICE_NAME_GET"><code class="xref c c-func docutils literal"><span class="pre">DEVICE_NAME_GET()</span></code></a></dt>
+<dd>Expands to the full name of a global device object.</dd>
+<dt><a class="reference internal" href="../api/device.html#c.DEVICE_GET" title="DEVICE_GET"><code class="xref c c-func docutils literal"><span class="pre">DEVICE_GET()</span></code></a></dt>
+<dd>Obtain a pointer to a device object by name.</dd>
+<dt><a class="reference internal" href="../api/device.html#c.DEVICE_DECLARE" title="DEVICE_DECLARE"><code class="xref c c-func docutils literal"><span class="pre">DEVICE_DECLARE()</span></code></a></dt>
+<dd>Declare a device object.</dd>
+</dl>
+</div>
+<div class="section" id="driver-data-structures">
+<h2>Driver Data Structures<a class="headerlink" href="#driver-data-structures" title="Permalink to this headline">¶</a></h2>
+<p>The device initialization macros populate some data structures at build time
+which are
+split into read-only and runtime-mutable parts. At a high level we have:</p>
+<div class="highlight-C"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">device</span> <span class="p">{</span>
+      <span class="k">struct</span> <span class="n">device_config</span> <span class="o">*</span><span class="n">config</span><span class="p">;</span>
+      <span class="kt">void</span> <span class="o">*</span><span class="n">driver_api</span><span class="p">;</span>
+      <span class="kt">void</span> <span class="o">*</span><span class="n">driver_data</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <cite>config</cite> member is for read-only configuration data set at build time. For
+example, base memory mapped IO addresses, IRQ line numbers, or other fixed
+physical characteristics of the device. This is the <cite>config_info</cite> structure
+passed to the <cite>DEVICE_*INIT()</cite> macros.</p>
+<p>The <cite>driver_data</cite> struct is kept in RAM, and is used by the driver for
+per-instance runtime housekeeping. For example, it may contain reference counts,
+semaphores, scratch buffers, etc.</p>
+<p>The <cite>driver_api</cite> struct maps generic subsystem APIs to the device-specific
+implementations in the driver. It is typically read-only and populated at
+build time. The next section describes this in more detail.</p>
+</div>
+<div class="section" id="subsystems-and-api-structures">
+<h2>Subsystems and API Structures<a class="headerlink" href="#subsystems-and-api-structures" title="Permalink to this headline">¶</a></h2>
+<p>Most drivers will be targeting a device-independent subsystem API.
+Applications can simply program to that generic API, and application
+code is not specific to any particular driver implementation.</p>
+<p>A subsystem API definition typically looks like this:</p>
+<div class="highlight-C"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="nf">int</span> <span class="p">(</span><span class="o">*</span><span class="n">subsystem_do_this_t</span><span class="p">)(</span><span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">device</span><span class="p">,</span> <span class="kt">int</span> <span class="n">foo</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bar</span><span class="p">);</span>
+<span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">subsystem_do_that_t</span><span class="p">)(</span><span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">device</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">baz</span><span class="p">);</span>
+
+<span class="k">struct</span> <span class="n">subsystem_api</span> <span class="p">{</span>
+      <span class="n">subsystem_do_this_t</span> <span class="n">do_this</span><span class="p">;</span>
+      <span class="n">subsystem_do_that_t</span> <span class="n">do_that</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">int</span> <span class="nf">subsystem_do_this</span><span class="p">(</span><span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">device</span><span class="p">,</span> <span class="kt">int</span> <span class="n">foo</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bar</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="k">struct</span> <span class="n">subsystem_api</span> <span class="o">*</span><span class="n">api</span><span class="p">;</span>
+
+      <span class="n">api</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">subsystem_api</span> <span class="o">*</span><span class="p">)</span><span class="n">device</span><span class="o">-&gt;</span><span class="n">driver_api</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">api</span><span class="o">-&gt;</span><span class="n">do_this</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">bar</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">subsystem_do_that</span><span class="p">(</span><span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">device</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">baz</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="k">struct</span> <span class="n">subsystem_api</span> <span class="o">*</span><span class="n">api</span><span class="p">;</span>
+
+      <span class="n">api</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">subsystem_api</span> <span class="o">*</span><span class="p">)</span><span class="n">device</span><span class="o">-&gt;</span><span class="n">driver_api</span><span class="p">;</span>
+      <span class="n">api</span><span class="o">-&gt;</span><span class="n">do_that</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">bar</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In general, it&#8217;s best to use <cite>__ASSERT()</cite> macros instead of
+propagating return values unless the failure is expected to occur during
+the normal course of operation (such as a storage device full). Bad
+parameters, programming errors, consistency checks, pathological/unrecoverable
+failures, etc., should be handled by assertions.</p>
+<p>When it is appropriate to return error conditions for the caller to check, 0
+should be returned on success and a POSIX errno.h code returned on failure.
+See <a class="reference external" href="https://wiki.zephyrproject.org/view/Coding_conventions#Return_Codes">https://wiki.zephyrproject.org/view/Coding_conventions#Return_Codes</a> for
+details about this.</p>
+<p>A driver implementing a particular subsystem will define the real implementation
+of these APIs, and populate an instance of subsystem_api structure:</p>
+<div class="highlight-C"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">int</span> <span class="nf">my_driver_do_this</span><span class="p">(</span><span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">device</span><span class="p">,</span> <span class="kt">int</span> <span class="n">foo</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bar</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">my_driver_do_that</span><span class="p">(</span><span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">device</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">baz</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">struct</span> <span class="n">subsystem_api</span> <span class="n">my_driver_api_funcs</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="p">.</span><span class="n">do_this</span> <span class="o">=</span> <span class="n">my_driver_do_this</span><span class="p">,</span>
+      <span class="p">.</span><span class="n">do_that</span> <span class="o">=</span> <span class="n">my_driver_do_that</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The driver would then pass <cite>my_driver_api_funcs</cite> as the <cite>api</cite> argument to
+<cite>DEVICE_AND_API_INIT()</cite>, or manually assign it to <cite>device-&gt;driver_api</cite> in the
+driver init function.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since pointers to the API functions are referenced in the driver_api`
+struct, they will always be included in the binary even if unused;
+<cite>gc-sections</cite> linker option will always see at least one reference to
+them. Providing for link-time size optimizations with driver APIs in
+most cases requires that the optional feature be controlled by a
+Kconfig option.</p>
+</div>
+</div>
+<div class="section" id="single-driver-multiple-instances">
+<h2>Single Driver, Multiple Instances<a class="headerlink" href="#single-driver-multiple-instances" title="Permalink to this headline">¶</a></h2>
+<p>Some drivers may be instantiated multiple times in a given system. For example
+there can be multiple GPIO banks, or multiple UARTS. Each instance of the driver
+will have a different <cite>config_info</cite> struct and <cite>driver_data</cite> struct.</p>
+<p>Configuring interrupts for multiple drivers instances is a special case. If each
+instance needs to configure a different interrupt line, this can be accomplished
+through the use of per-instance configuration functions, since the parameters
+to <cite>IRQ_CONNECT()</cite> need to be resolvable at build time.</p>
+<p>For example, let&#8217;s say we need to configure two instances of <cite>my_driver</cite>, each
+with a different interrupt line. In <cite>drivers/subsystem/subsystem_my_driver.h</cite>:</p>
+<div class="highlight-C"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">my_driver_config_irq_t</span><span class="p">)(</span><span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">device</span><span class="p">);</span>
+
+<span class="k">struct</span> <span class="n">my_driver_config</span> <span class="p">{</span>
+      <span class="kt">uint32_t</span> <span class="n">base_addr</span><span class="p">;</span>
+      <span class="n">my_driver_config_irq_t</span> <span class="n">config_func</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In the implementation of the common init function:</p>
+<div class="highlight-C"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_driver_isr</span><span class="p">(</span><span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="cm">/* Handle interrupt */</span>
+      <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">my_driver_init</span><span class="p">(</span><span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="k">const</span> <span class="k">struct</span> <span class="n">my_driver_config</span> <span class="o">*</span><span class="n">config</span> <span class="o">=</span> <span class="n">device</span><span class="o">-&gt;</span><span class="n">config</span><span class="o">-&gt;</span><span class="n">config_info</span><span class="p">;</span>
+
+      <span class="cm">/* Do other initialization stuff */</span>
+      <span class="p">...</span>
+
+      <span class="n">config</span><span class="o">-&gt;</span><span class="n">config_func</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+
+      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then when the particular instance is declared:</p>
+<div class="highlight-C"><div class="highlight"><pre><span></span><span class="cp">#if CONFIG_MY_DRIVER_0</span>
+
+<span class="n">DEVICE_DECLARE</span><span class="p">(</span><span class="n">my_driver_0</span><span class="p">);</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="n">my_driver_config_irq_0</span>
+<span class="p">{</span>
+      <span class="n">IRQ_CONNECT</span><span class="p">(</span><span class="n">MY_DRIVER_0_IRQ</span><span class="p">,</span> <span class="n">MY_DRIVER_0_PRI</span><span class="p">,</span> <span class="n">my_driver_isr</span><span class="p">,</span>
+                  <span class="n">DEVICE_GET</span><span class="p">(</span><span class="n">my_driver_0</span><span class="p">),</span> <span class="n">MY_DRIVER_0_FLAGS</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="k">static</span> <span class="k">struct</span> <span class="n">my_driver_config</span> <span class="n">my_driver_config_0</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="p">.</span><span class="n">base_addr</span> <span class="o">=</span> <span class="n">MY_DRIVER_0_BASE_ADDR</span><span class="p">;</span>
+      <span class="p">.</span><span class="n">config_func</span> <span class="o">=</span> <span class="n">my_driver_config_irq_0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">struct</span> <span class="n">my_driver_data_0</span><span class="p">;</span>
+
+<span class="n">DEVICE_AND_API_INIT</span><span class="p">(</span><span class="n">my_driver_0</span><span class="p">,</span> <span class="n">MY_DRIVER_0_NAME</span><span class="p">,</span> <span class="n">my_driver_init</span><span class="p">,</span>
+                    <span class="o">&amp;</span><span class="n">my_driver_data_0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_driver_config_0</span><span class="p">,</span> <span class="n">SECONDARY</span><span class="p">,</span>
+                    <span class="n">MY_DRIVER_0_PRIORITY</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_driver_api_funcs</span><span class="p">);</span>
+
+<span class="cp">#endif </span><span class="cm">/* CONFIG_MY_DRIVER_0 */</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>Note the use of <cite>DEVICE_DECLARE()</cite> to avoid a circular dependency on providing
+the IRQ handler argument and the definition of the device itself.</p>
+</div>
+<div class="section" id="initialization-levels">
+<h2>Initialization Levels<a class="headerlink" href="#initialization-levels" title="Permalink to this headline">¶</a></h2>
+<p>Drivers may depend on other drivers being initialized first, or
+require the use of kernel services. The DEVICE_INIT() APIs allow the user to
+specify at what time during the boot sequence the init function will be
+executed. Any driver will specify one of five initialization levels:</p>
+<dl class="docutils">
+<dt><cite>PRE_KERNEL_1</cite></dt>
+<dd>Used for devices that have no dependencies, such as those that rely
+solely on hardware present in the processor/SOC. These devices cannot
+use any kernel services during configuration, since the services are
+not yet available. The interrupt subsystem will be configured however
+so it&#8217;s OK to set up interrupts. Init functions at this level run on the
+interrupt stack.</dd>
+<dt><cite>PRE_KERNEL_2</cite></dt>
+<dd>Used for devices that rely on the initialization of devices initialized
+as part of the PRIMARY level. These devices cannot use any kernel
+services during configuration, since the kernel services are not yet
+available. Init functions at this level run on the interrupt stack.</dd>
+<dt><cite>POST_KERNEL</cite></dt>
+<dd>Used for devices that require kernel services during configuration.
+Init functions at this level run in context of the kernel main task.</dd>
+<dt><cite>APPLICATION</cite></dt>
+<dd>Used for application components (i.e. non-kernel components) that need
+automatic configuration. These devices can use all services provided by
+the kernel during configuration. Init functions at this level run on
+the kernel main task.</dd>
+</dl>
+<p>Within each initialization level you may specify a priority level, relative to
+other devices in the same initialization level. The priority level is specified
+as an integer value in the range 0 to 99; lower values indicate earlier
+initialization.  The priority level must be a decimal integer literal without
+leading zeroes or sign (e.g. 32), or an equivalent symbolic name (e.g.
+<cite>#define MY_INIT_PRIO 32</cite>); symbolic expressions are <em>not</em> permitted (e.g.
+<cite>CONFIG_KERNEL_INIT_PRIORITY_DEFAULT + 5</cite>).</p>
+</div>
+<div class="section" id="system-drivers">
+<h2>System Drivers<a class="headerlink" href="#system-drivers" title="Permalink to this headline">¶</a></h2>
+<p>In some cases you may just need to run a function at boot. Special <cite>SYS_INIT</cite>
+macros exist that map to <cite>DEVICE_INIT()</cite> or <cite>DEVICE_INIT_PM()</cite> calls.
+For <cite>SYS_INIT()</cite> there are no config or runtime data structures and there isn&#8217;t a way
+to later get a device pointer by name. The same policies for initialization
+level and priority apply.</p>
+<p>For <cite>SYS_INIT_PM()</cite> you can obtain pointers by name, see <a class="reference internal" href="../subsystems/power_management.html#power-management"><span class="std std-ref">power management</span></a> section.</p>
+<p><code class="xref c c-func docutils literal"><span class="pre">SYS_INIT()</span></code></p>
+<p><code class="xref c c-func docutils literal"><span class="pre">SYS_INIT_PM()</span></code></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../subsystems/subsystems.html" class="btn btn-neutral float-right" title="Subsystems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../porting/application.html" class="btn btn-neutral" title="Legacy Applications Porting Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

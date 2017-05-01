@@ -1,0 +1,34 @@
+:orphan:
+
+.. title:: BLUETOOTH_SPI_CHIP_SELECT_DEV_NAME
+
+.. option:: CONFIG_BLUETOOTH_SPI_CHIP_SELECT_DEV_NAME:
+.. _CONFIG_BLUETOOTH_SPI_CHIP_SELECT_DEV_NAME:
+
+This option specifies the name of GPIO driver controlling
+the Chip Select (CS) line.
+
+
+
+:Symbol:           BLUETOOTH_SPI_CHIP_SELECT_DEV_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Chip Select (CS) line driver name" if BLUETOOTH_SPI_BLUENRG (value: "n")
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BLUETOOTH_HCI && BLUETOOTH && BLUETOOTH_SPI (value: "n")
+:Locations:
+ * ../drivers/bluetooth/hci/Kconfig:107

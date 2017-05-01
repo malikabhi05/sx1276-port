@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: ETH_MCUX_RX_BUFFERS
+
+.. option:: CONFIG_ETH_MCUX_RX_BUFFERS:
+.. _CONFIG_ETH_MCUX_RX_BUFFERS:
+
+Set the number of RX buffers provided to the MCUX driver.
+
+
+
+:Symbol:           ETH_MCUX_RX_BUFFERS
+:Type:             int
+:Value:            "1"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [1, 16]
+:Prompts:
+
+ *  "Number of MCUX RX buffers" if ETH_MCUX (value: "n")
+:Default values:
+
+ *  2 (value: "n")
+ *   Condition: ETH_MCUX (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ ETH_MCUX (value: "n")
+:Locations:
+ * ../drivers/ethernet/Kconfig.mcux:32

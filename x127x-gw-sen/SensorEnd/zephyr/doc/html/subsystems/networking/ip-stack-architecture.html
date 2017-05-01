@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IP Stack Architecture &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Networking" href="networking.html"/>
+        <link rel="next" title="Network Connectivity API" href="networking-api-usage.html"/>
+        <link rel="prev" title="Migrating from Zephyr v1.6 IP Stack to v1.7" href="ip-stack-migrate.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../subsystems.html">Subsystems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/bluetooth.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../c_library.html">Standard C Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="networking.html">Networking</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip-stack-migrate.html">Migrating from Zephyr v1.6 IP Stack to v1.7</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IP Stack Architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#high-level-overview-of-the-ip-stack">High level overview of the IP stack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#network-data-flow">Network data flow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="networking-api-usage.html">Network Connectivity API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2-and-drivers.html">L2 Stack and Drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="network-management-api.html">Network Management API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buffers.html">Network Buffers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qemu_setup.html">Networking with Qemu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../power_management.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sensor.html">Sensor Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell.html">Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../test/ztest.html">Test Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usb/usb.html">USB device stack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../subsystems.html">Subsystems</a> &raquo;</li>
+        
+          <li><a href="networking.html">Networking</a> &raquo;</li>
+        
+      <li>IP Stack Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/subsystems/networking/ip-stack-architecture.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ip-stack-architecture">
+<span id="id1"></span><h1>IP Stack Architecture<a class="headerlink" href="#ip-stack-architecture" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="high-level-overview-of-the-ip-stack">
+<h2>High level overview of the IP stack<a class="headerlink" href="#high-level-overview-of-the-ip-stack" title="Permalink to this headline">¶</a></h2>
+<div class="align-center figure" id="id2">
+<img alt="Overview of the IP stack architecture" src="../../_images/ip-stack-architecture.svg" /><p class="caption"><span class="caption-text">Network stack overview</span></p>
+</div>
+<p><em>The IP stack is layered and it consists of the following parts:</em></p>
+<ul class="simple">
+<li><strong>Networking Application.</strong> This application uses the connectivity API to
+manipulate a network connection, and management API to set network
+related parameters such as starting a scan (when applicable),
+setting IP address to a network interface, etc.</li>
+<li><strong>Core IP stack.</strong> This provides implementations for
+various protocols such as IPv6, IPv4, UDP, TCP, ICMPv4 and ICMPv6.</li>
+<li><strong>Network interface abstraction layer.</strong> This provides functionality
+that is common in all the network interfaces, such as acquiring
+an IP address, etc.</li>
+<li><strong>Generic L2 layer.</strong> This provides common API for sending and receiving
+data to and from an actual network device.</li>
+<li><strong>L2 network technology component.</strong> These components include Ethernet,
+IEEE 802.15.4, Bluetooth, etc. Some of these technologies support IPv6
+header compression (6LoWPAN), which is done in its own layer. For
+example ARP for IPv4 is done in the Ethernet component.</li>
+<li><strong>Network device driver.</strong> The actual low-level device driver handles the
+physical sending or receiving of a network packet.</li>
+</ul>
+</div>
+<div class="section" id="network-data-flow">
+<h2>Network data flow<a class="headerlink" href="#network-data-flow" title="Permalink to this headline">¶</a></h2>
+<div class="align-center figure" id="id3">
+<img alt="Network data flow" src="../../_images/ip-stack-data-flow.svg" /><p class="caption"><span class="caption-text">Network data flow</span></p>
+</div>
+<p>The application typically consists of one or more tasks or threads
+that execute the application logic. When using the network
+connectivity APIs, following things will happen.</p>
+<p><em>Data receiving (RX):</em></p>
+<ol class="arabic simple">
+<li>A network data packet is received by a device driver.</li>
+<li>The device driver allocates enough network buffers to store the received
+data. The network buffers are then passed to the RX FIFO
+for further processing. The RX FIFO is used as a way to separate
+the data processing pipeline (bottom-half) as the device driver is
+running in interrupt context and it must do its processing very fast.</li>
+<li>The RX thread reads the RX FIFO and passes the data to the correct
+L2 driver. After the L2 driver has checked the packet, the packet is
+passed to L3 processing. The L3 layer checks if the packet is a proper
+IPv6 or IPv4 packet. If the packet contains UDP or TCP data, it
+is then sent to correct application via a function callback.
+This also means that the application data processing in that callback
+is run in thread context even if the actual application is running
+in task context. The data processing in the application callback should
+be done fast in order not to block the system too long.
+There is only one RX thread in the system. The stack size of the RX
+thread can be tweaked via Kconfig option but it should be kept as
+small as possible. This also means that stack utilization in the
+data processing callback should be minimized in order to avoid stack
+overflow.</li>
+<li>The application will then receive the data, which is stored inside a chain
+of net_bufs. The application now owns the data. After it has finished working
+with it, the application should release the net_bufs data by calling
+<cite>net_nbuf_unref()</cite>.</li>
+</ol>
+<p><em>Data sending (TX):</em></p>
+<ol class="arabic simple">
+<li>The application should use the connectivity API when the application is
+ready to send data. The sent data is checked by the correct L2 layer module
+and if everything is ok, the data is placed into the network interface TX
+queue. The network interface is typically selected to be the same interface
+for reply data packets or the interface is selected according to the routing
+algorithm. The application should not free the data packet if it was
+correctly placed into TX queue; the network driver will release the packet
+after it is sent. If the connectivity API sending function returns an error
+to the application, that means the packet was not sent correctly and the
+application needs to free the packet.</li>
+<li>Each network interface has a TX thread associated with it and the TX thread
+will send the packet to the correct device driver.</li>
+<li>If the device driver is able to inject the network packet into the
+network, then it will release the packet. Typically there are no
+retransmits at this lower level so usually the packet is released
+even if not sent correctly. This depends on the technology being used.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="networking-api-usage.html" class="btn btn-neutral float-right" title="Network Connectivity API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ip-stack-migrate.html" class="btn btn-neutral" title="Migrating from Zephyr v1.6 IP Stack to v1.7" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

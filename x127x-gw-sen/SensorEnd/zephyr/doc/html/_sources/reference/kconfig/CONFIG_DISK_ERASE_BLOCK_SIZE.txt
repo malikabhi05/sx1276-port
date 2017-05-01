@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: DISK_ERASE_BLOCK_SIZE
+
+.. option:: CONFIG_DISK_ERASE_BLOCK_SIZE:
+.. _CONFIG_DISK_ERASE_BLOCK_SIZE:
+
+This is typically the minimum block size that
+is erased at one time in flash storage.
+
+
+
+:Symbol:           DISK_ERASE_BLOCK_SIZE
+:Type:             hex
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  0x1000 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ FLASH && SPI && BOARD_ARDUINO_101 && SPI_FLASH_W25QXXDV && DISK_ACCESS_FLASH (value: "n")
+:Locations:
+ * ../subsys/disk/Kconfig:59
+ * ../boards/x86/arduino_101/Kconfig.defconfig:81

@@ -1,0 +1,42 @@
+:orphan:
+
+.. title:: MULTITHREADING
+
+.. option:: CONFIG_MULTITHREADING:
+.. _CONFIG_MULTITHREADING:
+
+If disabled, only the main thread is available, so a main() function
+must be provided. Interrupts are available. Kernel objects will most
+probably not behave as expected, especially with regards to pending,
+since the main thread cannot pend, it being the only thread in the
+system.
+
+Many drivers and subsystems will not work with this option; use only
+when you REALLY know what you are doing.
+
+
+
+:Symbol:           MULTITHREADING
+:Type:             bool
+:Value:            "y"
+:User value:       (no user value)
+:Visibility:       "y"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Multi-threading"
+:Default values:
+
+ *  y (value: "y")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../kernel/Kconfig:18

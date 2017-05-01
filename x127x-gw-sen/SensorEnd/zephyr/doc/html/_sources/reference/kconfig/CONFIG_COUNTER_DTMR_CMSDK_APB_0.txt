@@ -1,0 +1,41 @@
+:orphan:
+
+.. title:: COUNTER_DTMR_CMSDK_APB_0
+
+.. option:: CONFIG_COUNTER_DTMR_CMSDK_APB_0:
+.. _CONFIG_COUNTER_DTMR_CMSDK_APB_0:
+
+Enable support for Counter 0.
+
+
+
+:Symbol:           COUNTER_DTMR_CMSDK_APB_0
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Counter 0 driver" if !TIMER_DTMR_CMSDK_APB_0 (value: "y")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: !TIMER_DTMR_CMSDK_APB_0 (value: "y")
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ COUNTER && BOARD_V2M_BEETLE && COUNTER_DTMR_CMSDK_APB (value: "n")
+:Locations:
+ * ../drivers/counter/Kconfig.dtmr_cmsdk_apb:58
+ * ../boards/arm/mps2_an385/Kconfig.defconfig:94
+ * ../boards/arm/v2m_beetle/Kconfig.defconfig:94

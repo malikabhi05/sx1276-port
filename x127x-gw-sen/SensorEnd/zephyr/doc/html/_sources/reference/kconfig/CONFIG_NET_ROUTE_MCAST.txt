@@ -1,0 +1,32 @@
+:orphan:
+
+.. title:: NET_ROUTE_MCAST
+
+.. option:: CONFIG_NET_ROUTE_MCAST:
+.. _CONFIG_NET_ROUTE_MCAST:
+
+The configuration item CONFIG_NET_ROUTE_MCAST:
+
+:Symbol:           NET_ROUTE_MCAST
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: NET_ROUTE (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ NETWORKING && NETWORKING && NET_RPL && NET_RPL_MOP3 (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:76

@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: IEEE802154_NRF5_CCA_CORR_THRESHOLD
+
+.. option:: CONFIG_IEEE802154_NRF5_CCA_CORR_THRESHOLD:
+.. _CONFIG_IEEE802154_NRF5_CCA_CORR_THRESHOLD:
+
+The configuration item CONFIG_IEEE802154_NRF5_CCA_CORR_THRESHOLD:
+
+:Symbol:           IEEE802154_NRF5_CCA_CORR_THRESHOLD
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "nRF52 IEEE 802.15.4 CCA Correlator threshold"
+:Default values:
+
+ *  45 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ IEEE802154_NRF5 || IEEE802154_NRF5_RAW (value: "n")
+:Locations:
+ * ../drivers/ieee802154/Kconfig.nrf5:61

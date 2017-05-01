@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: NET_RX_STACK_SIZE
+
+.. option:: CONFIG_NET_RX_STACK_SIZE:
+.. _CONFIG_NET_RX_STACK_SIZE:
+
+Set the RX thread stack size in bytes. The RX thread is waiting
+data from network. There is one RX thread in the system.
+This value is a baseline and the actual RX stack size might
+be bigger depending on what features are enabled.
+
+
+
+:Symbol:           NET_RX_STACK_SIZE
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "RX thread stack size"
+:Default values:
+
+ *  1200 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.stack:21

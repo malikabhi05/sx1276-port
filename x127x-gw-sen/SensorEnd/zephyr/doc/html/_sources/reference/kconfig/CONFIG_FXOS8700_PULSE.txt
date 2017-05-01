@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: FXOS8700_PULSE
+
+.. option:: CONFIG_FXOS8700_PULSE:
+.. _CONFIG_FXOS8700_PULSE:
+
+Enable pulse detection
+
+
+
+:Symbol:           FXOS8700_PULSE
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Pulse detection"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ FXOS8700_TRIGGER (value: "n")
+:Locations:
+ * ../drivers/sensor/fxos8700/Kconfig:127

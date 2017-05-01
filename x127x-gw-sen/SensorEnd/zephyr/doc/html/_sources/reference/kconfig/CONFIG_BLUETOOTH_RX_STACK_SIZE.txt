@@ -1,0 +1,51 @@
+:orphan:
+
+.. title:: BLUETOOTH_RX_STACK_SIZE
+
+.. option:: CONFIG_BLUETOOTH_RX_STACK_SIZE:
+.. _CONFIG_BLUETOOTH_RX_STACK_SIZE:
+
+Size of the receiving thread stack. This is the context from
+which all event callbacks to the application occur. The
+default value is sufficient for basic operation, but if the
+application needs to do advanced things in its callbacks that
+require extra stack space, this value can be increased to
+accommodate for that.
+
+
+
+:Symbol:           BLUETOOTH_RX_STACK_SIZE
+:Type:             int
+:Value:            "1024"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [1024, 65536]
+ *  [1024, 65536]
+ *  [512, 65536] if CONFIG_BLUETOOTH_HCI_RAW (value: "n")
+:Prompts:
+
+ *  "Size of the receiving thread stack"
+ *  "Size of the receiving thread stack" if BLUETOOTH_HCI_HOST || BLUETOOTH_RECV_IS_RX_THREAD (value: "n")
+:Default values:
+
+ *  1024 (value: "n")
+ *   Condition: (none)
+ *  1024 (value: "n")
+ *   Condition: BLUETOOTH_HCI_HOST || BLUETOOTH_RECV_IS_RX_THREAD (value: "n")
+ *  512 (value: "n")
+ *   Condition: CONFIG_BLUETOOTH_HCI_RAW && (BLUETOOTH_HCI_HOST || BLUETOOTH_RECV_IS_RX_THREAD) (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BLUETOOTH_HCI && BLUETOOTH (value: "n")
+:Locations:
+ * ../drivers/bluetooth/nble/Kconfig:62
+ * ../subsys/bluetooth/host/Kconfig:86

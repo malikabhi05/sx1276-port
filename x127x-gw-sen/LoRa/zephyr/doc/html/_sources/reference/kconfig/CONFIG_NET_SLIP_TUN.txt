@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: NET_SLIP_TUN
+
+.. option:: CONFIG_NET_SLIP_TUN:
+.. _CONFIG_NET_SLIP_TUN:
+
+The host needs to have tunslip running in order
+to receive and send network packets via the SLIP driver.
+Choose this if unsure.
+
+
+:Symbol:           NET_SLIP_TUN
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "TUN SLIP driver"
+:Default values:
+ (no default values)
+:Selects:
+
+ *  :option:`CONFIG_SLIP`
+ *  :option:`CONFIG_UART_PIPE`
+ *  :option:`CONFIG_UART_INTERRUPT_DRIVEN`
+ *  :option:`CONFIG_NET_L2_DUMMY`
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:183

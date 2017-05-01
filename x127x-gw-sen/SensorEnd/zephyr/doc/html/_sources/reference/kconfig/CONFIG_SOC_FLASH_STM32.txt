@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: SOC_FLASH_STM32
+
+.. option:: CONFIG_SOC_FLASH_STM32:
+.. _CONFIG_SOC_FLASH_STM32:
+
+Enable STM32F3X series MCUs flash driver.
+
+
+
+:Symbol:           SOC_FLASH_STM32
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "STM32 flash driver" if SOC_SERIES_STM32F3X && FLASH (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: SOC_SERIES_STM32F3X && FLASH (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ FLASH && SOC_SERIES_STM32F3X (value: "n")
+:Locations:
+ * ../drivers/flash/Kconfig.stm32f3x:10

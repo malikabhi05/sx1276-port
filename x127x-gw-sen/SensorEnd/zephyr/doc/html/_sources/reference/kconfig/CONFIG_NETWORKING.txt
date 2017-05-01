@@ -1,0 +1,37 @@
+:orphan:
+
+.. title:: NETWORKING
+
+.. option:: CONFIG_NETWORKING:
+.. _CONFIG_NETWORKING:
+
+This option enabled generic link layer and IP networking support.
+
+
+
+:Symbol:           NETWORKING
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "y"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Link layer and IP networking support"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+
+ *  :option:`CONFIG_NET_BUF`
+ *  :option:`CONFIG_RANDOM_GENERATOR`
+:Reverse (select-related) dependencies:
+ IEEE802154_UPIPE && BOARD_QEMU_X86 || TELNET_CONSOLE && CONSOLE (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../subsys/net/Kconfig:51

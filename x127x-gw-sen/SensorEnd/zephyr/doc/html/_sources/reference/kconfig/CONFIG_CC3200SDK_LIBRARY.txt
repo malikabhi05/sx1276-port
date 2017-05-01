@@ -1,0 +1,32 @@
+:orphan:
+
+.. title:: CC3200SDK_LIBRARY
+
+.. option:: CONFIG_CC3200SDK_LIBRARY:
+.. _CONFIG_CC3200SDK_LIBRARY:
+
+The configuration item CONFIG_CC3200SDK_LIBRARY:
+
+:Symbol:           CC3200SDK_LIBRARY
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_CC3200 && SOC_SERIES_CC32XX (value: "n")
+:Locations:
+ * ../arch/arm/soc/ti_simplelink/cc32xx/Kconfig.defconfig.cc3200:29

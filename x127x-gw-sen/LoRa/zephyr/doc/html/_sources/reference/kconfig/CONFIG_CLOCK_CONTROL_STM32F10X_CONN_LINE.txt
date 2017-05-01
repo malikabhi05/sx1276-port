@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: CLOCK_CONTROL_STM32F10X_CONN_LINE
+
+.. option:: CONFIG_CLOCK_CONTROL_STM32F10X_CONN_LINE:
+.. _CONFIG_CLOCK_CONTROL_STM32F10X_CONN_LINE:
+
+Enable driver for Reset & Clock Control subsystem found
+in STM32F105/STM32F107 family of MCUs
+
+
+
+:Symbol:           CLOCK_CONTROL_STM32F10X_CONN_LINE
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "STM32F107x Reset & Clock Control"
+:Default values:
+
+ *  y (value: "y")
+ *   Condition: SOC_STM32F10X_CONNECTIVITY_LINE_DEVICE (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_STM32F10X_CONNECTIVITY_LINE_DEVICE && CLOCK_CONTROL (value: "n")
+:Locations:
+ * ../drivers/clock_control/Kconfig.stm32f107xx:10

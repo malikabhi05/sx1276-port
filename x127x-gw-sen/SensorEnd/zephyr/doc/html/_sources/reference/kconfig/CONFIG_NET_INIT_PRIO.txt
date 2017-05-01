@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: NET_INIT_PRIO
+
+.. option:: CONFIG_NET_INIT_PRIO:
+.. _CONFIG_NET_INIT_PRIO:
+
+Network initialization priority level. This number tells how
+early in the boot the network stack is initialized.
+
+
+
+:Symbol:           NET_INIT_PRIO
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  90 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig:19

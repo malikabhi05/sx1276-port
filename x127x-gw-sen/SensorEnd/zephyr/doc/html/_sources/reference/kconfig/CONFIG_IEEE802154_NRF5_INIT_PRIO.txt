@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: IEEE802154_NRF5_INIT_PRIO
+
+.. option:: CONFIG_IEEE802154_NRF5_INIT_PRIO:
+.. _CONFIG_IEEE802154_NRF5_INIT_PRIO:
+
+Set the initialization priority number. Do not mess with it unless
+you know what you are doing.
+
+
+
+:Symbol:           IEEE802154_NRF5_INIT_PRIO
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "nRF52 IEEE 802.15.4 intialization priority"
+:Default values:
+
+ *  80 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ IEEE802154_NRF5 || IEEE802154_NRF5_RAW (value: "n")
+:Locations:
+ * ../drivers/ieee802154/Kconfig.nrf5:27

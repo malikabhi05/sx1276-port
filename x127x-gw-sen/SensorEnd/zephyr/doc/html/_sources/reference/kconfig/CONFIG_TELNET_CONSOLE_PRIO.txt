@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: TELNET_CONSOLE_PRIO
+
+.. option:: CONFIG_TELNET_CONSOLE_PRIO:
+.. _CONFIG_TELNET_CONSOLE_PRIO:
+
+This option helps to fine-tune telnet's inner thread priority.
+
+
+
+:Symbol:           TELNET_CONSOLE_PRIO
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Telnet console inner thread priority"
+:Default values:
+
+ *  7 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ TELNET_CONSOLE && CONSOLE (value: "n")
+:Locations:
+ * ../drivers/console/Kconfig.telnet:83

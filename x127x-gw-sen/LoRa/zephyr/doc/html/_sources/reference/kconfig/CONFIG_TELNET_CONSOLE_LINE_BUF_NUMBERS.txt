@@ -1,0 +1,39 @@
+:orphan:
+
+.. title:: TELNET_CONSOLE_LINE_BUF_NUMBERS
+
+.. option:: CONFIG_TELNET_CONSOLE_LINE_BUF_NUMBERS:
+.. _CONFIG_TELNET_CONSOLE_LINE_BUF_NUMBERS:
+
+This option can be used to modify the amount of line buffers the
+driver can use. It really depends on how much output is meant to be
+sent, depending on the system load etc. You can play on both
+TELNET_CONSOLE_LINE_BUF_SIZE and this current option to get the
+best possible buffer settings you need.
+
+
+
+:Symbol:           TELNET_CONSOLE_LINE_BUF_NUMBERS
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Telnet console line buffers"
+:Default values:
+
+ *  4 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ TELNET_CONSOLE && CONSOLE (value: "n")
+:Locations:
+ * ../drivers/console/Kconfig.telnet:43

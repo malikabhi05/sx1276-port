@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: NET_MGMT_EVENT
+
+.. option:: CONFIG_NET_MGMT_EVENT:
+.. _CONFIG_NET_MGMT_EVENT:
+
+This adds support for the stack to notify events towards any
+relevant listener. This can be necessary when application
+(or else) needs to be notified on a specific network event
+(ip address change for instance) to trigger some related work.
+
+
+
+:Symbol:           NET_MGMT_EVENT
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Add support for runtime network event notifications"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ NETWORKING && NETWORKING && NET_L2_BLUETOOTH && NET_L2_BLUETOOTH_MGMT || NETWORKING && NETWORKING && NET_L2_IEEE802154 && NET_L2_IEEE802154_MGMT (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_MGMT (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.mgmt:17

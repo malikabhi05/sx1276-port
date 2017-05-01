@@ -1,0 +1,6 @@
+obj-y += hal/
+obj-y += lib/
+obj-y += fs/
+obj-y += debug/
+obj-$(CONFIG_MRAA) += lib/mraa/
+obj-y += lib/upm/

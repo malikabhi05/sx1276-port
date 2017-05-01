@@ -1,0 +1,37 @@
+:orphan:
+
+.. title:: HTTP_PARSER
+
+.. option:: CONFIG_HTTP_PARSER:
+.. _CONFIG_HTTP_PARSER:
+
+This option enables the http_parser library from nodejs.
+This parser requires some string-related routines commonly
+provided by a libc implementation.
+
+
+
+:Symbol:           HTTP_PARSER
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "HTTP Parser support"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/lib/http/Kconfig:6

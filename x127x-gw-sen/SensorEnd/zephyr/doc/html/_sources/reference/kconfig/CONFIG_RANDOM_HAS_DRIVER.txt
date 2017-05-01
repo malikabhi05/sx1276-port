@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: RANDOM_HAS_DRIVER
+
+.. option:: CONFIG_RANDOM_HAS_DRIVER:
+.. _CONFIG_RANDOM_HAS_DRIVER:
+
+This is an option to be enabled by individual random driver
+to signal that there is a true random driver.
+
+
+
+:Symbol:           RANDOM_HAS_DRIVER
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ RANDOM_GENERATOR && HAS_RNGA && RANDOM_GENERATOR && RANDOM_MCUX (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ RANDOM_GENERATOR (value: "n")
+:Locations:
+ * ../drivers/random/Kconfig:20

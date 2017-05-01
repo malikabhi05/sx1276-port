@@ -1,0 +1,41 @@
+:orphan:
+
+.. title:: TELNET_CONSOLE_LINE_BUF_SIZE
+
+.. option:: CONFIG_TELNET_CONSOLE_LINE_BUF_SIZE:
+.. _CONFIG_TELNET_CONSOLE_LINE_BUF_SIZE:
+
+This option can be used to modify the size of the buffer storing
+console output line, prior to sending it through the network.
+Of course an output line can be longer than such size, it just
+means sending it will start as soon as it reaches this size.
+It really depends on what type of output is expected.
+A lot of short lines: better reduce this value. On the contrary,
+raise it.
+
+
+
+:Symbol:           TELNET_CONSOLE_LINE_BUF_SIZE
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Telnet console line buffer size"
+:Default values:
+
+ *  64 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ TELNET_CONSOLE && CONSOLE (value: "n")
+:Locations:
+ * ../drivers/console/Kconfig.telnet:31

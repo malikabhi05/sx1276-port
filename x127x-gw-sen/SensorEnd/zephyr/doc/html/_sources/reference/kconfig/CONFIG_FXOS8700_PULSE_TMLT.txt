@@ -1,0 +1,43 @@
+:orphan:
+
+.. title:: FXOS8700_PULSE_TMLT
+
+.. option:: CONFIG_FXOS8700_PULSE_TMLT:
+.. _CONFIG_FXOS8700_PULSE_TMLT:
+
+The maximum time interval that can elapse between the start of the
+acceleration on the selected channel exceeding the specified threshold
+and the end when the channel acceleration goes back below the specified
+threshold. The resolution depends upon the sample rate (ODR) and the
+highpass filter configuration (HP_FILTER_CUTOFF[pls_hpf_en]). For
+ODR=800 Hz and pls_hpf_en=0, the resolution is 0.625 ms/LSB.
+
+
+
+:Symbol:           FXOS8700_PULSE_TMLT
+:Type:             hex
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Ranges:
+
+ *  [0, 0x7f]
+:Prompts:
+
+ *  "Pulse time limit"
+:Default values:
+
+ *  0x18 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ FXOS8700_PULSE && FXOS8700_TRIGGER (value: "n")
+:Locations:
+ * ../drivers/sensor/fxos8700/Kconfig:176

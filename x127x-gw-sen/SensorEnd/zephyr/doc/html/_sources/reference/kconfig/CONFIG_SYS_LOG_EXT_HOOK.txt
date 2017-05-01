@@ -1,0 +1,34 @@
+:orphan:
+
+.. title:: SYS_LOG_EXT_HOOK
+
+.. option:: CONFIG_SYS_LOG_EXT_HOOK:
+.. _CONFIG_SYS_LOG_EXT_HOOK:
+
+Use external hook function for logging.
+
+
+:Symbol:           SYS_LOG_EXT_HOOK
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Use external hook function for logging" if SYS_LOG (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: SYS_LOG (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../subsys/logging/Kconfig:68

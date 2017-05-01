@@ -1,0 +1,39 @@
+:orphan:
+
+.. title:: BMI160_GPIO_DEV_NAME
+
+.. option:: CONFIG_BMI160_GPIO_DEV_NAME:
+.. _CONFIG_BMI160_GPIO_DEV_NAME:
+
+The name of the GPIO device to which the BMI160 interrupt pin is
+connected.
+
+
+
+:Symbol:           BMI160_GPIO_DEV_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Gpio device" if BMI160 && BMI160_TRIGGER (value: "n")
+:Default values:
+
+ *  "GPIO_1"
+ *   Condition: BMI160 && BMI160_TRIGGER (value: "n")
+ *  GPIO_QMSI_1_NAME (value: "")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ GPIO_QMSI && BMI160 && BMI160_TRIGGER && BOARD_ARDUINO_101_SSS (value: "n")
+:Locations:
+ * ../drivers/sensor/bmi160/Kconfig:83
+ * ../boards/arc/arduino_101_sss/Kconfig.defconfig:17

@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: SOC_PART_NUMBER_SAME70J21
+
+.. option:: CONFIG_SOC_PART_NUMBER_SAME70J21:
+.. _CONFIG_SOC_PART_NUMBER_SAME70J21:
+
+The configuration item CONFIG_SOC_PART_NUMBER_SAME70J21:
+
+:Symbol:           SOC_PART_NUMBER_SAME70J21
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "SAME70J21"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ ARM (value: "n")
+:Locations:
+ * ../arch/arm/soc/atmel_sam/same70/Kconfig.soc:29

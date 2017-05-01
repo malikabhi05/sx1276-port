@@ -1,0 +1,36 @@
+:orphan:
+
+.. title:: JSON_LIBRARY
+
+.. option:: CONFIG_JSON_LIBRARY:
+.. _CONFIG_JSON_LIBRARY:
+
+Build a minimal JSON parsing/encoding library. Used by sample
+applications such as the NATS client.
+
+
+
+:Symbol:           JSON_LIBRARY
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "y"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Build JSON library"
+:Default values:
+
+ *  N (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../lib/json/Kconfig:11

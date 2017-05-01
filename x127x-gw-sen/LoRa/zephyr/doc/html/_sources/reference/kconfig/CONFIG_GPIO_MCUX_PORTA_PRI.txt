@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: GPIO_MCUX_PORTA_PRI
+
+.. option:: CONFIG_GPIO_MCUX_PORTA_PRI:
+.. _CONFIG_GPIO_MCUX_PORTA_PRI:
+
+The configuration item CONFIG_GPIO_MCUX_PORTA_PRI:
+
+:Symbol:           GPIO_MCUX_PORTA_PRI
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Port A interrupt priority" if GPIO_MCUX_PORTA (value: "n")
+:Default values:
+
+ *  2 (value: "n")
+ *   Condition: GPIO_MCUX_PORTA (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ GPIO_MCUX && GPIO (value: "n")
+:Locations:
+ * ../drivers/gpio/Kconfig.mcux:30

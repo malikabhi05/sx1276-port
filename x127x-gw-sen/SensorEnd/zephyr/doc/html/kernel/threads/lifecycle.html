@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Lifecycle &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Threads" href="threads.html"/>
+        <link rel="next" title="Scheduling" href="scheduling.html"/>
+        <link rel="prev" title="Threads" href="threads.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../kernel.html">Zephyr Kernel Primer (version 2)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="threads.html">Threads</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Lifecycle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suggested-uses">Suggested Uses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_data.html">Custom Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system_threads.html">System Threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workqueues.html">Workqueue Threads</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../timing/timing.html">Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/memory.html">Memory Allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synchronization/synchronization.html">Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_passing/data_passing.html">Data Passing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../other/other.html">Other Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../kernel.html">Zephyr Kernel Primer (version 2)</a> &raquo;</li>
+        
+          <li><a href="threads.html">Threads</a> &raquo;</li>
+        
+      <li>Lifecycle</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/kernel/threads/lifecycle.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lifecycle">
+<span id="lifecycle-v2"></span><h1>Lifecycle<a class="headerlink" href="#lifecycle" title="Permalink to this headline">¶</a></h1>
+<p>A <em class="dfn">thread</em> is a kernel object that is used for application processing
+that is too lengthy or too complex to be performed by an ISR.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#concepts" id="id1">Concepts</a><ul>
+<li><a class="reference internal" href="#thread-spawning" id="id2">Thread Spawning</a></li>
+<li><a class="reference internal" href="#thread-termination" id="id3">Thread Termination</a></li>
+<li><a class="reference internal" href="#thread-aborting" id="id4">Thread Aborting</a></li>
+<li><a class="reference internal" href="#thread-suspension" id="id5">Thread Suspension</a></li>
+<li><a class="reference internal" href="#thread-options" id="id6">Thread Options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation" id="id7">Implementation</a><ul>
+<li><a class="reference internal" href="#spawning-a-thread" id="id8">Spawning a Thread</a></li>
+<li><a class="reference internal" href="#terminating-a-thread" id="id9">Terminating a Thread</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#suggested-uses" id="id10">Suggested Uses</a></li>
+<li><a class="reference internal" href="#configuration-options" id="id11">Configuration Options</a></li>
+<li><a class="reference internal" href="#apis" id="id12">APIs</a></li>
+</ul>
+</div>
+<div class="section" id="concepts">
+<h2><a class="toc-backref" href="#id1">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>Any number of threads can be defined by an application. Each thread is
+referenced by a <em class="dfn">thread id</em> that is assigned when the thread is spawned.</p>
+<p>A thread has the following key properties:</p>
+<ul class="simple">
+<li>A <strong>stack area</strong>, which is a region of memory used for the thread&#8217;s
+control block (of type <code class="xref c c-type docutils literal"><span class="pre">struct</span> <span class="pre">k_thread</span></code>) and for its stack.
+The <strong>size</strong> of the stack area can be tailored to conform to the actual needs
+of the thread&#8217;s processing.</li>
+<li>An <strong>entry point function</strong>, which is invoked when the thread is started.
+Up to 3 <strong>argument values</strong> can be passed to this function.</li>
+<li>A <strong>scheduling priority</strong>, which instructs the kernel&#8217;s scheduler how to
+allocate CPU time to the thread. (See <a class="reference internal" href="scheduling.html#scheduling-v2"><span class="std std-ref">Scheduling</span></a>.)</li>
+<li>A set of <strong>thread options</strong>, which allow the thread to receive special
+treatment by the kernel under specific circumstances.
+(See <a class="reference internal" href="#thread-options-v2"><span class="std std-ref">Thread Options</span></a>.)</li>
+<li>A <strong>start delay</strong>, which specifies how long the kernel should wait before
+starting the thread.</li>
+</ul>
+<div class="section" id="thread-spawning">
+<span id="spawning-thread"></span><h3><a class="toc-backref" href="#id2">Thread Spawning</a><a class="headerlink" href="#thread-spawning" title="Permalink to this headline">¶</a></h3>
+<p>A thread must be spawned before it can be used. The kernel initializes
+the control block portion of the thread&#8217;s stack area, as well as one
+end of the stack portion. The remainder of the thread&#8217;s stack is typically
+left uninitialized.</p>
+<p>Specifying a start delay of <a class="reference internal" href="../../api/kernel_api.html#c.K_NO_WAIT" title="K_NO_WAIT"><code class="xref c c-macro docutils literal"><span class="pre">K_NO_WAIT</span></code></a> instructs the kernel
+to start thread execution immediately. Alternatively, the kernel can be
+instructed to delay execution of the thread by specifying a timeout
+value &#8211; for example, to allow device hardware used by the thread
+to become available.</p>
+<p>The kernel allows a delayed start to be cancelled before the thread begins
+executing. A cancellation request has no effect if the thread has already
+started. A thread whose delayed start was successfully cancelled must be
+re-spawned before it can be used.</p>
+</div>
+<div class="section" id="thread-termination">
+<h3><a class="toc-backref" href="#id3">Thread Termination</a><a class="headerlink" href="#thread-termination" title="Permalink to this headline">¶</a></h3>
+<p>Once a thread is started it typically executes forever. However, a thread may
+synchronously end its execution by returning from its entry point function.
+This is known as <strong>termination</strong>.</p>
+<p>A thread that terminates is responsible for releasing any shared resources
+it may own (such as mutexes and dynamically allocated memory)
+prior to returning, since the kernel does <em>not</em> reclaim them automatically.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The kernel does not currently make any claims regarding an application&#8217;s
+ability to respawn a thread that terminates.</p>
+</div>
+</div>
+<div class="section" id="thread-aborting">
+<h3><a class="toc-backref" href="#id4">Thread Aborting</a><a class="headerlink" href="#thread-aborting" title="Permalink to this headline">¶</a></h3>
+<p>A thread may asynchronously end its execution by <strong>aborting</strong>. The kernel
+automatically aborts a thread if the thread triggers a fatal error condition,
+such as dereferencing a null pointer.</p>
+<p>A thread can also be aborted by another thread (or by itself)
+by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_thread_abort7k_tid_t" title="k_thread_abort"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_abort()</span></code></a>. However, it is typically preferable
+to signal a thread to terminate itself gracefully, rather than aborting it.</p>
+<p>As with thread termination, the kernel does not reclaim shared resources
+owned by an aborted thread.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The kernel does not currently make any claims regarding an application&#8217;s
+ability to respawn a thread that aborts.</p>
+</div>
+</div>
+<div class="section" id="thread-suspension">
+<h3><a class="toc-backref" href="#id5">Thread Suspension</a><a class="headerlink" href="#thread-suspension" title="Permalink to this headline">¶</a></h3>
+<p>A thread can be prevented from executing for an indefinite period of time
+if it becomes <strong>suspended</strong>. The function <a class="reference internal" href="../../api/kernel_api.html#_CPPv216k_thread_suspend7k_tid_t" title="k_thread_suspend"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_suspend()</span></code></a>
+can be used to suspend any thread, including the calling thread.
+Suspending a thread that is already suspended has no additional effect.</p>
+<p>Once suspended, a thread cannot be scheduled until another thread calls
+<a class="reference internal" href="../../api/kernel_api.html#_CPPv215k_thread_resume7k_tid_t" title="k_thread_resume"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_resume()</span></code></a> to remove the suspension.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A thread can prevent itself from executing for a specified period of time
+using <a class="reference internal" href="../../api/kernel_api.html#_CPPv27k_sleep7int32_t" title="k_sleep"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_sleep()</span></code></a>. However, this is different from suspending
+a thread since a sleeping thread becomes executable automatically when the
+time limit is reached.</p>
+</div>
+</div>
+<div class="section" id="thread-options">
+<span id="thread-options-v2"></span><h3><a class="toc-backref" href="#id6">Thread Options</a><a class="headerlink" href="#thread-options" title="Permalink to this headline">¶</a></h3>
+<p>The kernel supports a small set of <em class="dfn">thread options</em> that allow a thread
+to receive special treatment under specific circumstances. The set of options
+associated with a thread are specified when the thread is spawned.</p>
+<p>A thread that does not require any thread option has an option value of zero.
+A thread that requires a thread option specifies it by name, using the
+<code class="docutils literal"><span class="pre">|</span></code> character as a separator if multiple options are needed
+(i.e. combine options using the bitwise OR operator).</p>
+<p>The following thread options are supported.</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="../../api/kernel_api.html#c.K_ESSENTIAL" title="K_ESSENTIAL"><code class="xref c c-macro docutils literal"><span class="pre">K_ESSENTIAL</span></code></a></dt>
+<dd><p class="first">This option tags the thread as an <em class="dfn">essential thread</em>. This instructs
+the kernel to treat the termination or aborting of the thread as a fatal
+system error.</p>
+<p class="last">By default, the thread is not considered to be an essential thread.</p>
+</dd>
+<dt><code class="xref c c-macro docutils literal"><span class="pre">K_FP_REGS</span></code> and <code class="xref c c-macro docutils literal"><span class="pre">K_SSE_REGS</span></code></dt>
+<dd><p class="first">These x86-specific options indicate that the thread uses the CPU&#8217;s
+floating point registers and SSE registers, respectively. This instructs
+the kernel to take additional steps to save and restore the contents
+of these registers when scheduling the thread.
+(For more information see <a class="reference internal" href="../other/float.html#float-v2"><span class="std std-ref">Floating Point Services</span></a>.)</p>
+<p class="last">By default, the kernel does not attempt to save and restore the contents
+of these registers when scheduling the thread.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2><a class="toc-backref" href="#id7">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="spawning-a-thread">
+<h3><a class="toc-backref" href="#id8">Spawning a Thread</a><a class="headerlink" href="#spawning-a-thread" title="Permalink to this headline">¶</a></h3>
+<p>A thread is spawned by defining its stack area and then calling
+<a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_thread_spawnPc6size_t16k_thread_entry_tPvPvPvi8uint32_t7int32_t" title="k_thread_spawn"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_spawn()</span></code></a>. The stack area is an array of bytes
+whose size must equal <code class="xref c c-macro docutils literal"><span class="pre">K_THREAD_SIZEOF</span></code> plus the size
+of the thread&#8217;s stack. The stack area must be defined using the
+<code class="xref c c-macro docutils literal"><span class="pre">__stack</span></code> attribute to ensure it is properly aligned.</p>
+<p>The thread spawning function returns its thread id, which can be used
+to reference the thread.</p>
+<p>The following code spawns a thread that starts immediately.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#define MY_STACK_SIZE 500</span>
+<span class="cp">#define MY_PRIORITY 5</span>
+
+<span class="k">extern</span> <span class="kt">void</span> <span class="nf">my_entry_point</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
+
+<span class="kt">char</span> <span class="n">__noinit</span> <span class="n">__stack</span> <span class="n">my_stack_area</span><span class="p">[</span><span class="n">MY_STACK_SIZE</span><span class="p">];</span>
+
+<span class="n">k_tid_t</span> <span class="n">my_tid</span> <span class="o">=</span> <span class="n">k_thread_spawn</span><span class="p">(</span><span class="n">my_stack_area</span><span class="p">,</span> <span class="n">MY_STACK_SIZE</span><span class="p">,</span>
+                                <span class="n">my_entry_point</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
+                                <span class="n">MY_PRIORITY</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K_NO_WAIT</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Alternatively, a thread can be spawned at compile time by calling
+<a class="reference internal" href="../../api/kernel_api.html#c.K_THREAD_DEFINE" title="K_THREAD_DEFINE"><code class="xref c c-macro docutils literal"><span class="pre">K_THREAD_DEFINE</span></code></a>. Observe that the macro defines
+the stack area and thread id variables automatically.</p>
+<p>The following code has the same effect as the code segment above.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#define MY_STACK_SIZE 500</span>
+<span class="cp">#define MY_PRIORITY 5</span>
+
+<span class="k">extern</span> <span class="kt">void</span> <span class="nf">my_entry_point</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
+
+<span class="n">K_THREAD_DEFINE</span><span class="p">(</span><span class="n">my_tid</span><span class="p">,</span> <span class="n">MY_STACK_SIZE</span><span class="p">,</span>
+                <span class="n">my_entry_point</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
+                <span class="n">MY_PRIORITY</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">K_NO_WAIT</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="terminating-a-thread">
+<h3><a class="toc-backref" href="#id9">Terminating a Thread</a><a class="headerlink" href="#terminating-a-thread" title="Permalink to this headline">¶</a></h3>
+<p>A thread terminates itself by returning from its entry point function.</p>
+<p>The following code illustrates the ways a thread can terminate.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_entry_point</span><span class="p">(</span><span class="kt">int</span> <span class="n">unused1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">unused2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">unused3</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">some</span> <span class="n">condition</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span> <span class="cm">/* thread terminates from mid-entry point function */</span>
+        <span class="p">}</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* thread terminates at end of entry point function */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="suggested-uses">
+<h2><a class="toc-backref" href="#id10">Suggested Uses</a><a class="headerlink" href="#suggested-uses" title="Permalink to this headline">¶</a></h2>
+<p>Use threads to handle processing that cannot be handled in an ISR.</p>
+<p>Use separate threads to handle logically distinct processing operations
+that can execute in parallel.</p>
+</div>
+<div class="section" id="configuration-options">
+<h2><a class="toc-backref" href="#id11">Configuration Options</a><a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>Related configuration options:</p>
+<ul class="simple">
+<li>None.</li>
+</ul>
+</div>
+<div class="section" id="apis">
+<h2><a class="toc-backref" href="#id12">APIs</a><a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>The following thread APIs are provided by <code class="file docutils literal"><span class="pre">kernel.h</span></code>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../api/kernel_api.html#c.K_THREAD_DEFINE" title="K_THREAD_DEFINE"><code class="xref c c-macro docutils literal"><span class="pre">K_THREAD_DEFINE</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_thread_spawnPc6size_t16k_thread_entry_tPvPvPvi8uint32_t7int32_t" title="k_thread_spawn"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_spawn()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv215k_thread_cancel7k_tid_t" title="k_thread_cancel"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_cancel()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_thread_abort7k_tid_t" title="k_thread_abort"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_abort()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv216k_thread_suspend7k_tid_t" title="k_thread_suspend"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_suspend()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv215k_thread_resume7k_tid_t" title="k_thread_resume"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_resume()</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scheduling.html" class="btn btn-neutral float-right" title="Scheduling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="threads.html" class="btn btn-neutral" title="Threads" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

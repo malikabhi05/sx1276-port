@@ -1,0 +1,39 @@
+:orphan:
+
+.. title:: XTENSA_INTERNAL_TIMER
+
+.. option:: CONFIG_XTENSA_INTERNAL_TIMER:
+.. _CONFIG_XTENSA_INTERNAL_TIMER:
+
+This module implements a kernel device driver for the Xtensa processor
+internal timer and provides the standard "system clock driver" interfaces.
+If unchecked, an external timer will be used. It will rely on a tick
+interrupt connected to an IRQ line. In this case one shall define
+both XTENSA_TIMER_IRQ and XTENSA_TIMER_IRQ_PRIORITY.
+
+
+
+:Symbol:           XTENSA_INTERNAL_TIMER
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Xtensa internal timer" if XTENSA_TIMER (value: "n")
+:Default values:
+
+ *  y (value: "y")
+ *   Condition: XTENSA_TIMER (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../drivers/timer/Kconfig:191

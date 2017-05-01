@@ -1,0 +1,32 @@
+:orphan:
+
+.. title:: ITCM_BASE_ADDRESS
+
+.. option:: CONFIG_ITCM_BASE_ADDRESS:
+.. _CONFIG_ITCM_BASE_ADDRESS:
+
+The configuration item CONFIG_ITCM_BASE_ADDRESS:
+
+:Symbol:           ITCM_BASE_ADDRESS
+:Type:             hex
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+
+ *  0x00000000 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_RISCV32_PULPINO (value: "n")
+:Locations:
+ * ../arch/riscv32/soc/pulpino/Kconfig.defconfig:31

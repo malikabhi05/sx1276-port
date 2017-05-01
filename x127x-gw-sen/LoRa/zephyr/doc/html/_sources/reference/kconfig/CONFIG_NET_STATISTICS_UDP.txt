@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: NET_STATISTICS_UDP
+
+.. option:: CONFIG_NET_STATISTICS_UDP:
+.. _CONFIG_NET_STATISTICS_UDP:
+
+Keep track of UDP related statistics
+
+
+
+:Symbol:           NET_STATISTICS_UDP
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "UDP statistics" if NET_UDP (value: "n")
+:Default values:
+
+ *  y (value: "y")
+ *   Condition: NET_UDP (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && NET_STATISTICS (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.stats:62

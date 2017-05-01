@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: ETH_SAM_GMAC_MII
+
+.. option:: CONFIG_ETH_SAM_GMAC_MII:
+.. _CONFIG_ETH_SAM_GMAC_MII:
+
+The configuration item CONFIG_ETH_SAM_GMAC_MII:
+
+:Symbol:           ETH_SAM_GMAC_MII
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "MII"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ ETH_SAM_GMAC (value: "n")
+:Locations:
+ * ../drivers/ethernet/Kconfig.sam_gmac:92

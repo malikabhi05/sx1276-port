@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: MCR20A_CLK_OUT_16MHZ
+
+.. option:: CONFIG_MCR20A_CLK_OUT_16MHZ:
+.. _CONFIG_MCR20A_CLK_OUT_16MHZ:
+
+The configuration item CONFIG_MCR20A_CLK_OUT_16MHZ:
+
+:Symbol:           MCR20A_CLK_OUT_16MHZ
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "16 MHz"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ IEEE802154_MCR20A || IEEE802154_MCR20A_RAW (value: "n")
+:Locations:
+ * ../drivers/ieee802154/Kconfig.mcr20a:79

@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: NET_STATISTICS
+
+.. option:: CONFIG_NET_STATISTICS:
+.. _CONFIG_NET_STATISTICS:
+
+Manage statistics accounting. This takes memory so say 'n' if unsure.
+
+
+
+:Symbol:           NET_STATISTICS
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Network statistics"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.stats:9

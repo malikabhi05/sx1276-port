@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Floating Point Services &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Other Services" href="other.html"/>
+        <link rel="next" title="C++ Support for Applications" href="cxx_support.html"/>
+        <link rel="prev" title="Ring Buffers" href="ring_buffers.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../kernel.html">Zephyr Kernel Primer (version 2)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../threads/threads.html">Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../timing/timing.html">Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/memory.html">Memory Allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synchronization/synchronization.html">Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_passing/data_passing.html">Data Passing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="other.html">Other Services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="interrupts.html">Interrupts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atomic.html">Atomic Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polling.html">Polling API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ring_buffers.html">Ring Buffers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Floating Point Services</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suggested-uses">Suggested Uses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cxx_support.html">C++ Support for Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu_idle.html">CPU Idling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../kernel.html">Zephyr Kernel Primer (version 2)</a> &raquo;</li>
+        
+          <li><a href="other.html">Other Services</a> &raquo;</li>
+        
+      <li>Floating Point Services</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/kernel/other/float.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="floating-point-services">
+<span id="float-v2"></span><h1>Floating Point Services<a class="headerlink" href="#floating-point-services" title="Permalink to this headline">¶</a></h1>
+<p>The kernel allows threads to use floating point registers on board
+configurations that support these registers.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Floating point services are currently available only for boards
+based on the ARM Cortex-M4 or the Intel x86 architectures. The
+services provided are architecture specific.</p>
+<p class="last">The kernel does not support the use of floating point registers by ISRs.</p>
+</div>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#concepts" id="id1">Concepts</a><ul>
+<li><a class="reference internal" href="#no-fp-registers-mode" id="id2">No FP registers mode</a></li>
+<li><a class="reference internal" href="#unshared-fp-registers-mode" id="id3">Unshared FP registers mode</a></li>
+<li><a class="reference internal" href="#shared-fp-registers-mode" id="id4">Shared FP registers mode</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation" id="id5">Implementation</a><ul>
+<li><a class="reference internal" href="#performing-floating-point-arithmetic" id="id6">Performing Floating Point Arithmetic</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#suggested-uses" id="id7">Suggested Uses</a></li>
+<li><a class="reference internal" href="#configuration-options" id="id8">Configuration Options</a></li>
+<li><a class="reference internal" href="#apis" id="id9">APIs</a></li>
+</ul>
+</div>
+<div class="section" id="concepts">
+<h2><a class="toc-backref" href="#id1">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>The kernel can be configured to provide only the floating point services
+required by an application. Three modes of operation are supported,
+which are described below. In addition, the kernel&#8217;s support for the SSE
+registers can be included or omitted, as desired.</p>
+<div class="section" id="no-fp-registers-mode">
+<h3><a class="toc-backref" href="#id2">No FP registers mode</a><a class="headerlink" href="#no-fp-registers-mode" title="Permalink to this headline">¶</a></h3>
+<p>This mode is used when the application has no threads that use floating point
+registers. It is the kernel&#8217;s default floating point services mode.</p>
+<p>If a thread uses any floating point register,
+the kernel generates a fatal error condition and aborts the thread.</p>
+</div>
+<div class="section" id="unshared-fp-registers-mode">
+<h3><a class="toc-backref" href="#id3">Unshared FP registers mode</a><a class="headerlink" href="#unshared-fp-registers-mode" title="Permalink to this headline">¶</a></h3>
+<p>This mode is used when the application has only a single thread
+that uses floating point registers.</p>
+<p>The kernel initializes the floating point registers so they can be used
+by any thread. The floating point registers are left unchanged
+whenever a context switch occurs.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Incorrect operation may result if two or more threads use
+floating point registers, as the kernel does not attempt to detect
+(or prevent) multiple threads from using these registers.</p>
+</div>
+</div>
+<div class="section" id="shared-fp-registers-mode">
+<h3><a class="toc-backref" href="#id4">Shared FP registers mode</a><a class="headerlink" href="#shared-fp-registers-mode" title="Permalink to this headline">¶</a></h3>
+<p>This mode is used when the application has two or more threads that use
+floating point registers. Depending upon the underlying CPU architecture,
+the kernel supports one or more of the following thread sub-classes:</p>
+<ul class="simple">
+<li>non-user: A thread that cannot use any floating point registers</li>
+<li>FPU user: A thread that can use the standard floating point registers</li>
+<li>SSE user: A thread that can use both the standard floating point registers
+and SSE registers</li>
+</ul>
+<p>The kernel initializes the floating point registers so they can be used
+by any thread, then saves and restores these registers during
+context switches to ensure the computations performed by each FPU user
+or SSE user are not impacted by the computations performed by the other users.</p>
+<p>On the ARM Cortex-M4 architecture the kernel treats <em>all</em> threads
+as FPU users when shared FP registers mode is enabled. This means that the
+floating point registers are saved and restored during a context switch, even
+when the associated threads are not using them. Each thread must provide
+an extra 132 bytes of stack space where these register values can be saved.</p>
+<p>On the x86 architecture the kernel treats each thread as a non-user,
+FPU user or SSE user on a case-by-case basis. A &#8220;lazy save&#8221; algorithm is used
+during context switching which updates the floating point registers only when
+it is absolutely necessary. For example, the registers are <em>not</em> saved when
+switching from an FPU user to a non-user thread, and then back to the original
+FPU user. The following table indicates the amount of additional stack space a
+thread must provide so the registers can be saved properly.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="29%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Thread type</th>
+<th class="head">FP register use</th>
+<th class="head">Extra stack space required</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>cooperative</td>
+<td>any</td>
+<td>0 bytes</td>
+</tr>
+<tr class="row-odd"><td>preemptive</td>
+<td>none</td>
+<td>0 bytes</td>
+</tr>
+<tr class="row-even"><td>preemptive</td>
+<td>FPU</td>
+<td>108 bytes</td>
+</tr>
+<tr class="row-odd"><td>preemptive</td>
+<td>SSE</td>
+<td>464 bytes</td>
+</tr>
+</tbody>
+</table>
+<p>The x86 kernel automatically detects that a given thread is using
+the floating point registers the first time the thread accesses them.
+The thread is tagged as an SSE user if the kernel has been configured
+to support the SSE registers, or as an FPU user if the SSE registers are
+not supported. If this would result in a thread that is an FPU user being
+tagged as an SSE user, or if the application wants to avoid the exception
+handling overhead involved in auto-tagging threads, it is possible to
+pre-tag a thread using one of the techniques listed below.</p>
+<ul class="simple">
+<li>A statically-spawned x86 thread can be pre-tagged by passing the
+<code class="xref c c-macro docutils literal"><span class="pre">K_FP_REGS</span></code> or <code class="xref c c-macro docutils literal"><span class="pre">K_SSE_REGS</span></code> option to
+<a class="reference internal" href="../../api/kernel_api.html#c.K_THREAD_DEFINE" title="K_THREAD_DEFINE"><code class="xref c c-macro docutils literal"><span class="pre">K_THREAD_DEFINE</span></code></a>.</li>
+<li>A dynamically-spawned x86 thread can be pre-tagged by passing the
+<code class="xref c c-macro docutils literal"><span class="pre">K_FP_REGS</span></code> or <code class="xref c c-macro docutils literal"><span class="pre">K_SSE_REGS</span></code> option to
+<a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_thread_spawnPc6size_t16k_thread_entry_tPvPvPvi8uint32_t7int32_t" title="k_thread_spawn"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_thread_spawn()</span></code></a>.</li>
+<li>An already-spawned x86 thread can pre-tag itself once it has started
+by passing the <code class="xref c c-macro docutils literal"><span class="pre">K_FP_REGS</span></code> or <code class="xref c c-macro docutils literal"><span class="pre">K_SSE_REGS</span></code> option to
+<a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_float_enable7k_tid_tj" title="k_float_enable"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_float_enable()</span></code></a>.</li>
+</ul>
+<p>If an x86 thread uses the floating point registers infrequently it can call
+<a class="reference internal" href="../../api/kernel_api.html#_CPPv215k_float_disable7k_tid_t" title="k_float_disable"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_float_disable()</span></code></a> to remove its tagging as an FPU user or SSE user.
+This eliminates the need for the kernel to take steps to preserve
+the contents of the floating point registers during context switches
+when there is no need to do so.
+When the thread again needs to use the floating point registers it can re-tag
+itself as an FPU user or SSE user by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_float_enable7k_tid_tj" title="k_float_enable"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_float_enable()</span></code></a>.</p>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2><a class="toc-backref" href="#id5">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="performing-floating-point-arithmetic">
+<h3><a class="toc-backref" href="#id6">Performing Floating Point Arithmetic</a><a class="headerlink" href="#performing-floating-point-arithmetic" title="Permalink to this headline">¶</a></h3>
+<p>No special coding is required for a thread to use floating point arithmetic
+if the kernel is properly configured.</p>
+<p>The following code shows how a routine can use floating point arithmetic
+to avoid overflow issues when computing the average of a series of integer
+values.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">average</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">values</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num_values</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="n">sum</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_values</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sum</span> <span class="o">+=</span> <span class="o">*</span><span class="n">values</span><span class="p">;</span>
+        <span class="n">values</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)((</span><span class="n">sum</span> <span class="o">/</span> <span class="n">num_values</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="suggested-uses">
+<h2><a class="toc-backref" href="#id7">Suggested Uses</a><a class="headerlink" href="#suggested-uses" title="Permalink to this headline">¶</a></h2>
+<p>Use the kernel floating point services when an application needs to
+perform floating point operations.</p>
+</div>
+<div class="section" id="configuration-options">
+<h2><a class="toc-backref" href="#id8">Configuration Options</a><a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>To configure unshared FP registers mode, enable the <a class="reference internal" href="../../reference/kconfig/CONFIG_FLOAT.html#cmdoption-arg-CONFIG_FLOAT"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_FLOAT</span></code></a>
+configuration option and leave the <a class="reference internal" href="../../reference/kconfig/CONFIG_FP_SHARING.html#cmdoption-arg-CONFIG_FP_SHARING"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_FP_SHARING</span></code></a> configuration
+option disabled.</p>
+<p>To configure shared FP registers mode, enable both the <a class="reference internal" href="../../reference/kconfig/CONFIG_FLOAT.html#cmdoption-arg-CONFIG_FLOAT"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_FLOAT</span></code></a>
+configuration option and the <a class="reference internal" href="../../reference/kconfig/CONFIG_FP_SHARING.html#cmdoption-arg-CONFIG_FP_SHARING"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_FP_SHARING</span></code></a> configuration option.
+Also, ensure that any thread that uses the floating point registers has
+sufficient added stack space for saving floating point register values
+during context switches, as described above.</p>
+<p>Use the <a class="reference internal" href="../../reference/kconfig/CONFIG_SSE.html#cmdoption-arg-CONFIG_SSE"><code class="xref std std-option docutils literal"><span class="pre">CONFIG_SSE</span></code></a> configuration option to enable support for
+SSEx instructions (x86 only).</p>
+</div>
+<div class="section" id="apis">
+<h2><a class="toc-backref" href="#id9">APIs</a><a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>The following floating point APIs (x86 only) are provided by <code class="file docutils literal"><span class="pre">kernel.h</span></code>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv214k_float_enable7k_tid_tj" title="k_float_enable"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_float_enable()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv215k_float_disable7k_tid_t" title="k_float_disable"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_float_disable()</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cxx_support.html" class="btn btn-neutral float-right" title="C++ Support for Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ring_buffers.html" class="btn btn-neutral" title="Ring Buffers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

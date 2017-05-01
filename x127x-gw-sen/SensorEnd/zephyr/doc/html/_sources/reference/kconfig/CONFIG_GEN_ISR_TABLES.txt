@@ -1,0 +1,49 @@
+:orphan:
+
+.. title:: GEN_ISR_TABLES
+
+.. option:: CONFIG_GEN_ISR_TABLES:
+.. _CONFIG_GEN_ISR_TABLES:
+
+This option controls whether a platform uses the gen_isr_tables
+script to generate its interrupt tables. This mechanism will create
+an appropriate hardware vector table and/or software IRQ table.
+
+
+
+:Symbol:           GEN_ISR_TABLES
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "y"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Use generated IRQ tables"
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+ *  y (value: "y")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ NIOS2 (value: "n")
+:Locations:
+ * ../arch/Kconfig:121
+ * ../arch/arm/core/cortex_m/Kconfig:215
+ * ../arch/arc/Kconfig:147
+ * ../arch/riscv32/Kconfig:67
+ * ../arch/nios2/Kconfig:40

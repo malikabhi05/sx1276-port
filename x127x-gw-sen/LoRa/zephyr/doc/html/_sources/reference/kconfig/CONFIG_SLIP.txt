@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: SLIP
+
+.. option:: CONFIG_SLIP:
+.. _CONFIG_SLIP:
+
+The configuration item CONFIG_SLIP:
+
+:Symbol:           SLIP
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "y"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "SLIP driver"
+:Default values:
+ (no default values)
+:Selects:
+
+ *  :option:`CONFIG_UART_PIPE`
+ *  :option:`CONFIG_UART_INTERRUPT_DRIVEN`
+:Reverse (select-related) dependencies:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL && NET_SLIP_TUN || NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL && NET_SLIP_TAP (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../drivers/slip/Kconfig:36

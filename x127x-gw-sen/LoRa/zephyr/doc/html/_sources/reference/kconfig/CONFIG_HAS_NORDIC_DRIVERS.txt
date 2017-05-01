@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: HAS_NORDIC_DRIVERS
+
+.. option:: CONFIG_HAS_NORDIC_DRIVERS:
+.. _CONFIG_HAS_NORDIC_DRIVERS:
+
+The configuration item CONFIG_HAS_NORDIC_DRIVERS:
+
+:Symbol:           HAS_NORDIC_DRIVERS
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+ (no prompts)
+:Default values:
+ (no default values)
+:Selects:
+
+ *  :option:`CONFIG_HAS_NORDIC_HAL`
+:Reverse (select-related) dependencies:
+ NETWORKING && SOC_NRF52840 && IEEE802154_NRF5 (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../ext/hal/nordic/Kconfig:13

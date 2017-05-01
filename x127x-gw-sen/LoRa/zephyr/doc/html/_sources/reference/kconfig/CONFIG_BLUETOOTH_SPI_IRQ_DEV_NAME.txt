@@ -1,0 +1,34 @@
+:orphan:
+
+.. title:: BLUETOOTH_SPI_IRQ_DEV_NAME
+
+.. option:: CONFIG_BLUETOOTH_SPI_IRQ_DEV_NAME:
+.. _CONFIG_BLUETOOTH_SPI_IRQ_DEV_NAME:
+
+This option specifies the name of GPIO driver controlling
+the chip's IRQ line.
+
+
+
+:Symbol:           BLUETOOTH_SPI_IRQ_DEV_NAME
+:Type:             string
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "IRQ line driver name"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BLUETOOTH_HCI && BLUETOOTH && BLUETOOTH_SPI (value: "n")
+:Locations:
+ * ../drivers/bluetooth/hci/Kconfig:114

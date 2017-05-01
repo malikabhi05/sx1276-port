@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developing Bluetooth Applications &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Bluetooth" href="bluetooth.html"/>
+        <link rel="next" title="Qualification Testing" href="qualification.html"/>
+        <link rel="prev" title="Bluetooth API" href="../../api/bluetooth.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../subsystems.html">Subsystems</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="bluetooth.html">Bluetooth</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bluetooth.html#source-tree-layout">Source tree layout</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="bluetooth.html#further-reading">Further reading</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../api/bluetooth.html">Bluetooth API</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Developing Bluetooth Applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qualification.html">Qualification Testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c_library.html">Standard C Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/networking.html">Networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../power_management.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sensor.html">Sensor Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell.html">Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../test/ztest.html">Test Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usb/usb.html">USB device stack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../subsystems.html">Subsystems</a> &raquo;</li>
+        
+          <li><a href="bluetooth.html">Bluetooth</a> &raquo;</li>
+        
+      <li>Developing Bluetooth Applications</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/subsystems/bluetooth/devel.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developing-bluetooth-applications">
+<h1>Developing Bluetooth Applications<a class="headerlink" href="#developing-bluetooth-applications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>The Bluetooth subsystem is initialized using the <code class="xref c c-func docutils literal"><span class="pre">bt_enable()</span></code>
+function. The caller should ensure that function succeeds by checking
+the return code for errors. If a function pointer is passed to
+<code class="xref c c-func docutils literal"><span class="pre">bt_enable()</span></code>, the initialization happens asynchronously, and the
+completion is notified through the given function.</p>
+</div>
+<div class="section" id="bluetooth-application-example">
+<h2>Bluetooth Application Example<a class="headerlink" href="#bluetooth-application-example" title="Permalink to this headline">¶</a></h2>
+<p>A simple Bluetooth beacon application is shown below. The application
+initializes the Bluetooth Subsystem and enables non-connectable
+advertising, effectively acting as a Bluetooth Low Energy broadcaster.</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</pre></div></td><td class="code"><div class="highlight"><pre><span></span>
+<span class="cm">/*</span>
+<span class="cm"> * Set Advertisement data. Based on the Eddystone specification:</span>
+<span class="cm"> * https://github.com/google/eddystone/blob/master/protocol-specification.md</span>
+<span class="cm"> * https://github.com/google/eddystone/tree/master/eddystone-url</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">bt_data</span> <span class="n">ad</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="n">BT_DATA_BYTES</span><span class="p">(</span><span class="n">BT_DATA_FLAGS</span><span class="p">,</span> <span class="n">BT_LE_AD_NO_BREDR</span><span class="p">),</span>
+	<span class="n">BT_DATA_BYTES</span><span class="p">(</span><span class="n">BT_DATA_UUID16_ALL</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">,</span> <span class="mh">0xfe</span><span class="p">),</span>
+	<span class="n">BT_DATA_BYTES</span><span class="p">(</span><span class="n">BT_DATA_SVC_DATA16</span><span class="p">,</span>
+		      <span class="mh">0xaa</span><span class="p">,</span> <span class="mh">0xfe</span><span class="p">,</span> <span class="cm">/* Eddystone UUID */</span>
+		      <span class="mh">0x10</span><span class="p">,</span> <span class="cm">/* Eddystone-URL frame type */</span>
+		      <span class="mh">0x00</span><span class="p">,</span> <span class="cm">/* Calibrated Tx power at 0m */</span>
+		      <span class="mh">0x00</span><span class="p">,</span> <span class="cm">/* URL Scheme Prefix http://www. */</span>
+		      <span class="sc">&#39;z&#39;</span><span class="p">,</span> <span class="sc">&#39;e&#39;</span><span class="p">,</span> <span class="sc">&#39;p&#39;</span><span class="p">,</span> <span class="sc">&#39;h&#39;</span><span class="p">,</span> <span class="sc">&#39;y&#39;</span><span class="p">,</span> <span class="sc">&#39;r&#39;</span><span class="p">,</span>
+		      <span class="sc">&#39;p&#39;</span><span class="p">,</span> <span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="sc">&#39;o&#39;</span><span class="p">,</span> <span class="sc">&#39;j&#39;</span><span class="p">,</span> <span class="sc">&#39;e&#39;</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">,</span> <span class="sc">&#39;t&#39;</span><span class="p">,</span>
+		      <span class="mh">0x08</span><span class="p">)</span> <span class="cm">/* .org */</span>
+<span class="p">};</span>
+
+<span class="cm">/* Set Scan Response data */</span>
+<span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">bt_data</span> <span class="n">sd</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="n">BT_DATA</span><span class="p">(</span><span class="n">BT_DATA_NAME_COMPLETE</span><span class="p">,</span> <span class="n">DEVICE_NAME</span><span class="p">,</span> <span class="n">DEVICE_NAME_LEN</span><span class="p">),</span>
+<span class="p">};</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">bt_ready</span><span class="p">(</span><span class="kt">int</span> <span class="n">err</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printk</span><span class="p">(</span><span class="s">&quot;Bluetooth init failed (err %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">&quot;Bluetooth initialized</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+	<span class="cm">/* Start advertising */</span>
+	<span class="n">err</span> <span class="o">=</span> <span class="n">bt_le_adv_start</span><span class="p">(</span><span class="n">BT_LE_ADV_NCONN</span><span class="p">,</span> <span class="n">ad</span><span class="p">,</span> <span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">ad</span><span class="p">),</span>
+			      <span class="n">sd</span><span class="p">,</span> <span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">sd</span><span class="p">));</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printk</span><span class="p">(</span><span class="s">&quot;Advertising failed to start (err %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">);</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">&quot;Beacon started</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">err</span><span class="p">;</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">&quot;Starting Beacon Demo</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+	<span class="cm">/* Initialize the Bluetooth Subsystem */</span>
+	<span class="n">err</span> <span class="o">=</span> <span class="n">bt_enable</span><span class="p">(</span><span class="n">bt_ready</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printk</span><span class="p">(</span><span class="s">&quot;Bluetooth init failed (err %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>The key APIs employed by the beacon sample are <code class="xref c c-func docutils literal"><span class="pre">bt_enable()</span></code>
+that&#8217;s used to initialize Bluetooth and then <code class="xref c c-func docutils literal"><span class="pre">bt_le_adv_start()</span></code>
+that&#8217;s used to start advertising a specific combination of advertising
+and scan response data.</p>
+</div>
+<div class="section" id="testing-with-qemu">
+<h2>Testing with QEMU<a class="headerlink" href="#testing-with-qemu" title="Permalink to this headline">¶</a></h2>
+<p>It&#8217;s possible to test Bluetooth applications using QEMU. In order to do
+so, a Bluetooth controller needs to be exported from the host OS (Linux)
+to the emulator.</p>
+<div class="section" id="using-host-system-bluetooth-controller-in-qemu">
+<h3>Using Host System Bluetooth Controller in QEMU<a class="headerlink" href="#using-host-system-bluetooth-controller-in-qemu" title="Permalink to this headline">¶</a></h3>
+<p>The host OS&#8217;s Bluetooth controller is connected to the second QEMU
+serial line using a UNIX socket. This socket employs the QEMU option
+<code class="docutils literal"><span class="pre">-serial</span> <span class="pre">unix:/tmp/bt-server-bredr</span></code>. This option is already
+added to QEMU through <strong class="makevar">QEMU_EXTRA_FLAGS</strong> in most Bluetooth
+sample Makefiles&#8217; and made available through the &#8216;run&#8217; make target.</p>
+<p>On the host side, BlueZ allows to export its Bluetooth controller
+through a so-called user channel for QEMU to use:</p>
+<ol class="arabic">
+<li><p class="first">Make sure that the Bluetooth controller is down</p>
+</li>
+<li><p class="first">Use the btproxy tool to open the listening UNIX socket, type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo tools/btproxy -u
+<span class="go">Listening on /tmp/bt-server-bredr</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Choose one of the Bluetooth sample applications located in
+<code class="docutils literal"><span class="pre">samples/bluetooth</span></code>.</p>
+</li>
+<li><p class="first">To run Bluetooth application in QEMU, type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make run
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Running QEMU now results in a connection with the second serial line to
+the <code class="docutils literal"><span class="pre">bt-server-bredr</span></code> UNIX socket, letting the application
+access the Bluetooth controller.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="qualification.html" class="btn btn-neutral float-right" title="Qualification Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../api/bluetooth.html" class="btn btn-neutral" title="Bluetooth API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

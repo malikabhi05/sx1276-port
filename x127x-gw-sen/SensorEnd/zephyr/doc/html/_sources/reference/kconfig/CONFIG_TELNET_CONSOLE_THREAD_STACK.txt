@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: TELNET_CONSOLE_THREAD_STACK
+
+.. option:: CONFIG_TELNET_CONSOLE_THREAD_STACK:
+.. _CONFIG_TELNET_CONSOLE_THREAD_STACK:
+
+This option helps to fine-tune telnet's inner thread stack size.
+
+
+
+:Symbol:           TELNET_CONSOLE_THREAD_STACK
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Telnet console inner thread stack size"
+:Default values:
+
+ *  1024 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ TELNET_CONSOLE && CONSOLE (value: "n")
+:Locations:
+ * ../drivers/console/Kconfig.telnet:77

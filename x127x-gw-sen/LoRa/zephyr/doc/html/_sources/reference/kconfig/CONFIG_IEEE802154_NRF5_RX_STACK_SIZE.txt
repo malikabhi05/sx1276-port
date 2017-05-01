@@ -1,0 +1,37 @@
+:orphan:
+
+.. title:: IEEE802154_NRF5_RX_STACK_SIZE
+
+.. option:: CONFIG_IEEE802154_NRF5_RX_STACK_SIZE:
+.. _CONFIG_IEEE802154_NRF5_RX_STACK_SIZE:
+
+This option sets the driver's stack size for its internal rx thread.
+The default value should be sufficient, but in case it proves to be
+a too little one, this option makes it easy to play with the size.
+
+
+
+:Symbol:           IEEE802154_NRF5_RX_STACK_SIZE
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Driver's internal rx thread stack size"
+:Default values:
+
+ *  800 (value: "n")
+ *   Condition: (none)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ IEEE802154_NRF5 || IEEE802154_NRF5_RAW (value: "n")
+:Locations:
+ * ../drivers/ieee802154/Kconfig.nrf5:19

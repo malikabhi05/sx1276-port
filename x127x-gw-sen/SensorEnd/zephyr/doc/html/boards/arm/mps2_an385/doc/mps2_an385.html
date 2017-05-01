@@ -1,0 +1,602 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ARM V2M MPS2 &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../../../index.html"/>
+        <link rel="up" title="Supported Boards" href="../../../boards.html"/>
+        <link rel="next" title="nRF51-PCA10028" href="../../nrf51_pca10028/doc/nrf51_pca10028.html"/>
+        <link rel="prev" title="Hexiwear" href="../../hexiwear_k64/doc/hexiwear_k64.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../boards.html">Supported Boards</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#x86-boards">X86 Boards</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../boards.html#arm-boards">ARM Boards</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../96b_carbon/doc/96b_carbon.html">96Boards Carbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../96b_nitrogen/doc/96b_nitrogen.html">96Boards Nitrogen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_101_ble/doc/board.html">Arduino/Genuino 101 (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_due/doc/board.html">Arduino Due</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cc3200_launchxl/doc/cc3200_launchxl.html">CC3200 LaunchXL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../curie_ble/doc/board.html">Curie (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_k64f/doc/frdm_k64f.html">NXP FRDM-K64F</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_kw41z/doc/frdm_kw41z.html">NXP FRDM-KW41Z</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hexiwear_k64/doc/hexiwear_k64.html">Hexiwear</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ARM V2M MPS2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware">Hardware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#programming-and-debugging">Programming and Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf51_pca10028/doc/nrf51_pca10028.html">nRF51-PCA10028</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52840_pca10056/doc/nrf52840_pca10056.html">nRF52840-PCA10056</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52_pca10040/doc/nordic_segger.html">Nordic nRF5x Segger J-Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52_pca10040/doc/nrf52_pca10040.html">nRF52-PCA10040</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f401re/doc/nucleof401re.html">ST Nucleo F401RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f411re/doc/nucleof411re.html">ST Nucleo F411RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_l476rg/doc/nucleol476rg.html">ST Nucleo L476RG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../qemu_cortex_m3/doc/board.html">ARM Cortex-M3 Emulation (QEMU)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sam_e70_xplained/doc/sam_e70_xplained.html">SAM E70 Xplained</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../v2m_beetle/doc/v2m_beetle.html">ARM V2M Beetle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#arc-boards">ARC Boards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#nios-ii-boards">NIOS II Boards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../boards.html">Supported Boards</a> &raquo;</li>
+        
+      <li>ARM V2M MPS2</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/boards/arm/mps2_an385/doc/mps2_an385.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="arm-v2m-mps2">
+<span id="mps2-an385-board"></span><h1>ARM V2M MPS2<a class="headerlink" href="#arm-v2m-mps2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The mps2_an385 board configuration is used by Zephyr applications that run on
+the V2M MPS2 board. It provides support for the ARM Cortex-M3 (AN385) CPU and
+the following devices:</p>
+<ul class="simple">
+<li>Nested Vectored Interrupt Controller (NVIC)</li>
+<li>System Tick System Clock (SYSTICK)</li>
+<li>Cortex-M System Design Kit UART</li>
+</ul>
+<a class="reference internal image-reference" href="../../../../_images/mps2.png"><img alt="ARM V2M MPS2" class="align-center" src="../../../../_images/mps2.png" style="width: 442px; height: 335px;" /></a>
+<p>More information about the board can be found at the <a class="reference external" href="https://developer.mbed.org/platforms/ARM-MPS2/">V2M MPS2 Website</a>.</p>
+<p>The Application Note AN385 can be found at <a class="reference external" href="http://infocenter.arm.com/help/topic/com.arm.doc.dai0385c/DAI0385C_cortex_m3_on_v2m_mps2.pdf">Application Note AN385</a>.</p>
+</div>
+<div class="section" id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
+<p>ARM V2M MPS2 provides the following hardware components:</p>
+<ul class="simple">
+<li>ARM Cortex-M3 (AN385)</li>
+<li>ARM IoT Subsystem for Cortex-M</li>
+<li>Form factor: 140x120cm</li>
+<li>SRAM: 8MB single cycle SRAM, 16MB PSRAM</li>
+<li>Video: QSVGA touch screen panel, 4bit RGB VGA connector</li>
+<li>Audio: Audio Codec</li>
+<li>Debug:<ul>
+<li>ARM JTAG20 connector</li>
+<li>ARM parallel trace connector (MICTOR38)</li>
+<li>20 pin Cortex debug connector</li>
+<li>10 pin Cortex debug connector</li>
+<li>ILA connector for FPGA debug</li>
+</ul>
+</li>
+<li>Expansion<ul>
+<li>GPIO</li>
+<li>SPI</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="supported-features">
+<h3>Supported Features<a class="headerlink" href="#supported-features" title="Permalink to this headline">¶</a></h3>
+<p>The mps2_an385 board configuration supports the following hardware features:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="20%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Interface</th>
+<th class="head">Controller</th>
+<th class="head">Driver/Component</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>NVIC</td>
+<td>on-chip</td>
+<td>nested vector interrupt controller</td>
+</tr>
+<tr class="row-odd"><td>SYSTICK</td>
+<td>on-chip</td>
+<td>systick</td>
+</tr>
+<tr class="row-even"><td>UART</td>
+<td>on-chip</td>
+<td>serial port-polling;
+serial port-interrupt</td>
+</tr>
+<tr class="row-odd"><td>GPIO</td>
+<td>on-chip</td>
+<td>gpio</td>
+</tr>
+<tr class="row-even"><td>WATCHDOG</td>
+<td>on-chip</td>
+<td>watchdog</td>
+</tr>
+<tr class="row-odd"><td>TIMER</td>
+<td>on-chip</td>
+<td>counter</td>
+</tr>
+<tr class="row-even"><td>DUALTIMER</td>
+<td>on-chip</td>
+<td>counter</td>
+</tr>
+</tbody>
+</table>
+<p>Other hardware features are not currently supported by the port.
+See the <a class="reference external" href="https://developer.mbed.org/platforms/ARM-MPS2/">V2M MPS2 Website</a> for a complete list of V2M MPS2 board hardware
+features.</p>
+<p>The default configuration can be found in the defconfig file:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">boards/arm/mps2_an385/mps2_an385_defconfig</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interrupt-controller">
+<h3>Interrupt Controller<a class="headerlink" href="#interrupt-controller" title="Permalink to this headline">¶</a></h3>
+<p>MPS2 is a Cortex-M3 based SoC and has 15 fixed exceptions and 45 IRQs.</p>
+<p>A Cortex-M3/4-based board uses vectored exceptions. This means each exception
+calls a handler directly from the vector table.</p>
+<p>Handlers are provided for exceptions 1-6, 11-12, and 14-15. The table here
+identifies the handlers used for each exception.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="20%" />
+<col width="27%" />
+<col width="43%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Exc#</th>
+<th class="head">Name</th>
+<th class="head">Remarks</th>
+<th class="head">Used by Zephyr Kernel</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Reset</td>
+<td>&nbsp;</td>
+<td>system initialization</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>NMI</td>
+<td>&nbsp;</td>
+<td>system fatal error</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Hard fault</td>
+<td>&nbsp;</td>
+<td>system fatal error</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>MemManage</td>
+<td>MPU fault</td>
+<td>system fatal error</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Bus</td>
+<td>&nbsp;</td>
+<td>system fatal error</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>Usage
+fault</td>
+<td>undefined
+instruction,
+or switch
+attempt to ARM
+mode</td>
+<td>system fatal error</td>
+</tr>
+<tr class="row-even"><td>11</td>
+<td>SVC</td>
+<td>&nbsp;</td>
+<td>context switch and
+software interrupts</td>
+</tr>
+<tr class="row-odd"><td>12</td>
+<td>Debug
+monitor</td>
+<td>&nbsp;</td>
+<td>system fatal error</td>
+</tr>
+<tr class="row-even"><td>14</td>
+<td>PendSV</td>
+<td>&nbsp;</td>
+<td>context switch</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>SYSTICK</td>
+<td>&nbsp;</td>
+<td>system clock</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pin-mapping">
+<h3>Pin Mapping<a class="headerlink" href="#pin-mapping" title="Permalink to this headline">¶</a></h3>
+<p>The ARM V2M MPS2 Board has 4 GPIO controllers. These controllers are responsible
+for pin muxing, input/output, pull-up, etc.</p>
+<p>All GPIO controller pins are exposed via the following sequence of pin numbers:</p>
+<ul class="simple">
+<li>Pins 0 - 15 are for GPIO 0</li>
+<li>Pins 16 - 31 are for GPIO 1</li>
+<li>Pins 32 -  47 are for GPIO 2</li>
+<li>Pins 48 -  51 are for GPIO 3</li>
+</ul>
+<p>Mapping from the ARM MPS2 Board pins to GPIO controllers:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li>D0 : EXT_0</li>
+<li>D1 : EXT_4</li>
+<li>D2 : EXT_2</li>
+<li>D3 : EXT_3</li>
+<li>D4 : EXT_1</li>
+<li>D5 : EXT_6</li>
+<li>D6 : EXT_7</li>
+<li>D7 : EXT_8</li>
+<li>D8 : EXT_9</li>
+<li>D9 : EXT_10</li>
+<li>D10 : EXT_12</li>
+<li>D11 : EXT_13</li>
+<li>D12 : EXT_14</li>
+<li>D13 : EXT_11</li>
+<li>D14 : EXT_15</li>
+<li>D15 : EXT_5</li>
+<li>D16 : EXT_16</li>
+<li>D17 : EXT_17</li>
+</ul>
+</td><td><ul class="simple">
+<li>D18 : EXT_18</li>
+<li>D19 : EXT_19</li>
+<li>D20 : EXT_20</li>
+<li>D21 : EXT_21</li>
+<li>D22 : EXT_22</li>
+<li>D23 : EXT_23</li>
+<li>D24 : EXT_24</li>
+<li>D25 : EXT_25</li>
+<li>D26 : EXT_26</li>
+<li>D27 : EXT_30</li>
+<li>D28 : EXT_28</li>
+<li>D29 : EXT_29</li>
+<li>D30 : EXT_27</li>
+<li>D31 : EXT_32</li>
+<li>D32 : EXT_33</li>
+<li>D33 : EXT_34</li>
+<li>D34 : EXT_35</li>
+</ul>
+</td><td><ul class="simple">
+<li>D35 : EXT_36</li>
+<li>D36 : EXT_38</li>
+<li>D37 : EXT_39</li>
+<li>D38 : EXT_40</li>
+<li>D39 : EXT_44</li>
+<li>D40 : EXT_41</li>
+<li>D41 : EXT_31</li>
+<li>D42 : EXT_37</li>
+<li>D43 : EXT_42</li>
+<li>D44 : EXT_43</li>
+<li>D45 : EXT_45</li>
+<li>D46 : EXT_46</li>
+<li>D47 : EXT_47</li>
+<li>D48 : EXT_48</li>
+<li>D49 : EXT_49</li>
+<li>D50 : EXT_50</li>
+<li>D51 : EXT_51</li>
+</ul>
+</td></tr></table>
+<p>Peripheral Mapping:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li>UART_3_RX : D0</li>
+<li>UART_3_TX : D1</li>
+<li>SPI_3_CS : D10</li>
+<li>SPI_3_MOSI : D11</li>
+<li>SPI_3_MISO : D12</li>
+<li>SPI_3_SCLK : D13</li>
+</ul>
+</td><td><ul class="simple">
+<li>I2C_3_SDA : D14</li>
+<li>I2C_3_SCL : D15</li>
+<li>UART_4_RX : D26</li>
+<li>UART_4_TX : D30</li>
+<li>SPI_4_CS : D36</li>
+</ul>
+</td><td><ul class="simple">
+<li>SPI_4_MOSI : D37</li>
+<li>SPI_4_MISO : D38</li>
+<li>SPI_4_SCK : D39</li>
+<li>I2C_4_SDA : D40</li>
+<li>I2C_4_SCL : D41</li>
+</ul>
+</td></tr></table>
+<p>For mode details please refer to <a class="reference external" href="http://infocenter.arm.com/help/topic/com.arm.doc.100112_0200_05_en/versatile_express_cortex_m_prototyping_systems_v2m_mps2_and_v2m_mps2plus_technical_reference_100112_0200_05_en.pdf">MPS2 Technical Reference Manual (TRM)</a>.</p>
+</div>
+<div class="section" id="system-clock">
+<h3>System Clock<a class="headerlink" href="#system-clock" title="Permalink to this headline">¶</a></h3>
+<p>The V2M MPS2 main clock is 24 MHz.</p>
+</div>
+<div class="section" id="serial-port">
+<h3>Serial Port<a class="headerlink" href="#serial-port" title="Permalink to this headline">¶</a></h3>
+<p>The V2M MPS2 processor has five UARTs. Both the UARTs have only two wires for
+RX/TX and no flow control (CTS/RTS) or FIFO. The Zephyr console output, by
+default, is utilizing UART0.</p>
+</div>
+</div>
+<div class="section" id="programming-and-debugging">
+<h2>Programming and Debugging<a class="headerlink" href="#programming-and-debugging" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="flashing">
+<h3>Flashing<a class="headerlink" href="#flashing" title="Permalink to this headline">¶</a></h3>
+<p>V2M MPS2 provides:</p>
+<ul class="simple">
+<li>A USB connection to the host computer, which exposes a Mass Storage and an
+USB Serial Port.</li>
+<li>A Serial Flash device, which implements the USB flash disk file storage.</li>
+<li>A physical UART connection which is relayed over interface USB Serial port.</li>
+</ul>
+<div class="section" id="flashing-an-application-to-v2m-mps2">
+<h4>Flashing an application to V2M MPS2<a class="headerlink" href="#flashing-an-application-to-v2m-mps2" title="Permalink to this headline">¶</a></h4>
+<p>The sample application <a class="reference internal" href="../../../../samples/hello_world/README.html#hello-world"><span class="std std-ref">Hello World</span></a> is being used in this tutorial:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span>ZEPHYR_BASE/samples/hello_world
+</pre></div>
+</div>
+<p>To build the Zephyr kernel and application, enter:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> <span class="nv">$ZEPHYR_BASE</span>
+<span class="gp">$</span> . zephyr-env.sh
+<span class="gp">$</span> <span class="nb">cd</span> <span class="nv">$ZEPHYR_BASE</span>/samples/hello_world/
+<span class="gp">$</span> make <span class="nv">BOARD</span><span class="o">=</span>mps2_an385
+</pre></div>
+</div>
+<p>Connect the V2M MPS2 to your host computer using the USB port and you should
+see a USB connection which exposes a Mass Storage and a USB Serial Port.
+Copy the generated zephyr.bin in the exposed drive.
+Reset the board and you should be able to see on the corresponding Serial Port
+the following message:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Hello World! arm</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../nrf51_pca10028/doc/nrf51_pca10028.html" class="btn btn-neutral float-right" title="nRF51-PCA10028" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../hexiwear_k64/doc/hexiwear_k64.html" class="btn btn-neutral" title="Hexiwear" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Stacks &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Data Passing" href="data_passing.html"/>
+        <link rel="next" title="Message Queues" href="message_queues.html"/>
+        <link rel="prev" title="Lifos" href="lifos.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../kernel.html">Zephyr Kernel Primer (version 2)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview/overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../threads/threads.html">Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../timing/timing.html">Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory/memory.html">Memory Allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synchronization/synchronization.html">Synchronization</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="data_passing.html">Data Passing</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fifos.html">Fifos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lifos.html">Lifos</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Stacks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suggested-uses">Suggested Uses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="message_queues.html">Message Queues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailboxes.html">Mailboxes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipes.html">Pipes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../other/other.html">Other Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../kernel.html">Zephyr Kernel Primer (version 2)</a> &raquo;</li>
+        
+          <li><a href="data_passing.html">Data Passing</a> &raquo;</li>
+        
+      <li>Stacks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/kernel/data_passing/stacks.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stacks">
+<span id="stacks-v2"></span><h1>Stacks<a class="headerlink" href="#stacks" title="Permalink to this headline">¶</a></h1>
+<p>A <em class="dfn">stack</em> is a kernel object that implements a traditional
+last in, first out (LIFO) queue, allowing threads and ISRs
+to add and remove a limited number of 32-bit data values.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#concepts" id="id1">Concepts</a></li>
+<li><a class="reference internal" href="#implementation" id="id2">Implementation</a><ul>
+<li><a class="reference internal" href="#defining-a-stack" id="id3">Defining a Stack</a></li>
+<li><a class="reference internal" href="#pushing-to-a-stack" id="id4">Pushing to a Stack</a></li>
+<li><a class="reference internal" href="#popping-from-a-stack" id="id5">Popping from a Stack</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#suggested-uses" id="id6">Suggested Uses</a></li>
+<li><a class="reference internal" href="#configuration-options" id="id7">Configuration Options</a></li>
+<li><a class="reference internal" href="#apis" id="id8">APIs</a></li>
+</ul>
+</div>
+<div class="section" id="concepts">
+<h2><a class="toc-backref" href="#id1">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>Any number of stacks can be defined. Each stack is referenced
+by its memory address.</p>
+<p>A stack has the following key properties:</p>
+<ul class="simple">
+<li>A <strong>queue</strong> of 32-bit data values that have been added but not yet removed.
+The queue is implemented using an array of 32-bit integers,
+and must be aligned on a 4-byte boundary.</li>
+<li>A <strong>maximum quantity</strong> of data values that can be queued in the array.</li>
+</ul>
+<p>A stack must be initialized before it can be used. This sets its queue to empty.</p>
+<p>A data value can be <strong>added</strong> to a stack by a thread or an ISR.
+The value is given directly to a waiting thread, if one exists;
+otherwise the value is added to the lifo&#8217;s queue.
+The kernel does <em>not</em> detect attempts to add a data value to a stack
+that has already reached its maximum quantity of queued values.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Adding a data value to a stack that is already full will result in
+array overflow, and lead to unpredictable behavior.</p>
+</div>
+<p>A data value may be <strong>removed</strong> from a stack by a thread.
+If the stack&#8217;s queue is empty a thread may choose to wait for it to be given.
+Any number of threads may wait on an empty stack simultaneously.
+When a data item is added, it is given to the highest priority thread
+that has waited longest.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The kernel does allow an ISR to remove an item from a stack, however
+the ISR must not attempt to wait if the stack is empty.</p>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2><a class="toc-backref" href="#id2">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="defining-a-stack">
+<h3><a class="toc-backref" href="#id3">Defining a Stack</a><a class="headerlink" href="#defining-a-stack" title="Permalink to this headline">¶</a></h3>
+<p>A stack is defined using a variable of type <code class="xref c c-type docutils literal"><span class="pre">struct</span> <span class="pre">k_stack</span></code>.
+It must then be initialized by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_stack_initP7k_stackP8uint32_ti" title="k_stack_init"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_stack_init()</span></code></a>.</p>
+<p>The following code defines and initializes an empty stack capable of holding
+up to ten 32-bit data values.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#define MAX_ITEMS 10</span>
+
+<span class="kt">uint32_t</span> <span class="n">my_stack_array</span><span class="p">[</span><span class="n">MAX_ITEMS</span><span class="p">];</span>
+<span class="k">struct</span> <span class="n">k_stack</span> <span class="n">my_stack</span><span class="p">;</span>
+
+<span class="n">k_stack_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_stack</span><span class="p">,</span> <span class="n">my_stack_array</span><span class="p">,</span> <span class="n">MAX_ITEMS</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Alternatively, a stack can be defined and initialized at compile time
+by calling <a class="reference internal" href="../../api/kernel_api.html#c.K_STACK_DEFINE" title="K_STACK_DEFINE"><code class="xref c c-macro docutils literal"><span class="pre">K_STACK_DEFINE</span></code></a>.</p>
+<p>The following code has the same effect as the code segment above. Observe
+that the macro defines both the stack and its array of data values.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">K_STACK_DEFINE</span><span class="p">(</span><span class="n">my_stack</span><span class="p">,</span> <span class="n">MAX_ITEMS</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pushing-to-a-stack">
+<h3><a class="toc-backref" href="#id4">Pushing to a Stack</a><a class="headerlink" href="#pushing-to-a-stack" title="Permalink to this headline">¶</a></h3>
+<p>A data item is added to a stack by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_stack_pushP7k_stack8uint32_t" title="k_stack_push"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_stack_push()</span></code></a>.</p>
+<p>The following code builds on the example above, and shows how a thread
+can create a pool of data structures by saving their memory addresses
+in a stack.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cm">/* define array of data structures */</span>
+<span class="k">struct</span> <span class="n">my_buffer_type</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">field1</span><span class="p">;</span>
+    <span class="p">...</span>
+    <span class="p">};</span>
+<span class="k">struct</span> <span class="n">my_buffer_type</span> <span class="n">my_buffers</span><span class="p">[</span><span class="n">MAX_ITEMS</span><span class="p">];</span>
+
+<span class="cm">/* save address of each data structure in a stack */</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_ITEMS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">k_stack_push</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_stack</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">my_buffers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="popping-from-a-stack">
+<h3><a class="toc-backref" href="#id5">Popping from a Stack</a><a class="headerlink" href="#popping-from-a-stack" title="Permalink to this headline">¶</a></h3>
+<p>A data item is taken from a stack by calling <a class="reference internal" href="../../api/kernel_api.html#_CPPv211k_stack_popP7k_stackP8uint32_t7int32_t" title="k_stack_pop"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_stack_pop()</span></code></a>.</p>
+<p>The following code builds on the example above, and shows how a thread
+can dynamically allocate an unused data structure.
+When the data structure is no longer required, the thread must push
+its address back on the stack to allow the data structure to be reused.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">my_buffer_type</span> <span class="o">*</span><span class="n">new_buffer</span><span class="p">;</span>
+
+<span class="n">k_stack_pop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer_stack</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">new_buffer</span><span class="p">,</span> <span class="n">K_FOREVER</span><span class="p">);</span>
+<span class="n">new_buffer</span><span class="o">-&gt;</span><span class="n">field1</span> <span class="o">=</span> <span class="p">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="suggested-uses">
+<h2><a class="toc-backref" href="#id6">Suggested Uses</a><a class="headerlink" href="#suggested-uses" title="Permalink to this headline">¶</a></h2>
+<p>Use a stack to store and retrieve 32-bit data values in a &#8220;last in,
+first out&#8221; manner, when the maximum number of stored items is known.</p>
+</div>
+<div class="section" id="configuration-options">
+<h2><a class="toc-backref" href="#id7">Configuration Options</a><a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>Related configuration options:</p>
+<ul class="simple">
+<li>None.</li>
+</ul>
+</div>
+<div class="section" id="apis">
+<h2><a class="toc-backref" href="#id8">APIs</a><a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>The following stack APIs are provided by <code class="file docutils literal"><span class="pre">kernel.h</span></code>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../api/kernel_api.html#c.K_STACK_DEFINE" title="K_STACK_DEFINE"><code class="xref c c-macro docutils literal"><span class="pre">K_STACK_DEFINE</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_stack_initP7k_stackP8uint32_ti" title="k_stack_init"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_stack_init()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv212k_stack_pushP7k_stack8uint32_t" title="k_stack_push"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_stack_push()</span></code></a></li>
+<li><a class="reference internal" href="../../api/kernel_api.html#_CPPv211k_stack_popP7k_stackP8uint32_t7int32_t" title="k_stack_pop"><code class="xref cpp cpp-func docutils literal"><span class="pre">k_stack_pop()</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="message_queues.html" class="btn btn-neutral float-right" title="Message Queues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lifos.html" class="btn btn-neutral" title="Lifos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bluetooth &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../index.html"/>
+        <link rel="up" title="Samples and Demos" href="../samples.html"/>
+        <link rel="next" title="Bluetooth: Beacon" href="beacon/README.html"/>
+        <link rel="prev" title="zperf: Network Traffic Generator" href="../net/zperf/README.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../samples.html">Samples and Demos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../kernel.html">Kernel Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic/basic.html">Basic Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../net/net.html">Networking Samples</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Bluetooth</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="beacon/README.html">Bluetooth: Beacon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="central/README.html">Bluetooth: Central</a></li>
+<li class="toctree-l3"><a class="reference internal" href="central_hr/README.html">Bluetooth: Central / Heart-rate Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eddystone/README.html">Bluetooth: Eddystone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handsfree/README.html">Bluetooth: Handsfree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_uart/README.html">Bluetooth: HCI UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_usb/README.html">Bluetooth: HCI USB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipsp/README.html">Bluetooth: IPSP Sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="peripheral/README.html">Bluetooth: Peripheral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="peripheral_csc/README.html">Bluetooth: Peripheral CSC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="peripheral_dis/README.html">Bluetooth: Peripheral DIS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="peripheral_esp/README.html">Bluetooth: Peripheral ESP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="peripheral_hids/README.html">Bluetooth: Peripheral HIDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="peripheral_hr/README.html">Bluetooth: Peripheral HR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="peripheral_sc_only/README.html">Bluetooth: Peripheral SC-only</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../sensor/sensor.html">Sensor Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grove/grove.html">Grove Kit Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced.html">Advanced Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../power/power.html">Power Management Samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../samples.html">Samples and Demos</a> &raquo;</li>
+        
+      <li>Bluetooth</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/samples/bluetooth/bluetooth.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bluetooth">
+<span id="bluetooth-setup"></span><h1>Bluetooth<a class="headerlink" href="#bluetooth" title="Permalink to this headline">¶</a></h1>
+<p>To build any of the Bluetooth samples, follow the instructions below:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make -C samples/bluetooth/&lt;app&gt;
+</pre></div>
+</div>
+<p>Host Bluetooth controller is connected to the second QEMU serial line through a
+Unix socket (QEMU option -serial unix:/tmp/bt-server-bredr).  This option is
+already added to Qemu through QEMU_EXTRA_FLAGS in Makefile.</p>
+<p>On the host side BlueZ allows to &#8220;connect&#8221; Bluetooth controller through a
+so-called user channel. Use the btproxy tool for that:</p>
+<p>Note that before calling <code class="docutils literal"><span class="pre">btproxy</span></code> make sure that Bluetooth controller is
+down.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo tools/btproxy -u
+<span class="go">Listening on /tmp/bt-server-bredr</span>
+</pre></div>
+</div>
+<p>Running the application in Qemu will connect the second serial line to
+<code class="docutils literal"><span class="pre">bt-server-bredr</span></code> Unix socket. When Bluetooth (CONFIG_BLUETOOTH) and Bluetooth
+HCI UART driver (CONFIG_BLUETOOTH_H4) are enabled, the Bluetooth driver
+registers with the system.</p>
+<p>From now on Bluetooth may be used by the application. To run applications in
+the Qemu emulation environment, type:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make run
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="beacon/README.html">Bluetooth: Beacon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="central/README.html">Bluetooth: Central</a></li>
+<li class="toctree-l1"><a class="reference internal" href="central_hr/README.html">Bluetooth: Central / Heart-rate Monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eddystone/README.html">Bluetooth: Eddystone</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handsfree/README.html">Bluetooth: Handsfree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_uart/README.html">Bluetooth: HCI UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_usb/README.html">Bluetooth: HCI USB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipsp/README.html">Bluetooth: IPSP Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peripheral/README.html">Bluetooth: Peripheral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peripheral_csc/README.html">Bluetooth: Peripheral CSC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peripheral_dis/README.html">Bluetooth: Peripheral DIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peripheral_esp/README.html">Bluetooth: Peripheral ESP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peripheral_hids/README.html">Bluetooth: Peripheral HIDs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peripheral_hr/README.html">Bluetooth: Peripheral HR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peripheral_sc_only/README.html">Bluetooth: Peripheral SC-only</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="beacon/README.html" class="btn btn-neutral float-right" title="Bluetooth: Beacon" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../net/zperf/README.html" class="btn btn-neutral" title="zperf: Network Traffic Generator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

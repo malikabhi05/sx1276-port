@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: ATAES132A
+
+.. option:: CONFIG_ATAES132A:
+.. _CONFIG_ATAES132A:
+
+Enable Atmel ATAES132A 32k AES Serial EEPROM support.
+
+
+
+:Symbol:           ATAES132A
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Atmel ATAES132A 32k AES Serial EEPROM support" if I2C && CRYPTO (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: I2C && CRYPTO (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ CRYPTO (value: "n")
+:Locations:
+ * ../drivers/crypto/Kconfig:51

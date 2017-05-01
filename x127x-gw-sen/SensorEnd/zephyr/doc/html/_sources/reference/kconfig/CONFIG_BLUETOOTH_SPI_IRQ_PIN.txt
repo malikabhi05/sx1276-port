@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: BLUETOOTH_SPI_IRQ_PIN
+
+.. option:: CONFIG_BLUETOOTH_SPI_IRQ_PIN:
+.. _CONFIG_BLUETOOTH_SPI_IRQ_PIN:
+
+This option specifies the IRQ line number on the SPI device
+
+
+
+:Symbol:           BLUETOOTH_SPI_IRQ_PIN
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "SPI IRQ line number"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ BLUETOOTH_HCI && BLUETOOTH && BLUETOOTH_SPI (value: "n")
+:Locations:
+ * ../drivers/bluetooth/hci/Kconfig:133

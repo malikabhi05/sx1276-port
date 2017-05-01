@@ -1,0 +1,38 @@
+:orphan:
+
+.. title:: ETH_INIT_PRIORITY
+
+.. option:: CONFIG_ETH_INIT_PRIORITY:
+.. _CONFIG_ETH_INIT_PRIORITY:
+
+Ethernet device driver initialization priority.
+Do not mess with it unless you know what you are doing.
+Note that the priority needs to be lower than the net stack
+so that it can start before the networking sub-system.
+
+
+
+:Symbol:           ETH_INIT_PRIORITY
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Ethernet driver init priority" if NET_L2_ETHERNET (value: "n")
+:Default values:
+
+ *  80 (value: "n")
+ *   Condition: NET_L2_ETHERNET (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../drivers/ethernet/Kconfig:26

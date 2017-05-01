@@ -1,0 +1,31 @@
+:orphan:
+
+.. title:: IEEE802154_NRF5_CCA_MODE_ED
+
+.. option:: CONFIG_IEEE802154_NRF5_CCA_MODE_ED:
+.. _CONFIG_IEEE802154_NRF5_CCA_MODE_ED:
+
+The configuration item CONFIG_IEEE802154_NRF5_CCA_MODE_ED:
+
+:Symbol:           IEEE802154_NRF5_CCA_MODE_ED
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   true
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Energy Above Threashold"
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ IEEE802154_NRF5 || IEEE802154_NRF5_RAW (value: "n")
+:Locations:
+ * ../drivers/ieee802154/Kconfig.nrf5:40

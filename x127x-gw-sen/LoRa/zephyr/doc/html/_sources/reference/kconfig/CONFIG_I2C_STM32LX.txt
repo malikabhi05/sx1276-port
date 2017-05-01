@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: I2C_STM32LX
+
+.. option:: CONFIG_I2C_STM32LX:
+.. _CONFIG_I2C_STM32LX:
+
+Enable I2C support on the STM32Lxx family of processors.
+
+
+
+:Symbol:           I2C_STM32LX
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "STM32Lx MCU I2C Driver" if I2C && SOC_FAMILY_STM32 && SOC_SERIES_STM32L4X (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: I2C && SOC_FAMILY_STM32 && SOC_SERIES_STM32L4X (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ (no additional dependencies)
+:Locations:
+ * ../drivers/i2c/Kconfig:86

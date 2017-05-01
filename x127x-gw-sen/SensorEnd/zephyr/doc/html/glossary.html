@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Glossary of Terms &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="index.html"/>
+        <link rel="prev" title="Licensing of Zephyr Project components" href="LICENSING.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boards/boards.html">Supported Boards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Glossary of Terms</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/glossary.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="glossary-of-terms">
+<span id="glossary"></span><h1>Glossary of Terms<a class="headerlink" href="#glossary-of-terms" title="Permalink to this headline">¶</a></h1>
+<dl class="glossary docutils">
+<dt id="term-api">API</dt>
+<dd>(Application Program Interface) A defined set of routines and protocols for
+building application software.</dd>
+<dt id="term-application">application</dt>
+<dd>The set of user-supplied files that the Zephyr build system uses
+to build an application image for a specified board configuration.
+It can contain application-specific code, kernel configuration settings,
+and at least one Makefile.
+The application&#8217;s kernel configuration settings direct the build system
+to create a custom kernel that makes efficient use of the board&#8217;s
+resources.
+An application can sometimes be built for more than one type of board
+configuration (including boards with different CPU architectures),
+if it does not require any board-specific capabilities.</dd>
+<dt id="term-application-image">application image</dt>
+<dd>A binary file that is loaded and executed by the board for which
+it was built.
+Each application image contains both the application&#8217;s code and the
+Zephyr kernel code needed to support it. They are compiled as a single,
+fully-linked binary.
+Once an application image is loaded onto a board, the image takes control
+of the system, initializes it, and runs as the system&#8217;s sole application.
+Both application code and kernel code execute as privileged code
+within a single shared address space.</dd>
+<dt id="term-board">board</dt>
+<dd>A target system with a defined set of devices and capabilities,
+which can load and execute an application image. It may be an actual
+hardware system or a simulated system running under QEMU.
+The Zephyr kernel supports a <a class="reference internal" href="boards/boards.html#boards"><span class="std std-ref">variety of boards</span></a>.</dd>
+<dt id="term-board-configuration">board configuration</dt>
+<dd>A set of kernel configuration options that specify how the devices
+present on a board are used by the kernel.
+The Zephyr build system defines one or more board configurations
+for each board it supports. The kernel configuration settings that are
+specified by the build system can be over-ridden by the application,
+if desired.</dd>
+<dt id="term-idt">IDT</dt>
+<dd>(Interrupt Descriptor Table) a data structure used by the x86
+architecture to implement an interrupt vector table. The IDT is used
+to determine the correct response to interrupts and exceptions.</dd>
+<dt id="term-isr">ISR</dt>
+<dd>(Interrupt Service Routine) Also known as an interrupt handler, an ISR
+is a callback function whose execution is triggered by a hardware
+interrupt (or software interrupt instructions) and is used to handle
+high-priority conditions that require interrupting the current code
+executing on the processor.</dd>
+<dt id="term-kernel">kernel</dt>
+<dd>The set of Zephyr-supplied files that implement the Zephyr kernel,
+including its core services, device drivers, network stack, and so on.</dd>
+<dt id="term-xip">XIP</dt>
+<dd>(eXecute In Place) a method of executing programs directly from long
+term storage rather than copying it into RAM, saving writable memory for
+dynamic data and not the static program code.</dd>
+</dl>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="LICENSING.html" class="btn btn-neutral" title="Licensing of Zephyr Project components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

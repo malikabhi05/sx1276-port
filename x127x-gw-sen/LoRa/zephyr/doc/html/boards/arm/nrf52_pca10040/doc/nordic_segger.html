@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nordic nRF5x Segger J-Link &mdash; Zephyr Project Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/zephyr-custom.css" type="text/css" />
+  
+
+  
+        <link rel="copyright" title="Copyright" href="../../../../copyright.html"/>
+    <link rel="top" title="Zephyr Project Documentation" href="../../../../index.html"/>
+        <link rel="up" title="Supported Boards" href="../../../boards.html"/>
+        <link rel="next" title="nRF52-PCA10040" href="nrf52_pca10040.html"/>
+        <link rel="prev" title="nRF52840-PCA10056" href="../../nrf52840_pca10056/doc/nrf52840_pca10056.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Zephyr Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.7.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction/introducing_zephyr.html">Introducing Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../boards.html">Supported Boards</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#x86-boards">X86 Boards</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../boards.html#arm-boards">ARM Boards</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../96b_carbon/doc/96b_carbon.html">96Boards Carbon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../96b_nitrogen/doc/96b_nitrogen.html">96Boards Nitrogen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_101_ble/doc/board.html">Arduino/Genuino 101 (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../arduino_due/doc/board.html">Arduino Due</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cc3200_launchxl/doc/cc3200_launchxl.html">CC3200 LaunchXL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../curie_ble/doc/board.html">Curie (BLE)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_k64f/doc/frdm_k64f.html">NXP FRDM-K64F</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../frdm_kw41z/doc/frdm_kw41z.html">NXP FRDM-KW41Z</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hexiwear_k64/doc/hexiwear_k64.html">Hexiwear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mps2_an385/doc/mps2_an385.html">ARM V2M MPS2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf51_pca10028/doc/nrf51_pca10028.html">nRF51-PCA10028</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf52840_pca10056/doc/nrf52840_pca10056.html">nRF52840-PCA10056</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Nordic nRF5x Segger J-Link</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#segger-j-link-software-installation">Segger J-Link Software Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nrf5x-command-line-tools-installation">nRF5x Command-Line Tools Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flashing">Flashing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usb-cdc-acm-serial-port-setup">USB CDC ACM Serial Port Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disabling-the-mass-storage-device-functionality">Disabling the Mass Storage Device functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rtt-console">RTT Console</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#segger-ozone">Segger Ozone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nrf52_pca10040.html">nRF52-PCA10040</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f401re/doc/nucleof401re.html">ST Nucleo F401RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_f411re/doc/nucleof411re.html">ST Nucleo F411RE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nucleo_l476rg/doc/nucleol476rg.html">ST Nucleo L476RG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../qemu_cortex_m3/doc/board.html">ARM Cortex-M3 Emulation (QEMU)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sam_e70_xplained/doc/sam_e70_xplained.html">SAM E70 Xplained</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../v2m_beetle/doc/v2m_beetle.html">ARM V2M Beetle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#arc-boards">ARC Boards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../boards.html#nios-ii-boards">NIOS II Boards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kernel/kernel.html">Zephyr Kernel Primer (version 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../application/application.html">Application Development Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../porting/porting.html">Porting Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../drivers/drivers.html">Device Drivers and Device Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../subsystems/subsystems.html">Subsystems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../samples/samples.html">Samples and Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/kconfig/index.html">Configuration Options Reference Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribute/code.html">Contributing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../LICENSING.html">Licensing of Zephyr Project components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary of Terms</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Zephyr Project</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../boards.html">Supported Boards</a> &raquo;</li>
+        
+      <li>Nordic nRF5x Segger J-Link</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/boards/arm/nrf52_pca10040/doc/nordic_segger.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nordic-nrf5x-segger-j-link">
+<span id="nordic-segger"></span><h1>Nordic nRF5x Segger J-Link<a class="headerlink" href="#nordic-nrf5x-segger-j-link" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>All Nordic nRF5x Development Kits, Preview Development Kits and Dongles are equipped
+with a Debug IC (Atmel ATSAM3U2C) which provides the following functionality:</p>
+<ul class="simple">
+<li>Segger J-Link firmware and desktop tools</li>
+<li>SWD debug for the nRF5x IC</li>
+<li>Mass Storage device for drag-and-drop image flashing</li>
+<li>USB CDC ACM Serial Port bridged to the nRF5x UART peripheral</li>
+<li>Segger RTT Console</li>
+<li>Segger Ozone Debugger</li>
+</ul>
+</div>
+<div class="section" id="segger-j-link-software-installation">
+<h2>Segger J-Link Software Installation<a class="headerlink" href="#segger-j-link-software-installation" title="Permalink to this headline">¶</a></h2>
+<p>To install the J-Link Software and documentation pack, follow the steps below:</p>
+<ol class="arabic simple">
+<li>Download the appropriate package from the <a class="reference external" href="https://www.segger.com/jlink-software.html">J-Link Software and documentation pack</a> <a class="footnote-reference" href="#id19" id="id20">[9]</a> website</li>
+<li>Depending on your platform, install the package or run the installer</li>
+<li>When connecting a J-Link-enabled board such as an nRF5x DK, PDK or dongle, a
+drive corresponding to a USB Mass Storage device as well as a serial port should come up</li>
+</ol>
+</div>
+<div class="section" id="nrf5x-command-line-tools-installation">
+<h2>nRF5x Command-Line Tools Installation<a class="headerlink" href="#nrf5x-command-line-tools-installation" title="Permalink to this headline">¶</a></h2>
+<p>The nRF5x command-line Tools allow you to control your nRF5x device from the command line,
+including resetting it, erasing or programming the flash memory and more.</p>
+<p>To install them, use the appropriate link for your operating system:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-Win32/33444">nRF5x Command-Line Tools for Windows</a> <a class="footnote-reference" href="#id3" id="id4">[1]</a></li>
+<li><a class="reference external" href="https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-Linux32/52615">nRF5x Command-Line Tools for Linux 32-bit</a> <a class="footnote-reference" href="#id5" id="id6">[2]</a></li>
+<li><a class="reference external" href="https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-Linux64/51386">nRF5x Command-Line Tools for Linux 64-bit</a> <a class="footnote-reference" href="#id7" id="id8">[3]</a></li>
+<li><a class="reference external" href="https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-OSX/53402">nRF5x Command-Line Tools for macOS</a> <a class="footnote-reference" href="#id9" id="id10">[4]</a></li>
+</ul>
+<p>After installing, make sure that <code class="docutils literal"><span class="pre">nrfjprog</span></code> is somewhere in your executable path
+to be able to invoke it from anywhere.</p>
+</div>
+<div class="section" id="flashing">
+<span id="nordic-segger-flashing"></span><h2>Flashing<a class="headerlink" href="#flashing" title="Permalink to this headline">¶</a></h2>
+<p>To program the flash with a compiled Zephyr image after having followed the instructions
+to install the Segger J-Link Software and the nRF5x Command-Line Tools, follow the steps below:</p>
+<ul class="simple">
+<li>Connect the micro-USB cable to the nRF5x board and to your computer</li>
+<li>Erase the flash memory in the nRF5x IC:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> nrfjprog --eraseall -f nrf5&lt;x&gt;
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">&lt;x&gt;</span></code> is either 1 for nRF51-based boards or 2 for nRF52-based boards</p>
+<ul class="simple">
+<li>Flash the Zephyr image from the sample folder of your choice:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> nrfjprog --program outdir/&lt;board&gt;/zephyr.hex -f nrf5&lt;x&gt;
+</pre></div>
+</div>
+<p>Where: <code class="docutils literal"><span class="pre">&lt;board&gt;</span></code> is the board name you used in the BOARD directive when building (for example nrf52_pca10040)
+and <code class="docutils literal"><span class="pre">&lt;x&gt;</span></code> is either 1 for nRF51-based boards or 2 for nRF52-based boards</p>
+<ul class="simple">
+<li>Reset and start Zephyr:</li>
+</ul>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> nrfjprog --reset -f nrf5&lt;x&gt;
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">&lt;x&gt;</span></code> is either 1 for nRF51-based boards or 2 for nRF52-based boards</p>
+</div>
+<div class="section" id="usb-cdc-acm-serial-port-setup">
+<h2>USB CDC ACM Serial Port Setup<a class="headerlink" href="#usb-cdc-acm-serial-port-setup" title="Permalink to this headline">¶</a></h2>
+<p><strong>Important note</strong>: An issue with Segger J-Link firmware on the nRF5x boards might cause
+data loss and/or corruption on the USB CDC ACM Serial Port on some machines.
+To work around this disable the Mass Storage Device on your board as described in <a class="reference internal" href="#nordic-segger-msd"><span class="std std-ref">Disabling the Mass Storage Device functionality</span></a>.</p>
+<div class="section" id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+<p>The serial port will appear as <code class="docutils literal"><span class="pre">COMxx</span></code>. Simply check the &#8220;Ports (COM &amp; LPT)&#8221; section
+in the Device Manager.</p>
+</div>
+<div class="section" id="gnu-linux">
+<h3>GNU/Linux<a class="headerlink" href="#gnu-linux" title="Permalink to this headline">¶</a></h3>
+<p>The serial port will appear as <code class="docutils literal"><span class="pre">/dev/ttyACMx</span></code>. By default the port is not accessible to all users.
+Type the command below to add your user to the dialout group to give it access to the serial port.
+Note that re-login is required for this to take effect.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo usermod -a -G dialout &lt;username&gt;
+</pre></div>
+</div>
+<p>To avoid it being taken by the Modem Manager for a few seconds when you plug the board in:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">systemctl stop ModemManager.service</span>
+<span class="go">systemctl disable ModemManager.service</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="apple-macos-os-x">
+<h3>Apple macOS (OS X)<a class="headerlink" href="#apple-macos-os-x" title="Permalink to this headline">¶</a></h3>
+<p>The serial port will appear as <code class="docutils literal"><span class="pre">/dev/tty.usbmodemXXXX</span></code>.</p>
+</div>
+</div>
+<div class="section" id="disabling-the-mass-storage-device-functionality">
+<span id="nordic-segger-msd"></span><h2>Disabling the Mass Storage Device functionality<a class="headerlink" href="#disabling-the-mass-storage-device-functionality" title="Permalink to this headline">¶</a></h2>
+<p>Due to a known issue in Segger&#8217;s J-Link firmware, depending on your operating system
+and version you might experience data corruption or drops if you use the USB CDC
+ACM Serial Port with packets larger than 64 bytes.
+This has been observed on both GNU/Linux and macOS (OS X).</p>
+<p>To avoid this, you can simply disable the Mass Storage Device by opening:</p>
+<ul class="simple">
+<li>On GNU/Linux or macOS (OS X) JLinkExe from a terminal</li>
+<li>On Microsoft Windows the &#8220;JLink Commander&#8221; application</li>
+</ul>
+<p>And then typing the following:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">MSDDisable</span>
+</pre></div>
+</div>
+<p>And finally unplugging and replugging the board. The Mass Storage Device should
+not appear anymore and you should now be able to send long packets over the virtual Serial Port.
+Further information from Segger can be found in the <a class="reference external" href="https://wiki.segger.com/index.php?title=J-Link-OB_SAM3U">Segger SAM3U Wiki</a> <a class="footnote-reference" href="#id11" id="id12">[5]</a>.</p>
+</div>
+<div class="section" id="rtt-console">
+<h2>RTT Console<a class="headerlink" href="#rtt-console" title="Permalink to this headline">¶</a></h2>
+<p>Segger&#8217;s J-Link supports <a class="reference external" href="https://www.segger.com/jlink-rtt.html">Real-Time Tracing (RTT)</a> <a class="footnote-reference" href="#id13" id="id14">[6]</a>, a technology that allows a terminal
+connection (both input and output) to be established between the target (nRF5x board)
+and the development computer for logging and input. Zephyr supports RTT on nRF5x targets,
+which can be very useful if the UART (through USB CDC ACM) is already being used for
+a purpose different than logging (such as HCI traffic in the hci_uart application).
+To use RTT, you will first need to enable it by adding the following lines in your <code class="docutils literal"><span class="pre">.conf</span></code> file:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">CONFIG_HAS_SEGGER_RTT=y</span>
+<span class="go">CONFIG_RTT_CONSOLE=y</span>
+</pre></div>
+</div>
+<p>Once compiled and flashed with RTT enabled, you will be able to display RTT console
+messages by doing the following:</p>
+<div class="section" id="id1">
+<h3>Windows<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Open the &#8220;J-Link RTT Viewer&#8221; application</li>
+<li>Select the following options:<ul>
+<li>Connection: USB</li>
+<li>Target Device: Select your IC from the list</li>
+<li>Target Interface and Speed: SWD, 4000 KHz</li>
+<li>RTT Control Block: Auto Detection</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="gnu-linux-and-macos-os-x">
+<h3>GNU/Linux and macOS (OS X)<a class="headerlink" href="#gnu-linux-and-macos-os-x" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Open <code class="docutils literal"><span class="pre">JLinkRTTLogger</span></code> from a terminal</li>
+<li>Select the following options:<ul>
+<li>Device Name: Use the fully qualified device name for your IC</li>
+<li>Target Interface: SWD</li>
+<li>Interface Speed: 4000 KHz</li>
+<li>RTT Control Block address: auto-detection</li>
+<li>RTT Channel name or index: 0</li>
+<li>Output file: filename or <code class="docutils literal"><span class="pre">/dev/stdout</span></code> to display on the terminal directly</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="segger-ozone">
+<h2>Segger Ozone<a class="headerlink" href="#segger-ozone" title="Permalink to this headline">¶</a></h2>
+<p>Segger J-Link is compatible with <a class="reference external" href="https://www.segger.com/ozone.htm">Segger Ozone</a> <a class="footnote-reference" href="#id15" id="id16">[7]</a>, a visual debugger that can be obtained here:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.segger.com/downloads/jlink#Ozone">Segger Ozone Download</a> <a class="footnote-reference" href="#id17" id="id18">[8]</a></li>
+</ul>
+<p>Once downloaded you can install it and configure it like so:</p>
+<ul class="simple">
+<li>Target Device: Select your IC from the list</li>
+<li>Target Interface: SWD</li>
+<li>Target Interface Speed: 4 MHz</li>
+<li>Host Interface: USB</li>
+</ul>
+<p>Once configured, you can then use the File-&gt;Open menu to open the <code class="docutils literal"><span class="pre">zephyr.elf</span></code>
+file that you can find in your <code class="docutils literal"><span class="pre">outdir/&lt;board&gt;/</span></code> folder.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[1]</a></td><td><a class="reference external" href="https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-Win32/33444">https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-Win32/33444</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[2]</a></td><td><a class="reference external" href="https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-Linux32/52615">https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-Linux32/52615</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[3]</a></td><td><a class="reference external" href="https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-Linux64/51386">https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-Linux64/51386</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[4]</a></td><td><a class="reference external" href="https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-OSX/53402">https://www.nordicsemi.com/eng/nordic/Products/nRF51822/nRF5x-Command-Line-Tools-OSX/53402</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12">[5]</a></td><td><a class="reference external" href="https://wiki.segger.com/index.php?title=J-Link-OB_SAM3U">https://wiki.segger.com/index.php?title=J-Link-OB_SAM3U</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[6]</a></td><td><a class="reference external" href="https://www.segger.com/jlink-rtt.html">https://www.segger.com/jlink-rtt.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id15" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id16">[7]</a></td><td><a class="reference external" href="https://www.segger.com/ozone.htm">https://www.segger.com/ozone.htm</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id17" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[8]</a></td><td><a class="reference external" href="https://www.segger.com/downloads/jlink#Ozone">https://www.segger.com/downloads/jlink#Ozone</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id19" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20">[9]</a></td><td><a class="reference external" href="https://www.segger.com/jlink-software.html">https://www.segger.com/jlink-software.html</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nrf52_pca10040.html" class="btn btn-neutral float-right" title="nRF52-PCA10040" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../nrf52840_pca10056/doc/nrf52840_pca10056.html" class="btn btn-neutral" title="nRF52840-PCA10056" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../../../copyright.html">Copyright</a> 2015-2017 Zephyr Project members and individual contributors..
+      Last updated on Mar 14, 2017.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: ''
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+:orphan:
+
+.. title:: NET_DEBUG_DHCPV4
+
+.. option:: CONFIG_NET_DEBUG_DHCPV4:
+.. _CONFIG_NET_DEBUG_DHCPV4:
+
+Enable debug diagnostic from DHCPV4 client.
+
+
+
+:Symbol:           NET_DEBUG_DHCPV4
+:Type:             bool
+:Value:            "n"
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "Debug DHCPv4 client" if NET_DHCPV4 (value: "n")
+:Default values:
+
+ *  n (value: "n")
+ *   Condition: NET_DHCPV4 (value: "n")
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL && NET_LOG && NET_DHCPV4 && NET_LOG_GLOBAL (value: "n")
+:Additional dependencies from enclosing menus and ifs:
+ NETWORKING && NETWORKING && !NET_L2_RAW_CHANNEL && NET_IPV4 && NET_LOG (value: "n")
+:Locations:
+ * ../subsys/net/ip/Kconfig.ipv4:51

@@ -1,0 +1,33 @@
+:orphan:
+
+.. title:: CLOCK_STM32_HSE_CLOCK
+
+.. option:: CONFIG_CLOCK_STM32_HSE_CLOCK:
+.. _CONFIG_CLOCK_STM32_HSE_CLOCK:
+
+Value of external high-speed clock (HSE).
+
+
+
+:Symbol:           CLOCK_STM32_HSE_CLOCK
+:Type:             int
+:Value:            ""
+:User value:       (no user value)
+:Visibility:       "n"
+:Is choice item:   false
+:Is defined:       true
+:Is from env.:     false
+:Is special:       false
+:Prompts:
+
+ *  "HSE clock value" if CLOCK_CONTROL_STM32_CUBE && (CLOCK_STM32_SYSCLK_SRC_HSE || CLOCK_STM32_PLL_SRC_HSE) (value: "n")
+:Default values:
+ (no default values)
+:Selects:
+ (no selects)
+:Reverse (select-related) dependencies:
+ (no reverse dependencies)
+:Additional dependencies from enclosing menus and ifs:
+ SOC_FAMILY_STM32 && CLOCK_CONTROL (value: "n")
+:Locations:
+ * ../drivers/clock_control/Kconfig.stm32:57
