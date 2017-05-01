@@ -1,3 +1,0 @@
-
-config SOC_EM11D
-	bool "Synopsys ARC EM11D"
